@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiqa & Basic Coverage Finder</title>
+<style>
+:root{
+  --border:#d9dee7; --bg:#f5f7fb; --card:#fff; --text:#172033;
+  --muted:#667085; --header:#17365d; --yes:#087443; --no:#b42318;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
+.header{background:linear-gradient(135deg,#17365d,#245b91);color:white;padding:22px 24px}
+.header h1{margin:0 0 5px;font-size:25px}
+.header p{margin:0;color:#dbeafe;font-size:14px}
+.container{padding:18px;max-width:1800px;margin:auto}
+.search-panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:15px;box-shadow:0 2px 8px rgba(16,24,40,.05)}
+.search-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.search-box label{display:block;font-weight:700;font-size:13px;margin-bottom:7px}
+.search-box input{width:100%;height:42px;border:1px solid #bfc7d4;border-radius:8px;padding:0 12px;font-size:15px;outline:none}
+.search-box input:focus{border-color:#3276b1;box-shadow:0 0 0 3px rgba(50,118,177,.12)}
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+button{border:1px solid var(--border);background:white;border-radius:8px;padding:9px 13px;cursor:pointer}
+button:hover{background:#f1f5f9}
+.stats{font-size:13px;color:var(--muted);margin-left:auto}
+.table-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(16,24,40,.05)}
+.table-wrap{overflow:auto;max-height:calc(100vh - 300px)}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:1450px;font-size:13px}
+th,td{border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:9px 10px;text-align:left;vertical-align:top}
+thead tr:first-child th{background:var(--header);color:white;position:sticky;top:0;z-index:4;font-weight:700;white-space:nowrap}
+thead tr.filters th{background:#eef2f7;position:sticky;top:39px;z-index:3;padding:6px}
+thead tr.filters input, thead tr.filters select{width:100%;height:32px;border:1px solid #c7cfda;border-radius:6px;background:white;padding:0 7px;font-size:12px}
+tbody tr:nth-child(even){background:#fafbfc}
+tbody tr:hover{background:#f0f7ff}
+.coverage{font-weight:800;text-align:center;border-radius:6px;display:inline-block;min-width:42px;padding:4px 8px}
+.yes{color:var(--yes);background:#e7f6ee}
+.no{color:var(--no);background:#fdecec}
+.loading{text-align:center;padding:35px;color:var(--muted)}
+.empty{text-align:center;padding:45px;color:var(--muted);font-size:15px}
+.small{font-size:12px;color:var(--muted)}
+@media(max-width:900px){.search-grid{grid-template-columns:repeat(2,1fr)}.stats{margin-left:0;width:100%}}
+@media(max-width:550px){.container{padding:10px}.search-grid{grid-template-columns:1fr}.header{padding:17px}.header h1{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Thiqa & Basic Coverage Finder</h1>
+  <p>Fast medicine search and column filtering</p>
+</div>
+
+<div class="container">
+  <section class="search-panel">
+    <div class="search-grid">
+      <div class="search-box">
+        <label for="brandSearch">Search by Brand Name</label>
+        <input id="brandSearch" type="search" placeholder="Type any part of the brand name..." autocomplete="off">
+      </div>
+      <div class="search-box">
+        <label for="ingredientSearch">Search by Active Ingredient</label>
+        <input id="ingredientSearch" type="search" placeholder="Type any part of the ingredient..." autocomplete="off">
+      </div>
+      <div class="search-box">
+        <label for="strengthSearch">Search by Strength</label>
+        <input id="strengthSearch" type="search" placeholder="Type any part of the strength..." autocomplete="off">
+      </div>
+      <div class="search-box">
+        <label for="dosageSearch">Search by Dosage Form</label>
+        <input id="dosageSearch" type="search" placeholder="Type any part of the dosage form..." autocomplete="off">
+      </div>
+    </div>
+    <div class="toolbar">
+      <button id="clearBtn">Clear all filters</button>
+      <span class="small">Search is partial-match: you do not need to type the full value.</span>
+      <span class="stats" id="stats">Loading...</span>
+    </div>
+  </section>
+
+  <section class="table-card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Proactive ID</th>
+            <th>HAAD CODE</th>
+            <th>Brand Name</th>
+            <th>Generic Code</th>
+            <th>HAAD Price</th>
+            <th>Active Ingredient</th>
+            <th>Strength</th>
+            <th>Dosage Form</th>
+            <th>Package Size</th>
+            <th>UPP Scope</th>
+            <th>THIQA</th>
+            <th>BASIC</th>
+            <th>Markup</th>
+            <th>Daman Coverage</th>
+          </tr>
+          <tr class="filters">
+            <th><input data-col="0" placeholder="Filter"></th>
+            <th><input data-col="1" placeholder="Filter"></th>
+            <th><input data-col="2" placeholder="Filter"></th>
+            <th><input data-col="3" placeholder="Filter"></th>
+            <th><input data-col="4" placeholder="Filter"></th>
+            <th><input data-col="5" placeholder="Filter"></th>
+            <th><input data-col="6" placeholder="Filter"></th>
+            <th><input data-col="7" placeholder="Filter"></th>
+            <th><input data-col="8" placeholder="Filter"></th>
+            <th><select data-col="9"><option value="">All</option><option>Yes</option><option>No</option></select></th>
+            <th><select data-col="10"><option value="">All</option><option>Yes</option><option>No</option></select></th>
+            <th><select data-col="11"><option value="">All</option><option>Yes</option><option>No</option></select></th>
+            <th><input data-col="12" placeholder="Filter"></th>
+            <th><input data-col="13" placeholder="Filter"></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"><tr><td colspan="14" class="loading">Loading data...</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script>
+const state = {
+  data: [],
+  normalized: [],
+  filters: Array(14).fill(""),
+  search: ["","","",""],
+  raf: 0
+};
+
+const keys = [
+  "Proactive ID","HAAD CODE","proactive name","Generic Code","Haad Price",
+  "Generic Name","Strength","Dosage Form","Package Size","Is UPP Scope",
+  "THIQA","BASIC","Markup","Daman Coverage"
+];
+
+const norm = v => String(v ?? "").toLowerCase().trim();
+
+function cell(value, col){
+  const text = value ?? "";
+  if ((col === 10 || col === 11) && (text === "Yes" || text === "No")) {
+    return `<span class="coverage ${text === "Yes" ? "yes" : "no"}">${text}</span>`;
+  }
+  return escapeHtml(String(text));
+}
+function escapeHtml(s){
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+}
+
+function matches(i){
+  const r = state.normalized[i];
+
+  // Four main searches
+  if (state.search[0] && !r[2].includes(state.search[0])) return false; // brand
+  if (state.search[1] && !r[5].includes(state.search[1])) return false; // ingredient
+  if (state.search[2] && !r[6].includes(state.search[2])) return false; // strength
+  if (state.search[3] && !r[7].includes(state.search[3])) return false; // dosage
+
+  // Column filters
+  for(let c=0;c<14;c++){
+    if(state.filters[c] && !r[c].includes(state.filters[c])) return false;
+  }
+  return true;
+}
+
+function render(){
+  const tbody = document.getElementById("tbody");
+  const out = [];
+  let count = 0;
+
+  for(let i=0;i<state.data.length;i++){
+    if(matches(i)){
+      const row = state.data[i];
+      out.push("<tr>" + row.map((v,c)=>"<td>"+cell(v,c)+"</td>").join("") + "</tr>");
+      count++;
+    }
+  }
+
+  tbody.innerHTML = out.length ? out.join("") :
+    '<tr><td colspan="14" class="empty">No matching records found.</td></tr>';
+
+  document.getElementById("stats").textContent =
+    `${count.toLocaleString()} matching record${count === 1 ? "" : "s"} / ${state.data.length.toLocaleString()} total`;
+}
+
+function scheduleRender(){
+  cancelAnimationFrame(state.raf);
+  state.raf = requestAnimationFrame(render);
+}
+
+function setSearch(index, value){
+  state.search[index] = norm(value);
+  scheduleRender();
+}
+
+document.querySelectorAll(".search-box input").forEach((el,i)=>{
+  el.addEventListener("input", e => setSearch(i,e.target.value));
+});
+
+document.querySelectorAll("[data-col]").forEach(el=>{
+  el.addEventListener("input", e => {
+    state.filters[Number(e.target.dataset.col)] = norm(e.target.value);
+    scheduleRender();
+  });
+  el.addEventListener("change", e => {
+    state.filters[Number(e.target.dataset.col)] = norm(e.target.value);
+    scheduleRender();
+  });
+});
+
+document.getElementById("clearBtn").addEventListener("click",()=>{
+  state.search = ["","","",""];
+  state.filters = Array(14).fill("");
+  document.querySelectorAll(".search-box input").forEach(x=>x.value="");
+  document.querySelectorAll("[data-col]").forEach(x=>x.value="");
+  scheduleRender();
+});
+
+fetch("data.json")
+  .then(r => {
+    if(!r.ok) throw new Error("Could not load data.json");
+    return r.json();
+  })
+  .then(data=>{
+    state.data = data.map(row => keys.map(k => row[k]));
+    state.normalized = state.data.map(row => row.map(norm));
+    render();
+  })
+  .catch(err=>{
+    document.getElementById("tbody").innerHTML =
+      `<tr><td colspan="14" class="empty">Could not load the database. Make sure <b>data.json</b> is in the same GitHub folder as index.html.</td></tr>`;
+    document.getElementById("stats").textContent = "Data loading error";
+    console.error(err);
+  });
+</script>
+</body>
+</html>
