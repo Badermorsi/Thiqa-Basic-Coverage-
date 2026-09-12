@@ -873,6 +873,8 @@ function cell(value,col){
 
 /* =========================================================
    CHECK WHETHER ROW MATCHES
+   % = AND
+   Order does not matter
 ========================================================= */
 
 function matches(index){
@@ -880,13 +882,106 @@ function matches(index){
     const row = state.normalized[index];
 
 
-    /* TOP BRAND SEARCH */
+    /* =====================================================
+       HELPER:
+       Split search by %
+       Every part must be found
+    ===================================================== */
+
+    function allTermsMatch(text, search){
+
+        if(!search){
+            return true;
+        }
+
+        const terms =
+            search
+                .split("%")
+                .map(term => term.trim())
+                .filter(term => term !== "");
+
+
+        return terms.every(term =>
+            text.includes(term)
+        );
+
+    }
+
+
+    /* =====================================================
+       HELPER:
+       EXACT NUMBER MATCHING
+       
+       Example:
+       100 does NOT match 1000
+       35 does NOT match 350
+       4.2 does NOT match 14.2
+
+       But:
+       1000 matches 1000 mg
+       350 matches 350 mg
+    ===================================================== */
+
+    function allExactNumbersMatch(text, search){
+
+        if(!search){
+            return true;
+        }
+
+        const terms =
+            search
+                .split("%")
+                .map(term => term.trim())
+                .filter(term => term !== "");
+
+
+        return terms.every(term => {
+
+            /*
+               Escape special regex characters
+            */
+
+            const escaped =
+                term.replace(
+                    /[.*+?^${}()|[\]\\]/g,
+                    "\\$&"
+                );
+
+
+            /*
+               Make sure the number is not part
+               of another number.
+
+               Example:
+               100  -> does NOT match 1000
+               35   -> does NOT match 350
+            */
+
+            const regex =
+                new RegExp(
+                    "(?<![0-9.])" +
+                    escaped +
+                    "(?![0-9.])"
+                );
+
+
+            return regex.test(text);
+
+        });
+
+    }
+
+
+    /* =====================================================
+       TOP BRAND SEARCH
+       % = AND
+    ===================================================== */
 
     if(
-
-        state.search[0] &&
-        !row[2].includes(state.search[0])
-
+        !allTermsMatch(
+            row[2],
+            state.search[0]
+        )
     ){
 
         return false;
@@ -894,13 +989,16 @@ function matches(index){
     }
 
 
-    /* TOP ACTIVE INGREDIENT SEARCH */
+    /* =====================================================
+       TOP ACTIVE INGREDIENT SEARCH
+       % = AND
+    ===================================================== */
 
     if(
-
-        state.search[1] &&
-        !row[5].includes(state.search[1])
-
+        !allTermsMatch(
+            row[5],
+            state.search[1]
+        )
     ){
 
         return false;
@@ -908,13 +1006,16 @@ function matches(index){
     }
 
 
-    /* TOP STRENGTH SEARCH */
+    /* =====================================================
+       TOP STRENGTH SEARCH
+       % = AND + EXACT NUMBERS
+    ===================================================== */
 
     if(
-
-        state.search[2] &&
-        !row[6].includes(state.search[2])
-
+        !allExactNumbersMatch(
+            row[6],
+            state.search[2]
+        )
     ){
 
         return false;
@@ -922,19 +1023,49 @@ function matches(index){
     }
 
 
-    /* TOP DOSAGE FORM SEARCH */
+    /* =====================================================
+       TOP DOSAGE FORM SEARCH
+       % = AND
+    ===================================================== */
 
     if(
-
-        state.search[3] &&
-        !row[7].includes(state.search[3])
-
+        !allTermsMatch(
+            row[7],
+            state.search[3]
+        )
     ){
 
         return false;
 
     }
 
+
+    /* =====================================================
+       EXCEL STYLE COLUMN FILTERS
+    ===================================================== */
+
+    for(let col = 0; col < 14; col++){
+
+        const selected =
+            state.filters[col];
+
+
+        if(selected.size > 0){
+
+            if(!selected.has(row[col])){
+
+                return false;
+
+            }
+
+        }
+
+    }
+
+
+    return true;
+
+}
 
     /* EXCEL STYLE COLUMN FILTERS */
 
