@@ -1066,30 +1066,6 @@ function matches(index){
 
 }
 
-    /* EXCEL STYLE COLUMN FILTERS */
-
-    for(let col = 0; col < 14; col++){
-
-        const selected = state.filters[col];
-
-        if(selected.size > 0){
-
-            if(!selected.has(row[col])){
-
-                return false;
-
-            }
-
-        }
-
-    }
-
-
-    return true;
-
-}
-
-
 /* =========================================================
    RENDER TABLE
 ========================================================= */
