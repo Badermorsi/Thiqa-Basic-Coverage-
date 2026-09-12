@@ -1,236 +1,1930 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Thiqa & Basic Coverage Finder</title>
+
 <style>
+
 :root{
-  --border:#d9dee7; --bg:#f5f7fb; --card:#fff; --text:#172033;
-  --muted:#667085; --header:#17365d; --yes:#087443; --no:#b42318;
+    --border:#d9dee7;
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --header:#17365d;
+    --header2:#eef2f7;
+    --yes:#087443;
+    --no:#b42318;
 }
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
-.header{background:linear-gradient(135deg,#17365d,#245b91);color:white;padding:22px 24px}
-.header h1{margin:0 0 5px;font-size:25px}
-.header p{margin:0;color:#dbeafe;font-size:14px}
-.container{padding:18px;max-width:1800px;margin:auto}
-.search-panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:15px;box-shadow:0 2px 8px rgba(16,24,40,.05)}
-.search-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.search-box label{display:block;font-weight:700;font-size:13px;margin-bottom:7px}
-.search-box input{width:100%;height:42px;border:1px solid #bfc7d4;border-radius:8px;padding:0 12px;font-size:15px;outline:none}
-.search-box input:focus{border-color:#3276b1;box-shadow:0 0 0 3px rgba(50,118,177,.12)}
-.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
-button{border:1px solid var(--border);background:white;border-radius:8px;padding:9px 13px;cursor:pointer}
-button:hover{background:#f1f5f9}
-.stats{font-size:13px;color:var(--muted);margin-left:auto}
-.table-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(16,24,40,.05)}
-.table-wrap{overflow:auto;max-height:calc(100vh - 300px)}
-table{border-collapse:separate;border-spacing:0;width:100%;min-width:1450px;font-size:13px}
-th,td{border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:9px 10px;text-align:left;vertical-align:top}
-thead tr:first-child th{background:var(--header);color:white;position:sticky;top:0;z-index:4;font-weight:700;white-space:nowrap}
-thead tr.filters th{background:#eef2f7;position:sticky;top:39px;z-index:3;padding:6px}
-thead tr.filters input, thead tr.filters select{width:100%;height:32px;border:1px solid #c7cfda;border-radius:6px;background:white;padding:0 7px;font-size:12px}
-tbody tr:nth-child(even){background:#fafbfc}
-tbody tr:hover{background:#f0f7ff}
-.coverage{font-weight:800;text-align:center;border-radius:6px;display:inline-block;min-width:42px;padding:4px 8px}
-.yes{color:var(--yes);background:#e7f6ee}
-.no{color:var(--no);background:#fdecec}
-.loading{text-align:center;padding:35px;color:var(--muted)}
-.empty{text-align:center;padding:45px;color:var(--muted);font-size:15px}
-.small{font-size:12px;color:var(--muted)}
-@media(max-width:900px){.search-grid{grid-template-columns:repeat(2,1fr)}.stats{margin-left:0;width:100%}}
-@media(max-width:550px){.container{padding:10px}.search-grid{grid-template-columns:1fr}.header{padding:17px}.header h1{font-size:21px}}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--text);
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    background:linear-gradient(135deg,#17365d,#245b91);
+    color:white;
+    padding:22px 24px;
+}
+
+.header h1{
+    margin:0;
+    font-size:25px;
+}
+
+/* ================= CONTAINER ================= */
+
+.container{
+    padding:18px;
+    max-width:1800px;
+    margin:auto;
+}
+
+/* ================= TOP SEARCH ================= */
+
+.search-panel{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:15px;
+    box-shadow:0 2px 8px rgba(16,24,40,.05);
+}
+
+.search-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.search-box label{
+    display:block;
+    font-weight:700;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.search-box input{
+    width:100%;
+    height:42px;
+    border:1px solid #bfc7d4;
+    border-radius:8px;
+    padding:0 12px;
+    font-size:15px;
+    outline:none;
+}
+
+.search-box input:focus{
+    border-color:#3276b1;
+    box-shadow:0 0 0 3px rgba(50,118,177,.12);
+}
+
+/* ================= TOOLBAR ================= */
+
+.toolbar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:14px;
+}
+
+button{
+    border:1px solid var(--border);
+    background:white;
+    border-radius:7px;
+    padding:8px 12px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#f1f5f9;
+}
+
+.stats{
+    font-size:13px;
+    color:var(--muted);
+    margin-left:auto;
+}
+
+.small{
+    font-size:12px;
+    color:var(--muted);
+}
+
+/* ================= TABLE ================= */
+
+.table-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(16,24,40,.05);
+}
+
+.table-wrap{
+    overflow:auto;
+    max-height:calc(100vh - 300px);
+}
+
+table{
+    border-collapse:separate;
+    border-spacing:0;
+    width:100%;
+    min-width:1500px;
+    font-size:13px;
+}
+
+th,
+td{
+    border-right:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    padding:9px 10px;
+    text-align:left;
+    vertical-align:top;
+}
+
+/* ================= TABLE HEADER ================= */
+
+thead tr:first-child th{
+    background:var(--header);
+    color:white;
+    position:sticky;
+    top:0;
+    z-index:10;
+    font-weight:700;
+    white-space:nowrap;
+    padding:0;
+}
+
+/* Header content */
+
+.header-cell{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:42px;
+    padding-left:10px;
+}
+
+.header-title{
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+/* ================= FILTER BUTTON ================= */
+
+.filter-button{
+    width:34px;
+    height:42px;
+    border:0;
+    border-left:1px solid rgba(255,255,255,.25);
+    border-radius:0;
+    background:transparent;
+    color:white;
+    font-size:15px;
+    padding:0;
+    flex-shrink:0;
+}
+
+.filter-button:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.filter-button.active{
+    background:#3d78ad;
+}
+
+/* ================= ROWS ================= */
+
+tbody tr:nth-child(even){
+    background:#fafbfc;
+}
+
+tbody tr:hover{
+    background:#f0f7ff;
+}
+
+/* ================= COVERAGE ================= */
+
+.coverage{
+    font-weight:800;
+    text-align:center;
+    border-radius:6px;
+    display:inline-block;
+    min-width:42px;
+    padding:4px 8px;
+}
+
+.yes{
+    color:var(--yes);
+    background:#e7f6ee;
+}
+
+.no{
+    color:var(--no);
+    background:#fdecec;
+}
+
+/* ================= FILTER POPUP ================= */
+
+.filter-popup{
+    position:fixed;
+    width:280px;
+    max-height:430px;
+    background:white;
+    border:1px solid #cbd5e1;
+    border-radius:9px;
+    box-shadow:0 8px 25px rgba(0,0,0,.18);
+    z-index:9999;
+    display:none;
+    overflow:hidden;
+}
+
+.filter-popup.show{
+    display:block;
+}
+
+/* Search */
+
+.filter-search{
+    padding:10px;
+    border-bottom:1px solid var(--border);
+    background:#fff;
+}
+
+.filter-search input{
+    width:100%;
+    height:34px;
+    border:1px solid #c7cfda;
+    border-radius:6px;
+    padding:0 9px;
+    font-size:13px;
+    outline:none;
+}
+
+.filter-search input:focus{
+    border-color:#3276b1;
+}
+
+/* Select all */
+
+.select-all{
+    padding:9px 11px;
+    border-bottom:1px solid var(--border);
+    background:#fafafa;
+}
+
+.select-all label,
+.filter-value label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+}
+
+.select-all input,
+.filter-value input{
+    width:16px;
+    height:16px;
+    cursor:pointer;
+}
+
+/* Values */
+
+.filter-values{
+    max-height:270px;
+    overflow-y:auto;
+    padding:5px 0;
+}
+
+.filter-value{
+    padding:7px 11px;
+    font-size:13px;
+}
+
+.filter-value:hover{
+    background:#f1f5f9;
+}
+
+.filter-value.hidden{
+    display:none;
+}
+
+.value-text{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+/* Buttons */
+
+.filter-actions{
+    display:flex;
+    gap:8px;
+    padding:10px;
+    border-top:1px solid var(--border);
+    background:#fafafa;
+}
+
+.filter-actions button{
+    flex:1;
+    font-weight:600;
+}
+
+.apply-button{
+    background:#17365d;
+    color:white;
+    border-color:#17365d;
+}
+
+.apply-button:hover{
+    background:#245b91;
+}
+
+.clear-filter-button:hover{
+    background:#feecec;
+    color:#b42318;
+}
+
+/* ================= LOADING ================= */
+
+.loading{
+    text-align:center;
+    padding:35px;
+    color:var(--muted);
+}
+
+.empty{
+    text-align:center;
+    padding:45px;
+    color:var(--muted);
+    font-size:15px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    .search-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stats{
+        margin-left:0;
+        width:100%;
+    }
+}
+
+@media(max-width:550px){
+
+    .container{
+        padding:10px;
+    }
+
+    .search-grid{
+        grid-template-columns:1fr;
+    }
+
+    .header{
+        padding:17px;
+    }
+
+    .header h1{
+        font-size:21px;
+    }
+
+    .filter-popup{
+        width:calc(100vw - 20px);
+        left:10px !important;
+        right:10px;
+    }
+}
+
 </style>
 </head>
+
 <body>
+
+<!-- ================= HEADER ================= -->
+
 <div class="header">
-  <h1>Thiqa & Basic Coverage Finder</h1>
+
+    <h1>Thiqa & Basic Coverage Finder</h1>
+
 </div>
+
 
 <div class="container">
-  <section class="search-panel">
-    <div class="search-grid">
-      <div class="search-box">
-        <label for="brandSearch">Search by Brand Name</label>
-        <input id="brandSearch" type="search" placeholder="Type any part of the brand name..." autocomplete="off">
-      </div>
-      <div class="search-box">
-        <label for="ingredientSearch">Search by Active Ingredient</label>
-        <input id="ingredientSearch" type="search" placeholder="Type any part of the ingredient..." autocomplete="off">
-      </div>
-      <div class="search-box">
-        <label for="strengthSearch">Search by Strength</label>
-        <input id="strengthSearch" type="search" placeholder="Type any part of the strength..." autocomplete="off">
-      </div>
-      <div class="search-box">
-        <label for="dosageSearch">Search by Dosage Form</label>
-        <input id="dosageSearch" type="search" placeholder="Type any part of the dosage form..." autocomplete="off">
-      </div>
-    </div>
-    <div class="toolbar">
-      <button id="clearBtn">Clear all filters</button>
-      <span class="small">Search is partial-match: you do not need to type the full value.</span>
-      <span class="stats" id="stats">Loading...</span>
-    </div>
-  </section>
 
-  <section class="table-card">
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Proactive ID</th>
-            <th>HAAD CODE</th>
-            <th>Brand Name</th>
-            <th>Generic Code</th>
-            <th>HAAD Price</th>
-            <th>Active Ingredient</th>
-            <th>Strength</th>
-            <th>Dosage Form</th>
-            <th>Package Size</th>
-            <th>UPP Scope</th>
-            <th>THIQA</th>
-            <th>BASIC</th>
-            <th>Markup</th>
-            <th>Daman Coverage</th>
-          </tr>
-          <tr class="filters">
-            <th><input data-col="0" placeholder="Filter"></th>
-            <th><input data-col="1" placeholder="Filter"></th>
-            <th><input data-col="2" placeholder="Filter"></th>
-            <th><input data-col="3" placeholder="Filter"></th>
-            <th><input data-col="4" placeholder="Filter"></th>
-            <th><input data-col="5" placeholder="Filter"></th>
-            <th><input data-col="6" placeholder="Filter"></th>
-            <th><input data-col="7" placeholder="Filter"></th>
-            <th><input data-col="8" placeholder="Filter"></th>
-            <th><select data-col="9"><option value="">All</option><option>Yes</option><option>No</option></select></th>
-            <th><select data-col="10"><option value="">All</option><option>Yes</option><option>No</option></select></th>
-            <th><select data-col="11"><option value="">All</option><option>Yes</option><option>No</option></select></th>
-            <th><input data-col="12" placeholder="Filter"></th>
-            <th><input data-col="13" placeholder="Filter"></th>
-          </tr>
-        </thead>
-        <tbody id="tbody"><tr><td colspan="14" class="loading">Loading data...</td></tr></tbody>
-      </table>
+
+<!-- ================= TOP SEARCH PANEL ================= -->
+
+<section class="search-panel">
+
+    <div class="search-grid">
+
+        <!-- BRAND -->
+
+        <div class="search-box">
+
+            <label for="brandSearch">
+                Search by Brand Name
+            </label>
+
+            <input
+                id="brandSearch"
+                type="search"
+                placeholder="Type any part of the brand name..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <!-- ACTIVE INGREDIENT -->
+
+        <div class="search-box">
+
+            <label for="ingredientSearch">
+                Search by Active Ingredient
+            </label>
+
+            <input
+                id="ingredientSearch"
+                type="search"
+                placeholder="Type any part of the ingredient..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <!-- STRENGTH -->
+
+        <div class="search-box">
+
+            <label for="strengthSearch">
+                Search by Strength
+            </label>
+
+            <input
+                id="strengthSearch"
+                type="search"
+                placeholder="Type any part of the strength..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <!-- DOSAGE FORM -->
+
+        <div class="search-box">
+
+            <label for="dosageSearch">
+                Search by Dosage Form
+            </label>
+
+            <input
+                id="dosageSearch"
+                type="search"
+                placeholder="Type any part of the dosage form..."
+                autocomplete="off"
+            >
+
+        </div>
+
     </div>
-  </section>
+
+
+    <div class="toolbar">
+
+        <button id="clearBtn">
+            Clear all filters
+        </button>
+
+        <span class="small">
+            Type any part of the information to search.
+        </span>
+
+        <span
+            class="stats"
+            id="stats">
+            Loading...
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= TABLE ================= -->
+
+<section class="table-card">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">Proactive ID</span>
+            <button class="filter-button" data-col="0">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">HAAD CODE</span>
+            <button class="filter-button" data-col="1">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">Brand Name</span>
+            <button class="filter-button" data-col="2">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">Generic Code</span>
+            <button class="filter-button" data-col="3">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">HAAD Price</span>
+            <button class="filter-button" data-col="4">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">Active Ingredient</span>
+            <button class="filter-button" data-col="5">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">Strength</span>
+            <button class="filter-button" data-col="6">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">Dosage Form</span>
+            <button class="filter-button" data-col="7">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">Package Size</span>
+            <button class="filter-button" data-col="8">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">UPP Scope</span>
+            <button class="filter-button" data-col="9">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">THIQA</span>
+            <button class="filter-button" data-col="10">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">BASIC</span>
+            <button class="filter-button" data-col="11">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">Markup</span>
+            <button class="filter-button" data-col="12">▼</button>
+        </div>
+    </th>
+
+
+    <th>
+        <div class="header-cell">
+            <span class="header-title">Daman Coverage</span>
+            <button class="filter-button" data-col="13">▼</button>
+        </div>
+    </th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="tbody">
+
+<tr>
+
+<td colspan="14" class="loading">
+    Loading data...
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
 </div>
 
+</section>
+
+</div>
+
+
+
+<!-- ================= FILTER POPUP ================= -->
+
+<div
+    id="filterPopup"
+    class="filter-popup"
+>
+
+    <div class="filter-search">
+
+        <input
+            id="filterSearch"
+            type="search"
+            placeholder="Search values..."
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="select-all">
+
+        <label>
+
+            <input
+                type="checkbox"
+                id="selectAll"
+            >
+
+            <span>Select All</span>
+
+        </label>
+
+    </div>
+
+
+    <div
+        id="filterValues"
+        class="filter-values">
+    </div>
+
+
+    <div class="filter-actions">
+
+        <button
+            id="clearColumn"
+            class="clear-filter-button">
+            Clear
+        </button>
+
+        <button
+            id="applyFilter"
+            class="apply-button">
+            Apply
+        </button>
+
+    </div>
+
+</div>
+
+
+
 <script>
+
+/* =========================================================
+   DATABASE STATE
+========================================================= */
+
 const state = {
-  data: [],
-  normalized: [],
-  filters: Array(14).fill(""),
-  search: ["","","",""],
-  raf: 0
+
+    data: [],
+
+    normalized: [],
+
+    search: ["","","",""],
+
+    filters: Array(14).fill(null).map(() => new Set()),
+
+    filterColumn: null,
+
+    filterTemp: new Set(),
+
+    raf: 0
+
 };
 
+
+/* =========================================================
+   DATA COLUMNS
+========================================================= */
+
 const keys = [
-  "Proactive ID","HAAD CODE","proactive name","Generic Code","Haad Price",
-  "Generic Name","Strength","Dosage Form","Package Size","Is UPP Scope",
-  "THIQA","BASIC","Markup","Daman Coverage"
+
+    "Proactive ID",
+    "HAAD CODE",
+    "proactive name",
+    "Generic Code",
+    "Haad Price",
+    "Generic Name",
+    "Strength",
+    "Dosage Form",
+    "Package Size",
+    "Is UPP Scope",
+    "THIQA",
+    "BASIC",
+    "Markup",
+    "Daman Coverage"
+
 ];
 
-const norm = v => String(v ?? "").toLowerCase().trim();
 
-function cell(value, col){
-  const text = value ?? "";
-  if ((col === 10 || col === 11) && (text === "Yes" || text === "No")) {
-    return `<span class="coverage ${text === "Yes" ? "yes" : "no"}">${text}</span>`;
-  }
-  return escapeHtml(String(text));
+/* =========================================================
+   NORMALIZE
+========================================================= */
+
+function norm(value){
+
+    return String(value ?? "")
+        .toLowerCase()
+        .trim();
+
 }
-function escapeHtml(s){
-  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(value ?? "").replace(
+
+        /[&<>"']/g,
+
+        function(c){
+
+            return {
+
+                "&":"&amp;",
+                "<":"&lt;",
+                ">":"&gt;",
+                '"':"&quot;",
+                "'":"&#039;"
+
+            }[c];
+
+        }
+
+    );
+
 }
 
-function matches(i){
-  const r = state.normalized[i];
 
-  // Four main searches
-  if (state.search[0] && !r[2].includes(state.search[0])) return false; // brand
-  if (state.search[1] && !r[5].includes(state.search[1])) return false; // ingredient
-  if (state.search[2] && !r[6].includes(state.search[2])) return false; // strength
-  if (state.search[3] && !r[7].includes(state.search[3])) return false; // dosage
+/* =========================================================
+   CELL DISPLAY
+========================================================= */
 
-  // Column filters
-  for(let c=0;c<14;c++){
-    if(state.filters[c] && !r[c].includes(state.filters[c])) return false;
-  }
-  return true;
+function cell(value,col){
+
+    const text = value ?? "";
+
+
+    /* THIQA / BASIC */
+
+    if(
+
+        (col === 10 || col === 11) &&
+        (text === "Yes" || text === "No")
+
+    ){
+
+        return `
+
+            <span class="coverage ${text === "Yes" ? "yes" : "no"}">
+
+                ${text}
+
+            </span>
+
+        `;
+
+    }
+
+
+    return escapeHtml(text);
+
 }
+
+
+/* =========================================================
+   CHECK WHETHER ROW MATCHES
+========================================================= */
+
+function matches(index){
+
+    const row = state.normalized[index];
+
+
+    /* TOP BRAND SEARCH */
+
+    if(
+
+        state.search[0] &&
+        !row[2].includes(state.search[0])
+
+    ){
+
+        return false;
+
+    }
+
+
+    /* TOP ACTIVE INGREDIENT SEARCH */
+
+    if(
+
+        state.search[1] &&
+        !row[5].includes(state.search[1])
+
+    ){
+
+        return false;
+
+    }
+
+
+    /* TOP STRENGTH SEARCH */
+
+    if(
+
+        state.search[2] &&
+        !row[6].includes(state.search[2])
+
+    ){
+
+        return false;
+
+    }
+
+
+    /* TOP DOSAGE FORM SEARCH */
+
+    if(
+
+        state.search[3] &&
+        !row[7].includes(state.search[3])
+
+    ){
+
+        return false;
+
+    }
+
+
+    /* EXCEL STYLE COLUMN FILTERS */
+
+    for(let col = 0; col < 14; col++){
+
+        const selected = state.filters[col];
+
+        if(selected.size > 0){
+
+            if(!selected.has(row[col])){
+
+                return false;
+
+            }
+
+        }
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
 
 function render(){
-  const tbody = document.getElementById("tbody");
-  const out = [];
-  let count = 0;
 
-  for(let i=0;i<state.data.length;i++){
-    if(matches(i)){
-      const row = state.data[i];
-      out.push("<tr>" + row.map((v,c)=>"<td>"+cell(v,c)+"</td>").join("") + "</tr>");
-      count++;
+    const tbody =
+        document.getElementById("tbody");
+
+
+    const output = [];
+
+    let count = 0;
+
+
+    for(
+
+        let i = 0;
+
+        i < state.data.length;
+
+        i++
+
+    ){
+
+        if(matches(i)){
+
+            const row = state.data[i];
+
+
+            output.push(
+
+                "<tr>" +
+
+                row.map(
+
+                    (value,col) =>
+
+                    "<td>" +
+
+                    cell(value,col) +
+
+                    "</td>"
+
+                ).join("") +
+
+                "</tr>"
+
+            );
+
+
+            count++;
+
+        }
+
     }
-  }
 
-  tbody.innerHTML = out.length ? out.join("") :
-    '<tr><td colspan="14" class="empty">No matching records found.</td></tr>';
 
-  document.getElementById("stats").textContent =
-    `${count.toLocaleString()} matching record${count === 1 ? "" : "s"} / ${state.data.length.toLocaleString()} total`;
+    if(output.length){
+
+        tbody.innerHTML =
+            output.join("");
+
+    }
+
+    else{
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="14"
+                    class="empty">
+
+                    No matching records found.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    document.getElementById("stats").textContent =
+
+        `${count.toLocaleString()} matching record${count === 1 ? "" : "s"} / ${state.data.length.toLocaleString()} total`;
+
 }
+
+
+/* =========================================================
+   SCHEDULE RENDER
+========================================================= */
 
 function scheduleRender(){
-  cancelAnimationFrame(state.raf);
-  state.raf = requestAnimationFrame(render);
+
+    cancelAnimationFrame(state.raf);
+
+    state.raf =
+        requestAnimationFrame(render);
+
 }
 
-function setSearch(index, value){
-  state.search[index] = norm(value);
-  scheduleRender();
+
+/* =========================================================
+   TOP SEARCH
+========================================================= */
+
+document
+    .querySelectorAll(".search-box input")
+    .forEach((input,index)=>{
+
+        input.addEventListener(
+
+            "input",
+
+            function(){
+
+                state.search[index] =
+                    norm(this.value);
+
+                scheduleRender();
+
+            }
+
+        );
+
+    });
+
+
+/* =========================================================
+   OPEN EXCEL STYLE FILTER
+========================================================= */
+
+const filterPopup =
+    document.getElementById("filterPopup");
+
+const filterSearch =
+    document.getElementById("filterSearch");
+
+const filterValues =
+    document.getElementById("filterValues");
+
+const selectAll =
+    document.getElementById("selectAll");
+
+
+document
+    .querySelectorAll(".filter-button")
+    .forEach(button=>{
+
+        button.addEventListener(
+
+            "click",
+
+            function(event){
+
+                event.stopPropagation();
+
+                openFilter(
+                    Number(this.dataset.col),
+                    this
+                );
+
+            }
+
+        );
+
+    });
+
+
+/* =========================================================
+   OPEN FILTER
+========================================================= */
+
+function openFilter(col,button){
+
+    state.filterColumn = col;
+
+
+    /* Copy current filter */
+
+    state.filterTemp =
+        new Set(state.filters[col]);
+
+
+    filterSearch.value = "";
+
+
+    buildFilterValues();
+
+
+    /* Position popup */
+
+    const rect =
+        button.getBoundingClientRect();
+
+
+    const popupWidth = 280;
+
+    let left =
+        rect.left;
+
+    let top =
+        rect.bottom + 4;
+
+
+    /* Prevent right overflow */
+
+    if(
+
+        left + popupWidth >
+        window.innerWidth - 10
+
+    ){
+
+        left =
+            window.innerWidth -
+            popupWidth -
+            10;
+
+    }
+
+
+    /* Prevent left overflow */
+
+    if(left < 10){
+
+        left = 10;
+
+    }
+
+
+    /* Prevent bottom overflow */
+
+    if(
+
+        top + 430 >
+        window.innerHeight
+
+    ){
+
+        top =
+            rect.top -
+            434;
+
+    }
+
+
+    filterPopup.style.left =
+        left + "px";
+
+    filterPopup.style.top =
+        top + "px";
+
+
+    filterPopup.classList.add("show");
+
+
+    /* Active button */
+
+    document
+        .querySelectorAll(".filter-button")
+        .forEach(b =>
+            b.classList.remove("active")
+        );
+
+
+    if(state.filters[col].size > 0){
+
+        button.classList.add("active");
+
+    }
+
+
+    setTimeout(
+        () => filterSearch.focus(),
+        20
+    );
+
 }
 
-document.querySelectorAll(".search-box input").forEach((el,i)=>{
-  el.addEventListener("input", e => setSearch(i,e.target.value));
-});
 
-document.querySelectorAll("[data-col]").forEach(el=>{
-  el.addEventListener("input", e => {
-    state.filters[Number(e.target.dataset.col)] = norm(e.target.value);
-    scheduleRender();
-  });
-  el.addEventListener("change", e => {
-    state.filters[Number(e.target.dataset.col)] = norm(e.target.value);
-    scheduleRender();
-  });
-});
+/* =========================================================
+   BUILD FILTER VALUES
+========================================================= */
 
-document.getElementById("clearBtn").addEventListener("click",()=>{
-  state.search = ["","","",""];
-  state.filters = Array(14).fill("");
-  document.querySelectorAll(".search-box input").forEach(x=>x.value="");
-  document.querySelectorAll("[data-col]").forEach(x=>x.value="");
-  scheduleRender();
-});
+function buildFilterValues(){
+
+    const col =
+        state.filterColumn;
+
+
+    if(col === null){
+
+        return;
+
+    }
+
+
+    /* Get unique values */
+
+    const values =
+        new Map();
+
+
+    for(
+
+        let i = 0;
+
+        i < state.normalized.length;
+
+        i++
+
+    ){
+
+        const original =
+            String(state.data[i][col] ?? "");
+
+        const normalized =
+            state.normalized[i][col];
+
+
+        if(!values.has(normalized)){
+
+            values.set(
+                normalized,
+                original
+            );
+
+        }
+
+    }
+
+
+    /* Sort */
+
+    const sorted =
+        [...values.entries()]
+        .sort(
+
+            (a,b)=>
+                a[1].localeCompare(
+                    b[1],
+                    undefined,
+                    {
+                        numeric:true,
+                        sensitivity:"base"
+                    }
+                )
+
+        );
+
+
+    filterValues.innerHTML = "";
+
+
+    sorted.forEach(
+
+        ([normalized,display])=>{
+
+            const div =
+                document.createElement("div");
+
+            div.className =
+                "filter-value";
+
+
+            const label =
+                document.createElement("label");
+
+
+            const checkbox =
+                document.createElement("input");
+
+            checkbox.type =
+                "checkbox";
+
+            checkbox.dataset.value =
+                normalized;
+
+            checkbox.checked =
+                state.filterTemp.has(normalized);
+
+
+            const span =
+                document.createElement("span");
+
+            span.className =
+                "value-text";
+
+            span.textContent =
+                display === ""
+                    ? "(Blank)"
+                    : display;
+
+
+            label.appendChild(
+                checkbox
+            );
+
+            label.appendChild(
+                span
+            );
+
+            div.appendChild(
+                label
+            );
+
+            filterValues.appendChild(
+                div
+            );
+
+        }
+
+    );
+
+
+    updateSelectAll();
+
+}
+
+
+/* =========================================================
+   SEARCH INSIDE FILTER
+========================================================= */
+
+filterSearch.addEventListener(
+
+    "input",
+
+    function(){
+
+        const search =
+            norm(this.value);
+
+
+        document
+            .querySelectorAll(
+                "#filterValues .filter-value"
+            )
+            .forEach(item=>{
+
+                const text =
+                    norm(
+                        item
+                        .querySelector(".value-text")
+                        .textContent
+                    );
+
+
+                item.classList.toggle(
+
+                    "hidden",
+
+                    search &&
+                    !text.includes(search)
+
+                );
+
+            });
+
+
+        updateSelectAll();
+
+    }
+
+);
+
+
+/* =========================================================
+   SELECT ALL
+========================================================= */
+
+selectAll.addEventListener(
+
+    "change",
+
+    function(){
+
+        const checked =
+            this.checked;
+
+
+        document
+            .querySelectorAll(
+                "#filterValues .filter-value:not(.hidden) input"
+            )
+            .forEach(cb=>{
+
+                cb.checked =
+                    checked;
+
+
+                if(checked){
+
+                    state.filterTemp.add(
+                        cb.dataset.value
+                    );
+
+                }
+                else{
+
+                    state.filterTemp.delete(
+                        cb.dataset.value
+                    );
+
+                }
+
+            });
+
+
+        updateSelectAll();
+
+    }
+
+);
+
+
+/* =========================================================
+   INDIVIDUAL CHECKBOX
+========================================================= */
+
+filterValues.addEventListener(
+
+    "change",
+
+    function(event){
+
+        if(
+
+            event.target.tagName !==
+            "INPUT"
+
+        ){
+
+            return;
+
+        }
+
+
+        const value =
+            event.target.dataset.value;
+
+
+        if(event.target.checked){
+
+            state.filterTemp.add(
+                value
+            );
+
+        }
+        else{
+
+            state.filterTemp.delete(
+                value
+            );
+
+        }
+
+
+        updateSelectAll();
+
+    }
+
+);
+
+
+/* =========================================================
+   UPDATE SELECT ALL STATE
+========================================================= */
+
+function updateSelectAll(){
+
+    const visible =
+        [
+            ...document.querySelectorAll(
+                "#filterValues .filter-value:not(.hidden) input"
+            )
+        ];
+
+
+    if(!visible.length){
+
+        selectAll.checked = false;
+
+        selectAll.indeterminate = false;
+
+        return;
+
+    }
+
+
+    const checked =
+        visible.filter(
+            cb => cb.checked
+        ).length;
+
+
+    selectAll.checked =
+        checked === visible.length;
+
+
+    selectAll.indeterminate =
+        checked > 0 &&
+        checked < visible.length;
+
+}
+
+
+/* =========================================================
+   APPLY FILTER
+========================================================= */
+
+document
+    .getElementById("applyFilter")
+    .addEventListener(
+
+        "click",
+
+        function(){
+
+            const col =
+                state.filterColumn;
+
+
+            if(col === null){
+
+                return;
+
+            }
+
+
+            state.filters[col] =
+                new Set(
+                    state.filterTemp
+                );
+
+
+            updateFilterButton(col);
+
+
+            closeFilter();
+
+
+            scheduleRender();
+
+        }
+
+    );
+
+
+/* =========================================================
+   CLEAR CURRENT COLUMN
+========================================================= */
+
+document
+    .getElementById("clearColumn")
+    .addEventListener(
+
+        "click",
+
+        function(){
+
+            const col =
+                state.filterColumn;
+
+
+            if(col === null){
+
+                return;
+
+            }
+
+
+            state.filters[col].clear();
+
+
+            state.filterTemp.clear();
+
+
+            updateFilterButton(col);
+
+
+            closeFilter();
+
+
+            scheduleRender();
+
+        }
+
+    );
+
+
+/* =========================================================
+   UPDATE FILTER BUTTON
+========================================================= */
+
+function updateFilterButton(col){
+
+    const button =
+        document.querySelector(
+            `.filter-button[data-col="${col}"]`
+        );
+
+
+    if(
+
+        state.filters[col].size > 0
+
+    ){
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+    else{
+
+        button.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CLOSE FILTER
+========================================================= */
+
+function closeFilter(){
+
+    filterPopup.classList.remove(
+        "show"
+    );
+
+    state.filterColumn =
+        null;
+
+}
+
+
+/* =========================================================
+   CLICK OUTSIDE
+========================================================= */
+
+document.addEventListener(
+
+    "click",
+
+    function(event){
+
+        if(
+
+            !filterPopup.contains(
+                event.target
+            ) &&
+
+            !event.target.closest(
+                ".filter-button"
+            )
+
+        ){
+
+            closeFilter();
+
+        }
+
+    }
+
+);
+
+
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
+
+document.addEventListener(
+
+    "keydown",
+
+    function(event){
+
+        if(event.key === "Escape"){
+
+            closeFilter();
+
+        }
+
+    }
+
+);
+
+
+/* =========================================================
+   CLEAR EVERYTHING
+========================================================= */
+
+document
+    .getElementById("clearBtn")
+    .addEventListener(
+
+        "click",
+
+        function(){
+
+            /* Clear top searches */
+
+            state.search =
+                ["","","",""];
+
+
+            document
+                .querySelectorAll(
+                    ".search-box input"
+                )
+                .forEach(
+                    input =>
+                        input.value = ""
+                );
+
+
+            /* Clear column filters */
+
+            state.filters =
+                Array(14)
+                .fill(null)
+                .map(
+                    () => new Set()
+                );
+
+
+            /* Reset buttons */
+
+            document
+                .querySelectorAll(
+                    ".filter-button"
+                )
+                .forEach(
+                    button =>
+                        button.classList.remove(
+                            "active"
+                        )
+                );
+
+
+            closeFilter();
+
+
+            scheduleRender();
+
+        }
+
+    );
+
+
+/* =========================================================
+   LOAD JSON DATABASE
+========================================================= */
 
 fetch("data.json")
-  .then(r => {
-    if(!r.ok) throw new Error("Could not load data.json");
-    return r.json();
-  })
-  .then(data=>{
-    state.data = data.map(row => keys.map(k => row[k]));
-    state.normalized = state.data.map(row => row.map(norm));
-    render();
-  })
-  .catch(err=>{
-    document.getElementById("tbody").innerHTML =
-      `<tr><td colspan="14" class="empty">Could not load the database. Make sure <b>data.json</b> is in the same GitHub folder as index.html.</td></tr>`;
-    document.getElementById("stats").textContent = "Data loading error";
-    console.error(err);
-  });
+
+.then(
+
+    response => {
+
+        if(!response.ok){
+
+            throw new Error(
+                "Could not load data.json"
+            );
+
+        }
+
+        return response.json();
+
+    }
+
+)
+
+.then(
+
+    data => {
+
+        /* Convert JSON */
+
+        state.data =
+            data.map(
+
+                row =>
+                    keys.map(
+                        key =>
+                            row[key]
+                    )
+
+            );
+
+
+        /* Create normalized copy */
+
+        state.normalized =
+            state.data.map(
+
+                row =>
+                    row.map(norm)
+
+            );
+
+
+        /* Display */
+
+        render();
+
+    }
+
+)
+
+.catch(
+
+    error => {
+
+        console.error(error);
+
+
+        document
+            .getElementById("tbody")
+            .innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="14"
+                        class="empty">
+
+                        Could not load the database.<br><br>
+
+                        Make sure
+                        <b>data.json</b>
+                        is in the same GitHub folder
+                        as <b>index.html</b>.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+
+        document
+            .getElementById("stats")
+            .textContent =
+                "Data loading error";
+
+    }
+
+);
+
 </script>
+
 </body>
 </html>
+```
