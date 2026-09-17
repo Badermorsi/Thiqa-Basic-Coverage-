@@ -1,9 +1,11 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insurance Coverage List</title>
+
 <style>
 *{
     box-sizing:border-box;
@@ -25,6 +27,7 @@ h1{
     font-size:26px;
     color:#1d3557;
 }
+
 /* =========================================================
    TABS
 ========================================================= */
@@ -33,15 +36,19 @@ h1{
     justify-content:center;
     gap:8px;
     margin-bottom:15px;
+    overflow-x:auto;
+    padding-bottom:2px;
 }
 .tab{
+    flex:0 0 auto;
     border:1px solid #b8b8b8;
     background:#eee;
-    padding:11px 25px;
+    padding:11px 20px;
     border-radius:6px 6px 0 0;
     cursor:pointer;
     font-weight:bold;
-    font-size:15px;
+    font-size:14px;
+    white-space:nowrap;
 }
 .tab:hover{
     background:#e2e2e2;
@@ -51,6 +58,7 @@ h1{
     color:#fff;
     border-color:#1d3557;
 }
+
 /* =========================================================
    SEARCH
 ========================================================= */
@@ -82,6 +90,7 @@ h1{
     top:10px;
     color:#777;
 }
+
 /* =========================================================
    BUTTONS
 ========================================================= */
@@ -107,6 +116,7 @@ h1{
 .clear-btn:hover{
     background:#b02a37;
 }
+
 /* =========================================================
    STATUS
 ========================================================= */
@@ -128,6 +138,7 @@ h1{
     font-family:monospace;
     text-align:left;
 }
+
 /* =========================================================
    TABLE
 ========================================================= */
@@ -164,6 +175,7 @@ h1{
 .header-title{
     overflow-wrap:anywhere;
 }
+
 /* =========================================================
    FILTER BUTTON
 ========================================================= */
@@ -185,6 +197,7 @@ h1{
     color:#fff;
     border-color:#1d3557;
 }
+
 /* =========================================================
    VIRTUAL TABLE
 ========================================================= */
@@ -205,36 +218,36 @@ h1{
     border-bottom:1px solid #d5d8dc;
     font-size:13px;
     line-height:17px;
-    /* FULL TEXT WRAPPING */
     white-space:normal;
     overflow-wrap:anywhere;
     word-break:break-word;
-    /* NEVER HIDE CELL CONTENT */
     overflow:visible;
     background:#fff;
 }
 .data-row:nth-child(even) .data-cell{
     background:#fafafa;
 }
+
 /* =========================================================
    THIQA / BASIC
 ========================================================= */
 .thiqa-yes,
 .basic-yes{
-    background:#198754!important;
-    color:#fff!important;
+    background:#d9ead3!important;
+    color:#222!important;
     font-weight:bold!important;
     text-align:center;
     vertical-align:middle;
 }
 .thiqa-no,
 .basic-no{
-    background:#dc3545!important;
-    color:#fff!important;
+    background:#f4cccc!important;
+    color:#222!important;
     font-weight:bold!important;
     text-align:center;
     vertical-align:middle;
 }
+
 /* =========================================================
    FILTER POPUP
 ========================================================= */
@@ -328,6 +341,7 @@ h1{
     background:#6c757d;
     color:#fff;
 }
+
 /* =========================================================
    MOBILE
 ========================================================= */
@@ -352,24 +366,23 @@ h1{
 }
 </style>
 </head>
+
 <body>
+
 <div class="top">
+
 <h1>Insurance Coverage List</h1>
-<div class="tabs">
-<button
-    id="thiqaTab"
-    class="tab active"
-    onclick="switchSheet('thiqa')">
-    Thiqa Coverage List
-</button>
-<button
-    id="haadTab"
-    class="tab"
-    onclick="switchSheet('haad')">
-    HAAD List
-</button>
-</div>
+
+<!-- =======================================================
+     WORKSHEET TABS
+======================================================= -->
+<div id="tabs" class="tabs"></div>
+
+<!-- =======================================================
+     SEARCH
+======================================================= -->
 <div class="search-container">
+
 <div class="search-box">
     <input
         id="brandSearch"
@@ -378,6 +391,7 @@ h1{
         oninput="applySearch()">
     <span class="search-icon">🔎</span>
 </div>
+
 <div class="search-box">
     <input
         id="genericSearch"
@@ -386,6 +400,7 @@ h1{
         oninput="applySearch()">
     <span class="search-icon">🔎</span>
 </div>
+
 <div class="search-box">
     <input
         id="strengthSearch"
@@ -394,6 +409,7 @@ h1{
         oninput="applySearch()">
     <span class="search-icon">🔎</span>
 </div>
+
 <div class="search-box">
     <input
         id="formSearch"
@@ -402,7 +418,9 @@ h1{
         oninput="applySearch()">
     <span class="search-icon">🔎</span>
 </div>
+
 </div>
+
 <div class="controls">
 <button
     class="control-btn clear-btn"
@@ -410,38 +428,48 @@ h1{
     Clear Search & Filters
 </button>
 </div>
+
 </div>
+
 <div id="status" class="status">
     Loading...
 </div>
+
 <div
     id="errorBox"
     class="error"
     style="display:none">
 </div>
+
 <div
     id="excelArea"
     class="excel-area">
+
 <div
     id="excelHeader"
     class="excel-header">
 </div>
+
 <div
     id="virtualContent"
     class="virtual-content">
 </div>
+
 </div>
+
 <!-- =======================================================
      FILTER POPUP
 ======================================================= -->
 <div
     id="filterPopup"
     class="filter-popup">
+
 <div
     id="filterPopupHeader"
     class="filter-popup-header">
     Filter
 </div>
+
 <div class="filter-search">
     <input
         id="filterValueSearch"
@@ -449,124 +477,211 @@ h1{
         placeholder="Search values..."
         oninput="renderFilterValues()">
 </div>
+
 <div class="filter-actions">
-    <button onclick="selectAllFilterValues()">
-        Select All
-    </button>
-    <button onclick="clearAllFilterValues()">
-        Clear All
-    </button>
+
+<button onclick="selectAllFilterValues()">
+    Select All
+</button>
+
+<button onclick="clearAllFilterValues()">
+    Clear All
+</button>
+
 </div>
+
 <div
     id="filterValues"
     class="filter-values">
 </div>
+
 <div class="filter-footer">
-    <button
-        class="apply-filter"
-        onclick="applyColumnFilter()">
-        Apply
-    </button>
-    <button
-        class="cancel-filter"
-        onclick="closeFilter()">
-        Cancel
-    </button>
+
+<button
+    class="apply-filter"
+    onclick="applyColumnFilter()">
+    Apply
+</button>
+
+<button
+    class="cancel-filter"
+    onclick="closeFilter()">
+    Cancel
+</button>
+
 </div>
 </div>
+
 <script>
+
 /* =========================================================
-   JSON FILE NAMES
+   WORKSHEETS
+   EXACT ORDER REQUESTED
 ========================================================= */
-const FILES = {
-    thiqa: "data.json",
-    haad: "HAAD_LIST.json"
-};
+
+const WORKSHEETS = [
+
+    {
+        id: "thiqa",
+        name: "Thiqa & Basic",
+        file: "data.json"
+    },
+
+    {
+        id: "haad",
+        name: "HAAD",
+        file: "HAAD_LIST.json"
+    },
+
+    {
+        id: "apg",
+        name: "APG FORMULARY 05-06",
+        file: "APG FORMULARY 05-06.json"
+    },
+
+    {
+        id: "icd10",
+        name: "ICD10",
+        file: "ICD10.json"
+    },
+
+    {
+        id: "vitamin",
+        name: "VITAMIN COVERAGE",
+        file: "VITAMIN COVERAGE.json"
+    },
+
+    {
+        id: "ppi",
+        name: "PPI Coverage",
+        file: "PPI Coverage.json"
+    },
+
+    {
+        id: "proactive",
+        name: "PROACTIVE INSTRUCTION",
+        file: "PROACTIVE INSTRUCTION.json"
+    },
+
+    {
+        id: "hcpc",
+        name: "HCPC Cap & Ref Price",
+        file: "HCPC Cap & REf Price.json"
+    },
+
+    {
+        id: "validity",
+        name: "VALIDITY AFTER OPENNING",
+        file: "VALIDITY AFTER OPENNING.json"
+    },
+
+    {
+        id: "cda",
+        name: "CDA & CDB MAX DD",
+        file: "CDA &CDB MAX DD.json"
+    },
+
+    {
+        id: "adnic",
+        name: "ADNIC (KHALIFA F.)",
+        file: "ADNIC ( KHALIFA F. ).json"
+    },
+
+    {
+        id: "nasHaad",
+        name: "Nas TPA Formulary (HAAD)",
+        file: "Nas TPA Formulary (HAAD).json"
+    },
+
+    {
+        id: "nasDha",
+        name: "Nas TPA Formulary (DHA)",
+        file: "Nas TPA Formulary (DHA).json"
+    },
+
+    {
+        id: "fmc",
+        name: "FMC LIST 01-2026",
+        file: "FMC LIST 01-2026.json"
+    },
+
+    {
+        id: "oman",
+        name: "OMAN FORMULARY 03-2024",
+        file: "OMAN FORMULARY 03-2024.json"
+    },
+
+    {
+        id: "phone",
+        name: "PHONE CONTACTS",
+        file: "PHONE CONTACTS.json"
+    }
+
+];
+
 /* =========================================================
-   DATA
+   DATA STORAGE
 ========================================================= */
-let thiqaData = [];
-let haadData = [];
+
+const sheetData = {};
+const sheetColumns = {};
+const filteredData = {};
+const columnFilters = {};
+const rowOffsets = {};
+const totalHeights = {};
+
+/* =========================================================
+   CURRENT SHEET
+   THIQA & BASIC IS DEFAULT
+========================================================= */
+
 let currentSheet = "thiqa";
-let columns = {
-    thiqa: [],
-    haad: []
-};
-let filteredData = {
-    thiqa: [],
-    haad: []
-};
-let columnFilters = {
-    thiqa: new Map(),
-    haad: new Map()
-};
+
+let renderTimer = null;
+
 /* =========================================================
    VIRTUAL SCROLLING
 ========================================================= */
+
 const MIN_ROW_HEIGHT = 42;
 const LINE_HEIGHT = 17;
 const ROW_VERTICAL_PADDING = 14;
 const BUFFER_ROWS = 30;
-let rowOffsets = {
-    thiqa: [],
-    haad: []
-};
-let totalHeights = {
-    thiqa: 0,
-    haad: 0
-};
-let renderTimer = null;
+
 /* =========================================================
-   HAAD COLUMNS
+   FILTER POPUP
 ========================================================= */
-const HAAD_COLUMNS = [
-    "Drug Code",
-    "Insurance Plan",
-    "Package Name",
-    "Generic Code",
-    "Generic Name",
-    "Strength",
-    "Dosage Form",
-    "Package Size",
-    "Dispense Mode",
-    "Package Price to Public",
-    "Package Price to Pharmacy",
-    "Unit Price to Public",
-    "Unit Price to Pharmacy",
-    "Status",
-    "Delete Effective Date",
-    "Last Change Date",
-    "Agent Name",
-    "Manufacturer Name",
-    "Insurance Coverage For Government Funded Program",
-    "UPP Scope",
-    "Included in Thiqa/ABM - other than 1&7 - Drug Formulary",
-    "Included In Basic Drug Formulary",
-    "Included In ABM 1 Drug Formulary",
-    "Included In ABM 7 Drug Formulary",
-    "Unit Markup",
-    "Package Markup",
-    "Thiqa Max. Reimbursement Price (Package)",
-    "Thiqa co-pay amount (package)",
-    "Basic co-pay amount (package)",
-    "UPP Effective Date",
-    "UPP Updated Date",
-    "UPP Expiry Date"
-];
+
+let filterPopupState = {
+    column: null,
+    sheet: null,
+    allValues: [],
+    selected: new Set()
+};
+
 /* =========================================================
    START
 ========================================================= */
+
 document.addEventListener(
     "DOMContentLoaded",
     function(){
+
+        createTabs();
+
+        initializeSheetStorage();
+
         loadAllData();
+
         document.addEventListener(
             "click",
             function(event){
+
                 const popup =
                     document.getElementById(
                         "filterPopup"
                     );
+
                 if(
                     !popup.contains(event.target) &&
                     !event.target.classList.contains(
@@ -575,194 +690,712 @@ document.addEventListener(
                 ){
                     closeFilter();
                 }
+
             }
         );
+
     }
 );
+
 /* =========================================================
-   LOAD BOTH JSON FILES
+   CREATE TABS
 ========================================================= */
+
+function createTabs(){
+
+    const tabs =
+        document.getElementById(
+            "tabs"
+        );
+
+    tabs.innerHTML = "";
+
+    WORKSHEETS.forEach(
+        sheet => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.className =
+                "tab";
+
+            if(
+                sheet.id ===
+                currentSheet
+            ){
+                button.classList.add(
+                    "active"
+                );
+            }
+
+            button.id =
+                "tab-" +
+                sheet.id;
+
+            button.textContent =
+                sheet.name;
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    switchSheet(
+                        sheet.id
+                    );
+
+                }
+            );
+
+            tabs.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+/* =========================================================
+   INITIALIZE STORAGE
+========================================================= */
+
+function initializeSheetStorage(){
+
+    WORKSHEETS.forEach(
+        sheet => {
+
+            sheetData[sheet.id] = [];
+
+            sheetColumns[sheet.id] = [];
+
+            filteredData[sheet.id] = [];
+
+            columnFilters[sheet.id] =
+                new Map();
+
+            rowOffsets[sheet.id] = [0];
+
+            totalHeights[sheet.id] = 0;
+
+        }
+    );
+
+}
+
+/* =========================================================
+   LOAD ALL DATA
+========================================================= */
+
 async function loadAllData(){
+
     const status =
-        document.getElementById("status");
+        document.getElementById(
+            "status"
+        );
+
     const errorBox =
-        document.getElementById("errorBox");
-    status.textContent = "Loading...";
-    errorBox.style.display = "none";
+        document.getElementById(
+            "errorBox"
+        );
+
+    status.textContent =
+        "Loading worksheets...";
+
+    errorBox.style.display =
+        "none";
+
     try{
+
+        /*
+           Load every JSON independently.
+
+           If one file fails, the other sheets
+           can still work.
+        */
+
         const results =
-            await Promise.all([
-                fetch(
-                    "data.json?v=" +
-                    Date.now(),
-                    {
-                        cache:"no-store"
-                    }
-                ),
-                fetch(
-                    "HAAD_LIST.json?v=" +
-                    Date.now(),
-                    {
-                        cache:"no-store"
+            await Promise.all(
+                WORKSHEETS.map(
+                    async sheet => {
+
+                        try{
+
+                            const response =
+                                await fetch(
+                                    encodeURI(
+                                        sheet.file
+                                    ) +
+                                    "?v=" +
+                                    Date.now(),
+                                    {
+                                        cache:
+                                            "no-store"
+                                    }
+                                );
+
+                            if(
+                                !response.ok
+                            ){
+
+                                throw new Error(
+                                    "HTTP " +
+                                    response.status
+                                );
+
+                            }
+
+                            const json =
+                                await response.json();
+
+                            const data =
+                                normalizeData(
+                                    json
+                                );
+
+                            return {
+                                sheet:
+                                    sheet,
+                                data:
+                                    data,
+                                error:
+                                    null
+                            };
+
+                        }
+                        catch(error){
+
+                            return {
+                                sheet:
+                                    sheet,
+                                data:
+                                    [],
+                                error:
+                                    error
+                            };
+
+                        }
+
                     }
                 )
-            ]);
-        if(!results[0].ok){
-            throw new Error(
-                "Could not load data.json\n" +
-                "HTTP Status: " +
-                results[0].status
             );
-        }
-        if(!results[1].ok){
-            throw new Error(
-                "Could not load HAAD_LIST.json\n" +
-                "HTTP Status: " +
-                results[1].status
-            );
-        }
-        const thiqaJson =
-            await results[0].json();
-        const haadJson =
-            await results[1].json();
-        thiqaData =
-            normalizeData(thiqaJson);
-        haadData =
-            normalizeData(haadJson);
-        if(!Array.isArray(thiqaData)){
-            throw new Error(
-                "data.json is not a JSON array."
-            );
-        }
-        if(!Array.isArray(haadData)){
-            throw new Error(
-                "HAAD_LIST.json is not a JSON array."
-            );
-        }
-        if(thiqaData.length === 0){
-            throw new Error(
-                "data.json loaded but contains 0 records."
-            );
-        }
-        if(haadData.length === 0){
-            throw new Error(
-                "HAAD_LIST.json loaded but contains 0 records."
-            );
-        }
-        columns.thiqa =
-            Object.keys(
-                thiqaData[0]
-            );
-        const existingHaadColumns =
-            Object.keys(
-                haadData[0]
-            );
-        const extraColumns =
-            existingHaadColumns.filter(
-                column =>
-                    !HAAD_COLUMNS.includes(
-                        column
+
+        let loadedCount = 0;
+        let errors = [];
+
+        results.forEach(
+            result => {
+
+                const id =
+                    result.sheet.id;
+
+                if(
+                    result.error
+                ){
+
+                    errors.push(
+                        result.sheet.name +
+                        " → " +
+                        result.sheet.file +
+                        " → " +
+                        result.error.message
+                    );
+
+                    sheetData[id] = [];
+                    sheetColumns[id] = [];
+                    filteredData[id] = [];
+
+                    return;
+
+                }
+
+                if(
+                    !Array.isArray(
+                        result.data
                     )
+                ){
+
+                    errors.push(
+                        result.sheet.name +
+                        " → JSON is not an array."
+                    );
+
+                    return;
+
+                }
+
+                sheetData[id] =
+                    result.data;
+
+                /*
+                   Automatically detect
+                   the actual columns in
+                   each JSON file.
+                */
+
+                sheetColumns[id] =
+                    getColumns(
+                        result.data
+                    );
+
+                filteredData[id] =
+                    [
+                        ...result.data
+                    ];
+
+                columnFilters[id].clear();
+
+                buildRowOffsets(
+                    id
+                );
+
+                loadedCount++;
+
+            }
+        );
+
+        /*
+           Thiqa & Basic MUST be
+           the first sheet displayed.
+        */
+
+        currentSheet = "thiqa";
+
+        updateTabActiveState();
+
+        if(
+            sheetData.thiqa.length === 0
+        ){
+
+            throw new Error(
+                "data.json could not be loaded or contains 0 records."
             );
-        columns.haad = [
-            ...HAAD_COLUMNS.filter(
-                column =>
-                    existingHaadColumns.includes(
-                        column
-                    )
-            ),
-            ...extraColumns
-        ];
-        filteredData.thiqa =
-            [...thiqaData];
-        filteredData.haad =
-            [...haadData];
-        columnFilters.thiqa.clear();
-        columnFilters.haad.clear();
-        buildRowOffsets("thiqa");
-        buildRowOffsets("haad");
-        renderVirtualTable("thiqa");
-        status.textContent =
-            "Thiqa Coverage List: " +
-            thiqaData.length.toLocaleString() +
-            " records  |  HAAD List: " +
-            haadData.length.toLocaleString() +
-            " records";
+
+        }
+
+        renderVirtualTable(
+            currentSheet
+        );
+
+        updateSearchPlaceholders();
+
+        updateStatus();
+
+        if(
+            errors.length > 0
+        ){
+
+            errorBox.style.display =
+                "block";
+
+            errorBox.textContent =
+                "Some worksheets could not be loaded:\n\n" +
+                errors.join(
+                    "\n"
+                );
+
+        }
+
     }
     catch(error){
+
         console.error(
             "Insurance Coverage List Error:",
             error
         );
+
         status.textContent =
             "Unable to load data.";
+
         errorBox.style.display =
             "block";
+
         errorBox.textContent =
             "ERROR LOADING DATA\n\n" +
-            error.message +
-            "\n\n" +
-            "Check that these files are in the SAME folder as index.html:\n\n" +
-            "data.json\n" +
-            "HAAD_LIST.json";
+            error.message;
+
     }
+
 }
+
 /* =========================================================
    NORMALIZE JSON
 ========================================================= */
+
 function normalizeData(json){
-    if(Array.isArray(json)){
+
+    if(
+        Array.isArray(json)
+    ){
+
         return json;
+
     }
+
     if(
         json &&
-        Array.isArray(json.data)
+        Array.isArray(
+            json.data
+        )
     ){
+
         return json.data;
+
     }
+
+    /*
+       Also support common
+       JSON object formats.
+    */
+
+    if(
+        json &&
+        typeof json === "object"
+    ){
+
+        const keys =
+            Object.keys(json);
+
+        for(
+            const key of keys
+        ){
+
+            if(
+                Array.isArray(
+                    json[key]
+                )
+            ){
+
+                return json[key];
+
+            }
+
+        }
+
+    }
+
     return [];
+
 }
+
+/* =========================================================
+   GET COLUMNS
+========================================================= */
+
+function getColumns(data){
+
+    if(
+        !Array.isArray(data) ||
+        data.length === 0
+    ){
+
+        return [];
+
+    }
+
+    /*
+       Collect ALL keys from all
+       records, not just the first row.
+
+       This protects against JSON files
+       where some columns appear later.
+    */
+
+    const columns = [];
+
+    const seen =
+        new Set();
+
+    data.forEach(
+        row => {
+
+            if(
+                row &&
+                typeof row === "object"
+            ){
+
+                Object.keys(
+                    row
+                ).forEach(
+                    key => {
+
+                        if(
+                            !seen.has(key)
+                        ){
+
+                            seen.add(key);
+
+                            columns.push(
+                                key
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+
+        }
+    );
+
+    return columns;
+
+}
+
 /* =========================================================
    SWITCH SHEET
 ========================================================= */
+
 function switchSheet(type){
+
+    if(
+        !sheetData.hasOwnProperty(
+            type
+        )
+    ){
+
+        return;
+
+    }
+
     currentSheet = type;
+
+    updateTabActiveState();
+
+    /*
+       Close any filter belonging
+       to the previous worksheet.
+    */
+
+    closeFilter();
+
+    /*
+       Clear search boxes when
+       changing worksheet.
+    */
+
     document
-        .getElementById("thiqaTab")
-        .classList
-        .toggle(
-            "active",
-            type === "thiqa"
-        );
-    document
-        .getElementById("haadTab")
-        .classList
-        .toggle(
-            "active",
-            type === "haad"
-        );
-    document
-        .getElementById("brandSearch")
+        .getElementById(
+            "brandSearch"
+        )
         .value = "";
+
     document
-        .getElementById("genericSearch")
+        .getElementById(
+            "genericSearch"
+        )
         .value = "";
+
     document
-        .getElementById("strengthSearch")
+        .getElementById(
+            "strengthSearch"
+        )
         .value = "";
+
     document
-        .getElementById("formSearch")
+        .getElementById(
+            "formSearch"
+        )
         .value = "";
+
+    /*
+       Restore all rows for this sheet
+       according to its own filters.
+    */
+
     filteredData[type] =
-        getFilteredRows(type);
-    buildRowOffsets(type);
-    renderVirtualTable(type);
+        getFilteredRows(
+            type
+        );
+
+    buildRowOffsets(
+        type
+    );
+
+    /*
+       Return to top when changing
+       worksheet.
+    */
+
+    const area =
+        document.getElementById(
+            "excelArea"
+        );
+
+    area.scrollTop = 0;
+    area.scrollLeft = 0;
+
+    updateSearchPlaceholders();
+
+    renderVirtualTable(
+        type
+    );
+
     updateStatus();
+
 }
+
+/* =========================================================
+   ACTIVE TAB
+========================================================= */
+
+function updateTabActiveState(){
+
+    WORKSHEETS.forEach(
+        sheet => {
+
+            const tab =
+                document.getElementById(
+                    "tab-" +
+                    sheet.id
+                );
+
+            if(tab){
+
+                tab.classList.toggle(
+                    "active",
+                    sheet.id ===
+                    currentSheet
+                );
+
+            }
+
+        }
+    );
+
+}
+
+/* =========================================================
+   SEARCH PLACEHOLDERS
+========================================================= */
+
+function updateSearchPlaceholders(){
+
+    const columns =
+        sheetColumns[
+            currentSheet
+        ] || [];
+
+    const brand =
+        findColumn(
+            columns,
+            [
+                "proactive name",
+                "brand name",
+                "package name"
+            ]
+        );
+
+    const generic =
+        findColumn(
+            columns,
+            [
+                "generic name"
+            ]
+        );
+
+    const strength =
+        findColumn(
+            columns,
+            [
+                "strength"
+            ]
+        );
+
+    const dosage =
+        findColumn(
+            columns,
+            [
+                "dosage form"
+            ]
+        );
+
+    const brandInput =
+        document.getElementById(
+            "brandSearch"
+        );
+
+    const genericInput =
+        document.getElementById(
+            "genericSearch"
+        );
+
+    const strengthInput =
+        document.getElementById(
+            "strengthSearch"
+        );
+
+    const formInput =
+        document.getElementById(
+            "formSearch"
+        );
+
+    brandInput.placeholder =
+        brand
+            ? "Search by " + brand
+            : "Search all data";
+
+    genericInput.placeholder =
+        generic
+            ? "Search by " + generic
+            : "Search all data";
+
+    strengthInput.placeholder =
+        strength
+            ? "Search by " + strength
+            : "Search all data";
+
+    formInput.placeholder =
+        dosage
+            ? "Search by " + dosage
+            : "Search all data";
+
+}
+
+/* =========================================================
+   FIND COLUMN
+========================================================= */
+
+function findColumn(
+    columns,
+    possibleNames
+){
+
+    for(
+        const wanted of possibleNames
+    ){
+
+        const exact =
+            columns.find(
+                column =>
+                    column
+                        .toLowerCase()
+                        .trim() ===
+                    wanted
+                        .toLowerCase()
+                        .trim()
+            );
+
+        if(exact){
+
+            return exact;
+
+        }
+
+    }
+
+    return null;
+
+}
+
 /* =========================================================
    SEARCH
 ========================================================= */
+
 function parseSearch(value){
+
     return value
         .toLowerCase()
         .split("%")
@@ -771,129 +1404,387 @@ function parseSearch(value){
                 item.trim()
         )
         .filter(Boolean);
+
 }
+
 function cellMatchesSearch(
     value,
     searchText
 ){
+
     const terms =
-        parseSearch(searchText);
-    if(terms.length === 0){
+        parseSearch(
+            searchText
+        );
+
+    if(
+        terms.length === 0
+    ){
+
         return true;
+
     }
+
     const text =
         String(
             value ?? ""
         ).toLowerCase();
+
     return terms.every(
         term =>
-            text.includes(term)
+            text.includes(
+                term
+            )
     );
+
 }
+
+/* =========================================================
+   APPLY SEARCH
+========================================================= */
+
 function applySearch(){
-    filteredData[currentSheet] =
+
+    filteredData[
+        currentSheet
+    ] =
         getFilteredRows(
             currentSheet
         );
+
     buildRowOffsets(
         currentSheet
     );
+
     renderVirtualTable(
         currentSheet
     );
+
     updateStatus();
+
 }
+
 /* =========================================================
    FILTER DATA
 ========================================================= */
-function getFilteredRows(type){
+
+function getFilteredRows(
+    type
+){
+
     const data =
-        type === "thiqa"
-            ? thiqaData
-            : haadData;
+        sheetData[type] || [];
+
+    const columns =
+        sheetColumns[type] || [];
+
+    /*
+       Identify standard medicine
+       columns if they exist.
+    */
+
+    const brandColumn =
+        findColumn(
+            columns,
+            [
+                "proactive name",
+                "brand name",
+                "package name"
+            ]
+        );
+
+    const genericColumn =
+        findColumn(
+            columns,
+            [
+                "generic name"
+            ]
+        );
+
+    const strengthColumn =
+        findColumn(
+            columns,
+            [
+                "strength"
+            ]
+        );
+
+    const formColumn =
+        findColumn(
+            columns,
+            [
+                "dosage form"
+            ]
+        );
+
+    const brandSearch =
+        document.getElementById(
+            "brandSearch"
+        ).value;
+
+    const genericSearch =
+        document.getElementById(
+            "genericSearch"
+        ).value;
+
+    const strengthSearch =
+        document.getElementById(
+            "strengthSearch"
+        ).value;
+
+    const formSearch =
+        document.getElementById(
+            "formSearch"
+        ).value;
+
+    /*
+       If this worksheet has the
+       standard medicine columns,
+       use the four dedicated searches.
+
+       Otherwise, use any entered search
+       as a search across the whole row.
+    */
+
+    const hasStandardColumns =
+        brandColumn ||
+        genericColumn ||
+        strengthColumn ||
+        formColumn;
+
     return data.filter(
         row => {
+
             if(
                 !rowPassesFilters(
                     row,
                     type
                 )
             ){
+
                 return false;
+
             }
-            const brandSearch =
-                document
-                    .getElementById(
-                        "brandSearch"
-                    )
-                    .value;
-            const genericSearch =
-                document
-                    .getElementById(
-                        "genericSearch"
-                    )
-                    .value;
-            const strengthSearch =
-                document
-                    .getElementById(
-                        "strengthSearch"
-                    )
-                    .value;
-            const formSearch =
-                document
-                    .getElementById(
-                        "formSearch"
-                    )
-                    .value;
-            const brandValue =
-                type === "thiqa"
-                    ? row["proactive name"]
-                    : row["Package Name"];
+
             if(
-                !cellMatchesSearch(
-                    brandValue,
-                    brandSearch
-                )
+                hasStandardColumns
             ){
-                return false;
+
+                if(
+                    brandColumn &&
+                    !cellMatchesSearch(
+                        row[brandColumn],
+                        brandSearch
+                    )
+                ){
+
+                    return false;
+
+                }
+
+                if(
+                    genericColumn &&
+                    !cellMatchesSearch(
+                        row[genericColumn],
+                        genericSearch
+                    )
+                ){
+
+                    return false;
+
+                }
+
+                if(
+                    strengthColumn &&
+                    !cellMatchesSearch(
+                        row[strengthColumn],
+                        strengthSearch
+                    )
+                ){
+
+                    return false;
+
+                }
+
+                if(
+                    formColumn &&
+                    !cellMatchesSearch(
+                        row[formColumn],
+                        formSearch
+                    )
+                ){
+
+                    return false;
+
+                }
+
+                /*
+                   If a search box is being used
+                   but its corresponding column
+                   does not exist, search the whole
+                   row.
+                */
+
+                if(
+                    !brandColumn &&
+                    parseSearch(
+                        brandSearch
+                    ).length > 0 &&
+                    !rowContainsTerms(
+                        row,
+                        brandSearch
+                    )
+                ){
+
+                    return false;
+
+                }
+
+                if(
+                    !genericColumn &&
+                    parseSearch(
+                        genericSearch
+                    ).length > 0 &&
+                    !rowContainsTerms(
+                        row,
+                        genericSearch
+                    )
+                ){
+
+                    return false;
+
+                }
+
+                if(
+                    !strengthColumn &&
+                    parseSearch(
+                        strengthSearch
+                    ).length > 0 &&
+                    !rowContainsTerms(
+                        row,
+                        strengthSearch
+                    )
+                ){
+
+                    return false;
+
+                }
+
+                if(
+                    !formColumn &&
+                    parseSearch(
+                        formSearch
+                    ).length > 0 &&
+                    !rowContainsTerms(
+                        row,
+                        formSearch
+                    )
+                ){
+
+                    return false;
+
+                }
+
+                return true;
+
             }
-            if(
-                !cellMatchesSearch(
-                    row["Generic Name"],
-                    genericSearch
-                )
+
+            /*
+               Completely different worksheet
+               structure:
+               search across the entire row.
+            */
+
+            const allSearches = [
+                brandSearch,
+                genericSearch,
+                strengthSearch,
+                formSearch
+            ];
+
+            for(
+                const searchText
+                of allSearches
             ){
-                return false;
+
+                if(
+                    parseSearch(
+                        searchText
+                    ).length > 0 &&
+                    !rowContainsTerms(
+                        row,
+                        searchText
+                    )
+                ){
+
+                    return false;
+
+                }
+
             }
-            if(
-                !cellMatchesSearch(
-                    row["Strength"],
-                    strengthSearch
-                )
-            ){
-                return false;
-            }
-            if(
-                !cellMatchesSearch(
-                    row["Dosage Form"],
-                    formSearch
-                )
-            ){
-                return false;
-            }
+
             return true;
+
         }
     );
+
 }
+
+/* =========================================================
+   SEARCH WHOLE ROW
+========================================================= */
+
+function rowContainsTerms(
+    row,
+    searchText
+){
+
+    const terms =
+        parseSearch(
+            searchText
+        );
+
+    if(
+        terms.length === 0
+    ){
+
+        return true;
+
+    }
+
+    const rowText =
+        Object.values(
+            row || {}
+        )
+        .map(
+            value =>
+                String(
+                    value ?? ""
+                ).toLowerCase()
+        )
+        .join(" ");
+
+    return terms.every(
+        term =>
+            rowText.includes(
+                term
+            )
+    );
+
+}
+
 /* =========================================================
    COLUMN FILTERS
 ========================================================= */
+
 function rowPassesFilters(
     row,
     type
 ){
+
     const filters =
         columnFilters[type];
+
     for(
         const [
             column,
@@ -901,40 +1792,56 @@ function rowPassesFilters(
         ]
         of filters.entries()
     ){
+
         const value =
             String(
                 row[column] ?? ""
             );
+
         if(
             selectedValues.size === 0
         ){
+
             return false;
+
         }
+
         if(
             !selectedValues.has(
                 value
             )
         ){
+
             return false;
+
         }
+
     }
+
     return true;
+
 }
+
 /* =========================================================
    OPEN FILTER
 ========================================================= */
+
 function openFilter(
     column,
     button
 ){
+
     const popup =
         document.getElementById(
             "filterPopup"
         );
-    popup._column =
+
+    filterPopupState.column =
         column;
-    popup._sheet =
+
+    filterPopupState.sheet =
         currentSheet;
+
     document
         .getElementById(
             "filterPopupHeader"
@@ -942,15 +1849,18 @@ function openFilter(
         .textContent =
             "Filter: " +
             column;
+
     document
         .getElementById(
             "filterValueSearch"
         )
         .value = "";
+
     const data =
-        currentSheet === "thiqa"
-            ? thiqaData
-            : haadData;
+        sheetData[
+            currentSheet
+        ] || [];
+
     const values = [
         ...new Set(
             data.map(
@@ -971,79 +1881,111 @@ function openFilter(
                 }
             )
     );
-    popup._allValues =
+
+    filterPopupState.allValues =
         values;
+
     const existing =
         columnFilters[
             currentSheet
-        ].get(column);
-    /*
-       Existing filter:
-       keep its selections.
-       No existing filter:
-       everything selected.
-    */
+        ].get(
+            column
+        );
+
     if(existing){
-        popup._selected =
-            new Set(existing);
+
+        filterPopupState.selected =
+            new Set(
+                existing
+            );
+
     }
     else{
-        popup._selected =
-            new Set(values);
+
+        filterPopupState.selected =
+            new Set(
+                values
+            );
+
     }
+
     renderFilterValues();
+
     const rect =
         button.getBoundingClientRect();
+
     const popupWidth = 330;
     const popupHeight = 420;
+
     let left =
         rect.left;
+
     let top =
         rect.bottom + 5;
+
     if(
         left + popupWidth >
         window.innerWidth
     ){
+
         left =
             window.innerWidth -
             popupWidth -
             10;
+
     }
+
     if(
         top + popupHeight >
         window.innerHeight
     ){
+
         top =
             rect.top -
             popupHeight -
             5;
+
     }
-    if(top < 10){
+
+    if(
+        top < 10
+    ){
+
         top = 10;
+
     }
-    if(left < 10){
+
+    if(
+        left < 10
+    ){
+
         left = 10;
+
     }
+
     popup.style.left =
         left + "px";
+
     popup.style.top =
         top + "px";
+
     popup.classList.add(
         "show"
     );
+
 }
+
 /* =========================================================
    FILTER VALUES
 ========================================================= */
+
 function renderFilterValues(){
-    const popup =
-        document.getElementById(
-            "filterPopup"
-        );
+
     const container =
         document.getElementById(
             "filterValues"
         );
+
     const search =
         document
             .getElementById(
@@ -1052,105 +1994,126 @@ function renderFilterValues(){
             .value
             .trim()
             .toLowerCase();
+
     const allValues =
-        popup._allValues || [];
+        filterPopupState.allValues ||
+        [];
+
     const selected =
-        popup._selected ||
+        filterPopupState.selected ||
         new Set();
-    /*
-       IMPORTANT EXCEL-LIKE BEHAVIOR:
-       Searching the filter list does NOT
-       modify the selected values.
-       It only hides values that do not
-       match the filter-search text.
-    */
+
     const visibleValues =
         allValues.filter(
             value =>
                 value
                     .toLowerCase()
-                    .includes(search)
+                    .includes(
+                        search
+                    )
         );
+
     container.innerHTML = "";
+
     if(
         visibleValues.length === 0
     ){
+
         container.innerHTML =
             '<div style="padding:12px;color:#777;">No matching values</div>';
+
         return;
+
     }
+
     const fragment =
         document.createDocumentFragment();
+
     visibleValues.forEach(
         value => {
+
             const label =
                 document.createElement(
                     "label"
                 );
+
             label.className =
                 "filter-value";
+
             const checkbox =
                 document.createElement(
                     "input"
                 );
+
             checkbox.type =
                 "checkbox";
-            /*
-               Checkbox reflects the actual
-               selection, not whether the value
-               matches the search.
-            */
+
             checkbox.checked =
-                selected.has(value);
+                selected.has(
+                    value
+                );
+
             checkbox.addEventListener(
                 "change",
                 function(){
+
                     if(
                         checkbox.checked
                     ){
+
                         selected.add(
                             value
                         );
+
                     }
                     else{
+
                         selected.delete(
                             value
                         );
+
                     }
+
                 }
             );
+
             const span =
                 document.createElement(
                     "span"
                 );
+
             span.textContent =
                 value === ""
                     ? "(Blank)"
                     : value;
+
             label.appendChild(
                 checkbox
             );
+
             label.appendChild(
                 span
             );
+
             fragment.appendChild(
                 label
             );
+
         }
     );
+
     container.appendChild(
         fragment
     );
+
 }
+
 /* =========================================================
    SELECT ALL
-   EXCEL-LIKE BEHAVIOR
 ========================================================= */
+
 function selectAllFilterValues(){
-    const popup =
-        document.getElementById(
-            "filterPopup"
-        );
+
     const search =
         document
             .getElementById(
@@ -1159,87 +2122,75 @@ function selectAllFilterValues(){
             .value
             .trim()
             .toLowerCase();
+
     const allValues =
-        popup._allValues || [];
-    /*
-       If there is text in Search Values,
-       only matching values are selected.
-       IMPORTANT:
-       Existing selections that do NOT
-       match the search are NOT removed.
-       This is what allows:
-       Select All
-       -> type "pana"
-       -> Apply
-       without clearing the selection state.
-    */
+        filterPopupState.allValues ||
+        [];
+
     const visibleValues =
         allValues.filter(
             value =>
                 value
                     .toLowerCase()
-                    .includes(search)
+                    .includes(
+                        search
+                    )
         );
+
     const selected =
-        popup._selected ||
+        filterPopupState.selected ||
         new Set();
+
     visibleValues.forEach(
         value => {
-            selected.add(value);
+
+            selected.add(
+                value
+            );
+
         }
     );
-    popup._selected =
+
+    filterPopupState.selected =
         selected;
+
     renderFilterValues();
+
 }
+
 /* =========================================================
    CLEAR ALL FILTER VALUES
 ========================================================= */
+
 function clearAllFilterValues(){
-    const popup =
-        document.getElementById(
-            "filterPopup"
-        );
-    popup._selected =
+
+    filterPopupState.selected =
         new Set();
+
     renderFilterValues();
+
 }
+
 /* =========================================================
    APPLY FILTER
 ========================================================= */
+
 function applyColumnFilter(){
-    const popup =
-        document.getElementById(
-            "filterPopup"
-        );
+
     const column =
-        popup._column;
+        filterPopupState.column;
+
     const type =
-        popup._sheet;
+        filterPopupState.sheet;
+
     const allValues =
-        popup._allValues || [];
+        filterPopupState.allValues ||
+        [];
+
     const selected =
-        popup._selected ||
+        filterPopupState.selected ||
         new Set();
-    /*
-       IMPORTANT:
-       If Search Values contains text,
-       we create a filter based on the
-       VALUES MATCHING THE SEARCH.
-       Example:
-       Values:
-       Panadol
-       Panadol Extra
-       Amoxil
-       Brufen
-       Search:
-       pana
-       Result:
-       Panadol
-       Panadol Extra
-       This works even if Select All
-       was still selected.
-    */
+
     const search =
         document
             .getElementById(
@@ -1248,28 +2199,34 @@ function applyColumnFilter(){
             .value
             .trim()
             .toLowerCase();
-    if(search !== ""){
+
+    if(
+        search !== ""
+    ){
+
         const matchingValues =
             allValues.filter(
                 value =>
                     value
                         .toLowerCase()
-                        .includes(search)
+                        .includes(
+                            search
+                        )
             );
-        /*
-           Replace the effective filter
-           with only the matching values.
-           This is the key Excel-like
-           behavior requested.
-        */
+
         if(
             matchingValues.length ===
             allValues.length
         ){
+
             columnFilters[type]
-                .delete(column);
+                .delete(
+                    column
+                );
+
         }
         else{
+
             columnFilters[type]
                 .set(
                     column,
@@ -1277,39 +2234,62 @@ function applyColumnFilter(){
                         matchingValues
                     )
                 );
+
         }
+
     }
     else{
-        /*
-           No search text:
-           use normal checkbox selection.
-        */
+
         if(
             selected.size ===
             allValues.length
         ){
+
             columnFilters[type]
-                .delete(column);
+                .delete(
+                    column
+                );
+
         }
         else{
+
             columnFilters[type]
                 .set(
                     column,
-                    new Set(selected)
+                    new Set(
+                        selected
+                    )
                 );
+
         }
+
     }
+
     closeFilter();
+
     filteredData[type] =
-        getFilteredRows(type);
-    buildRowOffsets(type);
-    renderVirtualTable(type);
+        getFilteredRows(
+            type
+        );
+
+    buildRowOffsets(
+        type
+    );
+
+    renderVirtualTable(
+        type
+    );
+
     updateStatus();
+
 }
+
 /* =========================================================
    CLOSE FILTER
 ========================================================= */
+
 function closeFilter(){
+
     document
         .getElementById(
             "filterPopup"
@@ -1318,71 +2298,110 @@ function closeFilter(){
         .remove(
             "show"
         );
+
 }
+
 /* =========================================================
    CLEAR EVERYTHING
 ========================================================= */
+
 function clearSearchAndFilters(){
+
     document
         .getElementById(
             "brandSearch"
         )
         .value = "";
+
     document
         .getElementById(
             "genericSearch"
         )
         .value = "";
+
     document
         .getElementById(
             "strengthSearch"
         )
         .value = "";
+
     document
         .getElementById(
             "formSearch"
         )
         .value = "";
-    columnFilters.thiqa.clear();
-    columnFilters.haad.clear();
-    filteredData.thiqa =
-        [...thiqaData];
-    filteredData.haad =
-        [...haadData];
+
+    /*
+       Clear filters ONLY for the current
+       worksheet.
+
+       Other worksheets keep their own
+       filters.
+    */
+
+    columnFilters[
+        currentSheet
+    ].clear();
+
+    filteredData[
+        currentSheet
+    ] =
+        [
+            ...sheetData[
+                currentSheet
+            ]
+        ];
+
     buildRowOffsets(
-        "thiqa"
+        currentSheet
     );
-    buildRowOffsets(
-        "haad"
-    );
+
     closeFilter();
+
     const area =
         document.getElementById(
             "excelArea"
         );
+
     area.scrollTop = 0;
     area.scrollLeft = 0;
+
     renderVirtualTable(
         currentSheet
     );
+
     updateStatus();
+
 }
+
 /* =========================================================
    STATUS
 ========================================================= */
+
 function updateStatus(){
+
     const total =
-        currentSheet === "thiqa"
-            ? thiqaData.length
-            : haadData.length;
+        sheetData[
+            currentSheet
+        ]?.length || 0;
+
     const shown =
         filteredData[
             currentSheet
-        ].length;
+        ]?.length || 0;
+
+    const sheet =
+        WORKSHEETS.find(
+            item =>
+                item.id ===
+                currentSheet
+        );
+
     const title =
-        currentSheet === "thiqa"
-            ? "Thiqa Coverage List"
-            : "HAAD List";
+        sheet
+            ? sheet.name
+            : currentSheet;
+
     document
         .getElementById(
             "status"
@@ -1394,15 +2413,20 @@ function updateStatus(){
             " of " +
             total.toLocaleString() +
             " records";
+
 }
+
 /* =========================================================
    COLUMN WIDTH
 ========================================================= */
+
 function getColumnWidth(
     column
 ){
+
     const lower =
         column.toLowerCase();
+
     if(
         lower.includes(
             "generic name"
@@ -1427,10 +2451,22 @@ function getColumnWidth(
         ) ||
         lower.includes(
             "daman coverage"
+        ) ||
+        lower.includes(
+            "description"
+        ) ||
+        lower.includes(
+            "instruction"
+        ) ||
+        lower.includes(
+            "indication"
         )
     ){
+
         return 280;
+
     }
+
     if(
         lower.includes(
             "strength"
@@ -1439,8 +2475,11 @@ function getColumnWidth(
             "dosage form"
         )
     ){
+
         return 160;
+
     }
+
     if(
         lower.includes(
             "price"
@@ -1458,61 +2497,81 @@ function getColumnWidth(
             "copay"
         )
     ){
+
         return 155;
+
     }
+
     if(
-        lower.includes("date")
+        lower.includes(
+            "date"
+        )
     ){
+
         return 140;
+
     }
+
     if(
         lower === "thiqa" ||
         lower === "basic"
     ){
+
         return 110;
+
     }
+
     return 150;
+
 }
+
 /* =========================================================
    GRID
 ========================================================= */
+
 function getGridTemplate(
     type
 ){
-    return columns[type]
+
+    return sheetColumns[type]
         .map(
             column =>
                 getColumnWidth(
                     column
-                ) + "px"
+                ) +
+                "px"
         )
         .join(" ");
+
 }
+
 /* =========================================================
    ROW HEIGHT
-   FULL CONTENT
 ========================================================= */
+
 function calculateRowHeight(
     row,
     type
 ){
+
     let maxLines = 1;
-    columns[type].forEach(
+
+    const columns =
+        sheetColumns[type] || [];
+
+    columns.forEach(
         column => {
+
             const value =
                 String(
                     row[column] ?? ""
                 );
+
             const width =
                 getColumnWidth(
                     column
                 );
-            /*
-               Approximate number of
-               characters that fit on
-               each line.
-               NO 10-LINE LIMIT.
-            */
+
             const charsPerLine =
                 Math.max(
                     8,
@@ -1520,21 +2579,26 @@ function calculateRowHeight(
                         width / 7
                     )
                 );
-            /*
-               Account for explicit
-               newline characters too.
-            */
+
             const paragraphs =
-                value.split("\n");
+                value.split(
+                    "\n"
+                );
+
             let lines = 0;
+
             paragraphs.forEach(
                 paragraph => {
+
                     if(
                         paragraph.length === 0
                     ){
+
                         lines += 1;
+
                     }
                     else{
+
                         lines += Math.max(
                             1,
                             Math.ceil(
@@ -1542,238 +2606,356 @@ function calculateRowHeight(
                                 charsPerLine
                             )
                         );
+
                     }
+
                 }
             );
+
             maxLines =
                 Math.max(
                     maxLines,
                     lines
                 );
+
         }
     );
-    /*
-       FULL CONTENT HEIGHT.
-       No maximum number of lines.
-    */
+
     return Math.max(
         MIN_ROW_HEIGHT,
         maxLines *
         LINE_HEIGHT +
         ROW_VERTICAL_PADDING
     );
+
 }
+
 /* =========================================================
    ROW OFFSETS
 ========================================================= */
+
 function buildRowOffsets(
     type
 ){
+
     const data =
-        filteredData[type];
+        filteredData[type] || [];
+
     const offsets =
         new Array(
             data.length + 1
         );
+
     offsets[0] = 0;
+
     for(
         let i = 0;
         i < data.length;
         i++
     ){
+
         offsets[i + 1] =
             offsets[i] +
             calculateRowHeight(
                 data[i],
                 type
             );
+
     }
+
     rowOffsets[type] =
         offsets;
+
     totalHeights[type] =
         offsets[
             offsets.length - 1
         ] || 0;
+
 }
+
 /* =========================================================
    FIND ROW
 ========================================================= */
+
 function findRowAtPosition(
     offsets,
     position
 ){
+
     let low = 0;
+
     let high =
         offsets.length - 1;
+
     while(
         low < high
     ){
+
         const mid =
             Math.floor(
                 (low + high) / 2
             );
+
         if(
             offsets[mid] <=
             position
         ){
+
             low =
                 mid + 1;
+
         }
         else{
+
             high =
                 mid;
+
         }
+
     }
+
     return Math.max(
         0,
         low - 1
     );
+
 }
+
 /* =========================================================
    RENDER TABLE
 ========================================================= */
+
 function renderVirtualTable(
     type
 ){
+
     const header =
         document.getElementById(
             "excelHeader"
         );
+
     const content =
         document.getElementById(
             "virtualContent"
         );
+
     const area =
         document.getElementById(
             "excelArea"
         );
+
+    const columns =
+        sheetColumns[type] || [];
+
     const template =
         getGridTemplate(
             type
         );
+
     header.style.gridTemplateColumns =
         template;
+
     header.innerHTML = "";
-    columns[type].forEach(
+
+    /*
+       If the selected worksheet
+       failed to load.
+    */
+
+    if(
+        columns.length === 0
+    ){
+
+        content.style.height =
+            "100px";
+
+        content.innerHTML =
+            '<div style="padding:25px;font-weight:bold;">No data available for this worksheet.</div>';
+
+        return;
+
+    }
+
+    /*
+       Build headers from the
+       ACTUAL JSON columns.
+    */
+
+    columns.forEach(
         column => {
+
             const cell =
                 document.createElement(
                     "div"
                 );
+
             cell.className =
                 "header-cell";
+
             const title =
                 document.createElement(
                     "span"
                 );
+
             title.className =
                 "header-title";
+
             title.textContent =
                 column;
+
             const button =
                 document.createElement(
                     "button"
                 );
+
             button.className =
                 "filter-button";
+
             button.textContent =
                 "▼";
+
             if(
                 columnFilters[type]
-                    .has(column)
+                    .has(
+                        column
+                    )
             ){
+
                 button.classList.add(
                     "active"
                 );
+
             }
+
             button.addEventListener(
                 "click",
                 function(event){
+
                     event.stopPropagation();
+
                     openFilter(
                         column,
                         button
                     );
+
                 }
             );
+
             cell.appendChild(
                 title
             );
+
             cell.appendChild(
                 button
             );
+
             header.appendChild(
                 cell
             );
+
         }
     );
+
     content.style.height =
         totalHeights[type] +
         "px";
+
     renderVisibleRows(
         type
     );
+
     area.onscroll =
         function(){
-            if(renderTimer){
+
+            if(
+                renderTimer
+            ){
+
                 cancelAnimationFrame(
                     renderTimer
                 );
+
             }
+
             renderTimer =
                 requestAnimationFrame(
                     function(){
+
                         renderVisibleRows(
                             currentSheet
                         );
+
                     }
                 );
+
         };
+
 }
+
 /* =========================================================
    VIRTUAL ROWS
 ========================================================= */
+
 function renderVisibleRows(
     type
 ){
+
     const content =
         document.getElementById(
             "virtualContent"
         );
+
     const area =
         document.getElementById(
             "excelArea"
         );
+
     const data =
-        filteredData[type];
+        filteredData[type] || [];
+
     const offsets =
-        rowOffsets[type];
-    if(!data.length){
+        rowOffsets[type] || [0];
+
+    const columns =
+        sheetColumns[type] || [];
+
+    if(
+        !data.length
+    ){
+
         content.innerHTML =
             '<div style="padding:25px;font-weight:bold;">No matching records.</div>';
+
         return;
+
     }
+
     const scrollTop =
         area.scrollTop;
+
     const viewportHeight =
         area.clientHeight;
+
     const firstVisible =
         findRowAtPosition(
             offsets,
             scrollTop
         );
+
     const lastVisible =
         findRowAtPosition(
             offsets,
             scrollTop +
             viewportHeight
         );
+
     const start =
         Math.max(
             0,
             firstVisible -
             BUFFER_ROWS
         );
+
     const end =
         Math.min(
             data.length,
@@ -1781,132 +2963,185 @@ function renderVisibleRows(
             BUFFER_ROWS +
             1
         );
+
     content.innerHTML = "";
+
     const fragment =
         document.createDocumentFragment();
+
     const template =
         getGridTemplate(
             type
         );
+
     for(
         let i = start;
         i < end;
         i++
     ){
+
         const row =
             document.createElement(
                 "div"
             );
+
         row.className =
             "data-row";
+
         row.style.gridTemplateColumns =
             template;
+
         row.style.top =
             offsets[i] +
             "px";
+
         row.style.height =
             (
                 offsets[i + 1] -
                 offsets[i]
             ) +
             "px";
+
         const item =
             data[i];
-        columns[type].forEach(
+
+        columns.forEach(
             column => {
+
                 const cell =
                     document.createElement(
                         "div"
                     );
+
                 cell.className =
                     "data-cell";
+
                 const value =
                     String(
                         item[column] ?? ""
                     );
-                /*
-                   textContent is used so ALL
-                   data is displayed safely.
-                */
+
                 cell.textContent =
                     value;
+
                 if(
                     value.length > 40
                 ){
+
                     cell.title =
                         value;
+
                 }
+
                 const lower =
-                    column.toLowerCase();
+                    column
+                        .toLowerCase();
+
                 const normalized =
                     value
                         .trim()
                         .toLowerCase();
-                /* THIQA */
+
+                /*
+                   THIQA
+                */
+
                 if(
                     lower === "thiqa"
                 ){
+
                     if(
                         normalized === "yes"
                     ){
+
                         cell.classList.add(
                             "thiqa-yes"
                         );
+
                     }
+
                     if(
                         normalized === "no"
                     ){
+
                         cell.classList.add(
                             "thiqa-no"
                         );
+
                     }
+
                 }
-                /* BASIC */
+
+                /*
+                   BASIC
+                */
+
                 if(
                     lower === "basic"
                 ){
+
                     if(
                         normalized === "yes"
                     ){
+
                         cell.classList.add(
                             "basic-yes"
                         );
+
                     }
+
                     if(
                         normalized === "no"
                     ){
+
                         cell.classList.add(
                             "basic-no"
                         );
+
                     }
+
                 }
+
                 row.appendChild(
                     cell
                 );
+
             }
         );
+
         fragment.appendChild(
             row
         );
+
     }
+
     content.appendChild(
         fragment
     );
+
 }
+
 /* =========================================================
    RESIZE
 ========================================================= */
+
 window.addEventListener(
     "resize",
     function(){
+
         buildRowOffsets(
             currentSheet
         );
+
         renderVirtualTable(
             currentSheet
         );
+
     }
 );
+
 </script>
+
 </body>
 </html>
+```
