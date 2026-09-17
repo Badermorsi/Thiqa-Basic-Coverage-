@@ -1158,11 +1158,11 @@ async function loadAllData(){
             sheetData[sheet.id] =
             result.rows;
 
-
-            sheetColumns[sheet.id] =
-            buildColumns(
-                result.rows
-            );
+sheetColumns[sheet.id] =
+buildColumns(
+    result.rows,
+    sheet.id
+);
 
 
             filteredData[sheet.id] =
@@ -1272,13 +1272,12 @@ function normalizeJSON(json){
    BUILD COLUMNS
 ========================================================= */
 
-function buildColumns(rows){
+function buildColumns(rows, type){
 
     const columns = [];
 
     /*
-       Stop checking once all row keys
-       are already known in most cases.
+       Build all columns from the JSON data
     */
 
     for(
@@ -1290,7 +1289,6 @@ function buildColumns(rows){
         const row =
         rows[i];
 
-
         if(
             !row ||
             typeof row !== "object" ||
@@ -1301,10 +1299,8 @@ function buildColumns(rows){
 
         }
 
-
         const keys =
         Object.keys(row);
-
 
         for(
             let j=0;
@@ -1314,7 +1310,6 @@ function buildColumns(rows){
 
             const key =
             keys[j];
-
 
             if(
                 columns.indexOf(key) === -1
@@ -1328,6 +1323,103 @@ function buildColumns(rows){
 
     }
 
+
+    /*
+       SPECIAL COLUMN ORDER
+       ONLY FOR VALIDITY AFTER OPENNING
+    */
+
+    if(type === "validity"){
+
+        const desiredOrder = [
+
+            "HAAD CODE",
+
+            "PROACTIVE NAME",
+
+            "VALIDITY AFTER OPENING:",
+
+            "NOTES",
+
+            "Measurability",
+
+            "Review date"
+
+        ];
+
+
+        const orderedColumns = [];
+
+
+        /*
+           Add the desired columns
+           only if they actually exist
+           in the JSON data.
+        */
+
+        for(
+            let i=0;
+            i<desiredOrder.length;
+            i++
+        ){
+
+            const desired =
+            desiredOrder[i];
+
+            const actual =
+            columns.find(
+                column =>
+                column.toLowerCase().trim() ===
+                desired.toLowerCase().trim()
+            );
+
+
+            if(actual){
+
+                orderedColumns.push(
+                    actual
+                );
+
+            }
+
+        }
+
+
+        /*
+           Keep any unexpected/additional
+           columns after the desired columns.
+        */
+
+        for(
+            let i=0;
+            i<columns.length;
+            i++
+        ){
+
+            if(
+                orderedColumns.indexOf(
+                    columns[i]
+                ) === -1
+            ){
+
+                orderedColumns.push(
+                    columns[i]
+                );
+
+            }
+
+        }
+
+
+        return orderedColumns;
+
+    }
+
+
+    /*
+       ALL OTHER SHEETS
+       Keep their original order.
+    */
 
     return columns;
 
