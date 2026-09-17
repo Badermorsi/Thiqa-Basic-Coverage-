@@ -341,7 +341,6 @@ h1{
 
 /* =========================
    VITAMIN COVERAGE
-   NCI / NOT COVERED
 ========================= */
 
 .vitamin-not-covered{
@@ -478,8 +477,11 @@ h1{
     padding:6px 8px;
 }
 
+/* FIXED FILTER VALUE */
 .filter-value{
-    display:flex;
+    display:flex !important;
+
+    width:100%;
 
     align-items:center;
 
@@ -488,6 +490,36 @@ h1{
     padding:5px 2px;
 
     font-size:12px;
+
+    line-height:16px;
+
+    cursor:pointer;
+
+    white-space:normal;
+}
+
+.filter-value:hover{
+    background:#f3f5f7;
+}
+
+.filter-value input{
+    flex:0 0 auto;
+
+    width:auto;
+
+    margin:0;
+
+    cursor:pointer;
+}
+
+.filter-value span{
+    display:block;
+
+    min-width:0;
+
+    word-break:break-word;
+
+    overflow-wrap:anywhere;
 }
 
 /* =========================
@@ -871,18 +903,10 @@ h1{
 Insurance Coverage List
 </h1>
 
-<!-- =========================
-     TABS
-========================= -->
-
 <div
     class="tabs"
     id="tabs"
 ></div>
-
-<!-- =========================
-     SEARCH
-========================= -->
 
 <div id="searchArea">
 
@@ -942,10 +966,6 @@ Loading...
 
 </div>
 
-<!-- =========================
-     TABLE
-========================= -->
-
 <div
     class="excel-area"
     id="excelArea"
@@ -961,20 +981,12 @@ Loading...
     id="virtualContent"
 ></div>
 
-<!-- =========================
-     SPECIAL CONTENT
-========================= -->
-
 <div
     class="special-content"
     id="specialContent"
 ></div>
 
 </div>
-
-<!-- =========================
-     FILTER POPUP
-========================= -->
 
 <div
     class="filter-popup"
@@ -1015,6 +1027,7 @@ Select All
 ></div>
 
 </div>
+
 
 <script>
 
@@ -1151,7 +1164,6 @@ let phoneLoaded = false;
 let phoneLoading = false;
 
 const ROW_HEIGHT = 42;
-
 const BUFFER_ROWS = 30;
 
 
@@ -1555,15 +1567,10 @@ function buildColumns(rows, type){
         const desiredOrder = [
 
             "HAAD CODE",
-
             "PROACTIVE NAME",
-
             "VALIDITY AFTER OPENING:",
-
             "NOTES",
-
             "Measurability",
-
             "Review date"
 
         ];
@@ -1665,7 +1672,8 @@ function displayValue(value){
 
 
 /* =========================================================
-   SEARCH
+   MULTI SEARCH
+   % = AND
 ========================================================= */
 
 function matchesMultiSearch(
@@ -1681,7 +1689,9 @@ function matchesMultiSearch(
     .toLowerCase();
 
     if(!query){
+
         return true;
+
     }
 
     const text =
@@ -1777,7 +1787,9 @@ function getFilteredRows(type){
     sheetColumns[type] || [];
 
     if(!rows.length){
+
         return [];
+
     }
 
     const brandColumn =
@@ -1839,6 +1851,8 @@ function getFilteredRows(type){
     return rows.filter(
         row => {
 
+            /* BRAND */
+
             if(brandQuery){
 
                 if(brandColumn){
@@ -1883,12 +1897,17 @@ function getFilteredRows(type){
                     }
 
                     if(!found){
+
                         return false;
+
                     }
 
                 }
 
             }
+
+
+            /* GENERIC */
 
             if(genericQuery){
 
@@ -1934,12 +1953,17 @@ function getFilteredRows(type){
                     }
 
                     if(!found){
+
                         return false;
+
                     }
 
                 }
 
             }
+
+
+            /* STRENGTH */
 
             if(strengthQuery){
 
@@ -1985,12 +2009,17 @@ function getFilteredRows(type){
                     }
 
                     if(!found){
+
                         return false;
+
                     }
 
                 }
 
             }
+
+
+            /* DOSAGE */
 
             if(dosageQuery){
 
@@ -2036,12 +2065,19 @@ function getFilteredRows(type){
                     }
 
                     if(!found){
+
                         return false;
+
                     }
 
                 }
 
             }
+
+
+            /* =================================================
+               COLUMN FILTERS
+            ================================================= */
 
             const filterColumns =
             Object.keys(filters);
@@ -2058,10 +2094,7 @@ function getFilteredRows(type){
                 const selected =
                 filters[column];
 
-                if(
-                    selected &&
-                    selected.size
-                ){
+                if(selected){
 
                     const value =
                     displayValue(
@@ -2075,21 +2108,6 @@ function getFilteredRows(type){
                         return false;
 
                     }
-
-                }
-
-                /*
-                   An empty selected Set means:
-                   nothing is selected.
-                   Therefore no rows should appear.
-                */
-
-                if(
-                    selected &&
-                    selected.size === 0
-                ){
-
-                    return false;
 
                 }
 
@@ -2217,7 +2235,9 @@ function getColumnWidths(type){
     sheetColumns[type] || [];
 
     if(!columns.length){
+
         return [];
+
     }
 
     const widths =
@@ -2380,7 +2400,7 @@ function getGridTemplate(type){
 
 
 /* =========================================================
-   BUILD SIMPLE OFFSETS
+   BUILD OFFSETS
 ========================================================= */
 
 function buildRowOffsets(type){
@@ -2434,7 +2454,9 @@ function findRowAtPosition(
 ){
 
     if(!offsets.length){
+
         return 0;
+
     }
 
     const index =
@@ -2557,11 +2579,15 @@ function renderVirtualTable(type){
         filterButton.textContent =
         "▼";
 
+        /*
+           Correct filter active state.
+        */
+
         if(
-            columnFilters[type][column] &&
-            columnFilters[type][column].size !== undefined &&
-            columnFilters[type][column].size !==
-            sheetData[type].length
+            Object.prototype.hasOwnProperty.call(
+                columnFilters[type],
+                column
+            )
         ){
 
             filterButton.classList.add(
@@ -2851,7 +2877,6 @@ function renderVisibleRows(type){
 
 /* =========================================================
    PHONE CONTACTS
-   LOAD 4 JSON FILES
 ========================================================= */
 
 async function loadPhoneContacts(){
@@ -3648,7 +3673,7 @@ function updateStatus(type){
 
 
 /* =========================================================
-   FILTER POPUP
+   OPEN FILTER POPUP
 ========================================================= */
 
 function openFilterPopup(
@@ -3790,69 +3815,206 @@ function openFilterPopup(
 
 
 /* =========================================================
-   UPDATE SELECT ALL BUTTON
+   SELECT ALL BUTTON
 ========================================================= */
 
 function updateSelectAllButton(){
 
     selectAllBtn.textContent =
-    filterPopupState.selectAll
-        ? "Select All"
-        : "Select All";
+    "Select All";
 
 }
 
 
 /* =========================================================
-   FILTER VALUES
+   RENDER FILTER VALUES
 ========================================================= */
 
 function renderFilterValues(){
 
-    const search = filterValueSearch.value.trim().toLowerCase();
+    const search =
+    filterValueSearch.value
+    .trim()
+    .toLowerCase();
 
-    const values = filterPopupState.allValues.filter(value =>
-        value.toLowerCase().includes(search)
+    /*
+       IMPORTANT:
+       Use matchesMultiSearch()
+       so % means AND.
+
+       Example:
+
+       pan%dol
+
+       means the value must contain
+       BOTH "pan" AND "dol".
+    */
+
+    const values =
+    filterPopupState.allValues.filter(
+        value =>
+        matchesMultiSearch(
+            value,
+            search
+        )
     );
 
-    filterValues.innerHTML = "";
+    filterValues.innerHTML =
+    "";
 
-    values.forEach(value => {
+    if(!values.length){
 
-        const label = document.createElement("label");
-        label.className = "filter-value-item";
+        const empty =
+        document.createElement(
+            "div"
+        );
 
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
+        empty.style.padding =
+        "10px 4px";
 
-        checkbox.checked =
-            filterPopupState.selected.has(value);
+        empty.style.fontSize =
+        "12px";
 
-        checkbox.addEventListener("change", () => {
+        empty.style.color =
+        "#666";
 
-            if(checkbox.checked){
-                filterPopupState.selected.add(value);
-            }else{
-                filterPopupState.selected.delete(value);
-            }
+        empty.textContent =
+        "No matching values";
 
-            filterPopupState.selectAll =
-                filterPopupState.selected.size ===
-                filterPopupState.allValues.length;
+        filterValues.appendChild(
+            empty
+        );
 
-            applyPopupFilter();
-            renderFilterValues();
-        });
+        return;
 
-        const text = document.createElement("span");
-        text.textContent = value;
+    }
 
-        label.appendChild(checkbox);
-        label.appendChild(text);
+    values.forEach(
+        value => {
 
-        filterValues.appendChild(label);
-    });
+            const label =
+            document.createElement(
+                "label"
+            );
+
+            /*
+               THIS is the important fix.
+
+               Existing CSS uses:
+               .filter-value
+
+               Previously the JS used:
+               .filter-value-item
+
+               which caused the values to appear
+               beside each other.
+            */
+
+            label.className =
+            "filter-value";
+
+            const checkbox =
+            document.createElement(
+                "input"
+            );
+
+            checkbox.type =
+            "checkbox";
+
+            /*
+               Select All ON:
+               every visible search result
+               is checked.
+
+               Select All OFF:
+               use individual selections.
+            */
+
+            checkbox.checked =
+            filterPopupState.selectAll
+                ? true
+                : filterPopupState.selected.has(
+                    value
+                );
+
+            checkbox.addEventListener(
+                "change",
+                () => {
+
+                    /*
+                       Manually changing a checkbox
+                       disables Select All.
+                    */
+
+                    filterPopupState.selectAll =
+                    false;
+
+                    if(
+                        checkbox.checked
+                    ){
+
+                        filterPopupState.selected.add(
+                            value
+                        );
+
+                    }
+                    else{
+
+                        filterPopupState.selected.delete(
+                            value
+                        );
+
+                    }
+
+                    /*
+                       If every value is selected,
+                       restore Select All state.
+                    */
+
+                    if(
+                        filterPopupState.selected.size ===
+                        filterPopupState.allValues.length
+                    ){
+
+                        filterPopupState.selectAll =
+                        true;
+
+                    }
+
+                    applyPopupFilter();
+
+                    renderFilterValues();
+
+                    updateSelectAllButton();
+
+                }
+            );
+
+            const text =
+            document.createElement(
+                "span"
+            );
+
+            text.textContent =
+            value || "(Blanks)";
+
+            label.appendChild(
+                checkbox
+            );
+
+            label.appendChild(
+                text
+            );
+
+            filterValues.appendChild(
+                label
+            );
+
+        }
+    );
+
 }
+
 
 /* =========================================================
    APPLY POPUP FILTER
@@ -3873,64 +4035,22 @@ function applyPopupFilter(){
     filterPopupState.allValues;
 
     const search =
-    filterPopupState.search;
+    filterValueSearch.value
+    .trim()
+    .toLowerCase();
+
 
     /*
-       SELECT ALL + SEARCH
-       
-       Example:
-       All values = Amoxicillin,
-       Paracetamol, Ibuprofen
+       ==============================================
+       SELECT ALL + NO SEARCH
+       ==============================================
 
-       Search = "amox"
-
-       Select All remains checked,
-       but only Amoxicillin is shown.
+       Nothing is filtered.
     */
 
     if(
         filterPopupState.selectAll &&
-        search
-    ){
-
-        const matchingValues =
-        new Set(
-            allValues.filter(
-                value =>
-                value
-                .toLowerCase()
-                .includes(search)
-            )
-        );
-
-        if(
-            matchingValues.size ===
-            allValues.length
-        ){
-
-            delete columnFilters[
-                sheet
-            ][column];
-
-        }
-        else{
-
-            columnFilters[
-                sheet
-            ][column] =
-            matchingValues;
-
-        }
-
-    }
-
-    /*
-       SELECT ALL with no search
-       means no filter on this column.
-    */
-
-    else if(
-        filterPopupState.selectAll
+        !search
     ){
 
         delete columnFilters[
@@ -3939,23 +4059,53 @@ function applyPopupFilter(){
 
     }
 
+
     /*
-       Nothing selected.
+       ==============================================
+       SELECT ALL + SEARCH
+       ==============================================
+
+       Example:
+
+       pan%dol
+
+       Find values containing BOTH
+       "pan" AND "dol".
+
+       The matching values become
+       the active column filter.
     */
 
     else if(
-        selected.size === 0
+        filterPopupState.selectAll &&
+        search
     ){
+
+        const matchingValues =
+        allValues.filter(
+            value =>
+            matchesMultiSearch(
+                value,
+                search
+            )
+        );
 
         columnFilters[
             sheet
         ][column] =
-        new Set();
+        new Set(
+            matchingValues
+        );
 
     }
 
+
     /*
-       Individual selections.
+       ==============================================
+       SELECT ALL OFF
+       ==============================================
+
+       Use exactly what the user checked.
     */
 
     else{
@@ -3963,9 +4113,12 @@ function applyPopupFilter(){
         columnFilters[
             sheet
         ][column] =
-        new Set(selected);
+        new Set(
+            selected
+        );
 
     }
+
 
     applyFilters(
         sheet
@@ -4017,32 +4170,25 @@ filterValueSearch.addEventListener(
     "input",
     () => {
 
-        const search =
+        filterPopupState.search =
         filterValueSearch.value
         .trim()
         .toLowerCase();
 
-        filterPopupState.search =
-        search;
-
         /*
-           If Select All is checked,
-           search itself becomes the
-           active filter.
+           First filter the dropdown list.
         */
 
-        if(
-            filterPopupState.selectAll
-        ){
+        renderFilterValues();
 
-            applyPopupFilter();
+        /*
+           Then apply the search to
+           the actual table.
+        */
 
-        }
-        else{
+        applyPopupFilter();
 
-            renderFilterValues();
-
-        }
+        updateSelectAllButton();
 
     }
 );
@@ -4057,8 +4203,9 @@ selectAllBtn.addEventListener(
     () => {
 
         /*
-           If currently selected,
-           unselect everything.
+           ==========================================
+           SELECT ALL -> UNSELECT ALL
+           ==========================================
         */
 
         if(
@@ -4074,8 +4221,9 @@ selectAllBtn.addEventListener(
         }
 
         /*
-           If currently unselected,
-           select everything.
+           ==========================================
+           UNSELECT ALL -> SELECT ALL
+           ==========================================
         */
 
         else{
@@ -4090,16 +4238,11 @@ selectAllBtn.addEventListener(
 
         }
 
-        /*
-           Re-apply the current search.
-           If Select All is selected and
-           search contains text, only matching
-           values are shown in the table.
-        */
-
         applyPopupFilter();
 
         renderFilterValues();
+
+        updateSelectAllButton();
 
     }
 );
@@ -4137,7 +4280,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   SEARCH
+   MAIN SEARCH
 ========================================================= */
 
 let searchTimer = null;
@@ -4190,7 +4333,7 @@ let searchTimer = null;
 
 
 /* =========================================================
-   CLEAR SEARCH
+   CLEAR SEARCH & FILTERS
 ========================================================= */
 
 clearBtn.addEventListener(
@@ -4198,8 +4341,11 @@ clearBtn.addEventListener(
     () => {
 
         brandSearch.value = "";
+
         genericSearch.value = "";
+
         strengthSearch.value = "";
+
         dosageSearch.value = "";
 
         if(
