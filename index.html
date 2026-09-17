@@ -306,10 +306,6 @@ h1{
     overflow-wrap:anywhere;
     word-break:break-word;
 
-    /*
-       IMPORTANT:
-       Do not clip long text.
-    */
     overflow:visible;
 
     height:auto;
@@ -357,7 +353,7 @@ h1{
 }
 
 /* =========================
-   THIQA + BASIC FROZEN COLUMNS
+   THIQA + BASIC FROZEN
 ========================= */
 
 .frozen-thiqa{
@@ -374,7 +370,6 @@ h1{
     background:#fff;
 }
 
-/* Header versions */
 .excel-header .frozen-thiqa{
     position:sticky;
     right:110px;
@@ -691,7 +686,7 @@ h1{
 }
 
 /* =========================
-   Phone table 1
+   PHONE TABLE 1
 ========================= */
 
 .phone-table-contacts th:first-child,
@@ -760,7 +755,7 @@ h1{
 }
 
 /* =========================
-   Insurance
+   INSURANCE
 ========================= */
 
 .phone-table-insurance th:first-child,
@@ -780,7 +775,7 @@ h1{
 }
 
 /* =========================
-   Phone loading
+   PHONE LOADING
 ========================= */
 
 .phone-loading{
@@ -1170,11 +1165,6 @@ const sheetColumns = {};
 const filteredData = {};
 const columnFilters = {};
 
-/*
-   Variable row height storage.
-
-   Each row gets its own height and top offset.
-*/
 const rowOffsets = {};
 const rowHeights = {};
 const totalHeights = {};
@@ -1184,9 +1174,6 @@ let currentSheet = "thiqa";
 let phoneLoaded = false;
 let phoneLoading = false;
 
-/*
-   Minimum/default row height.
-*/
 const ROW_HEIGHT = 42;
 
 const BUFFER_ROWS = 30;
@@ -1273,6 +1260,7 @@ document.getElementById("selectAllBtn");
 
 const applyFilterBtn =
 document.getElementById("applyFilterBtn");
+
 
 /* =========================================================
    INITIALIZE STORAGE
@@ -1889,7 +1877,9 @@ function getFilteredRows(type){
     return rows.filter(
         row => {
 
-            /* BRAND */
+            /* =========================
+               BRAND
+            ========================= */
 
             if(brandQuery){
 
@@ -1945,7 +1935,9 @@ function getFilteredRows(type){
             }
 
 
-            /* GENERIC */
+            /* =========================
+               GENERIC
+            ========================= */
 
             if(genericQuery){
 
@@ -2001,7 +1993,9 @@ function getFilteredRows(type){
             }
 
 
-            /* STRENGTH */
+            /* =========================
+               STRENGTH
+            ========================= */
 
             if(strengthQuery){
 
@@ -2057,7 +2051,9 @@ function getFilteredRows(type){
             }
 
 
-            /* DOSAGE */
+            /* =========================
+               DOSAGE
+            ========================= */
 
             if(dosageQuery){
 
@@ -2132,15 +2128,60 @@ function getFilteredRows(type){
                 const selected =
                 filters[column];
 
-                if(selected){
+                if(!selected){
 
-                    const value =
-                    displayValue(
-                        row[column]
-                    );
+                    continue;
+
+                }
+
+                const value =
+                displayValue(
+                    row[column]
+                );
+
+                /* =========================================
+                   TEXT FILTER
+                   Excel-style:
+                   Filter search text + Apply
+                ========================================= */
+
+                if(
+                    selected &&
+                    typeof selected === "object" &&
+                    !(
+                        selected instanceof Set
+                    ) &&
+                    Object.prototype.hasOwnProperty.call(
+                        selected,
+                        "text"
+                    )
+                ){
 
                     if(
-                        !selected.has(value)
+                        !matchesMultiSearch(
+                            value,
+                            selected.text
+                        )
+                    ){
+
+                        return false;
+
+                    }
+
+                }
+
+                /* =========================================
+                   CHECKBOX / VALUE FILTER
+                ========================================= */
+
+                else if(
+                    selected instanceof Set
+                ){
+
+                    if(
+                        !selected.has(
+                            value
+                        )
                     ){
 
                         return false;
@@ -2207,12 +2248,6 @@ function getColumnWidth(
         }
 
     }
-
-    /*
-       Proactive name gets extra width.
-       This helps long names wrap naturally
-       instead of creating extremely tall rows.
-    */
 
     if(
         c.includes("proactive name")
@@ -2456,23 +2491,6 @@ function getGridTemplate(type){
    CALCULATE ROW HEIGHT
 ========================================================= */
 
-/*
-   This estimates how many lines each cell needs.
-
-   The important difference from the old version is that
-   every row gets its own height.
-
-   Example:
-
-   Normal row = 42px
-
-   Long Cetaphil row = 93px
-
-   Very long row = 127px
-
-   The next row starts AFTER that height.
-*/
-
 function calculateRowHeight(
     row,
     type
@@ -2509,26 +2527,11 @@ function calculateRowHeight(
         const width =
         widths[i] || 150;
 
-        /*
-           Available text width.
-
-           16px = left + right padding.
-        */
-
         const availableWidth =
         Math.max(
             30,
             width - 16
         );
-
-        /*
-           Approximate Arial 13px character
-           width.
-
-           This is deliberately slightly
-           conservative so text does not get
-           clipped.
-        */
 
         const charsPerLine =
         Math.max(
@@ -2556,10 +2559,6 @@ function calculateRowHeight(
 
                 }
 
-                /*
-                   Break very long words too.
-                */
-
                 lines += Math.max(
                     1,
                     Math.ceil(
@@ -2578,12 +2577,6 @@ function calculateRowHeight(
         );
 
     }
-
-    /*
-       17px line height
-       + 14px vertical padding
-       + 4px safety margin.
-    */
 
     const calculated =
     (
@@ -2895,13 +2888,6 @@ function renderVisibleRows(type){
 
     }
 
-    /*
-       Safety check.
-
-       If the offsets don't match the
-       current filtered rows, rebuild them.
-    */
-
     if(
         !rowOffsets[type] ||
         rowOffsets[type].length !== rows.length
@@ -2936,14 +2922,6 @@ function renderVisibleRows(type){
 
     const viewportHeight =
     excelArea.clientHeight;
-
-    /*
-       Find the actual row at the current
-       scroll position.
-
-       Unlike the old code, this works with
-       different row heights.
-    */
 
     const firstVisible =
     findRowAtPosition(
@@ -3818,10 +3796,6 @@ async function switchSheet(type){
         type
     );
 
-    /*
-       Reset and rebuild variable row heights.
-    */
-
     buildRowOffsets(
         type
     );
@@ -4039,10 +4013,49 @@ function openFilterPopup(
     const existing =
     columnFilters[type][column];
 
-    const selected =
-    existing
-        ? new Set(existing)
-        : new Set(values);
+    let selected =
+    new Set(values);
+
+    let selectAll =
+    true;
+
+    /*
+       Restore existing checkbox filter.
+    */
+
+    if(
+        existing instanceof Set
+    ){
+
+        selected =
+        new Set(existing);
+
+        selectAll =
+        selected.size ===
+        values.length;
+
+    }
+
+    /*
+       Restore existing text filter.
+    */
+
+    let existingSearch = "";
+
+    if(
+        existing &&
+        typeof existing === "object" &&
+        !(existing instanceof Set) &&
+        Object.prototype.hasOwnProperty.call(
+            existing,
+            "text"
+        )
+    ){
+
+        existingSearch =
+        existing.text || "";
+
+    }
 
     filterPopupState = {
 
@@ -4054,11 +4067,9 @@ function openFilterPopup(
 
         selected,
 
-        selectAll:
-        selected.size ===
-        values.length,
+        selectAll,
 
-        search:""
+        search:existingSearch
 
     };
 
@@ -4067,7 +4078,7 @@ function openFilterPopup(
     column;
 
     filterValueSearch.value =
-    "";
+    existingSearch;
 
     updateSelectAllButton();
 
@@ -4245,17 +4256,6 @@ function renderFilterValues(){
 
                     }
 
-                    /*
-                       IMPORTANT:
-                       Do NOT apply the table filter here.
-
-                       The user clicks Apply only in
-                       the Excel-style workflow.
-
-                       Search inside the popup only
-                       changes the dropdown list.
-                    */
-
                     renderFilterValues();
 
                     updateSelectAllButton();
@@ -4289,43 +4289,85 @@ function renderFilterValues(){
 }
 
 
+/* =========================================================
+   APPLY POPUP FILTER
+========================================================= */
+
 function applyPopupFilter(){
 
-    const type = filterPopupState.sheet;
-    const column = filterPopupState.column;
+    const type =
+    filterPopupState.sheet;
 
-    if(!type || !column){
+    const column =
+    filterPopupState.column;
+
+    if(
+        !type ||
+        !column
+    ){
+
         return;
+
     }
 
     const searchText =
-        filterPopupState.search.trim().toLowerCase();
+    filterValueSearch.value
+    .trim()
+    .toLowerCase();
 
-    /* =====================================================
-       IF USER TYPED SEARCH TEXT
-       APPLY TEXT SEARCH DIRECTLY
-    ===================================================== */
+    /*
+       =====================================================
+       EXCEL-STYLE TEXT SEARCH
+       =====================================================
+
+       If the user typed something into:
+
+       Search values...
+
+       then that text becomes the actual
+       column filter.
+
+       Example:
+
+       amoxicillin
+
+       or:
+
+       500%10
+
+       means the cell must contain BOTH 500 and 10.
+    */
 
     if(searchText){
 
         columnFilters[type][column] = {
-            text: searchText
+
+            text:searchText
+
         };
 
     }
+
+    /*
+       =====================================================
+       NO TEXT SEARCH
+       =====================================================
+
+       Use normal checkbox filtering.
+    */
+
     else{
 
-        /* Normal checkbox filtering */
-
         const allValues =
-            filterPopupState.allValues;
+        filterPopupState.allValues;
 
         const selected =
-            filterPopupState.selected;
+        filterPopupState.selected;
 
         if(
             filterPopupState.selectAll ||
-            selected.size === allValues.length
+            selected.size ===
+            allValues.length
         ){
 
             delete columnFilters[type][column];
@@ -4334,13 +4376,17 @@ function applyPopupFilter(){
         else{
 
             columnFilters[type][column] =
-                new Set(selected);
+            new Set(
+                selected
+            );
 
         }
 
     }
 
-    applyFilters(type);
+    applyFilters(
+        type
+    );
 
 }
 
@@ -4364,12 +4410,6 @@ function applyFilters(type){
     getFilteredRows(
         type
     );
-
-    /*
-       Recalculate ALL row positions because
-       filtering changes the number of rows and
-       variable heights.
-    */
 
     buildRowOffsets(
         type
@@ -4400,11 +4440,11 @@ filterValueSearch.addEventListener(
         .toLowerCase();
 
         /*
-           Search ONLY filters the list inside
-           the popup.
+           This searches ONLY the values
+           displayed inside the popup.
 
-           It does NOT change the table until
-           Apply is performed.
+           The actual table changes only
+           after clicking Apply.
         */
 
         renderFilterValues();
@@ -4437,11 +4477,6 @@ selectAllBtn.addEventListener(
             )
         );
 
-        /*
-           Determine whether every currently
-           visible value is selected.
-        */
-
         const allVisibleSelected =
         visibleValues.every(
             value =>
@@ -4453,12 +4488,6 @@ selectAllBtn.addEventListener(
         if(
             allVisibleSelected
         ){
-
-            /*
-               Deselect ONLY visible values.
-
-               Hidden values remain unchanged.
-            */
 
             visibleValues.forEach(
                 value => {
@@ -4472,12 +4501,6 @@ selectAllBtn.addEventListener(
 
         }
         else{
-
-            /*
-               Select ONLY visible values.
-
-               Hidden values remain unchanged.
-            */
 
             visibleValues.forEach(
                 value => {
@@ -4502,6 +4525,7 @@ selectAllBtn.addEventListener(
     }
 );
 
+
 /* =========================================================
    APPLY FILTER BUTTON
 ========================================================= */
@@ -4510,13 +4534,31 @@ applyFilterBtn.addEventListener(
     "click",
     () => {
 
+        /*
+           Save the current text first.
+        */
+
+        filterPopupState.search =
+        filterValueSearch.value
+        .trim()
+        .toLowerCase();
+
+        /*
+           Apply the filter.
+        */
+
         applyPopupFilter();
+
+        /*
+           Close popup after Apply.
+        */
 
         closeFilterPopup();
 
     }
 );
-    
+
+
 /* =========================================================
    CLOSE POPUP
 ========================================================= */
@@ -4539,12 +4581,6 @@ document.addEventListener(
                 event.target
             )
         ){
-
-            /*
-               Clicking outside closes the popup.
-               Since changes are not applied until
-               Apply, closing does not alter the table.
-            */
 
             closeFilterPopup();
 
@@ -4719,11 +4755,6 @@ window.addEventListener(
                     return;
 
                 }
-
-                /*
-                   Column widths may have changed,
-                   so row heights must be recalculated.
-                */
 
                 buildRowOffsets(
                     currentSheet
