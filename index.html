@@ -302,10 +302,6 @@ h1{
     font-size:13px;
     line-height:17px;
 
-    /*
-       WRAP TEXT
-    */
-
     white-space:normal;
     overflow-wrap:anywhere;
     word-break:break-word;
@@ -353,7 +349,7 @@ h1{
     color:#222 !important;
     font-weight:bold !important;
 }
-    
+
 /* =========================
    FROZEN
 ========================= */
@@ -493,7 +489,7 @@ h1{
 }
 
 /* =========================
-   PROACTIVE
+   SPECIAL CONTENT
 ========================= */
 
 .special-content{
@@ -523,6 +519,215 @@ h1{
 }
 
 /* =========================
+   PHONE CONTACTS
+========================= */
+
+.phone-layout{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(0,1fr)
+        minmax(0,1.35fr);
+
+    gap:15px;
+
+    width:100%;
+
+    max-width:1600px;
+
+    margin:0 auto;
+
+    align-items:stretch;
+
+}
+
+.phone-table-box{
+
+    width:100%;
+
+    background:#fff;
+
+    border:1px solid #bfc5cb;
+
+    border-radius:5px;
+
+    overflow:hidden;
+
+}
+
+.phone-middle{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+    min-width:0;
+
+}
+
+.phone-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    table-layout:auto;
+
+}
+
+.phone-table th,
+.phone-table td{
+
+    border:1px solid #d5d8dc;
+
+    padding:7px 8px;
+
+    font-size:13px;
+
+    line-height:17px;
+
+    text-align:left;
+
+    vertical-align:middle;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+}
+
+.phone-table thead th{
+
+    background:#e9edf2;
+
+    font-weight:bold;
+
+}
+
+.phone-table tbody tr:nth-child(even) td{
+
+    background:#fafafa;
+
+}
+
+/* Merged APG / ZAS title */
+
+.phone-section-title{
+
+    background:#1d3557 !important;
+
+    color:#fff !important;
+
+    text-align:center !important;
+
+    font-weight:bold !important;
+
+    font-size:14px !important;
+
+    padding:9px 8px !important;
+
+}
+
+/* Phone table 1 */
+
+.phone-table-contacts th:first-child,
+.phone-table-contacts td:first-child{
+
+    min-width:140px;
+
+}
+
+.phone-table-contacts th:nth-child(2),
+.phone-table-contacts td:nth-child(2){
+
+    min-width:110px;
+
+    white-space:nowrap;
+
+}
+
+.phone-table-contacts th:nth-child(3),
+.phone-table-contacts td:nth-child(3){
+
+    min-width:120px;
+
+    white-space:nowrap;
+
+}
+
+/* APG */
+
+.phone-table-apg th:first-child,
+.phone-table-apg td:first-child{
+
+    width:55%;
+
+}
+
+.phone-table-apg th:last-child,
+.phone-table-apg td:last-child{
+
+    width:45%;
+
+    white-space:nowrap;
+
+}
+
+/* ZAS */
+
+.phone-table-zas th:first-child,
+.phone-table-zas td:first-child{
+
+    width:65%;
+
+}
+
+.phone-table-zas th:last-child,
+.phone-table-zas td:last-child{
+
+    width:35%;
+
+    white-space:nowrap;
+
+}
+
+/* Insurance */
+
+.phone-table-insurance th:first-child,
+.phone-table-insurance td:first-child{
+
+    width:65%;
+
+}
+
+.phone-table-insurance th:last-child,
+.phone-table-insurance td:last-child{
+
+    width:35%;
+
+    white-space:nowrap;
+
+}
+
+/* Phone loading */
+
+.phone-loading{
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#555;
+
+    font-size:14px;
+
+}
+
+/* =========================
    MOBILE
 ========================= */
 
@@ -534,6 +739,32 @@ h1{
 
     .search-container{
         grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .phone-layout{
+
+        grid-template-columns:
+            minmax(0,1fr)
+            minmax(0,1fr);
+
+    }
+
+    .phone-table-box:first-child{
+
+        grid-column:1 / -1;
+
+    }
+
+    .phone-middle{
+
+        grid-column:1 / -1;
+
+    }
+
+    .phone-table-box:last-child{
+
+        grid-column:1 / -1;
+
     }
 
 }
@@ -570,6 +801,35 @@ h1{
         padding:8px;
     }
 
+    .phone-layout{
+
+        display:flex;
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+    .phone-middle{
+
+        display:flex;
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+    .phone-table th,
+    .phone-table td{
+
+        font-size:12px;
+
+        padding:6px;
+
+    }
+
 }
 
 </style>
@@ -583,7 +843,6 @@ h1{
 Insurance Coverage List
 </h1>
 
-
 <!-- =========================
      TABS
 ========================= -->
@@ -592,7 +851,6 @@ Insurance Coverage List
     class="tabs"
     id="tabs"
 ></div>
-
 
 <!-- =========================
      SEARCH
@@ -628,7 +886,6 @@ Insurance Coverage List
 
 </div>
 
-
 <div class="controls">
 
 <button
@@ -643,7 +900,6 @@ Clear Search & Filters
 
 </div>
 
-
 <div
     class="status"
     id="status"
@@ -651,14 +907,12 @@ Clear Search & Filters
 Loading...
 </div>
 
-
 <div
     class="error-box"
     id="errorBox"
 ></div>
 
 </div>
-
 
 <!-- =========================
      TABLE
@@ -674,15 +928,13 @@ Loading...
     id="excelHeader"
 ></div>
 
-
 <div
     class="virtual-content"
     id="virtualContent"
 ></div>
 
-
 <!-- =========================
-     PROACTIVE IMAGES
+     SPECIAL CONTENT
 ========================= -->
 
 <div
@@ -691,7 +943,6 @@ Loading...
 ></div>
 
 </div>
-
 
 <!-- =========================
      FILTER POPUP
@@ -709,7 +960,6 @@ Loading...
 Filter
 </div>
 
-
 <div class="filter-search">
 
 <input
@@ -719,7 +969,6 @@ Filter
 >
 
 </div>
-
 
 <div class="filter-actions">
 
@@ -738,7 +987,6 @@ Clear
 </button>
 
 </div>
-
 
 <div
     class="filter-values"
@@ -845,10 +1093,26 @@ const WORKSHEETS = [
     file:"OMAN FORMULARY 03-2024.json"
 },
 
+/*
+   PHONE CONTACTS IS SPECIAL.
+   It loads its 4 JSON files only
+   when the tab is opened.
+*/
+
 {
     id:"phone",
     name:"PHONE CONTACTS",
-    file:"PHONE CONTACTS.json"
+    special:"phone",
+
+    phoneFiles:[
+
+        "PHONE CONTACTS 1.json",
+        "PHONE CONTACTS 2.json",
+        "PHONE CONTACTS 3.json",
+        "PHONE CONTACTS 4.json"
+
+    ]
+
 }
 
 ];
@@ -868,13 +1132,14 @@ let currentSheet = "thiqa";
 const rowOffsets = {};
 const totalHeights = {};
 
+/* Phone data */
+
+let phoneLoaded = false;
+let phoneLoading = false;
+
 
 /*
    FAST FIXED ROW HEIGHT
-
-   This is intentionally fixed.
-   It avoids calculating every row height
-   during loading/searching.
 */
 
 const ROW_HEIGHT = 42;
@@ -1004,22 +1269,17 @@ function createTabs(){
         const button =
         document.createElement("button");
 
-
         button.type =
         "button";
-
 
         button.className =
         "tab";
 
-
         button.dataset.sheet =
         sheet.id;
 
-
         button.textContent =
         sheet.name;
-
 
         if(sheet.id === currentSheet){
 
@@ -1028,7 +1288,6 @@ function createTabs(){
             );
 
         }
-
 
         button.addEventListener(
             "click",
@@ -1041,7 +1300,6 @@ function createTabs(){
             }
         );
 
-
         tabsEl.appendChild(
             button
         );
@@ -1052,7 +1310,7 @@ function createTabs(){
 
 
 /* =========================================================
-   LOAD JSON - PARALLEL
+   LOAD NORMAL JSON FILES
 ========================================================= */
 
 async function loadAllData(){
@@ -1060,27 +1318,23 @@ async function loadAllData(){
     errorBox.style.display =
         "none";
 
-
     /*
-       LOAD ALL FILES AT THE SAME TIME
+       PHONE CONTACTS and PROACTIVE
+       are not loaded here.
     */
+
+    const normalSheets =
+    WORKSHEETS.filter(
+        sheet =>
+        !sheet.special
+    );
+
 
     const results =
     await Promise.all(
 
-        WORKSHEETS.map(
+        normalSheets.map(
             async sheet => {
-
-                if(sheet.special){
-
-                    return {
-                        sheet,
-                        rows:[],
-                        error:null
-                    };
-
-                }
-
 
                 try{
 
@@ -1088,11 +1342,9 @@ async function loadAllData(){
                     await fetch(
                         encodeURI(
                             sheet.file
-                        ) +
-                        "?v=" +
-                        Date.now(),
+                        ),
                         {
-                            cache:"no-store"
+                            cache:"default"
                         }
                     );
 
@@ -1148,11 +1400,6 @@ async function loadAllData(){
     const errors = [];
 
 
-    /*
-       Just store the data.
-       NO row calculations here.
-    */
-
     results.forEach(
         result => {
 
@@ -1160,19 +1407,15 @@ async function loadAllData(){
             result.sheet;
 
 
-            if(sheet.special){
-                return;
-            }
-
-
             sheetData[sheet.id] =
             result.rows;
 
-sheetColumns[sheet.id] =
-buildColumns(
-    result.rows,
-    sheet.id
-);
+
+            sheetColumns[sheet.id] =
+            buildColumns(
+                result.rows,
+                sheet.id
+            );
 
 
             filteredData[sheet.id] =
@@ -1286,9 +1529,6 @@ function buildColumns(rows, type){
 
     const columns = [];
 
-    /*
-       Build all columns from the JSON data
-    */
 
     for(
         let i=0;
@@ -1298,6 +1538,7 @@ function buildColumns(rows, type){
 
         const row =
         rows[i];
+
 
         if(
             !row ||
@@ -1309,8 +1550,10 @@ function buildColumns(rows, type){
 
         }
 
+
         const keys =
         Object.keys(row);
+
 
         for(
             let j=0;
@@ -1320,6 +1563,7 @@ function buildColumns(rows, type){
 
             const key =
             keys[j];
+
 
             if(
                 columns.indexOf(key) === -1
@@ -1361,12 +1605,6 @@ function buildColumns(rows, type){
         const orderedColumns = [];
 
 
-        /*
-           Add the desired columns
-           only if they actually exist
-           in the JSON data.
-        */
-
         for(
             let i=0;
             i<desiredOrder.length;
@@ -1375,6 +1613,7 @@ function buildColumns(rows, type){
 
             const desired =
             desiredOrder[i];
+
 
             const actual =
             columns.find(
@@ -1394,11 +1633,6 @@ function buildColumns(rows, type){
 
         }
 
-
-        /*
-           Keep any unexpected/additional
-           columns after the desired columns.
-        */
 
         for(
             let i=0;
@@ -1425,11 +1659,6 @@ function buildColumns(rows, type){
 
     }
 
-
-    /*
-       ALL OTHER SHEETS
-       Keep their original order.
-    */
 
     return columns;
 
@@ -1505,11 +1734,13 @@ function matchesMultiSearch(
 
 
     /*
-       Example:
        500%10
 
-       Means:
-       contains 500 AND 10
+       means:
+
+       contains 500
+       AND
+       contains 10
     */
 
     const terms =
@@ -1678,7 +1909,6 @@ function getFilteredRows(type){
 
     return rows.filter(
         row => {
-
 
             /*
                BRAND
@@ -2115,10 +2345,6 @@ function getColumnWidths(type){
     );
 
 
-    /*
-       Available width.
-    */
-
     const available =
     excelArea.clientWidth ||
     window.innerWidth;
@@ -2131,11 +2357,6 @@ function getColumnWidths(type){
     );
 
 
-    /*
-       If already wider than page,
-       don't change anything.
-    */
-
     if(total >= available){
 
         return widths;
@@ -2146,13 +2367,6 @@ function getColumnWidths(type){
     const extra =
     available - total;
 
-
-    /*
-       Extra width weights.
-
-       This makes the table fill the page
-       without making short columns huge.
-    */
 
     const weights =
     columns.map(
@@ -2198,11 +2412,6 @@ function getColumnWidths(type){
         }
     );
 
-
-    /*
-       Frozen columns do NOT receive
-       additional width.
-    */
 
     let totalWeight = 0;
 
@@ -2319,11 +2528,6 @@ function buildRowOffsets(type){
     );
 
 
-    /*
-       FAST:
-       No per-row calculations.
-    */
-
     for(
         let i=0;
         i<rows.length;
@@ -2372,11 +2576,6 @@ function findRowAtPosition(
     }
 
 
-    /*
-       Since rows have fixed height,
-       direct calculation is much faster.
-    */
-
     const index =
     Math.floor(
         position /
@@ -2402,7 +2601,8 @@ function findRowAtPosition(
 function renderVirtualTable(type){
 
     if(
-        type === "proactive"
+        type === "proactive" ||
+        type === "phone"
     ){
 
         return;
@@ -2604,11 +2804,6 @@ function renderVisibleRows(type){
     getGridTemplate(type);
 
 
-    /*
-       IMPORTANT:
-       Do NOT calculate each row.
-    */
-
     const scrollTop =
     excelArea.scrollTop;
 
@@ -2711,39 +2906,51 @@ function renderVisibleRows(type){
             cell.textContent =
             value;
 
-            /* VITAMIN NCI / NOT COVERED */
 
-if(type === "vitamin"){
+            /* =========================
+               VITAMIN NCI / NOT COVERED
+            ========================= */
 
-    const normalizedColumn =
-    column
-    .toLowerCase()
-    .trim();
+            if(type === "vitamin"){
 
-    const normalizedValue =
-    value
-    .toLowerCase()
-    .trim();
+                const normalizedColumn =
+                column
+                .toLowerCase()
+                .trim();
 
-    if(
-        (
-            normalizedColumn === "enhanced" ||
-            normalizedColumn === "thiqa"
-        )
-        &&
-        (
-            normalizedValue === "nci" ||
-            normalizedValue === "not covered"
-        )
-    ){
 
-        cell.classList.add(
-            "vitamin-not-covered"
-        );
+                const normalizedValue =
+                value
+                .toLowerCase()
+                .trim();
 
-    }
 
-}
+                if(
+                    (
+                        normalizedColumn ===
+                        "enhanced" ||
+
+                        normalizedColumn ===
+                        "thiqa"
+                    )
+                    &&
+                    (
+                        normalizedValue ===
+                        "nci" ||
+
+                        normalizedValue ===
+                        "not covered"
+                    )
+                ){
+
+                    cell.classList.add(
+                        "vitamin-not-covered"
+                    );
+
+                }
+
+            }
+
 
             /*
                THIQA / BASIC
@@ -2852,10 +3059,681 @@ if(type === "vitamin"){
 
 
 /* =========================================================
+   PHONE CONTACTS
+   LOAD 4 JSON FILES
+========================================================= */
+
+async function loadPhoneContacts(){
+
+    if(phoneLoaded){
+
+        renderPhoneContacts();
+
+        return;
+
+    }
+
+
+    if(phoneLoading){
+
+        return;
+
+    }
+
+
+    phoneLoading = true;
+
+
+    specialContent.innerHTML =
+    '<div class="phone-loading">Loading PHONE CONTACTS...</div>';
+
+
+    statusEl.textContent =
+    "Loading PHONE CONTACTS...";
+
+
+    const phoneSheet =
+    WORKSHEETS.find(
+        sheet =>
+        sheet.id === "phone"
+    );
+
+
+    try{
+
+        /*
+           Load all 4 phone files together.
+        */
+
+        const results =
+        await Promise.all(
+
+            phoneSheet.phoneFiles.map(
+                async file => {
+
+                    const response =
+                    await fetch(
+                        encodeURI(file),
+                        {
+                            cache:"default"
+                        }
+                    );
+
+
+                    if(!response.ok){
+
+                        throw new Error(
+                            file +
+                            " - HTTP " +
+                            response.status
+                        );
+
+                    }
+
+
+                    const json =
+                    await response.json();
+
+
+                    return normalizePhoneRows(
+                        json
+                    );
+
+                }
+            )
+
+        );
+
+
+        sheetData.phone = {
+
+            contacts:
+            results[0],
+
+            apg:
+            results[1],
+
+            zas:
+            results[2],
+
+            insurance:
+            results[3]
+
+        };
+
+
+        phoneLoaded = true;
+
+
+        renderPhoneContacts();
+
+
+    }
+    catch(error){
+
+        specialContent.innerHTML = "";
+
+        const message =
+        document.createElement(
+            "div"
+        );
+
+
+        message.className =
+        "error-box";
+
+
+        message.style.display =
+        "block";
+
+
+        message.textContent =
+        "PHONE CONTACTS could not be loaded:\n\n" +
+        error.message;
+
+
+        specialContent.appendChild(
+            message
+        );
+
+
+        statusEl.textContent =
+        "PHONE CONTACTS - Error";
+
+    }
+    finally{
+
+        phoneLoading = false;
+
+    }
+
+}
+
+
+/* =========================================================
+   NORMALIZE PHONE JSON
+========================================================= */
+
+function normalizePhoneRows(json){
+
+    if(Array.isArray(json)){
+
+        return json;
+
+    }
+
+
+    if(
+        json &&
+        Array.isArray(json.data)
+    ){
+
+        return json.data;
+
+    }
+
+
+    if(
+        json &&
+        typeof json === "object"
+    ){
+
+        /*
+           If a single object is supplied,
+           treat it as one row.
+        */
+
+        return [json];
+
+    }
+
+
+    return [];
+
+}
+
+
+/* =========================================================
+   PHONE TABLE HEADERS
+========================================================= */
+
+function getPhoneColumns(rows){
+
+    const columns = [];
+
+
+    for(
+        let i=0;
+        i<rows.length;
+        i++
+    ){
+
+        const row =
+        rows[i];
+
+
+        if(
+            !row ||
+            typeof row !== "object"
+        ){
+
+            continue;
+
+        }
+
+
+        const keys =
+        Object.keys(row);
+
+
+        for(
+            let j=0;
+            j<keys.length;
+            j++
+        ){
+
+            if(
+                columns.indexOf(
+                    keys[j]
+                ) === -1
+            ){
+
+                columns.push(
+                    keys[j]
+                );
+
+            }
+
+        }
+
+    }
+
+
+    return columns;
+
+}
+
+
+/* =========================================================
+   CREATE PHONE TABLE
+========================================================= */
+
+function createPhoneTable(
+    rows,
+    className,
+    title
+){
+
+    const box =
+    document.createElement(
+        "div"
+    );
+
+
+    box.className =
+    "phone-table-box";
+
+
+    const table =
+    document.createElement(
+        "table"
+    );
+
+
+    table.className =
+    "phone-table " +
+    className;
+
+
+    const columns =
+    getPhoneColumns(
+        rows
+    );
+
+
+    /*
+       Empty data
+    */
+
+    if(!columns.length){
+
+        const empty =
+        document.createElement(
+            "div"
+        );
+
+
+        empty.className =
+        "phone-loading";
+
+
+        empty.textContent =
+        "No data available";
+
+
+        box.appendChild(
+            empty
+        );
+
+
+        return box;
+
+    }
+
+
+    const thead =
+    document.createElement(
+        "thead"
+    );
+
+
+    /*
+       Merged title row
+       Only APG and ZAS have title.
+    */
+
+    if(title){
+
+        const titleRow =
+        document.createElement(
+            "tr"
+        );
+
+
+        const titleCell =
+        document.createElement(
+            "th"
+        );
+
+
+        titleCell.colSpan =
+        columns.length;
+
+
+        titleCell.className =
+        "phone-section-title";
+
+
+        titleCell.textContent =
+        title;
+
+
+        titleRow.appendChild(
+            titleCell
+        );
+
+
+        thead.appendChild(
+            titleRow
+        );
+
+    }
+
+
+    /*
+       Normal column header row
+    */
+
+    const headerRow =
+    document.createElement(
+        "tr"
+    );
+
+
+    for(
+        let i=0;
+        i<columns.length;
+        i++
+    ){
+
+        const th =
+        document.createElement(
+            "th"
+        );
+
+
+        /*
+           Table 1:
+           MOBILE becomes MOB
+        */
+
+        if(
+            className ===
+            "phone-table-contacts" &&
+            columns[i]
+            .toLowerCase()
+            .trim() ===
+            "mobile"
+        ){
+
+            th.textContent =
+            "MOB";
+
+        }
+        else{
+
+            th.textContent =
+            columns[i];
+
+        }
+
+
+        headerRow.appendChild(
+            th
+        );
+
+    }
+
+
+    thead.appendChild(
+        headerRow
+    );
+
+
+    table.appendChild(
+        thead
+    );
+
+
+    /*
+       BODY
+    */
+
+    const tbody =
+    document.createElement(
+        "tbody"
+    );
+
+
+    for(
+        let i=0;
+        i<rows.length;
+        i++
+    ){
+
+        const row =
+        rows[i];
+
+
+        const tr =
+        document.createElement(
+            "tr"
+        );
+
+
+        for(
+            let c=0;
+            c<columns.length;
+            c++
+        ){
+
+            const td =
+            document.createElement(
+                "td"
+            );
+
+
+            td.textContent =
+            displayValue(
+                row[
+                    columns[c]
+                ]
+            );
+
+
+            tr.appendChild(
+                td
+            );
+
+        }
+
+
+        tbody.appendChild(
+            tr
+        );
+
+    }
+
+
+    table.appendChild(
+        tbody
+    );
+
+
+    box.appendChild(
+        table
+    );
+
+
+    return box;
+
+}
+
+
+/* =========================================================
+   RENDER PHONE CONTACTS
+========================================================= */
+
+function renderPhoneContacts(){
+
+    if(!phoneLoaded){
+
+        loadPhoneContacts();
+
+        return;
+
+    }
+
+
+    specialContent.innerHTML =
+    "";
+
+
+    const layout =
+    document.createElement(
+        "div"
+    );
+
+
+    layout.className =
+    "phone-layout";
+
+
+    /*
+       =========================
+       TABLE 1
+       CONTACTS
+       =========================
+    */
+
+    const contactsTable =
+    createPhoneTable(
+
+        sheetData.phone.contacts,
+
+        "phone-table-contacts",
+
+        null
+
+    );
+
+
+    layout.appendChild(
+        contactsTable
+    );
+
+
+    /*
+       =========================
+       MIDDLE
+       APG + ZAS
+       =========================
+    */
+
+    const middle =
+    document.createElement(
+        "div"
+    );
+
+
+    middle.className =
+    "phone-middle";
+
+
+    /*
+       APG
+    */
+
+    const apgTable =
+    createPhoneTable(
+
+        sheetData.phone.apg,
+
+        "phone-table-apg",
+
+        "APG DEPARTMENTS"
+
+    );
+
+
+    middle.appendChild(
+        apgTable
+    );
+
+
+    /*
+       ZAS
+    */
+
+    const zasTable =
+    createPhoneTable(
+
+        sheetData.phone.zas,
+
+        "phone-table-zas",
+
+        "ZAS BUSINESS UNITS"
+
+    );
+
+
+    middle.appendChild(
+        zasTable
+    );
+
+
+    layout.appendChild(
+        middle
+    );
+
+
+    /*
+       =========================
+       TABLE 4
+       INSURANCE
+       =========================
+    */
+
+    const insuranceTable =
+    createPhoneTable(
+
+        sheetData.phone.insurance,
+
+        "phone-table-insurance",
+
+        null
+
+    );
+
+
+    layout.appendChild(
+        insuranceTable
+    );
+
+
+    specialContent.appendChild(
+        layout
+    );
+
+
+    statusEl.textContent =
+    "PHONE CONTACTS - " +
+    (
+        sheetData.phone.contacts.length +
+        sheetData.phone.apg.length +
+        sheetData.phone.zas.length +
+        sheetData.phone.insurance.length
+    ).toLocaleString() +
+    " contacts";
+
+}
+
+
+/* =========================================================
    SWITCH SHEET
 ========================================================= */
 
-function switchSheet(type){
+async function switchSheet(type){
 
     currentSheet =
     type;
@@ -2893,7 +3771,9 @@ function switchSheet(type){
 
 
     /*
+       =========================
        PROACTIVE
+       =========================
     */
 
     if(
@@ -2929,7 +3809,47 @@ function switchSheet(type){
 
 
     /*
+       =========================
+       PHONE CONTACTS
+       =========================
+    */
+
+    if(
+        type === "phone"
+    ){
+
+        searchArea.style.display =
+        "none";
+
+
+        excelHeader.style.display =
+        "none";
+
+
+        virtualContent.style.display =
+        "none";
+
+
+        specialContent.style.display =
+        "block";
+
+
+        excelArea.scrollTop =
+        0;
+
+
+        await loadPhoneContacts();
+
+
+        return;
+
+    }
+
+
+    /*
+       =========================
        NORMAL
+       =========================
     */
 
     searchArea.style.display =
@@ -3034,11 +3954,6 @@ function renderProactiveImages(){
         (i + 1);
 
 
-        /*
-           First image loads immediately.
-           Second can wait.
-        */
-
         if(i === 1){
 
             img.loading =
@@ -3119,6 +4034,15 @@ function updateStatus(type){
     }
 
 
+    if(
+        type === "phone"
+    ){
+
+        return;
+
+    }
+
+
     const total =
     sheetData[type]
         ? sheetData[type].length
@@ -3152,7 +4076,8 @@ function openFilterPopup(
 ){
 
     if(
-        type === "proactive"
+        type === "proactive" ||
+        type === "phone"
     ){
 
         return;
@@ -3467,7 +4392,8 @@ function applyPopupFilter(){
 function applyFilters(type){
 
     if(
-        type === "proactive"
+        type === "proactive" ||
+        type === "phone"
     ){
 
         return;
@@ -3622,7 +4548,9 @@ let searchTimer = null;
 
                 if(
                     currentSheet ===
-                    "proactive"
+                    "proactive" ||
+                    currentSheet ===
+                    "phone"
                 ){
 
                     return;
@@ -3670,7 +4598,9 @@ clearBtn.addEventListener(
 
         if(
             currentSheet !==
-            "proactive"
+            "proactive" &&
+            currentSheet !==
+            "phone"
         ){
 
             columnFilters[
@@ -3701,7 +4631,9 @@ excelArea.addEventListener(
 
         if(
             currentSheet ===
-            "proactive"
+            "proactive" ||
+            currentSheet ===
+            "phone"
         ){
 
             return;
@@ -3758,18 +4690,15 @@ window.addEventListener(
 
                 if(
                     currentSheet ===
-                    "proactive"
+                    "proactive" ||
+                    currentSheet ===
+                    "phone"
                 ){
 
                     return;
 
                 }
 
-
-                /*
-                   Recalculate only active
-                   worksheet.
-                */
 
                 buildRowOffsets(
                     currentSheet
