@@ -1027,6 +1027,13 @@ Filter
 Select All
 </button>
 
+<button
+    id="applyFilterBtn"
+    type="button"
+>
+Apply
+</button>
+
 </div>
 
 <div
@@ -1264,6 +1271,8 @@ document.getElementById("filterValues");
 const selectAllBtn =
 document.getElementById("selectAllBtn");
 
+const applyFilterBtn =
+document.getElementById("applyFilterBtn");
 
 /* =========================================================
    INITIALIZE STORAGE
@@ -4501,7 +4510,21 @@ selectAllBtn.addEventListener(
     }
 );
 
+/* =========================================================
+   APPLY FILTER BUTTON
+========================================================= */
 
+applyFilterBtn.addEventListener(
+    "click",
+    () => {
+
+        applyPopupFilter();
+
+        closeFilterPopup();
+
+    }
+);
+    
 /* =========================================================
    CLOSE POPUP
 ========================================================= */
