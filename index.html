@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,70 +8,72 @@
 
 <style>
 
-/* =========================================================
-   GENERAL
-========================================================= */
-
 *{
     box-sizing:border-box;
 }
 
-html,
 body{
     margin:0;
-    padding:0;
-    width:100%;
-    height:100%;
-}
-
-body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#f2f3f5;
+    background:#f3f5f7;
     color:#222;
 }
 
-/* =========================================================
-   TOP AREA
-========================================================= */
+/* =========================
+   TOP
+========================= */
 
 .top{
     background:#fff;
-    padding:10px 15px 8px;
-    border-bottom:1px solid #d5d8dc;
+    padding:18px 20px 12px;
+    border-bottom:1px solid #d9d9d9;
 }
 
 h1{
-    margin:0 0 10px;
+    margin:0 0 15px;
     text-align:center;
+    font-size:26px;
     color:#1d3557;
-    font-size:24px;
 }
 
-/* =========================================================
+/* =========================
    TABS
-========================================================= */
+========================= */
 
 .tabs{
     display:grid;
-    grid-template-columns:repeat(8,1fr);
-    gap:5px;
+    grid-template-columns:repeat(8,minmax(0,1fr));
+    gap:8px;
+
+    width:100%;
+    max-width:1600px;
+
+    margin:0 auto 15px;
 }
 
 .tab{
-    border:1px solid #bfc5cc;
-    background:#e9edf2;
-    color:#1d3557;
-    padding:8px 5px;
-    border-radius:4px;
+    width:100%;
+
+    border:1px solid #b8b8b8;
+    background:#eee;
+
+    padding:10px 7px;
+
+    border-radius:6px 6px 0 0;
+
     cursor:pointer;
-    font-size:12px;
+
     font-weight:bold;
+    font-size:13px;
+
     text-align:center;
-    min-width:0;
+
+    white-space:normal;
+    line-height:16px;
 }
 
 .tab:hover{
-    background:#dce6f1;
+    background:#e2e6ea;
 }
 
 .tab.active{
@@ -81,600 +82,952 @@ h1{
     border-color:#1d3557;
 }
 
-/* =========================================================
-   SEARCH AREA
-========================================================= */
+/* =========================
+   SEARCH
+========================= */
 
-.search-area{
-    margin-top:10px;
+.search-container{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:8px;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+
+    gap:10px;
+
+    max-width:1600px;
+    margin:0 auto 10px;
 }
 
-.search-box{
-    position:relative;
-}
-
-.search-box input{
+.search-container input{
     width:100%;
-    padding:9px 35px 9px 10px;
-    border:1px solid #bfc5cc;
-    border-radius:4px;
-    font-size:13px;
+
+    padding:10px 12px;
+
+    border:1px solid #c5cbd1;
+    border-radius:5px;
+
+    font-size:14px;
+
     outline:none;
 }
 
-.search-box input:focus{
+.search-container input:focus{
     border-color:#1d3557;
 }
 
-.clear-search{
-    position:absolute;
-    right:8px;
-    top:50%;
-    transform:translateY(-50%);
+.controls{
+    display:flex;
+    justify-content:center;
+
+    margin-bottom:10px;
+}
+
+.clear-btn{
+    border:1px solid #1d3557;
+
+    background:#1d3557;
+    color:#fff;
+
+    padding:9px 18px;
+
+    border-radius:5px;
+
     cursor:pointer;
-    color:#777;
+
     font-weight:bold;
-    display:none;
 }
 
-.clear-search:hover{
-    color:#111;
+.clear-btn:hover{
+    background:#16304e;
 }
 
-/* =========================================================
-   STATUS / ERROR
-========================================================= */
+/* =========================
+   STATUS
+========================= */
 
 .status{
-    margin-top:7px;
-    font-size:12px;
+    text-align:center;
+    font-size:13px;
     color:#555;
+
+    margin:6px 0 10px;
 }
 
 .error-box{
     display:none;
-    margin-top:7px;
-    padding:8px;
+
+    max-width:1600px;
+
+    margin:0 auto 10px;
+
     background:#f8d7da;
-    border:1px solid #f1aeb5;
-    color:#842029;
-    border-radius:4px;
-    font-size:12px;
+    color:#721c24;
+
+    border:1px solid #f1b0b7;
+
+    padding:10px;
+
+    border-radius:5px;
+
+    white-space:pre-wrap;
 }
 
-/* =========================================================
+/* =========================
    EXCEL AREA
-========================================================= */
+========================= */
 
 .excel-area{
-    height:calc(100vh - 225px);
-    min-height:450px;
-    overflow:auto;
-    background:#fff;
-    margin:0;
     position:relative;
+
+    width:100%;
+
+    height:calc(100vh - 225px);
+
+    min-height:450px;
+
+    overflow:auto;
+
+    background:#fff;
+
+    border-top:1px solid #c8c8c8;
 }
 
-/* =========================================================
-   EXCEL TABLE
-========================================================= */
+/* =========================
+   HEADER
+========================= */
 
-.excel-table{
+.excel-header{
+    position:sticky;
+    top:0;
+
+    z-index:20;
+
+    display:grid;
+
     width:max-content;
     min-width:100%;
-    border-collapse:separate;
-    border-spacing:0;
-    table-layout:fixed;
+
+    background:#e9edf2;
+
+    border-bottom:2px solid #9ba6b2;
 }
 
-.excel-table th,
-.excel-table td{
-    border-right:1px solid #d5d8dc;
-    border-bottom:1px solid #d5d8dc;
-    padding:8px 9px;
-    font-size:12px;
+.header-cell{
+    position:relative;
+
+    min-width:0;
+
+    min-height:54px;
+
+    padding:7px 32px 7px 8px;
+
+    border-right:1px solid #c7cbd0;
+
+    display:flex;
+    align-items:center;
+
+    font-weight:bold;
+    font-size:13px;
     line-height:16px;
-    height:42px;
-    vertical-align:middle;
+
+    white-space:normal;
     overflow-wrap:anywhere;
     word-break:break-word;
 }
 
-.excel-table thead th{
-    position:sticky;
-    top:0;
-    z-index:20;
-    background:#1d3557;
-    color:#fff;
-    font-weight:bold;
-    text-align:center;
+.filter-btn{
+    position:absolute;
+
+    right:4px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:22px;
+    height:22px;
+
+    border:1px solid #adb5bd;
+
+    background:#fff;
+
+    border-radius:4px;
+
+    cursor:pointer;
+
+    font-size:10px;
+
+    padding:0;
 }
 
-.excel-table tbody td{
+.filter-btn:hover{
+    background:#eef2f5;
+}
+
+.filter-btn.filtered{
+    background:#1d3557;
+    color:#fff;
+}
+
+/* =========================
+   VIRTUAL CONTENT
+========================= */
+
+.virtual-content{
+    position:relative;
+
+    width:100%;
+
+    min-width:max-content;
+}
+
+.data-row{
+    position:absolute;
+
+    left:0;
+
+    display:grid;
+
+    width:max-content;
+    min-width:100%;
+
     background:#fff;
 }
 
-.excel-table tbody tr:nth-child(even) td{
+.data-cell{
+    min-width:0;
+
+    padding:7px 8px;
+
+    border-right:1px solid #d5d8dc;
+    border-bottom:1px solid #d5d8dc;
+
+    font-size:13px;
+    line-height:17px;
+
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+
+    overflow:hidden;
+}
+
+.data-row:nth-child(even) .data-cell{
     background:#fafafa;
 }
 
-/* =========================================================
-   FROZEN THIQA / BASIC COLUMNS
-========================================================= */
+/* =========================
+   THIQA / BASIC
+========================= */
 
-.frozen-thiqa{
-    position:sticky !important;
-    right:var(--basic-width,0px);
-    z-index:15 !important;
-    background:#eef5fb !important;
+.thiqa-yes,
+.basic-yes{
+    background:#d9ead3 !important;
+
+    color:#222 !important;
+
+    font-weight:bold !important;
+
+    text-align:center;
 }
+
+.thiqa-no,
+.basic-no{
+    background:#f4cccc !important;
+
+    color:#222 !important;
+
+    font-weight:bold !important;
+
+    text-align:center;
+}
+
+/* =========================
+   VITAMIN COVERAGE
+   NCI / NOT COVERED
+========================= */
+
+.vitamin-not-covered{
+    background:#f4cccc !important;
+    color:#222 !important;
+    font-weight:bold !important;
+}
+
+/* =========================
+   FROZEN
+========================= */
 
 .frozen-basic{
     position:sticky !important;
+
     right:0;
-    z-index:16 !important;
-    background:#eef5fb !important;
+
+    z-index:18 !important;
+
+    box-shadow:
+        -3px 0 4px rgba(0,0,0,.08);
 }
 
-thead .frozen-thiqa,
-thead .frozen-basic{
-    z-index:30 !important;
-    background:#1d3557 !important;
-    color:#fff !important;
+.frozen-thiqa{
+    position:sticky !important;
+
+    right:110px;
+
+    z-index:18 !important;
+
+    box-shadow:
+        -2px 0 3px rgba(0,0,0,.05);
 }
 
-/* =========================================================
-   VITAMIN COVERAGE SPECIAL CELLS
-========================================================= */
-
-.vitamin-nci,
-.vitamin-not-covered{
-    color:#c00000 !important;
-    font-weight:bold;
+.excel-header .frozen-basic,
+.excel-header .frozen-thiqa{
+    z-index:25 !important;
 }
 
-/* =========================================================
-   FILTER
-========================================================= */
-
-.filter-button{
-    margin-left:5px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:16px;
-    height:16px;
-    border:1px solid rgba(255,255,255,.7);
-    border-radius:2px;
-    cursor:pointer;
-    font-size:9px;
-    background:rgba(255,255,255,.12);
-}
-
-.filter-button:hover{
-    background:rgba(255,255,255,.25);
-}
-
-.filter-button.active{
-    background:#fff;
-    color:#1d3557;
-}
-
-/* =========================================================
+/* =========================
    FILTER POPUP
-========================================================= */
+========================= */
 
 .filter-popup{
-    position:fixed;
-    z-index:1000;
-    width:260px;
-    max-height:400px;
-    background:#fff;
-    border:1px solid #aaa;
-    border-radius:5px;
-    box-shadow:0 4px 15px rgba(0,0,0,.2);
     display:none;
+
+    position:fixed;
+
+    z-index:1000;
+
+    width:280px;
+
+    max-height:420px;
+
+    background:#fff;
+
+    border:1px solid #b9c1c8;
+
+    border-radius:6px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.18);
+
     overflow:hidden;
+}
+
+.filter-popup.show{
+    display:block;
 }
 
 .filter-popup-header{
-    padding:8px;
-    background:#1d3557;
-    color:#fff;
-    font-size:12px;
+    padding:10px;
+
+    border-bottom:1px solid #ddd;
+
+    background:#f5f7f9;
+
     font-weight:bold;
+
+    font-size:13px;
 }
 
-.filter-popup-actions{
-    display:flex;
-    gap:5px;
-    padding:7px;
+.filter-search{
+    padding:8px;
+
     border-bottom:1px solid #ddd;
 }
 
-.filter-popup-actions button{
-    flex:1;
-    padding:5px;
-    font-size:11px;
-    cursor:pointer;
-    border:1px solid #bbb;
-    background:#f4f4f4;
-    border-radius:3px;
-}
-
-.filter-popup-actions button:hover{
-    background:#e5e5e5;
-}
-
-.filter-list{
-    max-height:320px;
-    overflow:auto;
-    padding:5px 7px;
-}
-
-.filter-option{
-    display:flex;
-    align-items:flex-start;
-    gap:6px;
-    padding:4px 2px;
-    font-size:11px;
-    cursor:pointer;
-}
-
-.filter-option input{
-    margin-top:2px;
-}
-
-.filter-footer{
-    padding:7px;
-    border-top:1px solid #ddd;
-}
-
-.filter-apply{
+.filter-search input{
     width:100%;
-    padding:6px;
-    border:0;
-    background:#1d3557;
-    color:#fff;
-    border-radius:3px;
-    cursor:pointer;
-    font-size:11px;
-    font-weight:bold;
+
+    padding:7px 8px;
+
+    border:1px solid #c7cdd3;
+
+    border-radius:4px;
 }
 
-/* =========================================================
+.filter-actions{
+    display:flex;
+
+    gap:6px;
+
+    padding:8px;
+
+    border-bottom:1px solid #ddd;
+}
+
+.filter-actions button{
+    flex:1;
+
+    padding:7px;
+
+    border:1px solid #c3cad1;
+
+    background:#fff;
+
+    border-radius:4px;
+
+    cursor:pointer;
+}
+
+.filter-actions button:hover{
+    background:#eef2f5;
+}
+
+.filter-values{
+    max-height:280px;
+
+    overflow-y:auto;
+
+    padding:6px 8px;
+}
+
+.filter-value{
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:5px 2px;
+
+    font-size:12px;
+}
+
+/* =========================
    SPECIAL CONTENT
-========================================================= */
+========================= */
 
 .special-content{
     display:none;
+
     width:100%;
+
     background:#fff;
-    min-height:100%;
+
     padding:15px;
 }
 
-/* =========================================================
-   PROACTIVE
-========================================================= */
-
-.proactive-container{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-    align-items:center;
-}
-
-.proactive-container img{
-    max-width:100%;
-    height:auto;
+.proactive-image{
     display:block;
-    border:1px solid #ddd;
+
+    width:100%;
+
+    max-width:1600px;
+
+    height:auto;
+
+    margin:0 auto 20px;
 }
 
-/* =========================================================
+.proactive-image:last-child{
+    margin-bottom:0;
+}
+
+/* =========================
    PHONE CONTACTS
-========================================================= */
+========================= */
 
 .phone-layout{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.25fr);
-    gap:15px;
-    width:100%;
-    align-items:stretch;
-}
 
-.phone-middle{
-    display:flex;
-    flex-direction:column;
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(0,1fr)
+        minmax(0,1.35fr);
+
     gap:15px;
-    min-width:0;
+
+    width:100%;
+
+    max-width:1600px;
+
+    margin:0 auto;
+
+    align-items:stretch;
+
 }
 
 .phone-table-box{
+
+    width:100%;
+
     background:#fff;
-    border:1px solid #c8c8c8;
-    border-radius:6px;
+
+    border:1px solid #bfc5cb;
+
+    border-radius:5px;
+
     overflow:hidden;
-    box-shadow:0 1px 3px rgba(0,0,0,.06);
+
+}
+
+.phone-middle{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
     min-width:0;
+
 }
 
 .phone-table{
-    width:100%;
-    border-collapse:collapse;
-    table-layout:fixed;
-}
 
-/* All cells */
+    width:100%;
+
+    border-collapse:collapse;
+
+    table-layout:auto;
+
+}
 
 .phone-table th,
 .phone-table td{
-    border-right:1px solid #d5d8dc;
-    border-bottom:1px solid #d5d8dc;
-    padding:8px 9px;
+
+    border:1px solid #d5d8dc;
+
+    padding:7px 8px;
+
     font-size:13px;
+
     line-height:17px;
+
     text-align:left;
+
     vertical-align:middle;
+
     overflow-wrap:anywhere;
+
     word-break:break-word;
+
 }
 
-.phone-table th:last-child,
-.phone-table td:last-child{
-    border-right:0;
-}
+/* =========================
+   PHONE COLUMN HEADINGS
+========================= */
 
-.phone-table tbody tr:last-child td{
-    border-bottom:0;
-}
-
-/* Section title:
-   APG DEPARTMENTS
-   ZAS BUSINESS UNITS
+/*
+   Actual column headings:
+   CONTACTS | LANDLINE | MOB
+   DEPARTMENT | Contact
+   BUSINESS UNIT | Contact
+   INSURANCE COMPANY | CONTACT NUMBER
 */
 
-.phone-table thead tr.phone-title-row th{
-    background:#1d3557;
-    color:#fff;
-    text-align:center;
-    font-size:14px;
-    font-weight:bold;
-    padding:10px 8px;
-    border-right:0;
-}
+.phone-table thead tr.phone-column-heading th{
 
-/* Column headings */
+    background:#e9edf2 !important;
 
-.phone-table thead tr.phone-header-row th{
-    background:#dce6f1;
-    color:#222;
-    font-weight:bold;
-    text-align:center;
+    color:#222 !important;
+
+    font-weight:bold !important;
+
+    text-align:center !important;
+
     vertical-align:middle;
-    padding:9px 8px;
+
 }
 
-/* Data rows */
+/* =========================
+   PHONE SECTION TITLES
+========================= */
+
+.phone-section-title{
+
+    background:#1d3557 !important;
+
+    color:#fff !important;
+
+    text-align:center !important;
+
+    font-weight:bold !important;
+
+    font-size:14px !important;
+
+    padding:9px 8px !important;
+
+}
+
+/* =========================
+   PHONE BODY
+========================= */
 
 .phone-table tbody tr:nth-child(even) td{
+
     background:#fafafa;
+
 }
 
-/* =========================================================
-   PHONE TABLE 1
-========================================================= */
+/* =========================
+   Phone table 1
+========================= */
 
-.phone-layout > .phone-table-box:first-child
-.phone-table th:first-child,
-.phone-layout > .phone-table-box:first-child
-.phone-table td:first-child{
-    width:42%;
+.phone-table-contacts th:first-child,
+.phone-table-contacts td:first-child{
+
+    min-width:140px;
+
 }
 
-.phone-layout > .phone-table-box:first-child
-.phone-table th:nth-child(2),
-.phone-layout > .phone-table-box:first-child
-.phone-table td:nth-child(2),
-.phone-layout > .phone-table-box:first-child
-.phone-table th:nth-child(3),
-.phone-layout > .phone-table-box:first-child
-.phone-table td:nth-child(3){
-    width:29%;
+.phone-table-contacts th:nth-child(2),
+.phone-table-contacts td:nth-child(2){
+
+    min-width:110px;
+
+    white-space:nowrap;
+
 }
 
-/* =========================================================
-   PHONE TABLES 2 & 3
-========================================================= */
+.phone-table-contacts th:nth-child(3),
+.phone-table-contacts td:nth-child(3){
 
-.phone-middle .phone-table th:first-child,
-.phone-middle .phone-table td:first-child{
-    width:68%;
+    min-width:120px;
+
+    white-space:nowrap;
+
 }
 
-.phone-middle .phone-table th:last-child,
-.phone-middle .phone-table td:last-child{
-    width:32%;
+/* =========================
+   APG
+========================= */
+
+.phone-table-apg th:first-child,
+.phone-table-apg td:first-child{
+
+    width:55%;
+
 }
 
-/* =========================================================
-   PHONE TABLE 4
-========================================================= */
+.phone-table-apg th:last-child,
+.phone-table-apg td:last-child{
 
-.phone-layout > .phone-table-box:last-child
-.phone-table th:first-child,
-.phone-layout > .phone-table-box:last-child
-.phone-table td:first-child{
-    width:62%;
+    width:45%;
+
+    white-space:nowrap;
+
 }
 
-.phone-layout > .phone-table-box:last-child
-.phone-table th:last-child,
-.phone-layout > .phone-table-box:last-child
-.phone-table td:last-child{
-    width:38%;
+/* =========================
+   ZAS
+========================= */
+
+.phone-table-zas th:first-child,
+.phone-table-zas td:first-child{
+
+    width:65%;
+
 }
+
+.phone-table-zas th:last-child,
+.phone-table-zas td:last-child{
+
+    width:35%;
+
+    white-space:nowrap;
+
+}
+
+/* =========================
+   Insurance
+========================= */
+
+.phone-table-insurance th:first-child,
+.phone-table-insurance td:first-child{
+
+    width:65%;
+
+}
+
+.phone-table-insurance th:last-child,
+.phone-table-insurance td:last-child{
+
+    width:35%;
+
+    white-space:nowrap;
+
+}
+
+/* =========================
+   Phone loading
+========================= */
 
 .phone-loading{
+
     text-align:center;
-    padding:40px 15px;
+
+    padding:30px;
+
     color:#555;
+
     font-size:14px;
+
 }
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:1100px){
 
     .tabs{
-        grid-template-columns:repeat(4,1fr);
+        grid-template-columns:repeat(4,minmax(0,1fr));
     }
 
-    .search-area{
-        grid-template-columns:repeat(2,1fr);
+    .search-container{
+        grid-template-columns:repeat(2,minmax(0,1fr));
     }
 
     .phone-layout{
-        grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+
+        grid-template-columns:
+            minmax(0,1fr)
+            minmax(0,1fr);
+
     }
 
-    .phone-layout > .phone-table-box:last-child{
+    .phone-table-box:first-child{
+
         grid-column:1 / -1;
+
     }
+
+    .phone-middle{
+
+        grid-column:1 / -1;
+
+    }
+
+    .phone-table-box:last-child{
+
+        grid-column:1 / -1;
+
+    }
+
 }
 
 @media(max-width:800px){
 
     h1{
-        font-size:20px;
+        font-size:21px;
+    }
+
+    .top{
+        padding:12px 8px 8px;
     }
 
     .tabs{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:6px;
     }
 
-    .search-area{
+    .tab{
+        font-size:12px;
+        padding:9px 5px;
+    }
+
+    .search-container{
         grid-template-columns:1fr;
     }
 
     .excel-area{
-        height:calc(100vh - 300px);
-    }
-
-    .phone-layout{
-        grid-template-columns:1fr;
-    }
-
-    .phone-layout > .phone-table-box:last-child{
-        grid-column:auto;
+        height:calc(100vh - 360px);
     }
 
     .special-content{
         padding:8px;
     }
+
+    .phone-layout{
+
+        display:flex;
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+    .phone-middle{
+
+        display:flex;
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+    .phone-table th,
+    .phone-table td{
+
+        font-size:12px;
+
+        padding:6px;
+
+    }
+
 }
 
 </style>
 </head>
 
-
 <body>
 
 <div class="top">
 
-    <h1>Insurance Coverage List</h1>
+<h1>
+Insurance Coverage List
+</h1>
 
-    <div class="tabs" id="tabs"></div>
+<!-- =========================
+     TABS
+========================= -->
 
-    <div class="search-area" id="searchArea">
+<div
+    class="tabs"
+    id="tabs"
+></div>
 
-        <div class="search-box">
-            <input
-                type="text"
-                id="globalSearch"
-                placeholder="Search all columns..."
-                autocomplete="off">
-            <span class="clear-search" id="clearSearch">×</span>
-        </div>
+<!-- =========================
+     SEARCH
+========================= -->
 
-        <div class="search-box">
-            <input
-                type="text"
-                id="strengthSearch"
-                placeholder="Strength / exact terms..."
-                autocomplete="off">
-            <span class="clear-search" id="clearStrengthSearch">×</span>
-        </div>
+<div id="searchArea">
 
-    </div>
+<div class="search-container">
 
-    <div class="status" id="status">
-        Loading...
-    </div>
+<input
+    id="brandSearch"
+    type="text"
+    placeholder="Search Brand Name..."
+>
 
-    <div class="error-box" id="errorBox"></div>
+<input
+    id="genericSearch"
+    type="text"
+    placeholder="Search Generic Name..."
+>
+
+<input
+    id="strengthSearch"
+    type="text"
+    placeholder="Search Strength..."
+>
+
+<input
+    id="dosageSearch"
+    type="text"
+    placeholder="Search Dosage Form..."
+>
 
 </div>
 
+<div class="controls">
 
-<div class="excel-area" id="excelArea">
-
-    <div id="excelHeader"></div>
-
-    <div id="virtualContent"></div>
-
-    <div
-        class="special-content"
-        id="specialContent">
-    </div>
+<button
+    id="clearBtn"
+    class="clear-btn"
+    type="button"
+>
+Clear Search & Filters
+</button>
 
 </div>
 
+</div>
+
+<div
+    class="status"
+    id="status"
+>
+Loading...
+</div>
+
+<div
+    class="error-box"
+    id="errorBox"
+></div>
+
+</div>
+
+<!-- =========================
+     TABLE
+========================= -->
+
+<div
+    class="excel-area"
+    id="excelArea"
+>
+
+<div
+    class="excel-header"
+    id="excelHeader"
+></div>
+
+<div
+    class="virtual-content"
+    id="virtualContent"
+></div>
+
+<!-- =========================
+     SPECIAL CONTENT
+========================= -->
+
+<div
+    class="special-content"
+    id="specialContent"
+></div>
+
+</div>
+
+<!-- =========================
+     FILTER POPUP
+========================= -->
 
 <div
     class="filter-popup"
-    id="filterPopup">
+    id="filterPopup"
+>
 
-    <div
-        class="filter-popup-header"
-        id="filterPopupHeader">
-    </div>
+<div
+    class="filter-popup-header"
+    id="filterPopupHeader"
+>
+Filter
+</div>
 
-    <div class="filter-popup-actions">
+<div class="filter-search">
 
-        <button id="filterSelectAll">
-            Select All
-        </button>
-
-        <button id="filterClearAll">
-            Clear
-        </button>
-
-    </div>
-
-    <div
-        class="filter-list"
-        id="filterList">
-    </div>
-
-    <div class="filter-footer">
-
-        <button
-            class="filter-apply"
-            id="filterApply">
-            Apply
-        </button>
-
-    </div>
+<input
+    id="filterValueSearch"
+    type="text"
+    placeholder="Search values..."
+>
 
 </div>
 
+<div class="filter-actions">
+
+<button
+    id="selectAllBtn"
+    type="button"
+>
+Select All
+</button>
+
+<button
+    id="clearFilterBtn"
+    type="button"
+>
+Clear
+</button>
+
+</div>
+
+<div
+    class="filter-values"
+    id="filterValues"
+></div>
+
+</div>
 
 <script>
 
@@ -684,145 +1037,137 @@ thead .frozen-basic{
 
 const WORKSHEETS = [
 
-    {
-        id:"thiqa",
-        name:"Thiqa & Basic",
-        file:"data.json"
-    },
+{
+    id:"thiqa",
+    name:"Thiqa & Basic",
+    file:"data.json"
+},
 
-    {
-        id:"haad",
-        name:"HAAD",
-        file:"HAAD_LIST.json"
-    },
+{
+    id:"haad",
+    name:"HAAD",
+    file:"HAAD_LIST.json"
+},
 
-    {
-        id:"apg",
-        name:"APG FORMULARY 05-06",
-        file:"APG FORMULARY 05-06.json"
-    },
+{
+    id:"apg",
+    name:"APG FORMULARY 05-06",
+    file:"APG FORMULARY 05-06.json"
+},
 
-    {
-        id:"icd10",
-        name:"ICD10",
-        file:"ICD10.json"
-    },
+{
+    id:"icd10",
+    name:"ICD10",
+    file:"ICD10.json"
+},
 
-    {
-        id:"vitamin",
-        name:"VITAMIN COVERAGE",
-        file:"VITAMIN COVERAGE.json"
-    },
+{
+    id:"vitamin",
+    name:"VITAMIN COVERAGE",
+    file:"VITAMIN COVERAGE.json"
+},
 
-    {
-        id:"ppi",
-        name:"PPI Coverage",
-        file:"PPI Coverage.json"
-    },
+{
+    id:"ppi",
+    name:"PPI Coverage",
+    file:"PPI Coverage.json"
+},
 
-    {
-        id:"proactive",
-        name:"PROACTIVE INSTRUCTION",
-        special:true
-    },
+{
+    id:"proactive",
+    name:"PROACTIVE INSTRUCTION",
+    special:true
+},
 
-    {
-        id:"hcpc",
-        name:"HCPC Cap & Ref Price",
-        file:"HCPC Cap & REf Price.json"
-    },
+{
+    id:"hcpc",
+    name:"HCPC Cap & Ref Price",
+    file:"HCPC Cap & REf Price.json"
+},
 
-    {
-        id:"validity",
-        name:"VALIDITY AFTER OPENNING",
-        file:"VALIDITY AFTER OPENNING.json"
-    },
+{
+    id:"validity",
+    name:"VALIDITY AFTER OPENNING",
+    file:"VALIDITY AFTER OPENNING.json"
+},
 
-    {
-        id:"cda",
-        name:"CDA & CDB MAX DD",
-        file:"CDA &CDB MAX DD.json"
-    },
+{
+    id:"cda",
+    name:"CDA & CDB MAX DD",
+    file:"CDA &CDB MAX DD.json"
+},
 
-    {
-        id:"adnic",
-        name:"ADNIC (KHALIFA F.)",
-        file:"ADNIC ( KHALIFA F. ).json"
-    },
+{
+    id:"adnic",
+    name:"ADNIC (KHALIFA F.)",
+    file:"ADNIC ( KHALIFA F. ).json"
+},
 
-    {
-        id:"nasHaad",
-        name:"Nas TPA Formulary (HAAD)",
-        file:"Nas TPA Formulary (HAAD).json"
-    },
+{
+    id:"nasHaad",
+    name:"Nas TPA Formulary (HAAD)",
+    file:"Nas TPA Formulary (HAAD).json"
+},
 
-    {
-        id:"nasDha",
-        name:"Nas TPA Formulary (DHA)",
-        file:"Nas TPA Formulary (DHA).json"
-    },
+{
+    id:"nasDha",
+    name:"Nas TPA Formulary (DHA)",
+    file:"Nas TPA Formulary (DHA).json"
+},
 
-    {
-        id:"fmc",
-        name:"FMC LIST 01-2026",
-        file:"FMC LIST 01-2026.json"
-    },
+{
+    id:"fmc",
+    name:"FMC LIST 01-2026",
+    file:"FMC LIST 01-2026.json"
+},
 
-    {
-        id:"oman",
-        name:"OMAN FORMULARY 03-2024",
-        file:"OMAN FORMULARY 03-2024.json"
-    },
+{
+    id:"oman",
+    name:"OMAN FORMULARY 03-2024",
+    file:"OMAN FORMULARY 03-2024.json"
+},
 
-    /* =====================================================
-       PHONE CONTACTS
-       4 SEPARATE JSON FILES
-    ===================================================== */
+/*
+   PHONE CONTACTS IS SPECIAL.
+   It loads its 4 JSON files only
+   when the tab is opened.
+*/
 
-    {
-        id:"phone",
-        name:"PHONE CONTACTS",
-        special:"phone",
+{
+    id:"phone",
+    name:"PHONE CONTACTS",
+    special:"phone",
 
-        phoneFiles:[
-            "PHONE CONTACTS 1.json",
-            "PHONE CONTACTS 2.json",
-            "PHONE CONTACTS 3.json",
-            "PHONE CONTACTS 4.json"
-        ]
-    }
+    phoneFiles:[
+
+        "PHONE CONTACTS 1.json",
+        "PHONE CONTACTS 2.json",
+        "PHONE CONTACTS 3.json",
+        "PHONE CONTACTS 4.json"
+
+    ]
+
+}
 
 ];
 
 
 /* =========================================================
-   GLOBAL VARIABLES
+   STORAGE
 ========================================================= */
+
+const sheetData = {};
+const sheetColumns = {};
+const filteredData = {};
+const columnFilters = {};
 
 let currentSheet = "thiqa";
 
-let sheetData = {};
-
-let filteredData = [];
-
-let columns = [];
-
-let filters = {};
-
-let currentFilterColumn = null;
+const rowOffsets = {};
+const totalHeights = {};
 
 let phoneLoaded = false;
-
 let phoneLoading = false;
-
-const phoneData = {
-
-    contacts:[],
-    apg:[],
-    zas:[],
-    insurance:[]
-
-};
 
 const ROW_HEIGHT = 42;
 
@@ -830,93 +1175,105 @@ const BUFFER_ROWS = 30;
 
 
 /* =========================================================
-   ELEMENTS
+   FILTER STATE
+========================================================= */
+
+let filterPopupState = {
+
+    column:null,
+
+    sheet:null,
+
+    allValues:[],
+
+    selected:new Set()
+
+};
+
+
+/* =========================================================
+   DOM
 ========================================================= */
 
 const tabsEl =
-    document.getElementById("tabs");
-
-const searchArea =
-    document.getElementById("searchArea");
-
-const globalSearch =
-    document.getElementById("globalSearch");
-
-const strengthSearch =
-    document.getElementById("strengthSearch");
-
-const clearSearch =
-    document.getElementById("clearSearch");
-
-const clearStrengthSearch =
-    document.getElementById("clearStrengthSearch");
+document.getElementById("tabs");
 
 const statusEl =
-    document.getElementById("status");
+document.getElementById("status");
 
 const errorBox =
-    document.getElementById("errorBox");
+document.getElementById("errorBox");
 
 const excelArea =
-    document.getElementById("excelArea");
+document.getElementById("excelArea");
 
 const excelHeader =
-    document.getElementById("excelHeader");
+document.getElementById("excelHeader");
 
 const virtualContent =
-    document.getElementById("virtualContent");
+document.getElementById("virtualContent");
 
 const specialContent =
-    document.getElementById("specialContent");
+document.getElementById("specialContent");
+
+const searchArea =
+document.getElementById("searchArea");
+
+const brandSearch =
+document.getElementById("brandSearch");
+
+const genericSearch =
+document.getElementById("genericSearch");
+
+const strengthSearch =
+document.getElementById("strengthSearch");
+
+const dosageSearch =
+document.getElementById("dosageSearch");
+
+const clearBtn =
+document.getElementById("clearBtn");
 
 const filterPopup =
-    document.getElementById("filterPopup");
+document.getElementById("filterPopup");
 
 const filterPopupHeader =
-    document.getElementById("filterPopupHeader");
+document.getElementById("filterPopupHeader");
 
-const filterList =
-    document.getElementById("filterList");
+const filterValueSearch =
+document.getElementById("filterValueSearch");
 
-const filterSelectAll =
-    document.getElementById("filterSelectAll");
+const filterValues =
+document.getElementById("filterValues");
 
-const filterClearAll =
-    document.getElementById("filterClearAll");
+const selectAllBtn =
+document.getElementById("selectAllBtn");
 
-const filterApply =
-    document.getElementById("filterApply");
-
-
-/* =========================================================
-   NORMALIZE JSON
-========================================================= */
-
-function normalizeJSON(json){
-
-    if(Array.isArray(json)){
-        return json;
-    }
-
-    if(json && Array.isArray(json.data)){
-        return json.data;
-    }
-
-    if(json && typeof json === "object"){
-        return [json];
-    }
-
-    return [];
-}
+const clearFilterBtn =
+document.getElementById("clearFilterBtn");
 
 
 /* =========================================================
-   PHONE JSON NORMALIZER
+   INITIALIZE STORAGE
 ========================================================= */
 
-function normalizePhoneJSON(json){
+function initializeSheetStorage(){
 
-    return normalizeJSON(json);
+    WORKSHEETS.forEach(sheet => {
+
+        sheetData[sheet.id] = [];
+
+        sheetColumns[sheet.id] = [];
+
+        filteredData[sheet.id] = [];
+
+        columnFilters[sheet.id] = {};
+
+        rowOffsets[sheet.id] = [];
+
+        totalHeights[sheet.id] = 0;
+
+    });
 
 }
 
@@ -932,20 +1289,42 @@ function createTabs(){
     WORKSHEETS.forEach(sheet => {
 
         const button =
-            document.createElement("button");
+        document.createElement("button");
 
-        button.className = "tab";
+        button.type =
+        "button";
 
-        button.dataset.id = sheet.id;
+        button.className =
+        "tab";
 
-        button.textContent = sheet.name;
+        button.dataset.sheet =
+        sheet.id;
+
+        button.textContent =
+        sheet.name;
+
+        if(sheet.id === currentSheet){
+
+            button.classList.add(
+                "active"
+            );
+
+        }
 
         button.addEventListener(
             "click",
-            () => switchSheet(sheet.id)
+            () => {
+
+                switchSheet(
+                    sheet.id
+                );
+
+            }
         );
 
-        tabsEl.appendChild(button);
+        tabsEl.appendChild(
+            button
+        );
 
     });
 
@@ -953,100 +1332,131 @@ function createTabs(){
 
 
 /* =========================================================
-   UPDATE ACTIVE TAB
-========================================================= */
-
-function updateActiveTab(){
-
-    document
-        .querySelectorAll(".tab")
-        .forEach(tab => {
-
-            tab.classList.toggle(
-                "active",
-                tab.dataset.id === currentSheet
-            );
-
-        });
-
-}
-
-
-/* =========================================================
-   LOAD ALL NORMAL DATA
+   LOAD NORMAL JSON FILES
 ========================================================= */
 
 async function loadAllData(){
 
-    errorBox.style.display = "none";
+    errorBox.style.display =
+        "none";
 
-    try{
+    const normalSheets =
+    WORKSHEETS.filter(
+        sheet =>
+        !sheet.special
+    );
 
-        const normalSheets =
-            WORKSHEETS.filter(
-                sheet => !sheet.special
-            );
+    const results =
+    await Promise.all(
 
-        const results =
-            await Promise.all(
+        normalSheets.map(
+            async sheet => {
 
-                normalSheets.map(
-                    async sheet => {
+                try{
 
-                        const response =
-                            await fetch(
-                                encodeURI(
-                                    sheet.file
-                                ) +
-                                "?v=" +
-                                Date.now(),
-                                {
-                                    cache:"no-store"
-                                }
-                            );
-
-                        if(!response.ok){
-                            throw new Error(
-                                "Could not load " +
-                                sheet.file
-                            );
+                    const response =
+                    await fetch(
+                        encodeURI(
+                            sheet.file
+                        ),
+                        {
+                            cache:"default"
                         }
+                    );
 
-                        const json =
-                            await response.json();
+                    if(!response.ok){
 
-                        return {
-                            id:sheet.id,
-                            data:normalizeJSON(json)
-                        };
+                        throw new Error(
+                            "HTTP " +
+                            response.status
+                        );
 
                     }
-                )
 
+                    const json =
+                    await response.json();
+
+                    return {
+
+                        sheet,
+
+                        rows:
+                        normalizeJSON(
+                            json
+                        ),
+
+                        error:null
+
+                    };
+
+                }
+                catch(error){
+
+                    return {
+
+                        sheet,
+
+                        rows:[],
+
+                        error
+
+                    };
+
+                }
+
+            }
+        )
+
+    );
+
+    const errors = [];
+
+    results.forEach(
+        result => {
+
+            const sheet =
+            result.sheet;
+
+            sheetData[sheet.id] =
+            result.rows;
+
+            sheetColumns[sheet.id] =
+            buildColumns(
+                result.rows,
+                sheet.id
             );
 
-        results.forEach(result => {
+            filteredData[sheet.id] =
+            result.rows.slice();
 
-            sheetData[result.id] =
-                result.data;
+            columnFilters[sheet.id] =
+            {};
 
-        });
+            if(result.error){
 
-        switchSheet("thiqa");
+                errors.push(
+                    sheet.name +
+                    ": " +
+                    result.error.message
+                );
 
-    }
-    catch(error){
+            }
 
-        console.error(error);
+        }
+    );
+
+    switchSheet(
+        "thiqa"
+    );
+
+    if(errors.length){
 
         errorBox.textContent =
-            "Error loading data: " +
-            error.message;
+        "Some sheets could not be loaded:\n\n" +
+        errors.join("\n");
 
-        errorBox.style.display = "block";
-
-        statusEl.textContent =
-            "Loading error";
+        errorBox.style.display =
+        "block";
 
     }
 
@@ -1054,308 +1464,1609 @@ async function loadAllData(){
 
 
 /* =========================================================
-   GET OBJECT COLUMNS
+   NORMALIZE JSON
 ========================================================= */
 
-function getObjectColumns(
-    rows,
-    fallback=[]
-){
+function normalizeJSON(json){
 
-    const result = [];
+    if(Array.isArray(json)){
 
-    rows.forEach(row => {
+        return json;
+
+    }
+
+    if(
+        json &&
+        Array.isArray(json.data)
+    ){
+
+        return json.data;
+
+    }
+
+    if(
+        json &&
+        typeof json === "object"
+    ){
+
+        const keys =
+        Object.keys(json);
+
+        for(
+            let i=0;
+            i<keys.length;
+            i++
+        ){
+
+            if(
+                Array.isArray(
+                    json[keys[i]]
+                )
+            ){
+
+                return json[keys[i]];
+
+            }
+
+        }
+
+    }
+
+    return [];
+
+}
+
+
+/* =========================================================
+   BUILD COLUMNS
+========================================================= */
+
+function buildColumns(rows, type){
+
+    const columns = [];
+
+    for(
+        let i=0;
+        i<rows.length;
+        i++
+    ){
+
+        const row =
+        rows[i];
 
         if(
             !row ||
             typeof row !== "object" ||
             Array.isArray(row)
         ){
-            return;
+
+            continue;
+
         }
 
-        Object.keys(row).forEach(key => {
+        const keys =
+        Object.keys(row);
 
-            if(!result.includes(key)){
-                result.push(key);
+        for(
+            let j=0;
+            j<keys.length;
+            j++
+        ){
+
+            const key =
+            keys[j];
+
+            if(
+                columns.indexOf(key) === -1
+            ){
+
+                columns.push(key);
+
             }
 
-        });
+        }
 
-    });
-
-    if(result.length){
-        return result;
     }
 
-    return fallback;
+    if(type === "validity"){
+
+        const desiredOrder = [
+
+            "HAAD CODE",
+
+            "PROACTIVE NAME",
+
+            "VALIDITY AFTER OPENING:",
+
+            "NOTES",
+
+            "Measurability",
+
+            "Review date"
+
+        ];
+
+        const orderedColumns = [];
+
+        for(
+            let i=0;
+            i<desiredOrder.length;
+            i++
+        ){
+
+            const desired =
+            desiredOrder[i];
+
+            const actual =
+            columns.find(
+                column =>
+                column.toLowerCase().trim() ===
+                desired.toLowerCase().trim()
+            );
+
+            if(actual){
+
+                orderedColumns.push(
+                    actual
+                );
+
+            }
+
+        }
+
+        for(
+            let i=0;
+            i<columns.length;
+            i++
+        ){
+
+            if(
+                orderedColumns.indexOf(
+                    columns[i]
+                ) === -1
+            ){
+
+                orderedColumns.push(
+                    columns[i]
+                );
+
+            }
+
+        }
+
+        return orderedColumns;
+
+    }
+
+    return columns;
 
 }
 
 
 /* =========================================================
-   SWITCH SHEET
+   VALUE
 ========================================================= */
 
-function switchSheet(id){
+function displayValue(value){
 
-    const sheet =
-        WORKSHEETS.find(
-            item => item.id === id
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+    if(
+        typeof value === "object"
+    ){
+
+        try{
+
+            return JSON.stringify(
+                value
+            );
+
+        }
+        catch{
+
+            return String(value);
+
+        }
+
+    }
+
+    return String(value);
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function matchesMultiSearch(
+    value,
+    search
+){
+
+    const query =
+    String(
+        search || ""
+    )
+    .trim()
+    .toLowerCase();
+
+    if(!query){
+        return true;
+    }
+
+    const text =
+    displayValue(value)
+    .toLowerCase();
+
+    const terms =
+    query
+    .split("%")
+    .map(
+        term =>
+        term.trim()
+    )
+    .filter(Boolean);
+
+    for(
+        let i=0;
+        i<terms.length;
+        i++
+    ){
+
+        if(
+            !text.includes(
+                terms[i]
+            )
+        ){
+
+            return false;
+
+        }
+
+    }
+
+    return true;
+
+}
+
+
+/* =========================================================
+   FIND COLUMN
+========================================================= */
+
+function findColumn(
+    columns,
+    patterns
+){
+
+    for(
+        let i=0;
+        i<patterns.length;
+        i++
+    ){
+
+        const pattern =
+        patterns[i];
+
+        for(
+            let j=0;
+            j<columns.length;
+            j++
+        ){
+
+            if(
+                columns[j]
+                .toLowerCase()
+                .trim()
+                .includes(pattern)
+            ){
+
+                return columns[j];
+
+            }
+
+        }
+
+    }
+
+    return null;
+
+}
+
+
+/* =========================================================
+   FILTER ROWS
+========================================================= */
+
+function getFilteredRows(type){
+
+    const rows =
+    sheetData[type] || [];
+
+    const columns =
+    sheetColumns[type] || [];
+
+    if(!rows.length){
+        return [];
+    }
+
+    const brandColumn =
+    findColumn(
+        columns,
+        [
+            "brand name",
+            "brand",
+            "product name",
+            "item name",
+            "package name"
+        ]
+    );
+
+    const genericColumn =
+    findColumn(
+        columns,
+        [
+            "generic name",
+            "active ingredient",
+            "active ingredients",
+            "generic",
+            "ingredient"
+        ]
+    );
+
+    const strengthColumn =
+    findColumn(
+        columns,
+        [
+            "strength"
+        ]
+    );
+
+    const dosageColumn =
+    findColumn(
+        columns,
+        [
+            "dosage form",
+            "dosage"
+        ]
+    );
+
+    const brandQuery =
+    brandSearch.value;
+
+    const genericQuery =
+    genericSearch.value;
+
+    const strengthQuery =
+    strengthSearch.value;
+
+    const dosageQuery =
+    dosageSearch.value;
+
+    const filters =
+    columnFilters[type] || {};
+
+    return rows.filter(
+        row => {
+
+            if(brandQuery){
+
+                if(brandColumn){
+
+                    if(
+                        !matchesMultiSearch(
+                            row[brandColumn],
+                            brandQuery
+                        )
+                    ){
+
+                        return false;
+
+                    }
+
+                }
+                else{
+
+                    let found = false;
+
+                    const values =
+                    Object.values(row);
+
+                    for(
+                        let i=0;
+                        i<values.length;
+                        i++
+                    ){
+
+                        if(
+                            matchesMultiSearch(
+                                values[i],
+                                brandQuery
+                            )
+                        ){
+
+                            found = true;
+                            break;
+
+                        }
+
+                    }
+
+                    if(!found){
+                        return false;
+                    }
+
+                }
+
+            }
+
+            if(genericQuery){
+
+                if(genericColumn){
+
+                    if(
+                        !matchesMultiSearch(
+                            row[genericColumn],
+                            genericQuery
+                        )
+                    ){
+
+                        return false;
+
+                    }
+
+                }
+                else{
+
+                    let found = false;
+
+                    const values =
+                    Object.values(row);
+
+                    for(
+                        let i=0;
+                        i<values.length;
+                        i++
+                    ){
+
+                        if(
+                            matchesMultiSearch(
+                                values[i],
+                                genericQuery
+                            )
+                        ){
+
+                            found = true;
+                            break;
+
+                        }
+
+                    }
+
+                    if(!found){
+                        return false;
+                    }
+
+                }
+
+            }
+
+            if(strengthQuery){
+
+                if(strengthColumn){
+
+                    if(
+                        !matchesMultiSearch(
+                            row[strengthColumn],
+                            strengthQuery
+                        )
+                    ){
+
+                        return false;
+
+                    }
+
+                }
+                else{
+
+                    let found = false;
+
+                    const values =
+                    Object.values(row);
+
+                    for(
+                        let i=0;
+                        i<values.length;
+                        i++
+                    ){
+
+                        if(
+                            matchesMultiSearch(
+                                values[i],
+                                strengthQuery
+                            )
+                        ){
+
+                            found = true;
+                            break;
+
+                        }
+
+                    }
+
+                    if(!found){
+                        return false;
+                    }
+
+                }
+
+            }
+
+            if(dosageQuery){
+
+                if(dosageColumn){
+
+                    if(
+                        !matchesMultiSearch(
+                            row[dosageColumn],
+                            dosageQuery
+                        )
+                    ){
+
+                        return false;
+
+                    }
+
+                }
+                else{
+
+                    let found = false;
+
+                    const values =
+                    Object.values(row);
+
+                    for(
+                        let i=0;
+                        i<values.length;
+                        i++
+                    ){
+
+                        if(
+                            matchesMultiSearch(
+                                values[i],
+                                dosageQuery
+                            )
+                        ){
+
+                            found = true;
+                            break;
+
+                        }
+
+                    }
+
+                    if(!found){
+                        return false;
+                    }
+
+                }
+
+            }
+
+            const filterColumns =
+            Object.keys(filters);
+
+            for(
+                let i=0;
+                i<filterColumns.length;
+                i++
+            ){
+
+                const column =
+                filterColumns[i];
+
+                const selected =
+                filters[column];
+
+                if(
+                    selected &&
+                    selected.size
+                ){
+
+                    const value =
+                    displayValue(
+                        row[column]
+                    );
+
+                    if(
+                        !selected.has(value)
+                    ){
+
+                        return false;
+
+                    }
+
+                }
+
+            }
+
+            return true;
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   GET COLUMN WIDTH
+========================================================= */
+
+function getColumnWidth(
+    column,
+    type
+){
+
+    const c =
+    column
+    .toLowerCase()
+    .trim();
+
+    if(
+        type === "thiqa" &&
+        (
+            c === "thiqa" ||
+            c === "basic"
+        )
+    ){
+
+        return 110;
+
+    }
+
+    if(
+        type === "vitamin"
+    ){
+
+        if(
+            c.includes("item name")
+        ){
+
+            return 330;
+
+        }
+
+        if(
+            c.includes("active ingredient") ||
+            c.includes("active ingredients")
+        ){
+
+            return 380;
+
+        }
+
+    }
+
+    if(
+        c.includes("generic") ||
+        c.includes("active ingredient") ||
+        c.includes("active ingredients") ||
+        c.includes("package name") ||
+        c.includes("product name") ||
+        c.includes("item name") ||
+        c.includes("description") ||
+        c.includes("instruction") ||
+        c.includes("indication") ||
+        c.includes("manufacturer") ||
+        c.includes("formulary") ||
+        c.includes("agent") ||
+        c.includes("daman")
+    ){
+
+        return 280;
+
+    }
+
+    if(
+        c.includes("strength") ||
+        c.includes("dosage form") ||
+        c === "dosage"
+    ){
+
+        return 160;
+
+    }
+
+    if(
+        c.includes("price") ||
+        c.includes("markup") ||
+        c.includes("reimbursement") ||
+        c.includes("copay") ||
+        c.includes("cap")
+    ){
+
+        return 155;
+
+    }
+
+    if(
+        c.includes("date")
+    ){
+
+        return 140;
+
+    }
+
+    return 150;
+
+}
+
+
+/* =========================================================
+   FAST COLUMN WIDTH CALCULATION
+========================================================= */
+
+function getColumnWidths(type){
+
+    const columns =
+    sheetColumns[type] || [];
+
+    if(!columns.length){
+        return [];
+    }
+
+    const widths =
+    columns.map(
+        column =>
+        getColumnWidth(
+            column,
+            type
+        )
+    );
+
+    const available =
+    excelArea.clientWidth ||
+    window.innerWidth;
+
+    const total =
+    widths.reduce(
+        (a,b) => a+b,
+        0
+    );
+
+    if(total >= available){
+
+        return widths;
+
+    }
+
+    const extra =
+    available - total;
+
+    const weights =
+    columns.map(
+        column => {
+
+            const c =
+            column
+            .toLowerCase()
+            .trim();
+
+            if(
+                type === "vitamin" &&
+                (
+                    c.includes("item name") ||
+                    c.includes("active ingredient") ||
+                    c.includes("active ingredients")
+                )
+            ){
+
+                return 5;
+
+            }
+
+            if(
+                c.includes("generic") ||
+                c.includes("active ingredient") ||
+                c.includes("item name") ||
+                c.includes("package name") ||
+                c.includes("description") ||
+                c.includes("instruction") ||
+                c.includes("indication")
+            ){
+
+                return 3;
+
+            }
+
+            return 1;
+
+        }
+    );
+
+    let totalWeight = 0;
+
+    for(
+        let i=0;
+        i<columns.length;
+        i++
+    ){
+
+        const c =
+        columns[i]
+        .toLowerCase()
+        .trim();
+
+        const frozen =
+        type === "thiqa" &&
+        (
+            c === "thiqa" ||
+            c === "basic"
         );
 
-    if(!sheet){
-        return;
-    }
+        if(!frozen){
 
-    currentSheet = id;
+            totalWeight +=
+            weights[i];
 
-    updateActiveTab();
-
-    errorBox.style.display = "none";
-
-    filters = {};
-
-    globalSearch.value = "";
-
-    strengthSearch.value = "";
-
-    clearSearch.style.display = "none";
-
-    clearStrengthSearch.style.display = "none";
-
-    filterPopup.style.display = "none";
-
-
-    /* =====================================================
-       PROACTIVE
-    ===================================================== */
-
-    if(sheet.id === "proactive"){
-
-        searchArea.style.display = "none";
-
-        excelHeader.innerHTML = "";
-
-        virtualContent.innerHTML = "";
-
-        virtualContent.style.display = "none";
-
-        specialContent.style.display = "block";
-
-        renderProactive();
-
-        statusEl.textContent =
-            "PROACTIVE INSTRUCTION";
-
-        return;
+        }
 
     }
 
+    if(totalWeight <= 0){
 
-    /* =====================================================
-       PHONE CONTACTS
-    ===================================================== */
-
-    if(sheet.id === "phone"){
-
-        searchArea.style.display = "none";
-
-        excelHeader.innerHTML = "";
-
-        virtualContent.innerHTML = "";
-
-        virtualContent.style.display = "none";
-
-        specialContent.style.display = "block";
-
-        renderPhoneContacts();
-
-        statusEl.textContent =
-            "PHONE CONTACTS";
-
-        return;
+        return widths;
 
     }
 
+    const finalWidths =
+    widths.map(
+        (width,index) => {
 
-    /* =====================================================
-       NORMAL SHEET
-    ===================================================== */
+            const c =
+            columns[index]
+            .toLowerCase()
+            .trim();
 
-    searchArea.style.display = "grid";
+            const frozen =
+            type === "thiqa" &&
+            (
+                c === "thiqa" ||
+                c === "basic"
+            );
 
-    specialContent.style.display = "none";
+            if(frozen){
 
-    virtualContent.style.display = "block";
+                return width;
 
-    const data =
-        sheetData[id] || [];
+            }
 
-    columns =
-        getObjectColumns(data);
+            return Math.round(
+                width +
+                (
+                    extra *
+                    weights[index] /
+                    totalWeight
+                )
+            );
 
-    filteredData =
-        [...data];
+        }
+    );
 
-    updatePlaceholders();
-
-    buildExcelHeader();
-
-    applyFilters();
-
-    statusEl.textContent =
-        sheet.name +
-        " — " +
-        data.length +
-        " records";
+    return finalWidths;
 
 }
 
 
 /* =========================================================
-   PROACTIVE
+   GRID TEMPLATE
 ========================================================= */
 
-function renderProactive(){
+function getGridTemplate(type){
 
-    specialContent.innerHTML = `
-
-        <div class="proactive-container">
-
-            <img
-                src="proactive 1.png"
-                alt="Proactive Instruction 1">
-
-            <img
-                src="proactive 2.png"
-                alt="Proactive Instruction 2">
-
-        </div>
-
-    `;
+    return getColumnWidths(type)
+    .map(
+        width =>
+        width + "px"
+    )
+    .join(" ");
 
 }
 
 
 /* =========================================================
-   PHONE CONTACTS LOADER
+   BUILD SIMPLE OFFSETS
 ========================================================= */
 
-async function renderPhoneContacts(){
+function buildRowOffsets(type){
+
+    const rows =
+    filteredData[type] || [];
+
+    const offsets =
+    new Array(
+        rows.length
+    );
+
+    for(
+        let i=0;
+        i<rows.length;
+        i++
+    ){
+
+        offsets[i] =
+        i * ROW_HEIGHT;
+
+    }
+
+    rowOffsets[type] =
+    offsets;
+
+    totalHeights[type] =
+    rows.length *
+    ROW_HEIGHT;
+
+    if(
+        currentSheet === type
+    ){
+
+        virtualContent.style.height =
+        totalHeights[type] +
+        "px";
+
+    }
+
+}
+
+
+/* =========================================================
+   FIND ROW
+========================================================= */
+
+function findRowAtPosition(
+    offsets,
+    position
+){
+
+    if(!offsets.length){
+        return 0;
+    }
+
+    const index =
+    Math.floor(
+        position /
+        ROW_HEIGHT
+    );
+
+    return Math.max(
+        0,
+        Math.min(
+            offsets.length - 1,
+            index
+        )
+    );
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderVirtualTable(type){
+
+    if(
+        type === "proactive" ||
+        type === "phone"
+    ){
+
+        return;
+
+    }
+
+    const columns =
+    sheetColumns[type] || [];
+
+    if(!columns.length){
+
+        excelHeader.innerHTML = "";
+
+        virtualContent.innerHTML = "";
+
+        virtualContent.style.height =
+        "60px";
+
+        return;
+
+    }
+
+    const template =
+    getGridTemplate(type);
+
+    excelHeader.style.gridTemplateColumns =
+    template;
+
+    excelHeader.innerHTML =
+    "";
+
+    for(
+        let i=0;
+        i<columns.length;
+        i++
+    ){
+
+        const column =
+        columns[i];
+
+        const cell =
+        document.createElement(
+            "div"
+        );
+
+        cell.className =
+        "header-cell";
+
+        cell.textContent =
+        column;
+
+        if(type === "thiqa"){
+
+            const normalized =
+            column
+            .toLowerCase()
+            .trim();
+
+            if(
+                normalized === "basic"
+            ){
+
+                cell.classList.add(
+                    "frozen-basic"
+                );
+
+            }
+
+            if(
+                normalized === "thiqa"
+            ){
+
+                cell.classList.add(
+                    "frozen-thiqa"
+                );
+
+            }
+
+        }
+
+        const filterButton =
+        document.createElement(
+            "button"
+        );
+
+        filterButton.type =
+        "button";
+
+        filterButton.className =
+        "filter-btn";
+
+        filterButton.textContent =
+        "▼";
+
+        if(
+            columnFilters[type][column] &&
+            columnFilters[type][column].size
+        ){
+
+            filterButton.classList.add(
+                "filtered"
+            );
+
+        }
+
+        filterButton.addEventListener(
+            "click",
+            event => {
+
+                event.stopPropagation();
+
+                openFilterPopup(
+                    type,
+                    column,
+                    filterButton
+                );
+
+            }
+        );
+
+        cell.appendChild(
+            filterButton
+        );
+
+        excelHeader.appendChild(
+            cell
+        );
+
+    }
+
+    renderVisibleRows(
+        type
+    );
+
+}
+
+
+/* =========================================================
+   VISIBLE ROWS
+========================================================= */
+
+function renderVisibleRows(type){
+
+    const rows =
+    filteredData[type] || [];
+
+    const columns =
+    sheetColumns[type] || [];
+
+    if(!rows.length){
+
+        virtualContent.innerHTML =
+        "";
+
+        virtualContent.style.height =
+        "60px";
+
+        return;
+
+    }
+
+    const template =
+    getGridTemplate(type);
+
+    const scrollTop =
+    excelArea.scrollTop;
+
+    const viewportHeight =
+    excelArea.clientHeight;
+
+    const start =
+    Math.max(
+        0,
+        Math.floor(
+            scrollTop /
+            ROW_HEIGHT
+        ) -
+        BUFFER_ROWS
+    );
+
+    const end =
+    Math.min(
+        rows.length - 1,
+
+        Math.ceil(
+            (
+                scrollTop +
+                viewportHeight
+            ) /
+            ROW_HEIGHT
+        ) +
+        BUFFER_ROWS
+    );
+
+    virtualContent.innerHTML =
+    "";
+
+    for(
+        let i=start;
+        i<=end;
+        i++
+    ){
+
+        const row =
+        rows[i];
+
+        const rowElement =
+        document.createElement(
+            "div"
+        );
+
+        rowElement.className =
+        "data-row";
+
+        rowElement.style.gridTemplateColumns =
+        template;
+
+        rowElement.style.height =
+        ROW_HEIGHT + "px";
+
+        rowElement.style.top =
+        (
+            i *
+            ROW_HEIGHT
+        ) + "px";
+
+        for(
+            let c=0;
+            c<columns.length;
+            c++
+        ){
+
+            const column =
+            columns[c];
+
+            const cell =
+            document.createElement(
+                "div"
+            );
+
+            cell.className =
+            "data-cell";
+
+            const value =
+            displayValue(
+                row[column]
+            );
+
+            cell.textContent =
+            value;
+
+            if(type === "vitamin"){
+
+                const normalizedColumn =
+                column
+                .toLowerCase()
+                .trim();
+
+                const normalizedValue =
+                value
+                .toLowerCase()
+                .trim();
+
+                if(
+                    (
+                        normalizedColumn ===
+                        "enhanced" ||
+
+                        normalizedColumn ===
+                        "thiqa"
+                    )
+                    &&
+                    (
+                        normalizedValue ===
+                        "nci" ||
+
+                        normalizedValue ===
+                        "not covered"
+                    )
+                ){
+
+                    cell.classList.add(
+                        "vitamin-not-covered"
+                    );
+
+                }
+
+            }
+
+            if(
+                type === "thiqa"
+            ){
+
+                const normalizedColumn =
+                column
+                .toLowerCase()
+                .trim();
+
+                const normalizedValue =
+                value
+                .toLowerCase()
+                .trim();
+
+                if(
+                    normalizedColumn ===
+                    "basic"
+                ){
+
+                    cell.classList.add(
+                        "frozen-basic"
+                    );
+
+                    if(
+                        normalizedValue ===
+                        "yes"
+                    ){
+
+                        cell.classList.add(
+                            "basic-yes"
+                        );
+
+                    }
+                    else if(
+                        normalizedValue ===
+                        "no"
+                    ){
+
+                        cell.classList.add(
+                            "basic-no"
+                        );
+
+                    }
+
+                }
+
+                if(
+                    normalizedColumn ===
+                    "thiqa"
+                ){
+
+                    cell.classList.add(
+                        "frozen-thiqa"
+                    );
+
+                    if(
+                        normalizedValue ===
+                        "yes"
+                    ){
+
+                        cell.classList.add(
+                            "thiqa-yes"
+                        );
+
+                    }
+                    else if(
+                        normalizedValue ===
+                        "no"
+                    ){
+
+                        cell.classList.add(
+                            "thiqa-no"
+                        );
+
+                    }
+
+                }
+
+            }
+
+            rowElement.appendChild(
+                cell
+            );
+
+        }
+
+        virtualContent.appendChild(
+            rowElement
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   PHONE CONTACTS
+   LOAD 4 JSON FILES
+========================================================= */
+
+async function loadPhoneContacts(){
 
     if(phoneLoaded){
 
-        if(currentSheet === "phone"){
-            buildPhoneContacts();
-        }
+        renderPhoneContacts();
 
         return;
 
     }
 
     if(phoneLoading){
+
         return;
+
     }
 
     phoneLoading = true;
 
-    specialContent.innerHTML = `
+    specialContent.innerHTML =
+    '<div class="phone-loading">Loading PHONE CONTACTS...</div>';
 
-        <div class="phone-loading">
-            Loading phone contacts...
-        </div>
+    statusEl.textContent =
+    "Loading PHONE CONTACTS...";
 
-    `;
+    const phoneSheet =
+    WORKSHEETS.find(
+        sheet =>
+        sheet.id === "phone"
+    );
 
     try{
 
-        const phoneSheet =
-            WORKSHEETS.find(
-                sheet => sheet.id === "phone"
-            );
-
         const results =
-            await Promise.all(
+        await Promise.all(
 
-                phoneSheet.phoneFiles.map(
-                    async file => {
+            phoneSheet.phoneFiles.map(
+                async file => {
 
-                        const response =
-                            await fetch(
-                                encodeURI(file),
-                                {
-                                    cache:"no-store"
-                                }
-                            );
-
-                        if(!response.ok){
-
-                            throw new Error(
-                                "Could not load " +
-                                file
-                            );
-
+                    const response =
+                    await fetch(
+                        encodeURI(file),
+                        {
+                            cache:"default"
                         }
+                    );
 
-                        const json =
-                            await response.json();
+                    if(!response.ok){
 
-                        return normalizePhoneJSON(
-                            json
+                        throw new Error(
+                            file +
+                            " - HTTP " +
+                            response.status
                         );
 
                     }
-                )
 
-            );
+                    const json =
+                    await response.json();
 
+                    return normalizePhoneRows(
+                        json
+                    );
 
-        phoneData.contacts =
-            results[0];
+                }
+            )
 
-        phoneData.apg =
-            results[1];
+        );
 
-        phoneData.zas =
-            results[2];
+        sheetData.phone = {
 
-        phoneData.insurance =
-            results[3];
+            contacts:
+            results[0],
+
+            apg:
+            results[1],
+
+            zas:
+            results[2],
+
+            insurance:
+            results[3]
+
+        };
 
         phoneLoaded = true;
 
-        phoneLoading = false;
-
-
-        if(currentSheet !== "phone"){
-            return;
-        }
-
-        buildPhoneContacts();
-
-        statusEl.textContent =
-            "PHONE CONTACTS";
+        renderPhoneContacts();
 
     }
     catch(error){
 
-        phoneLoading = false;
-
-        console.error(error);
-
         specialContent.innerHTML = "";
 
-        errorBox.textContent =
-            "Error loading phone contacts: " +
-            error.message;
+        const message =
+        document.createElement(
+            "div"
+        );
 
-        errorBox.style.display = "block";
+        message.className =
+        "error-box";
+
+        message.style.display =
+        "block";
+
+        message.textContent =
+        "PHONE CONTACTS could not be loaded:\n\n" +
+        error.message;
+
+        specialContent.appendChild(
+            message
+        );
 
         statusEl.textContent =
-            "PHONE CONTACTS — Loading error";
+        "PHONE CONTACTS - Error";
 
     }
+    finally{
+
+        phoneLoading = false;
+
+    }
+
+}
+
+
+/* =========================================================
+   NORMALIZE PHONE JSON
+========================================================= */
+
+function normalizePhoneRows(json){
+
+    if(Array.isArray(json)){
+
+        return json;
+
+    }
+
+    if(
+        json &&
+        Array.isArray(json.data)
+    ){
+
+        return json.data;
+
+    }
+
+    if(
+        json &&
+        typeof json === "object"
+    ){
+
+        return [json];
+
+    }
+
+    return [];
+
+}
+
+
+/* =========================================================
+   PHONE TABLE HEADERS
+========================================================= */
+
+function getPhoneColumns(rows){
+
+    const columns = [];
+
+    for(
+        let i=0;
+        i<rows.length;
+        i++
+    ){
+
+        const row =
+        rows[i];
+
+        if(
+            !row ||
+            typeof row !== "object"
+        ){
+
+            continue;
+
+        }
+
+        const keys =
+        Object.keys(row);
+
+        for(
+            let j=0;
+            j<keys.length;
+            j++
+        ){
+
+            if(
+                columns.indexOf(
+                    keys[j]
+                ) === -1
+            ){
+
+                columns.push(
+                    keys[j]
+                );
+
+            }
+
+        }
+
+    }
+
+    return columns;
 
 }
 
@@ -1366,64 +3077,82 @@ async function renderPhoneContacts(){
 
 function createPhoneTable(
     rows,
-    title,
-    headerMap={},
-    fallbackColumns=[]
+    className,
+    title
 ){
 
     const box =
-        document.createElement("div");
+    document.createElement(
+        "div"
+    );
 
     box.className =
-        "phone-table-box";
-
+    "phone-table-box";
 
     const table =
-        document.createElement("table");
+    document.createElement(
+        "table"
+    );
 
     table.className =
-        "phone-table";
+    "phone-table " +
+    className;
 
+    const columns =
+    getPhoneColumns(
+        rows
+    );
 
-    const actualRows =
-        Array.isArray(rows)
-            ? rows
-            : [];
+    if(!columns.length){
 
-
-    const tableColumns =
-        getObjectColumns(
-            actualRows,
-            fallbackColumns
+        const empty =
+        document.createElement(
+            "div"
         );
 
+        empty.className =
+        "phone-loading";
+
+        empty.textContent =
+        "No data available";
+
+        box.appendChild(
+            empty
+        );
+
+        return box;
+
+    }
 
     const thead =
-        document.createElement("thead");
+    document.createElement(
+        "thead"
+    );
 
-
-    /* =====================================================
-       SECTION TITLE ROW
-    ===================================================== */
+    /*
+       APG / ZAS title row
+    */
 
     if(title){
 
         const titleRow =
-            document.createElement("tr");
-
-        titleRow.className =
-            "phone-title-row";
-
+        document.createElement(
+            "tr"
+        );
 
         const titleCell =
-            document.createElement("th");
+        document.createElement(
+            "th"
+        );
 
         titleCell.colSpan =
-            tableColumns.length;
+        columns.length;
+
+        titleCell.className =
+        "phone-section-title";
 
         titleCell.textContent =
-            title;
-
+        title;
 
         titleRow.appendChild(
             titleCell
@@ -1435,31 +3164,59 @@ function createPhoneTable(
 
     }
 
-
-    /* =====================================================
-       COLUMN HEADING ROW
-    ===================================================== */
+    /*
+       ACTUAL COLUMN HEADING ROW
+    */
 
     const headerRow =
-        document.createElement("tr");
+    document.createElement(
+        "tr"
+    );
 
     headerRow.className =
-        "phone-header-row";
+    "phone-column-heading";
 
-
-    tableColumns.forEach(column => {
+    for(
+        let i=0;
+        i<columns.length;
+        i++
+    ){
 
         const th =
-            document.createElement("th");
+        document.createElement(
+            "th"
+        );
 
-        th.textContent =
-            headerMap[column] ||
-            column;
+        /*
+           Table 1:
+           MOBILE becomes MOB
+        */
 
-        headerRow.appendChild(th);
+        if(
+            className ===
+            "phone-table-contacts" &&
+            columns[i]
+            .toLowerCase()
+            .trim() ===
+            "mobile"
+        ){
 
-    });
+            th.textContent =
+            "MOB";
 
+        }
+        else{
+
+            th.textContent =
+            columns[i];
+
+        }
+
+        headerRow.appendChild(
+            th
+        );
+
+    }
 
     thead.appendChild(
         headerRow
@@ -1469,62 +3226,66 @@ function createPhoneTable(
         thead
     );
 
-
-    /* =====================================================
-       DATA
-    ===================================================== */
+    /*
+       BODY
+    */
 
     const tbody =
-        document.createElement("tbody");
+    document.createElement(
+        "tbody"
+    );
 
+    for(
+        let i=0;
+        i<rows.length;
+        i++
+    ){
 
-    actualRows.forEach(row => {
+        const row =
+        rows[i];
 
         const tr =
-            document.createElement("tr");
+        document.createElement(
+            "tr"
+        );
 
-
-        tableColumns.forEach(column => {
+        for(
+            let c=0;
+            c<columns.length;
+            c++
+        ){
 
             const td =
-                document.createElement("td");
-
-
-            let value =
-                row[column];
-
-
-            if(
-                value === undefined ||
-                value === null
-            ){
-                value = "";
-            }
-
+            document.createElement(
+                "td"
+            );
 
             td.textContent =
-                String(value);
+            displayValue(
+                row[
+                    columns[c]
+                ]
+            );
 
+            tr.appendChild(
+                td
+            );
 
-            tr.appendChild(td);
+        }
 
-        });
+        tbody.appendChild(
+            tr
+        );
 
-
-        tbody.appendChild(tr);
-
-    });
-
+    }
 
     table.appendChild(
         tbody
     );
 
-
     box.appendChild(
         table
     );
-
 
     return box;
 
@@ -1532,151 +3293,324 @@ function createPhoneTable(
 
 
 /* =========================================================
-   BUILD PHONE CONTACTS
+   RENDER PHONE CONTACTS
 ========================================================= */
 
-function buildPhoneContacts(){
+function renderPhoneContacts(){
 
-    specialContent.innerHTML = "";
+    if(!phoneLoaded){
 
+        loadPhoneContacts();
+
+        return;
+
+    }
+
+    specialContent.innerHTML =
+    "";
 
     const layout =
-        document.createElement("div");
+    document.createElement(
+        "div"
+    );
 
     layout.className =
-        "phone-layout";
+    "phone-layout";
 
-
-    /* =====================================================
+    /*
        TABLE 1
-       CONTACTS / LANDLINE / MOB
-    ===================================================== */
+       CONTACTS
+    */
 
     const contactsTable =
-        createPhoneTable(
+    createPhoneTable(
 
-            phoneData.contacts,
+        sheetData.phone.contacts,
 
-            "",
+        "phone-table-contacts",
 
-            {
-                MOBILE:"MOB"
-            },
+        null
 
-            [
-                "CONTACTS",
-                "LANDLINE",
-                "MOBILE"
-            ]
-
-        );
-
+    );
 
     layout.appendChild(
         contactsTable
     );
 
-
-    /* =====================================================
-       MIDDLE COLUMN
-    ===================================================== */
+    /*
+       MIDDLE
+       APG + ZAS
+    */
 
     const middle =
-        document.createElement("div");
+    document.createElement(
+        "div"
+    );
 
     middle.className =
-        "phone-middle";
+    "phone-middle";
 
-
-    /* =====================================================
-       TABLE 2
-       APG DEPARTMENTS
-    ===================================================== */
+    /*
+       APG
+    */
 
     const apgTable =
-        createPhoneTable(
+    createPhoneTable(
 
-            phoneData.apg,
+        sheetData.phone.apg,
 
-            "APG DEPARTMENTS",
+        "phone-table-apg",
 
-            {},
+        "APG DEPARTMENTS"
 
-            [
-                "DEPARTMENT",
-                "Contact"
-            ]
-
-        );
-
+    );
 
     middle.appendChild(
         apgTable
     );
 
-
-    /* =====================================================
-       TABLE 3
-       ZAS BUSINESS UNITS
-    ===================================================== */
+    /*
+       ZAS
+    */
 
     const zasTable =
-        createPhoneTable(
+    createPhoneTable(
 
-            phoneData.zas,
+        sheetData.phone.zas,
 
-            "ZAS BUSINESS UNITS",
+        "phone-table-zas",
 
-            {},
+        "ZAS BUSINESS UNITS"
 
-            [
-                "BUSINESS UNIT",
-                "Contact"
-            ]
-
-        );
-
+    );
 
     middle.appendChild(
         zasTable
     );
 
-
     layout.appendChild(
         middle
     );
 
-
-    /* =====================================================
+    /*
        TABLE 4
-       INSURANCE COMPANY
-    ===================================================== */
+       INSURANCE
+    */
 
     const insuranceTable =
-        createPhoneTable(
+    createPhoneTable(
 
-            phoneData.insurance,
+        sheetData.phone.insurance,
 
-            "",
+        "phone-table-insurance",
 
-            {},
+        null
 
-            [
-                "INSURANCE COMPANY",
-                "CONTACT NUMBER"
-            ]
-
-        );
-
+    );
 
     layout.appendChild(
         insuranceTable
     );
 
-
     specialContent.appendChild(
         layout
     );
+
+    statusEl.textContent =
+    "PHONE CONTACTS - " +
+    (
+        sheetData.phone.contacts.length +
+        sheetData.phone.apg.length +
+        sheetData.phone.zas.length +
+        sheetData.phone.insurance.length
+    ).toLocaleString() +
+    " contacts";
+
+}
+
+
+/* =========================================================
+   SWITCH SHEET
+========================================================= */
+
+async function switchSheet(type){
+
+    currentSheet =
+    type;
+
+    document
+    .querySelectorAll(".tab")
+    .forEach(
+        tab => {
+
+            tab.classList.toggle(
+                "active",
+                tab.dataset.sheet === type
+            );
+
+        }
+    );
+
+    brandSearch.value = "";
+    genericSearch.value = "";
+    strengthSearch.value = "";
+    dosageSearch.value = "";
+
+    closeFilterPopup();
+
+    /*
+       PROACTIVE
+    */
+
+    if(
+        type === "proactive"
+    ){
+
+        searchArea.style.display =
+        "none";
+
+        excelHeader.style.display =
+        "none";
+
+        virtualContent.style.display =
+        "none";
+
+        specialContent.style.display =
+        "block";
+
+        renderProactiveImages();
+
+        statusEl.textContent =
+        "PROACTIVE INSTRUCTION";
+
+        return;
+
+    }
+
+    /*
+       PHONE CONTACTS
+    */
+
+    if(
+        type === "phone"
+    ){
+
+        searchArea.style.display =
+        "none";
+
+        excelHeader.style.display =
+        "none";
+
+        virtualContent.style.display =
+        "none";
+
+        specialContent.style.display =
+        "block";
+
+        excelArea.scrollTop =
+        0;
+
+        await loadPhoneContacts();
+
+        return;
+
+    }
+
+    /*
+       NORMAL
+    */
+
+    searchArea.style.display =
+    "block";
+
+    excelHeader.style.display =
+    "grid";
+
+    virtualContent.style.display =
+    "block";
+
+    specialContent.style.display =
+    "none";
+
+    updatePlaceholders(
+        type
+    );
+
+    filteredData[type] =
+    getFilteredRows(
+        type
+    );
+
+    buildRowOffsets(
+        type
+    );
+
+    excelArea.scrollTop =
+    0;
+
+    renderVirtualTable(
+        type
+    );
+
+    updateStatus(
+        type
+    );
+
+}
+
+
+/* =========================================================
+   PROACTIVE IMAGES
+========================================================= */
+
+function renderProactiveImages(){
+
+    specialContent.innerHTML =
+    "";
+
+    const files = [
+
+        "proactive 1.png",
+
+        "proactive 2.png"
+
+    ];
+
+    for(
+        let i=0;
+        i<files.length;
+        i++
+    ){
+
+        const img =
+        document.createElement(
+            "img"
+        );
+
+        img.className =
+        "proactive-image";
+
+        img.src =
+        encodeURI(
+            files[i]
+        );
+
+        img.alt =
+        "Proactive Instruction " +
+        (i + 1);
+
+        if(i === 1){
+
+            img.loading =
+            "lazy";
+
+        }
+
+        specialContent.appendChild(
+            img
+        );
+
+    }
 
 }
 
@@ -1685,187 +3619,83 @@ function buildPhoneContacts(){
    PLACEHOLDERS
 ========================================================= */
 
-function updatePlaceholders(){
+function updatePlaceholders(type){
 
-    if(currentSheet === "thiqa"){
+    const columns =
+    sheetColumns[type] || [];
 
-        globalSearch.placeholder =
-            "Search Brand / Ingredient / Form / etc...";
-
-        strengthSearch.placeholder =
-            "Strength search — use % for AND";
-
-    }
-    else{
-
-        globalSearch.placeholder =
-            "Search all columns...";
-
-        strengthSearch.placeholder =
-            "Search all cells...";
-
-    }
-
-}
-
-
-/* =========================================================
-   BUILD EXCEL HEADER
-========================================================= */
-
-function buildExcelHeader(){
-
-    excelHeader.innerHTML = "";
-
-    if(!columns.length){
-        return;
-    }
-
-
-    const table =
-        document.createElement("table");
-
-    table.className =
-        "excel-table";
-
-
-    const thead =
-        document.createElement("thead");
-
-    const tr =
-        document.createElement("tr");
-
-
-    columns.forEach(
-        (column,index) => {
-
-            const th =
-                document.createElement("th");
-
-            th.textContent =
-                column;
-
-
-            /* Thiqa / Basic frozen */
-
-            if(
-                currentSheet === "thiqa" &&
-                (
-                    column.toUpperCase() === "THIQA" ||
-                    column.toUpperCase() === "BASIC"
-                )
-            ){
-
-                if(
-                    column.toUpperCase() === "THIQA"
-                ){
-                    th.classList.add(
-                        "frozen-thiqa"
-                    );
-                }
-
-                if(
-                    column.toUpperCase() === "BASIC"
-                ){
-                    th.classList.add(
-                        "frozen-basic"
-                    );
-                }
-
-            }
-
-
-            const filterButton =
-                document.createElement("span");
-
-            filterButton.className =
-                "filter-button";
-
-            filterButton.textContent =
-                "▼";
-
-            filterButton.title =
-                "Filter";
-
-
-            filterButton.addEventListener(
-                "click",
-                event => {
-
-                    event.stopPropagation();
-
-                    openFilterPopup(
-                        column,
-                        filterButton
-                    );
-
-                }
-            );
-
-
-            th.appendChild(
-                filterButton
-            );
-
-
-            tr.appendChild(th);
-
-        }
+    const has =
+    pattern =>
+    columns.some(
+        column =>
+        column
+        .toLowerCase()
+        .includes(pattern)
     );
 
+    brandSearch.placeholder =
+    has("brand") ||
+    has("item name")
+        ? "Search Brand / Item..."
+        : "Search Brand Name...";
 
-    thead.appendChild(tr);
+    genericSearch.placeholder =
+    has("generic") ||
+    has("active ingredient") ||
+    has("ingredient")
+        ? "Search Generic / Active Ingredient..."
+        : "Search Generic Name...";
 
-    table.appendChild(thead);
+    strengthSearch.placeholder =
+    "Search Strength...";
 
-    excelHeader.appendChild(table);
-
-
-    updateFrozenWidths();
+    dosageSearch.placeholder =
+    "Search Dosage Form...";
 
 }
 
 
 /* =========================================================
-   UPDATE FROZEN WIDTHS
+   STATUS
 ========================================================= */
 
-function updateFrozenWidths(){
+function updateStatus(type){
 
-    if(currentSheet !== "thiqa"){
+    if(
+        type === "proactive"
+    ){
+
+        statusEl.textContent =
+        "PROACTIVE INSTRUCTION";
+
         return;
+
     }
 
-    const headers =
-        excelHeader.querySelectorAll(
-            "thead th"
-        );
+    if(
+        type === "phone"
+    ){
 
-    let basicWidth = 0;
+        return;
 
+    }
 
-    headers.forEach(th => {
+    const total =
+    sheetData[type]
+        ? sheetData[type].length
+        : 0;
 
-        if(
-            th.classList.contains(
-                "frozen-basic"
-            )
-        ){
+    const shown =
+    filteredData[type]
+        ? filteredData[type].length
+        : 0;
 
-            basicWidth =
-                th.getBoundingClientRect()
-                    .width;
-
-        }
-
-    });
-
-
-    document.documentElement.style
-        .setProperty(
-            "--basic-width",
-            basicWidth + "px"
-        );
+    statusEl.textContent =
+    "Showing " +
+    shown.toLocaleString() +
+    " of " +
+    total.toLocaleString() +
+    " records";
 
 }
 
@@ -1875,824 +3705,462 @@ function updateFrozenWidths(){
 ========================================================= */
 
 function openFilterPopup(
+    type,
     column,
     button
 ){
 
     if(
-        currentSheet === "proactive" ||
-        currentSheet === "phone"
+        type === "proactive" ||
+        type === "phone"
     ){
+
         return;
+
     }
 
+    const rows =
+    sheetData[type] || [];
 
-    currentFilterColumn =
-        column;
+    const valueSet =
+    new Set();
 
+    for(
+        let i=0;
+        i<rows.length;
+        i++
+    ){
 
-    filterPopupHeader.textContent =
-        column;
-
-
-    const data =
-        sheetData[currentSheet] || [];
-
-
-    const values = [];
-
-
-    data.forEach(row => {
-
-        let value =
-            row[column];
-
-        if(
-            value === undefined ||
-            value === null
-        ){
-            value = "";
-        }
-
-        value = String(value);
-
-        if(!values.includes(value)){
-            values.push(value);
-        }
-
-    });
-
-
-    values.sort(
-        (a,b) =>
-            a.localeCompare(
-                b,
-                undefined,
-                {
-                    numeric:true,
-                    sensitivity:"base"
-                }
+        valueSet.add(
+            displayValue(
+                rows[i][column]
             )
+        );
+
+    }
+
+    const values =
+    Array.from(
+        valueSet
+    )
+    .sort(
+        (a,b) =>
+        a.localeCompare(
+            b,
+            undefined,
+            {
+                numeric:true,
+                sensitivity:"base"
+            }
+        )
     );
 
+    const existing =
+    columnFilters[type][column];
 
-    filterList.innerHTML = "";
+    filterPopupState = {
+
+        column,
+
+        sheet:type,
+
+        allValues:values,
+
+        selected:
+        existing
+            ? new Set(existing)
+            : new Set(values)
+
+    };
+
+    filterPopupHeader.textContent =
+    "Filter: " +
+    column;
+
+    filterValueSearch.value =
+    "";
+
+    renderFilterValues();
+
+    const rect =
+    button.getBoundingClientRect();
+
+    let left =
+    rect.left;
+
+    let top =
+    rect.bottom + 5;
+
+    if(
+        left + 280 >
+        window.innerWidth
+    ){
+
+        left =
+        window.innerWidth -
+        290;
+
+    }
+
+    if(
+        top + 420 >
+        window.innerHeight
+    ){
+
+        top =
+        window.innerHeight - 
+        430;
+
+    }
+
+    filterPopup.style.left =
+    Math.max(
+        5,
+        left
+    ) + "px";
+
+    filterPopup.style.top =
+    Math.max(
+        5,
+        top
+    ) + "px";
+
+    filterPopup.classList.add(
+        "show"
+    );
+
+}
 
 
-    const selected =
-        filters[column]
-            ? filters[column]
-            : new Set(values);
+/* =========================================================
+   FILTER VALUES
+========================================================= */
 
+function renderFilterValues(){
 
-    values.forEach(value => {
+    const search =
+    filterValueSearch.value
+    .trim()
+    .toLowerCase();
+
+    filterValues.innerHTML =
+    "";
+
+    const values =
+    filterPopupState
+    .allValues
+    .filter(
+        value =>
+        value
+        .toLowerCase()
+        .includes(search)
+    );
+
+    for(
+        let i=0;
+        i<values.length;
+        i++
+    ){
+
+        const value =
+        values[i];
 
         const label =
-            document.createElement("label");
+        document.createElement(
+            "label"
+        );
 
         label.className =
-            "filter-option";
-
+        "filter-value";
 
         const checkbox =
-            document.createElement("input");
+        document.createElement(
+            "input"
+        );
 
         checkbox.type =
-            "checkbox";
-
-        checkbox.value =
-            value;
+        "checkbox";
 
         checkbox.checked =
-            selected.has(value);
+        filterPopupState
+        .selected
+        .has(value);
 
+        checkbox.addEventListener(
+            "change",
+            () => {
 
-        const span =
-            document.createElement("span");
+                if(
+                    checkbox.checked
+                ){
 
-        span.textContent =
-            value === ""
-                ? "(Blank)"
-                : value;
+                    filterPopupState
+                    .selected
+                    .add(value);
 
+                }
+                else{
+
+                    filterPopupState
+                    .selected
+                    .delete(value);
+
+                }
+
+                applyPopupFilter();
+
+            }
+        );
+
+        const text =
+        document.createElement(
+            "span"
+        );
+
+        text.textContent =
+        value === ""
+            ? "(Blanks)"
+            : value;
 
         label.appendChild(
             checkbox
         );
 
         label.appendChild(
-            span
+            text
         );
 
-
-        filterList.appendChild(
+        filterValues.appendChild(
             label
         );
 
-    });
-
-
-    const rect =
-        button.getBoundingClientRect();
-
-
-    let left =
-        rect.left;
-
-    let top =
-        rect.bottom + 5;
-
-
-    if(left + 260 > window.innerWidth){
-        left =
-            window.innerWidth - 270;
-    }
-
-    if(top + 400 > window.innerHeight){
-        top =
-            Math.max(
-                10,
-                rect.top - 405
-            );
-    }
-
-
-    filterPopup.style.left =
-        left + "px";
-
-    filterPopup.style.top =
-        top + "px";
-
-    filterPopup.style.display =
-        "block";
-
-}
-
-
-/* =========================================================
-   FILTER SELECT ALL
-========================================================= */
-
-filterSelectAll.addEventListener(
-    "click",
-    () => {
-
-        filterList
-            .querySelectorAll(
-                'input[type="checkbox"]'
-            )
-            .forEach(
-                checkbox =>
-                    checkbox.checked = true
-            );
-
-    }
-);
-
-
-/* =========================================================
-   FILTER CLEAR ALL
-========================================================= */
-
-filterClearAll.addEventListener(
-    "click",
-    () => {
-
-        filterList
-            .querySelectorAll(
-                'input[type="checkbox"]'
-            )
-            .forEach(
-                checkbox =>
-                    checkbox.checked = false
-            );
-
-    }
-);
-
-
-/* =========================================================
-   APPLY FILTER
-========================================================= */
-
-filterApply.addEventListener(
-    "click",
-    () => {
-
-        if(!currentFilterColumn){
-            return;
-        }
-
-
-        const selected =
-            new Set();
-
-
-        filterList
-            .querySelectorAll(
-                'input[type="checkbox"]:checked'
-            )
-            .forEach(
-                checkbox =>
-                    selected.add(
-                        checkbox.value
-                    )
-            );
-
-
-        filters[currentFilterColumn] =
-            selected;
-
-
-        filterPopup.style.display =
-            "none";
-
-
-        applyFilters();
-
-    }
-);
-
-
-/* =========================================================
-   APPLY FILTERS + SEARCH
-========================================================= */
-
-function applyFilters(){
-
-    if(
-        currentSheet === "proactive" ||
-        currentSheet === "phone"
-    ){
-        return;
-    }
-
-
-    const data =
-        sheetData[currentSheet] || [];
-
-
-    const globalTerm =
-        globalSearch.value
-            .trim()
-            .toLowerCase();
-
-
-    const strengthTerm =
-        strengthSearch.value
-            .trim()
-            .toLowerCase();
-
-
-    filteredData =
-        data.filter(row => {
-
-
-            /* =============================================
-               COLUMN FILTERS
-            ============================================= */
-
-            for(
-                const column in filters
-            ){
-
-                const selected =
-                    filters[column];
-
-
-                let value =
-                    row[column];
-
-
-                if(
-                    value === undefined ||
-                    value === null
-                ){
-                    value = "";
-                }
-
-
-                value =
-                    String(value);
-
-
-                if(
-                    selected.size === 0 ||
-                    !selected.has(value)
-                ){
-                    return false;
-                }
-
-            }
-
-
-            /* =============================================
-               GLOBAL SEARCH
-            ============================================= */
-
-            if(globalTerm){
-
-                const terms =
-                    globalTerm
-                        .split(/\s+/)
-                        .filter(Boolean);
-
-
-                const rowText =
-                    columns
-                        .map(column => {
-
-                            let value =
-                                row[column];
-
-                            if(
-                                value === undefined ||
-                                value === null
-                            ){
-                                value = "";
-                            }
-
-                            return String(value)
-                                .toLowerCase();
-
-                        })
-                        .join(" ");
-
-
-                for(
-                    const term of terms
-                ){
-
-                    if(
-                        !rowText.includes(term)
-                    ){
-                        return false;
-                    }
-
-                }
-
-            }
-
-
-            /* =============================================
-               STRENGTH / % SEARCH
-               Each % term must exist in SAME CELL
-            ============================================= */
-
-            if(strengthTerm){
-
-                const searchParts =
-                    strengthTerm
-                        .split("%")
-                        .map(
-                            part =>
-                                part.trim()
-                                    .toLowerCase()
-                        )
-                        .filter(Boolean);
-
-
-                if(searchParts.length){
-
-                    const found =
-                        columns.some(
-                            column => {
-
-                                let value =
-                                    row[column];
-
-
-                                if(
-                                    value === undefined ||
-                                    value === null
-                                ){
-                                    value = "";
-                                }
-
-
-                                value =
-                                    String(value)
-                                        .toLowerCase();
-
-
-                                return searchParts.every(
-                                    term =>
-                                        value.includes(
-                                            term
-                                        )
-                                );
-
-                            }
-                        );
-
-
-                    if(!found){
-                        return false;
-                    }
-
-                }
-
-            }
-
-
-            return true;
-
-        });
-
-
-    updateFilterButtons();
-
-    renderVirtualTable();
-
-    updateStatus();
-
-}
-
-
-/* =========================================================
-   FILTER BUTTON STATES
-========================================================= */
-
-function updateFilterButtons(){
-
-    document
-        .querySelectorAll(
-            ".filter-button"
-        )
-        .forEach(button => {
-
-            const th =
-                button.parentElement;
-
-            if(!th){
-                return;
-            }
-
-            const column =
-                th.firstChild &&
-                th.firstChild.textContent
-                    ? th.firstChild.textContent
-                    : "";
-
-
-            button.classList.toggle(
-                "active",
-                false
-            );
-
-        });
-
-
-    const headers =
-        excelHeader.querySelectorAll(
-            "thead th"
-        );
-
-
-    headers.forEach(th => {
-
-        const button =
-            th.querySelector(
-                ".filter-button"
-            );
-
-        if(!button){
-            return;
-        }
-
-
-        const column =
-            Array.from(th.childNodes)
-                .filter(
-                    node =>
-                        node.nodeType ===
-                        Node.TEXT_NODE
-                )
-                .map(
-                    node =>
-                        node.textContent
-                )
-                .join("")
-                .trim();
-
-
-        button.classList.toggle(
-            "active",
-            !!filters[column]
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-   VIRTUAL TABLE
-========================================================= */
-
-function renderVirtualTable(){
-
-    if(
-        currentSheet === "proactive" ||
-        currentSheet === "phone"
-    ){
-        return;
-    }
-
-
-    virtualContent.innerHTML = "";
-
-
-    if(!columns.length){
-
-        virtualContent.textContent =
-            "No data";
-
-        return;
-
-    }
-
-
-    const wrapper =
-        document.createElement("div");
-
-    wrapper.style.position =
-        "relative";
-
-    wrapper.style.height =
-        (
-            filteredData.length *
-            ROW_HEIGHT
-        ) + "px";
-
-
-    const table =
-        document.createElement("table");
-
-    table.className =
-        "excel-table";
-
-    table.style.position =
-        "absolute";
-
-    table.style.top =
-        "0";
-
-    table.style.left =
-        "0";
-
-
-    const tbody =
-        document.createElement("tbody");
-
-    table.appendChild(
-        tbody
-    );
-
-
-    wrapper.appendChild(
-        table
-    );
-
-    virtualContent.appendChild(
-        wrapper
-    );
-
-
-    const scrollTop =
-        excelArea.scrollTop;
-
-
-    const start =
-        Math.max(
-            0,
-            Math.floor(
-                scrollTop / ROW_HEIGHT
-            ) - BUFFER_ROWS
-        );
-
-
-    const visibleCount =
-        Math.ceil(
-            excelArea.clientHeight /
-            ROW_HEIGHT
-        ) +
-        BUFFER_ROWS * 2;
-
-
-    const end =
-        Math.min(
-            filteredData.length,
-            start + visibleCount
-        );
-
-
-    table.style.top =
-        (
-            start *
-            ROW_HEIGHT
-        ) + "px";
-
-
-    for(
-        let i = start;
-        i < end;
-        i++
-    ){
-
-        const row =
-            filteredData[i];
-
-
-        const tr =
-            document.createElement("tr");
-
-        tr.style.height =
-            ROW_HEIGHT + "px";
-
-
-        columns.forEach(
-            column => {
-
-                const td =
-                    document.createElement("td");
-
-
-                let value =
-                    row[column];
-
-
-                if(
-                    value === undefined ||
-                    value === null
-                ){
-                    value = "";
-                }
-
-
-                td.textContent =
-                    String(value);
-
-
-                /* =====================================
-                   VITAMIN SPECIAL
-                ===================================== */
-
-                if(
-                    currentSheet === "vitamin"
-                ){
-
-                    const upper =
-                        String(value)
-                            .toUpperCase()
-                            .trim();
-
-
-                    if(
-                        upper === "NCI" ||
-                        upper === "NOT COVERED"
-                    ){
-
-                        td.classList.add(
-                            "vitamin-nci"
-                        );
-
-                    }
-
-                }
-
-
-                /* =====================================
-                   FROZEN THIQA / BASIC
-                ===================================== */
-
-                if(
-                    currentSheet === "thiqa"
-                ){
-
-                    const upperColumn =
-                        column
-                            .toUpperCase()
-                            .trim();
-
-
-                    if(
-                        upperColumn === "THIQA"
-                    ){
-
-                        td.classList.add(
-                            "frozen-thiqa"
-                        );
-
-                    }
-
-
-                    if(
-                        upperColumn === "BASIC"
-                    ){
-
-                        td.classList.add(
-                            "frozen-basic"
-                        );
-
-                    }
-
-                }
-
-
-                tr.appendChild(td);
-
-            }
-        );
-
-
-        tbody.appendChild(
-            tr
-        );
-
     }
 
 }
 
 
 /* =========================================================
-   UPDATE STATUS
+   APPLY POPUP FILTER
 ========================================================= */
 
-function updateStatus(){
+function applyPopupFilter(){
 
     const sheet =
-        WORKSHEETS.find(
-            item =>
-                item.id === currentSheet
-        );
+    filterPopupState.sheet;
 
+    const column =
+    filterPopupState.column;
 
-    if(!sheet){
-        return;
+    const selected =
+    filterPopupState.selected;
+
+    const allValues =
+    filterPopupState.allValues;
+
+    if(
+        selected.size ===
+        allValues.length
+    ){
+
+        delete columnFilters[
+            sheet
+        ][column];
+
+    }
+    else{
+
+        columnFilters[
+            sheet
+        ][column] =
+        new Set(selected);
+
     }
 
-
-    statusEl.textContent =
-        sheet.name +
-        " — " +
-        filteredData.length +
-        " / " +
-        (
-            sheetData[currentSheet] || []
-        ).length +
-        " records";
+    applyFilters(
+        sheet
+    );
 
 }
 
 
 /* =========================================================
-   SEARCH EVENTS
+   APPLY FILTERS
 ========================================================= */
 
-globalSearch.addEventListener(
+function applyFilters(type){
+
+    if(
+        type === "proactive" ||
+        type === "phone"
+    ){
+
+        return;
+
+    }
+
+    filteredData[type] =
+    getFilteredRows(
+        type
+    );
+
+    buildRowOffsets(
+        type
+    );
+
+    renderVirtualTable(
+        type
+    );
+
+    updateStatus(
+        type
+    );
+
+}
+
+
+/* =========================================================
+   FILTER SEARCH
+========================================================= */
+
+filterValueSearch.addEventListener(
     "input",
+    renderFilterValues
+);
+
+
+/* =========================================================
+   SELECT ALL
+========================================================= */
+
+selectAllBtn.addEventListener(
+    "click",
     () => {
 
-        if(
-            currentSheet === "proactive" ||
-            currentSheet === "phone"
-        ){
-            return;
-        }
+        filterPopupState.selected =
+        new Set(
+            filterPopupState.allValues
+        );
 
+        renderFilterValues();
 
-        clearSearch.style.display =
-            globalSearch.value
-                ? "block"
-                : "none";
-
-
-        applyFilters();
+        applyPopupFilter();
 
     }
 );
 
 
-strengthSearch.addEventListener(
-    "input",
+/* =========================================================
+   CLEAR FILTER
+========================================================= */
+
+clearFilterBtn.addEventListener(
+    "click",
     () => {
 
+        const sheet =
+        filterPopupState.sheet;
+
+        const column =
+        filterPopupState.column;
+
+        delete columnFilters[
+            sheet
+        ][column];
+
+        filterPopupState.selected =
+        new Set(
+            filterPopupState.allValues
+        );
+
+        applyFilters(
+            sheet
+        );
+
+        renderFilterValues();
+
+    }
+);
+
+
+/* =========================================================
+   CLOSE POPUP
+========================================================= */
+
+function closeFilterPopup(){
+
+    filterPopup.classList.remove(
+        "show"
+    );
+
+}
+
+
+document.addEventListener(
+    "click",
+    event => {
+
         if(
-            currentSheet === "proactive" ||
-            currentSheet === "phone"
+            !filterPopup.contains(
+                event.target
+            )
         ){
-            return;
+
+            closeFilterPopup();
+
         }
 
-
-        clearStrengthSearch.style.display =
-            strengthSearch.value
-                ? "block"
-                : "none";
+    }
+);
 
 
-        applyFilters();
+/* =========================================================
+   SEARCH
+========================================================= */
+
+let searchTimer = null;
+
+[
+    brandSearch,
+    genericSearch,
+    strengthSearch,
+    dosageSearch
+]
+.forEach(
+    input => {
+
+        input.addEventListener(
+            "input",
+            () => {
+
+                if(
+                    currentSheet ===
+                    "proactive" ||
+                    currentSheet ===
+                    "phone"
+                ){
+
+                    return;
+
+                }
+
+                clearTimeout(
+                    searchTimer
+                );
+
+                searchTimer =
+                setTimeout(
+                    () => {
+
+                        applyFilters(
+                            currentSheet
+                        );
+
+                    },
+                    100
+                );
+
+            }
+        );
 
     }
 );
@@ -2702,53 +4170,29 @@ strengthSearch.addEventListener(
    CLEAR SEARCH
 ========================================================= */
 
-clearSearch.addEventListener(
+clearBtn.addEventListener(
     "click",
     () => {
 
-        globalSearch.value = "";
-
-        clearSearch.style.display =
-            "none";
-
-        applyFilters();
-
-    }
-);
-
-
-clearStrengthSearch.addEventListener(
-    "click",
-    () => {
-
+        brandSearch.value = "";
+        genericSearch.value = "";
         strengthSearch.value = "";
-
-        clearStrengthSearch.style.display =
-            "none";
-
-        applyFilters();
-
-    }
-);
-
-
-/* =========================================================
-   CLOSE FILTER WHEN CLICKING OUTSIDE
-========================================================= */
-
-document.addEventListener(
-    "click",
-    event => {
+        dosageSearch.value = "";
 
         if(
-            !filterPopup.contains(event.target) &&
-            !event.target.classList.contains(
-                "filter-button"
-            )
+            currentSheet !==
+            "proactive" &&
+            currentSheet !==
+            "phone"
         ){
 
-            filterPopup.style.display =
-                "none";
+            columnFilters[
+                currentSheet
+            ] = {};
+
+            applyFilters(
+                currentSheet
+            );
 
         }
 
@@ -2757,22 +4201,48 @@ document.addEventListener(
 
 
 /* =========================================================
-   SCROLL
+   FAST SCROLL
 ========================================================= */
+
+let scrollFrame = null;
 
 excelArea.addEventListener(
     "scroll",
     () => {
 
         if(
-            currentSheet === "proactive" ||
-            currentSheet === "phone"
+            currentSheet ===
+            "proactive" ||
+            currentSheet ===
+            "phone"
         ){
+
             return;
+
         }
 
-        renderVirtualTable();
+        if(scrollFrame){
 
+            cancelAnimationFrame(
+                scrollFrame
+            );
+
+        }
+
+        scrollFrame =
+        requestAnimationFrame(
+            () => {
+
+                renderVisibleRows(
+                    currentSheet
+                );
+
+            }
+        );
+
+    },
+    {
+        passive:true
     }
 );
 
@@ -2781,27 +4251,49 @@ excelArea.addEventListener(
    RESIZE
 ========================================================= */
 
+let resizeTimer = null;
+
 window.addEventListener(
     "resize",
     () => {
 
-        if(
-            currentSheet === "proactive" ||
-            currentSheet === "phone"
-        ){
-            return;
-        }
+        clearTimeout(
+            resizeTimer
+        );
 
-        updateFrozenWidths();
+        resizeTimer =
+        setTimeout(
+            () => {
 
-        renderVirtualTable();
+                if(
+                    currentSheet ===
+                    "proactive" ||
+                    currentSheet ===
+                    "phone"
+                ){
+
+                    return;
+
+                }
+
+                buildRowOffsets(
+                    currentSheet
+                );
+
+                renderVirtualTable(
+                    currentSheet
+                );
+
+            },
+            150
+        );
 
     }
 );
 
 
 /* =========================================================
-   INITIALIZE
+   START
 ========================================================= */
 
 document.addEventListener(
@@ -2809,6 +4301,8 @@ document.addEventListener(
     () => {
 
         createTabs();
+
+        initializeSheetStorage();
 
         loadAllData();
 
