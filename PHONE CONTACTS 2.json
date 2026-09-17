@@ -1,0 +1,35 @@
+
+ [
+ {
+  "DEPARTMENT": "STORE",
+  "Contact": "03-7223262"
+ },
+ {
+  "DEPARTMENT": "INVENTORY DEPT.",
+  "Contact": "03-7321116"
+ },
+ {
+  "DEPARTMENT": "INSURANCE DEPT.",
+  "Contact": "03-7321116"
+ },
+ {
+  "DEPARTMENT": "PURCHASE DEPT.",
+  "Contact": "03-7321116"
+ },
+ {
+  "DEPARTMENT": "QUALITY DEPT.",
+  "Contact": "03-7515018   -  03-7654438  - 03-7629562"
+ },
+ {
+  "DEPARTMENT": "MARKETING DEPT.",
+  "Contact": "03-7531558 "
+ },
+ {
+  "DEPARTMENT": "ACCOUNTS DEPT.",
+  "Contact": "03-7654435"
+ },
+ {
+  "DEPARTMENT": "HR DEPT.",
+  "Contact": "03-7654435"
+ }
+ ]
