@@ -6,20 +6,24 @@
 <title>Insurance Coverage List</title>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
+
 body{
     margin:0;
     font-family:Arial,Helvetica,sans-serif;
     background:#f3f5f7;
     color:#222;
 }
+
 .top{
     background:#fff;
     padding:18px 20px 12px;
     border-bottom:1px solid #d9d9d9;
 }
+
 h1{
     margin:0 0 15px;
     text-align:center;
@@ -27,30 +31,50 @@ h1{
     color:#1d3557;
 }
 
+
 /* =========================================================
    TABS
 ========================================================= */
+
 .tabs{
-    display:flex;
-    justify-content:center;
+    display:grid;
+
+    /* 8 tabs per row = 2 rows for 16 tabs */
+    grid-template-columns:
+        repeat(8,minmax(120px,1fr));
+
     gap:8px;
-    margin-bottom:15px;
-    flex-wrap:wrap;
+
+    width:100%;
     max-width:1500px;
-    margin-left:auto;
-    margin-right:auto;
+
+    margin:0 auto 15px;
+
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    padding-bottom:2px;
 }
 
 .tab{
-    flex:0 0 auto;
+    width:100%;
+
     border:1px solid #b8b8b8;
     background:#eee;
-    padding:11px 20px;
+
+    padding:10px 8px;
+
     border-radius:6px 6px 0 0;
+
     cursor:pointer;
+
     font-weight:bold;
-    font-size:14px;
-    white-space:nowrap;
+    font-size:13px;
+
+    white-space:normal;
+    line-height:16px;
+
+    min-height:42px;
 }
 
 .tab:hover{
@@ -63,340 +87,587 @@ h1{
     border-color:#1d3557;
 }
 
+
 /* =========================================================
    SEARCH
 ========================================================= */
+
 .search-container{
     display:grid;
-    grid-template-columns:repeat(4,minmax(180px,1fr));
+    grid-template-columns:
+        repeat(4,minmax(180px,1fr));
+
     gap:10px;
+
     max-width:1400px;
+
     margin:0 auto;
 }
+
 .search-box{
     position:relative;
 }
+
 .search-box input{
     width:100%;
+
     padding:11px 38px 11px 12px;
+
     border:1px solid #bcbcbc;
     border-radius:5px;
+
     font-size:14px;
+
     outline:none;
 }
+
 .search-box input:focus{
     border-color:#1d3557;
-    box-shadow:0 0 0 2px rgba(29,53,87,.1);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(29,53,87,.1);
 }
+
 .search-icon{
     position:absolute;
+
     right:11px;
     top:10px;
+
     color:#777;
 }
+
 
 /* =========================================================
    BUTTONS
 ========================================================= */
+
 .controls{
     display:flex;
+
     justify-content:center;
+
     gap:10px;
+
     margin-top:12px;
+
     flex-wrap:wrap;
 }
+
 .control-btn{
     border:none;
+
     border-radius:5px;
+
     padding:10px 18px;
+
     cursor:pointer;
+
     font-weight:bold;
+
     font-size:14px;
 }
+
 .clear-btn{
     background:#dc3545;
     color:#fff;
 }
+
 .clear-btn:hover{
     background:#b02a37;
 }
 
+
 /* =========================================================
    STATUS
 ========================================================= */
+
 .status{
     text-align:center;
+
     padding:10px;
+
     font-size:14px;
+
     color:#555;
 }
+
 .error{
     margin:15px auto;
+
     max-width:1000px;
+
     background:#ffe5e5;
+
     color:#a40000;
+
     border:1px solid #ff9b9b;
+
     border-radius:6px;
+
     padding:15px;
+
     white-space:pre-wrap;
+
     font-family:monospace;
+
     text-align:left;
 }
 
+
 /* =========================================================
-   TABLE
+   TABLE AREA
 ========================================================= */
+
 .excel-area{
     position:relative;
+
     width:100%;
+
     height:calc(100vh - 225px);
+
     min-height:450px;
+
     overflow:auto;
+
     background:#fff;
+
     border-top:1px solid #c8c8c8;
 }
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
 .excel-header{
     position:sticky;
+
     top:0;
+
     z-index:20;
+
     display:grid;
+
     background:#e9edf2;
+
     border-bottom:2px solid #9ba6b2;
-    min-width:max-content;
+
+    width:max-content;
+
+    min-width:100%;
 }
+
 .header-cell{
     min-height:54px;
+
     padding:7px 8px;
+
     border-right:1px solid #c7cbd0;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     gap:5px;
+
     font-weight:bold;
+
     font-size:13px;
+
     line-height:16px;
-}
-.header-title{
+
+    white-space:normal;
+
     overflow-wrap:anywhere;
+
+    word-break:break-word;
 }
+
+.header-title{
+    min-width:0;
+
+    white-space:normal;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+}
+
 
 /* =========================================================
    FILTER BUTTON
 ========================================================= */
+
 .filter-button{
     flex:0 0 auto;
+
     width:25px;
     height:25px;
+
     border:1px solid #9ca3aa;
+
     border-radius:4px;
+
     background:#fff;
+
     cursor:pointer;
+
     font-size:13px;
 }
+
 .filter-button:hover{
     background:#dce6f2;
 }
+
 .filter-button.active{
     background:#1d3557;
+
     color:#fff;
+
     border-color:#1d3557;
 }
+
 
 /* =========================================================
    VIRTUAL TABLE
 ========================================================= */
+
 .virtual-content{
     position:relative;
-    min-width:max-content;
+
+    width:max-content;
+
+    min-width:100%;
 }
+
 .data-row{
     position:absolute;
+
     left:0;
+
     display:grid;
-    min-width:max-content;
+
     width:max-content;
 }
+
 .data-cell{
+
     padding:7px 8px;
+
     border-right:1px solid #d5d8dc;
+
     border-bottom:1px solid #d5d8dc;
+
     font-size:13px;
+
     line-height:17px;
-    white-space:normal;
-    overflow-wrap:anywhere;
-    word-break:break-word;
-    overflow:visible;
+
+    /*
+       IMPORTANT:
+       Never cut text.
+    */
+
+    white-space:normal !important;
+
+    overflow-wrap:anywhere !important;
+
+    word-break:break-word !important;
+
+    overflow:visible !important;
+
+    text-overflow:clip !important;
+
     background:#fff;
+
+    height:auto;
 }
+
 .data-row:nth-child(even) .data-cell{
     background:#fafafa;
 }
 
+
 /* =========================================================
-   FROZEN THIQA / BASIC COLUMNS
+   FROZEN THIQA / BASIC
    ONLY USED FOR data.json
 ========================================================= */
 
 .frozen-right{
     position:sticky !important;
+
     z-index:15 !important;
 }
 
-/* BASIC = far right */
 .frozen-basic{
     position:sticky !important;
+
     right:0;
+
     z-index:18 !important;
-    box-shadow:-3px 0 4px rgba(0,0,0,.08);
+
+    box-shadow:
+        -3px 0 4px
+        rgba(0,0,0,.08);
 }
 
-/* THIQA = immediately left of BASIC */
 .frozen-thiqa{
     position:sticky !important;
+
     right:110px;
+
     z-index:18 !important;
-    box-shadow:-2px 0 3px rgba(0,0,0,.05);
+
+    box-shadow:
+        -2px 0 3px
+        rgba(0,0,0,.05);
 }
 
-/* Header versions must be above data rows */
 .excel-header .frozen-basic,
 .excel-header .frozen-thiqa{
     z-index:25 !important;
+
     background:#e9edf2;
 }
-    
+
+
 /* =========================================================
    THIQA / BASIC
 ========================================================= */
+
 .thiqa-yes,
 .basic-yes{
+
     background:#d9ead3!important;
+
     color:#222!important;
+
     font-weight:bold!important;
+
     text-align:center;
+
     vertical-align:middle;
 }
+
 .thiqa-no,
 .basic-no{
+
     background:#f4cccc!important;
+
     color:#222!important;
+
     font-weight:bold!important;
+
     text-align:center;
+
     vertical-align:middle;
 }
+
 
 /* =========================================================
    FILTER POPUP
 ========================================================= */
+
 .filter-popup{
+
     position:fixed;
+
     z-index:1000;
+
     width:330px;
-    max-width:calc(100vw - 20px);
+
+    max-width:
+        calc(100vw - 20px);
+
     background:#fff;
+
     border:1px solid #aaa;
+
     border-radius:6px;
-    box-shadow:0 5px 25px rgba(0,0,0,.25);
+
+    box-shadow:
+        0 5px 25px
+        rgba(0,0,0,.25);
+
     display:none;
 }
+
 .filter-popup.show{
     display:block;
 }
+
 .filter-popup-header{
+
     padding:10px;
+
     background:#f0f2f4;
+
     border-bottom:1px solid #ddd;
+
     font-weight:bold;
 }
+
 .filter-search{
+
     padding:9px;
+
     border-bottom:1px solid #ddd;
 }
+
 .filter-search input{
+
     width:100%;
+
     padding:8px;
+
     border:1px solid #aaa;
+
     border-radius:4px;
 }
+
 .filter-actions{
+
     display:flex;
+
     gap:7px;
+
     padding:8px;
+
     border-bottom:1px solid #ddd;
 }
+
 .filter-actions button{
+
     flex:1;
+
     padding:7px;
+
     border:1px solid #aaa;
+
     background:#fff;
+
     border-radius:4px;
+
     cursor:pointer;
+
     font-size:12px;
+
     font-weight:bold;
 }
+
 .filter-actions button:hover{
     background:#edf2f7;
 }
+
 .filter-values{
+
     max-height:260px;
+
     overflow-y:auto;
+
     padding:5px 8px;
 }
+
 .filter-value{
+
     display:flex;
+
     align-items:center;
+
     gap:7px;
+
     padding:5px 3px;
+
     font-size:13px;
 }
+
 .filter-value:hover{
     background:#f2f2f2;
 }
+
 .filter-value span{
+
     overflow-wrap:anywhere;
+
     word-break:break-word;
 }
+
 .filter-footer{
+
     display:flex;
+
     gap:8px;
+
     padding:9px;
+
     border-top:1px solid #ddd;
 }
+
 .filter-footer button{
+
     flex:1;
+
     padding:8px;
+
     border:none;
+
     border-radius:4px;
+
     cursor:pointer;
+
     font-weight:bold;
 }
+
 .apply-filter{
+
     background:#198754;
+
     color:#fff;
 }
+
 .cancel-filter{
+
     background:#6c757d;
+
     color:#fff;
 }
+
 
 /* =========================================================
    MOBILE
 ========================================================= */
+
 @media(max-width:800px){
 
     h1{
         font-size:21px;
-    }    
+    }
+
+    /*
+       Still 2 rows.
+       Horizontal scrolling is allowed
+       because 16 tabs cannot fit on a
+       small screen.
+    */
 
     .tabs{
-        justify-content:flex-start;
-        flex-wrap:nowrap;
+        grid-template-columns:
+            repeat(8,120px);
+
         overflow-x:auto;
+
+        justify-content:start;
     }
 
     .tab{
-        white-space:nowrap;
-        padding:10px 16px;
+        font-size:12px;
+
+        padding:9px 6px;
+
+        min-height:44px;
     }
 
     .search-container{
@@ -407,119 +678,182 @@ h1{
         height:calc(100vh - 360px);
     }
 }
+
 </style>
 </head>
 
+
 <body>
+
 
 <div class="top">
 
-<h1>Insurance Coverage List</h1>
+<h1>
+    Insurance Coverage List
+</h1>
+
 
 <!-- =======================================================
      WORKSHEET TABS
 ======================================================= -->
-<div id="tabs" class="tabs"></div>
+
+<div
+    id="tabs"
+    class="tabs">
+</div>
+
 
 <!-- =======================================================
      SEARCH
 ======================================================= -->
+
 <div class="search-container">
 
-<div class="search-box">
-    <input
-        id="brandSearch"
-        type="text"
-        placeholder="Search by Brand Name"
-        oninput="applySearch()">
-    <span class="search-icon">🔎</span>
-</div>
 
 <div class="search-box">
-    <input
-        id="genericSearch"
-        type="text"
-        placeholder="Search by Generic Name"
-        oninput="applySearch()">
-    <span class="search-icon">🔎</span>
+
+<input
+    id="brandSearch"
+    type="text"
+    placeholder="Search by Brand Name"
+    oninput="applySearch()">
+
+<span class="search-icon">
+    🔎
+</span>
+
 </div>
+
 
 <div class="search-box">
-    <input
-        id="strengthSearch"
-        type="text"
-        placeholder="Search by Strength"
-        oninput="applySearch()">
-    <span class="search-icon">🔎</span>
+
+<input
+    id="genericSearch"
+    type="text"
+    placeholder="Search by Generic Name"
+    oninput="applySearch()">
+
+<span class="search-icon">
+    🔎
+</span>
+
 </div>
+
 
 <div class="search-box">
-    <input
-        id="formSearch"
-        type="text"
-        placeholder="Search by Dosage Form"
-        oninput="applySearch()">
-    <span class="search-icon">🔎</span>
-</div>
+
+<input
+    id="strengthSearch"
+    type="text"
+    placeholder="Search by Strength"
+    oninput="applySearch()">
+
+<span class="search-icon">
+    🔎
+</span>
 
 </div>
+
+
+<div class="search-box">
+
+<input
+    id="formSearch"
+    type="text"
+    placeholder="Search by Dosage Form"
+    oninput="applySearch()">
+
+<span class="search-icon">
+    🔎
+</span>
+
+</div>
+
+
+</div>
+
 
 <div class="controls">
+
 <button
     class="control-btn clear-btn"
     onclick="clearSearchAndFilters()">
+
     Clear Search & Filters
+
 </button>
-</div>
 
 </div>
 
-<div id="status" class="status">
+
+</div>
+
+
+<div
+    id="status"
+    class="status">
+
     Loading...
+
 </div>
+
 
 <div
     id="errorBox"
     class="error"
     style="display:none">
+
 </div>
+
 
 <div
     id="excelArea"
     class="excel-area">
+
 
 <div
     id="excelHeader"
     class="excel-header">
 </div>
 
+
 <div
     id="virtualContent"
     class="virtual-content">
 </div>
 
+
 </div>
+
 
 <!-- =======================================================
      FILTER POPUP
 ======================================================= -->
+
 <div
     id="filterPopup"
     class="filter-popup">
 
+
 <div
     id="filterPopupHeader"
     class="filter-popup-header">
+
     Filter
+
 </div>
 
+
 <div class="filter-search">
-    <input
-        id="filterValueSearch"
-        type="text"
-        placeholder="Search values..."
-        oninput="renderFilterValues()">
+
+<input
+    id="filterValueSearch"
+    type="text"
+    placeholder="Search values..."
+    oninput="renderFilterValues()">
+
 </div>
+
 
 <div class="filter-actions">
 
@@ -533,174 +867,201 @@ h1{
 
 </div>
 
+
 <div
     id="filterValues"
     class="filter-values">
 </div>
+
 
 <div class="filter-footer">
 
 <button
     class="apply-filter"
     onclick="applyColumnFilter()">
+
     Apply
+
 </button>
+
 
 <button
     class="cancel-filter"
     onclick="closeFilter()">
+
     Cancel
+
 </button>
 
 </div>
+
+
 </div>
+
 
 <script>
 
+
 /* =========================================================
    WORKSHEETS
-   EXACT ORDER REQUESTED
 ========================================================= */
 
 const WORKSHEETS = [
 
     {
-        id: "thiqa",
-        name: "Thiqa & Basic",
-        file: "data.json"
+        id:"thiqa",
+        name:"Thiqa & Basic",
+        file:"data.json"
     },
 
     {
-        id: "haad",
-        name: "HAAD",
-        file: "HAAD_LIST.json"
+        id:"haad",
+        name:"HAAD",
+        file:"HAAD_LIST.json"
     },
 
     {
-        id: "apg",
-        name: "APG FORMULARY 05-06",
-        file: "APG FORMULARY 05-06.json"
+        id:"apg",
+        name:"APG FORMULARY 05-06",
+        file:"APG FORMULARY 05-06.json"
     },
 
     {
-        id: "icd10",
-        name: "ICD10",
-        file: "ICD10.json"
+        id:"icd10",
+        name:"ICD10",
+        file:"ICD10.json"
     },
 
     {
-        id: "vitamin",
-        name: "VITAMIN COVERAGE",
-        file: "VITAMIN COVERAGE.json"
+        id:"vitamin",
+        name:"VITAMIN COVERAGE",
+        file:"VITAMIN COVERAGE.json"
     },
 
     {
-        id: "ppi",
-        name: "PPI Coverage",
-        file: "PPI Coverage.json"
+        id:"ppi",
+        name:"PPI Coverage",
+        file:"PPI Coverage.json"
     },
 
     {
-        id: "proactive",
-        name: "PROACTIVE INSTRUCTION",
-        file: "PROACTIVE INSTRUCTION.json"
+        id:"proactive",
+        name:"PROACTIVE INSTRUCTION",
+        file:"PROACTIVE INSTRUCTION.json"
     },
 
     {
-        id: "hcpc",
-        name: "HCPC Cap & Ref Price",
-        file: "HCPC Cap & REf Price.json"
+        id:"hcpc",
+        name:"HCPC Cap & Ref Price",
+        file:"HCPC Cap & REf Price.json"
     },
 
     {
-        id: "validity",
-        name: "VALIDITY AFTER OPENNING",
-        file: "VALIDITY AFTER OPENNING.json"
+        id:"validity",
+        name:"VALIDITY AFTER OPENNING",
+        file:"VALIDITY AFTER OPENNING.json"
     },
 
     {
-        id: "cda",
-        name: "CDA & CDB MAX DD",
-        file: "CDA &CDB MAX DD.json"
+        id:"cda",
+        name:"CDA & CDB MAX DD",
+        file:"CDA &CDB MAX DD.json"
     },
 
     {
-        id: "adnic",
-        name: "ADNIC (KHALIFA F.)",
-        file: "ADNIC ( KHALIFA F. ).json"
+        id:"adnic",
+        name:"ADNIC (KHALIFA F.)",
+        file:"ADNIC ( KHALIFA F. ).json"
     },
 
     {
-        id: "nasHaad",
-        name: "Nas TPA Formulary (HAAD)",
-        file: "Nas TPA Formulary (HAAD).json"
+        id:"nasHaad",
+        name:"Nas TPA Formulary (HAAD)",
+        file:"Nas TPA Formulary (HAAD).json"
     },
 
     {
-        id: "nasDha",
-        name: "Nas TPA Formulary (DHA)",
-        file: "Nas TPA Formulary (DHA).json"
+        id:"nasDha",
+        name:"Nas TPA Formulary (DHA)",
+        file:"Nas TPA Formulary (DHA).json"
     },
 
     {
-        id: "fmc",
-        name: "FMC LIST 01-2026",
-        file: "FMC LIST 01-2026.json"
+        id:"fmc",
+        name:"FMC LIST 01-2026",
+        file:"FMC LIST 01-2026.json"
     },
 
     {
-        id: "oman",
-        name: "OMAN FORMULARY 03-2024",
-        file: "OMAN FORMULARY 03-2024.json"
+        id:"oman",
+        name:"OMAN FORMULARY 03-2024",
+        file:"OMAN FORMULARY 03-2024.json"
     },
 
     {
-        id: "phone",
-        name: "PHONE CONTACTS",
-        file: "PHONE CONTACTS.json"
+        id:"phone",
+        name:"PHONE CONTACTS",
+        file:"PHONE CONTACTS.json"
     }
 
 ];
+
 
 /* =========================================================
    DATA STORAGE
 ========================================================= */
 
 const sheetData = {};
+
 const sheetColumns = {};
+
 const filteredData = {};
+
 const columnFilters = {};
+
 const rowOffsets = {};
+
 const totalHeights = {};
+
 
 /* =========================================================
    CURRENT SHEET
-   THIQA & BASIC IS DEFAULT
 ========================================================= */
 
 let currentSheet = "thiqa";
 
 let renderTimer = null;
 
+
 /* =========================================================
    VIRTUAL SCROLLING
 ========================================================= */
 
 const MIN_ROW_HEIGHT = 42;
+
 const LINE_HEIGHT = 17;
+
 const ROW_VERTICAL_PADDING = 14;
+
 const BUFFER_ROWS = 30;
+
 
 /* =========================================================
    FILTER POPUP
 ========================================================= */
 
 let filterPopupState = {
-    column: null,
-    sheet: null,
-    allValues: [],
-    selected: new Set()
+
+    column:null,
+
+    sheet:null,
+
+    allValues:[],
+
+    selected:new Set()
+
 };
+
 
 /* =========================================================
    START
@@ -716,6 +1077,7 @@ document.addEventListener(
 
         loadAllData();
 
+
         document.addEventListener(
             "click",
             function(event){
@@ -725,13 +1087,18 @@ document.addEventListener(
                         "filterPopup"
                     );
 
+
                 if(
-                    !popup.contains(event.target) &&
+                    !popup.contains(
+                        event.target
+                    ) &&
                     !event.target.classList.contains(
                         "filter-button"
                     )
                 ){
+
                     closeFilter();
+
                 }
 
             }
@@ -739,6 +1106,7 @@ document.addEventListener(
 
     }
 );
+
 
 /* =========================================================
    CREATE TABS
@@ -753,6 +1121,7 @@ function createTabs(){
 
     tabs.innerHTML = "";
 
+
     WORKSHEETS.forEach(
         sheet => {
 
@@ -761,24 +1130,31 @@ function createTabs(){
                     "button"
                 );
 
+
             button.className =
                 "tab";
+
 
             if(
                 sheet.id ===
                 currentSheet
             ){
+
                 button.classList.add(
                     "active"
                 );
+
             }
+
 
             button.id =
                 "tab-" +
                 sheet.id;
 
+
             button.textContent =
                 sheet.name;
+
 
             button.addEventListener(
                 "click",
@@ -791,6 +1167,7 @@ function createTabs(){
                 }
             );
 
+
             tabs.appendChild(
                 button
             );
@@ -799,6 +1176,7 @@ function createTabs(){
     );
 
 }
+
 
 /* =========================================================
    INITIALIZE STORAGE
@@ -818,14 +1196,17 @@ function initializeSheetStorage(){
             columnFilters[sheet.id] =
                 new Map();
 
-            rowOffsets[sheet.id] = [0];
+            rowOffsets[sheet.id] =
+                [0];
 
-            totalHeights[sheet.id] = 0;
+            totalHeights[sheet.id] =
+                0;
 
         }
     );
 
 }
+
 
 /* =========================================================
    LOAD ALL DATA
@@ -843,23 +1224,20 @@ async function loadAllData(){
             "errorBox"
         );
 
+
     status.textContent =
         "Loading worksheets...";
+
 
     errorBox.style.display =
         "none";
 
+
     try{
-
-        /*
-           Load every JSON independently.
-
-           If one file fails, the other sheets
-           can still work.
-        */
 
         const results =
             await Promise.all(
+
                 WORKSHEETS.map(
                     async sheet => {
 
@@ -872,11 +1250,13 @@ async function loadAllData(){
                                     ) +
                                     "?v=" +
                                     Date.now(),
+
                                     {
                                         cache:
                                             "no-store"
                                     }
                                 );
+
 
                             if(
                                 !response.ok
@@ -889,49 +1269,59 @@ async function loadAllData(){
 
                             }
 
+
                             const json =
                                 await response.json();
+
 
                             const data =
                                 normalizeData(
                                     json
                                 );
 
+
                             return {
-                                sheet:
-                                    sheet,
-                                data:
-                                    data,
-                                error:
-                                    null
+
+                                sheet:sheet,
+
+                                data:data,
+
+                                error:null
+
                             };
 
                         }
                         catch(error){
 
                             return {
-                                sheet:
-                                    sheet,
-                                data:
-                                    [],
-                                error:
-                                    error
+
+                                sheet:sheet,
+
+                                data:[],
+
+                                error:error
+
                             };
 
                         }
 
                     }
                 )
+
             );
 
+
         let loadedCount = 0;
+
         let errors = [];
+
 
         results.forEach(
             result => {
 
                 const id =
                     result.sheet.id;
+
 
                 if(
                     result.error
@@ -945,13 +1335,11 @@ async function loadAllData(){
                         result.error.message
                     );
 
-                    sheetData[id] = [];
-                    sheetColumns[id] = [];
-                    filteredData[id] = [];
 
                     return;
 
                 }
+
 
                 if(
                     !Array.isArray(
@@ -968,44 +1356,43 @@ async function loadAllData(){
 
                 }
 
+
                 sheetData[id] =
                     result.data;
 
-                /*
-                   Automatically detect
-                   the actual columns in
-                   each JSON file.
-                */
 
                 sheetColumns[id] =
                     getColumns(
                         result.data
                     );
 
+
                 filteredData[id] =
                     [
                         ...result.data
                     ];
 
+
                 columnFilters[id].clear();
+
 
                 buildRowOffsets(
                     id
                 );
+
 
                 loadedCount++;
 
             }
         );
 
-        /*
-           Thiqa & Basic MUST be
-           the first sheet displayed.
-        */
 
-        currentSheet = "thiqa";
+        currentSheet =
+            "thiqa";
+
 
         updateTabActiveState();
+
 
         if(
             sheetData.thiqa.length === 0
@@ -1017,13 +1404,16 @@ async function loadAllData(){
 
         }
 
+
         renderVirtualTable(
             currentSheet
         );
 
+
         updateSearchPlaceholders();
 
         updateStatus();
+
 
         if(
             errors.length > 0
@@ -1031,6 +1421,7 @@ async function loadAllData(){
 
             errorBox.style.display =
                 "block";
+
 
             errorBox.textContent =
                 "Some worksheets could not be loaded:\n\n" +
@@ -1048,11 +1439,14 @@ async function loadAllData(){
             error
         );
 
+
         status.textContent =
             "Unable to load data.";
 
+
         errorBox.style.display =
             "block";
+
 
         errorBox.textContent =
             "ERROR LOADING DATA\n\n" +
@@ -1061,6 +1455,7 @@ async function loadAllData(){
     }
 
 }
+
 
 /* =========================================================
    NORMALIZE JSON
@@ -1076,6 +1471,7 @@ function normalizeData(json){
 
     }
 
+
     if(
         json &&
         Array.isArray(
@@ -1087,10 +1483,6 @@ function normalizeData(json){
 
     }
 
-    /*
-       Also support common
-       JSON object formats.
-    */
 
     if(
         json &&
@@ -1099,6 +1491,7 @@ function normalizeData(json){
 
         const keys =
             Object.keys(json);
+
 
         for(
             const key of keys
@@ -1118,9 +1511,11 @@ function normalizeData(json){
 
     }
 
+
     return [];
 
 }
+
 
 /* =========================================================
    GET COLUMNS
@@ -1137,18 +1532,12 @@ function getColumns(data){
 
     }
 
-    /*
-       Collect ALL keys from all
-       records, not just the first row.
-
-       This protects against JSON files
-       where some columns appear later.
-    */
 
     const columns = [];
 
     const seen =
         new Set();
+
 
     data.forEach(
         row => {
@@ -1183,9 +1572,11 @@ function getColumns(data){
         }
     );
 
+
     return columns;
 
 }
+
 
 /* =========================================================
    SWITCH SHEET
@@ -1203,82 +1594,71 @@ function switchSheet(type){
 
     }
 
-    currentSheet = type;
+
+    currentSheet =
+        type;
+
 
     updateTabActiveState();
 
-    /*
-       Close any filter belonging
-       to the previous worksheet.
-    */
 
     closeFilter();
 
-    /*
-       Clear search boxes when
-       changing worksheet.
-    */
 
-    document
-        .getElementById(
-            "brandSearch"
-        )
-        .value = "";
+    document.getElementById(
+        "brandSearch"
+    ).value = "";
 
-    document
-        .getElementById(
-            "genericSearch"
-        )
-        .value = "";
 
-    document
-        .getElementById(
-            "strengthSearch"
-        )
-        .value = "";
+    document.getElementById(
+        "genericSearch"
+    ).value = "";
 
-    document
-        .getElementById(
-            "formSearch"
-        )
-        .value = "";
 
-    /*
-       Restore all rows for this sheet
-       according to its own filters.
-    */
+    document.getElementById(
+        "strengthSearch"
+    ).value = "";
+
+
+    document.getElementById(
+        "formSearch"
+    ).value = "";
+
 
     filteredData[type] =
         getFilteredRows(
             type
         );
 
+
     buildRowOffsets(
         type
     );
 
-    /*
-       Return to top when changing
-       worksheet.
-    */
 
     const area =
         document.getElementById(
             "excelArea"
         );
 
+
     area.scrollTop = 0;
+
     area.scrollLeft = 0;
 
+
     updateSearchPlaceholders();
+
 
     renderVirtualTable(
         type
     );
 
+
     updateStatus();
 
 }
+
 
 /* =========================================================
    ACTIVE TAB
@@ -1295,10 +1675,12 @@ function updateTabActiveState(){
                     sheet.id
                 );
 
+
             if(tab){
 
                 tab.classList.toggle(
                     "active",
+
                     sheet.id ===
                     currentSheet
                 );
@@ -1309,6 +1691,7 @@ function updateTabActiveState(){
     );
 
 }
+
 
 /* =========================================================
    SEARCH PLACEHOLDERS
@@ -1321,15 +1704,18 @@ function updateSearchPlaceholders(){
             currentSheet
         ] || [];
 
+
     const brand =
         findColumn(
             columns,
             [
                 "proactive name",
                 "brand name",
-                "package name"
+                "package name",
+                "item name"
             ]
         );
+
 
     const generic =
         findColumn(
@@ -1339,6 +1725,7 @@ function updateSearchPlaceholders(){
             ]
         );
 
+
     const strength =
         findColumn(
             columns,
@@ -1346,6 +1733,7 @@ function updateSearchPlaceholders(){
                 "strength"
             ]
         );
+
 
     const dosage =
         findColumn(
@@ -1355,47 +1743,44 @@ function updateSearchPlaceholders(){
             ]
         );
 
-    const brandInput =
-        document.getElementById(
-            "brandSearch"
-        );
 
-    const genericInput =
-        document.getElementById(
-            "genericSearch"
-        );
+    document.getElementById(
+        "brandSearch"
+    ).placeholder =
 
-    const strengthInput =
-        document.getElementById(
-            "strengthSearch"
-        );
-
-    const formInput =
-        document.getElementById(
-            "formSearch"
-        );
-
-    brandInput.placeholder =
         brand
             ? "Search by " + brand
             : "Search all data";
 
-    genericInput.placeholder =
+
+    document.getElementById(
+        "genericSearch"
+    ).placeholder =
+
         generic
             ? "Search by " + generic
             : "Search all data";
 
-    strengthInput.placeholder =
+
+    document.getElementById(
+        "strengthSearch"
+    ).placeholder =
+
         strength
             ? "Search by " + strength
             : "Search all data";
 
-    formInput.placeholder =
+
+    document.getElementById(
+        "formSearch"
+    ).placeholder =
+
         dosage
             ? "Search by " + dosage
             : "Search all data";
 
 }
+
 
 /* =========================================================
    FIND COLUMN
@@ -1421,6 +1806,7 @@ function findColumn(
                         .trim()
             );
 
+
         if(exact){
 
             return exact;
@@ -1429,9 +1815,11 @@ function findColumn(
 
     }
 
+
     return null;
 
 }
+
 
 /* =========================================================
    SEARCH
@@ -1450,6 +1838,7 @@ function parseSearch(value){
 
 }
 
+
 function cellMatchesSearch(
     value,
     searchText
@@ -1460,6 +1849,7 @@ function cellMatchesSearch(
             searchText
         );
 
+
     if(
         terms.length === 0
     ){
@@ -1468,10 +1858,12 @@ function cellMatchesSearch(
 
     }
 
+
     const text =
         String(
             value ?? ""
         ).toLowerCase();
+
 
     return terms.every(
         term =>
@@ -1481,6 +1873,7 @@ function cellMatchesSearch(
     );
 
 }
+
 
 /* =========================================================
    APPLY SEARCH
@@ -1495,17 +1888,21 @@ function applySearch(){
             currentSheet
         );
 
+
     buildRowOffsets(
         currentSheet
     );
+
 
     renderVirtualTable(
         currentSheet
     );
 
+
     updateStatus();
 
 }
+
 
 /* =========================================================
    FILTER DATA
@@ -1518,13 +1915,10 @@ function getFilteredRows(
     const data =
         sheetData[type] || [];
 
+
     const columns =
         sheetColumns[type] || [];
 
-    /*
-       Identify standard medicine
-       columns if they exist.
-    */
 
     const brandColumn =
         findColumn(
@@ -1532,9 +1926,11 @@ function getFilteredRows(
             [
                 "proactive name",
                 "brand name",
-                "package name"
+                "package name",
+                "item name"
             ]
         );
+
 
     const genericColumn =
         findColumn(
@@ -1544,6 +1940,7 @@ function getFilteredRows(
             ]
         );
 
+
     const strengthColumn =
         findColumn(
             columns,
@@ -1551,6 +1948,7 @@ function getFilteredRows(
                 "strength"
             ]
         );
+
 
     const formColumn =
         findColumn(
@@ -1560,40 +1958,37 @@ function getFilteredRows(
             ]
         );
 
+
     const brandSearch =
         document.getElementById(
             "brandSearch"
         ).value;
+
 
     const genericSearch =
         document.getElementById(
             "genericSearch"
         ).value;
 
+
     const strengthSearch =
         document.getElementById(
             "strengthSearch"
         ).value;
+
 
     const formSearch =
         document.getElementById(
             "formSearch"
         ).value;
 
-    /*
-       If this worksheet has the
-       standard medicine columns,
-       use the four dedicated searches.
-
-       Otherwise, use any entered search
-       as a search across the whole row.
-    */
 
     const hasStandardColumns =
         brandColumn ||
         genericColumn ||
         strengthColumn ||
         formColumn;
+
 
     return data.filter(
         row => {
@@ -1608,6 +2003,7 @@ function getFilteredRows(
                 return false;
 
             }
+
 
             if(
                 hasStandardColumns
@@ -1625,6 +2021,7 @@ function getFilteredRows(
 
                 }
 
+
                 if(
                     genericColumn &&
                     !cellMatchesSearch(
@@ -1636,6 +2033,7 @@ function getFilteredRows(
                     return false;
 
                 }
+
 
                 if(
                     strengthColumn &&
@@ -1649,6 +2047,7 @@ function getFilteredRows(
 
                 }
 
+
                 if(
                     formColumn &&
                     !cellMatchesSearch(
@@ -1661,12 +2060,6 @@ function getFilteredRows(
 
                 }
 
-                /*
-                   If a search box is being used
-                   but its corresponding column
-                   does not exist, search the whole
-                   row.
-                */
 
                 if(
                     !brandColumn &&
@@ -1683,6 +2076,7 @@ function getFilteredRows(
 
                 }
 
+
                 if(
                     !genericColumn &&
                     parseSearch(
@@ -1697,6 +2091,7 @@ function getFilteredRows(
                     return false;
 
                 }
+
 
                 if(
                     !strengthColumn &&
@@ -1713,6 +2108,7 @@ function getFilteredRows(
 
                 }
 
+
                 if(
                     !formColumn &&
                     parseSearch(
@@ -1728,22 +2124,24 @@ function getFilteredRows(
 
                 }
 
+
                 return true;
 
             }
 
-            /*
-               Completely different worksheet
-               structure:
-               search across the entire row.
-            */
 
             const allSearches = [
+
                 brandSearch,
+
                 genericSearch,
+
                 strengthSearch,
+
                 formSearch
+
             ];
+
 
             for(
                 const searchText
@@ -1766,12 +2164,14 @@ function getFilteredRows(
 
             }
 
+
             return true;
 
         }
     );
 
 }
+
 
 /* =========================================================
    SEARCH WHOLE ROW
@@ -1787,6 +2187,7 @@ function rowContainsTerms(
             searchText
         );
 
+
     if(
         terms.length === 0
     ){
@@ -1794,6 +2195,7 @@ function rowContainsTerms(
         return true;
 
     }
+
 
     const rowText =
         Object.values(
@@ -1807,6 +2209,7 @@ function rowContainsTerms(
         )
         .join(" ");
 
+
     return terms.every(
         term =>
             rowText.includes(
@@ -1815,6 +2218,7 @@ function rowContainsTerms(
     );
 
 }
+
 
 /* =========================================================
    COLUMN FILTERS
@@ -1827,6 +2231,7 @@ function rowPassesFilters(
 
     const filters =
         columnFilters[type];
+
 
     for(
         const [
@@ -1841,6 +2246,7 @@ function rowPassesFilters(
                 row[column] ?? ""
             );
 
+
         if(
             selectedValues.size === 0
         ){
@@ -1848,6 +2254,7 @@ function rowPassesFilters(
             return false;
 
         }
+
 
         if(
             !selectedValues.has(
@@ -1861,9 +2268,11 @@ function rowPassesFilters(
 
     }
 
+
     return true;
 
 }
+
 
 /* =========================================================
    OPEN FILTER
@@ -1879,40 +2288,46 @@ function openFilter(
             "filterPopup"
         );
 
+
     filterPopupState.column =
         column;
+
 
     filterPopupState.sheet =
         currentSheet;
 
-    document
-        .getElementById(
-            "filterPopupHeader"
-        )
-        .textContent =
-            "Filter: " +
-            column;
 
-    document
-        .getElementById(
-            "filterValueSearch"
-        )
-        .value = "";
+    document.getElementById(
+        "filterPopupHeader"
+    ).textContent =
+        "Filter: " +
+        column;
+
+
+    document.getElementById(
+        "filterValueSearch"
+    ).value = "";
+
 
     const data =
         sheetData[
             currentSheet
         ] || [];
 
+
     const values = [
+
         ...new Set(
+
             data.map(
                 row =>
                     String(
                         row[column] ?? ""
                     )
             )
+
         )
+
     ].sort(
         (a,b) =>
             a.localeCompare(
@@ -1925,8 +2340,10 @@ function openFilter(
             )
     );
 
+
     filterPopupState.allValues =
         values;
+
 
     const existing =
         columnFilters[
@@ -1934,6 +2351,7 @@ function openFilter(
         ].get(
             column
         );
+
 
     if(existing){
 
@@ -1952,19 +2370,29 @@ function openFilter(
 
     }
 
+
     renderFilterValues();
+
 
     const rect =
         button.getBoundingClientRect();
 
-    const popupWidth = 330;
-    const popupHeight = 420;
+
+    const popupWidth =
+        330;
+
+
+    const popupHeight =
+        420;
+
 
     let left =
         rect.left;
 
+
     let top =
         rect.bottom + 5;
+
 
     if(
         left + popupWidth >
@@ -1978,6 +2406,7 @@ function openFilter(
 
     }
 
+
     if(
         top + popupHeight >
         window.innerHeight
@@ -1990,6 +2419,7 @@ function openFilter(
 
     }
 
+
     if(
         top < 10
     ){
@@ -1997,6 +2427,7 @@ function openFilter(
         top = 10;
 
     }
+
 
     if(
         left < 10
@@ -2006,17 +2437,21 @@ function openFilter(
 
     }
 
+
     popup.style.left =
         left + "px";
 
+
     popup.style.top =
         top + "px";
+
 
     popup.classList.add(
         "show"
     );
 
 }
+
 
 /* =========================================================
    FILTER VALUES
@@ -2029,22 +2464,25 @@ function renderFilterValues(){
             "filterValues"
         );
 
+
     const search =
-        document
-            .getElementById(
-                "filterValueSearch"
-            )
-            .value
-            .trim()
-            .toLowerCase();
+        document.getElementById(
+            "filterValueSearch"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
 
     const allValues =
         filterPopupState.allValues ||
         [];
 
+
     const selected =
         filterPopupState.selected ||
         new Set();
+
 
     const visibleValues =
         allValues.filter(
@@ -2056,7 +2494,9 @@ function renderFilterValues(){
                     )
         );
 
+
     container.innerHTML = "";
+
 
     if(
         visibleValues.length === 0
@@ -2069,8 +2509,10 @@ function renderFilterValues(){
 
     }
 
+
     const fragment =
         document.createDocumentFragment();
+
 
     visibleValues.forEach(
         value => {
@@ -2080,21 +2522,26 @@ function renderFilterValues(){
                     "label"
                 );
 
+
             label.className =
                 "filter-value";
+
 
             const checkbox =
                 document.createElement(
                     "input"
                 );
 
+
             checkbox.type =
                 "checkbox";
+
 
             checkbox.checked =
                 selected.has(
                     value
                 );
+
 
             checkbox.addEventListener(
                 "change",
@@ -2120,23 +2567,28 @@ function renderFilterValues(){
                 }
             );
 
+
             const span =
                 document.createElement(
                     "span"
                 );
+
 
             span.textContent =
                 value === ""
                     ? "(Blank)"
                     : value;
 
+
             label.appendChild(
                 checkbox
             );
 
+
             label.appendChild(
                 span
             );
+
 
             fragment.appendChild(
                 label
@@ -2145,11 +2597,13 @@ function renderFilterValues(){
         }
     );
 
+
     container.appendChild(
         fragment
     );
 
 }
+
 
 /* =========================================================
    SELECT ALL
@@ -2158,17 +2612,18 @@ function renderFilterValues(){
 function selectAllFilterValues(){
 
     const search =
-        document
-            .getElementById(
-                "filterValueSearch"
-            )
-            .value
-            .trim()
-            .toLowerCase();
+        document.getElementById(
+            "filterValueSearch"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
 
     const allValues =
         filterPopupState.allValues ||
         [];
+
 
     const visibleValues =
         allValues.filter(
@@ -2180,9 +2635,11 @@ function selectAllFilterValues(){
                     )
         );
 
+
     const selected =
         filterPopupState.selected ||
         new Set();
+
 
     visibleValues.forEach(
         value => {
@@ -2194,12 +2651,15 @@ function selectAllFilterValues(){
         }
     );
 
+
     filterPopupState.selected =
         selected;
+
 
     renderFilterValues();
 
 }
+
 
 /* =========================================================
    CLEAR ALL FILTER VALUES
@@ -2210,9 +2670,11 @@ function clearAllFilterValues(){
     filterPopupState.selected =
         new Set();
 
+
     renderFilterValues();
 
 }
+
 
 /* =========================================================
    APPLY FILTER
@@ -2223,25 +2685,29 @@ function applyColumnFilter(){
     const column =
         filterPopupState.column;
 
+
     const type =
         filterPopupState.sheet;
+
 
     const allValues =
         filterPopupState.allValues ||
         [];
 
+
     const selected =
         filterPopupState.selected ||
         new Set();
 
+
     const search =
-        document
-            .getElementById(
-                "filterValueSearch"
-            )
-            .value
-            .trim()
-            .toLowerCase();
+        document.getElementById(
+            "filterValueSearch"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
 
     if(
         search !== ""
@@ -2256,6 +2722,7 @@ function applyColumnFilter(){
                             search
                         )
             );
+
 
         if(
             matchingValues.length ===
@@ -2308,24 +2775,30 @@ function applyColumnFilter(){
 
     }
 
+
     closeFilter();
+
 
     filteredData[type] =
         getFilteredRows(
             type
         );
 
+
     buildRowOffsets(
         type
     );
+
 
     renderVirtualTable(
         type
     );
 
+
     updateStatus();
 
 }
+
 
 /* =========================================================
    CLOSE FILTER
@@ -2344,47 +2817,37 @@ function closeFilter(){
 
 }
 
+
 /* =========================================================
    CLEAR EVERYTHING
 ========================================================= */
 
 function clearSearchAndFilters(){
 
-    document
-        .getElementById(
-            "brandSearch"
-        )
-        .value = "";
+    document.getElementById(
+        "brandSearch"
+    ).value = "";
 
-    document
-        .getElementById(
-            "genericSearch"
-        )
-        .value = "";
 
-    document
-        .getElementById(
-            "strengthSearch"
-        )
-        .value = "";
+    document.getElementById(
+        "genericSearch"
+    ).value = "";
 
-    document
-        .getElementById(
-            "formSearch"
-        )
-        .value = "";
 
-    /*
-       Clear filters ONLY for the current
-       worksheet.
+    document.getElementById(
+        "strengthSearch"
+    ).value = "";
 
-       Other worksheets keep their own
-       filters.
-    */
+
+    document.getElementById(
+        "formSearch"
+    ).value = "";
+
 
     columnFilters[
         currentSheet
     ].clear();
+
 
     filteredData[
         currentSheet
@@ -2395,27 +2858,35 @@ function clearSearchAndFilters(){
             ]
         ];
 
+
     buildRowOffsets(
         currentSheet
     );
 
+
     closeFilter();
+
 
     const area =
         document.getElementById(
             "excelArea"
         );
 
+
     area.scrollTop = 0;
+
     area.scrollLeft = 0;
+
 
     renderVirtualTable(
         currentSheet
     );
 
+
     updateStatus();
 
 }
+
 
 /* =========================================================
    STATUS
@@ -2428,10 +2899,12 @@ function updateStatus(){
             currentSheet
         ]?.length || 0;
 
+
     const shown =
         filteredData[
             currentSheet
         ]?.length || 0;
+
 
     const sheet =
         WORKSHEETS.find(
@@ -2440,27 +2913,29 @@ function updateStatus(){
                 currentSheet
         );
 
+
     const title =
         sheet
             ? sheet.name
             : currentSheet;
 
-    document
-        .getElementById(
-            "status"
-        )
-        .textContent =
-            title +
-            ": " +
-            shown.toLocaleString() +
-            " of " +
-            total.toLocaleString() +
-            " records";
+
+    document.getElementById(
+        "status"
+    ).textContent =
+
+        title +
+        ": " +
+        shown.toLocaleString() +
+        " of " +
+        total.toLocaleString() +
+        " records";
 
 }
 
+
 /* =========================================================
-   COLUMN WIDTH
+   BASE COLUMN WIDTH
 ========================================================= */
 
 function getColumnWidth(
@@ -2470,90 +2945,79 @@ function getColumnWidth(
     const lower =
         column.toLowerCase();
 
+
+    /*
+       EXTRA WIDE TEXT COLUMNS
+    */
+
     if(
-        lower.includes(
-            "generic name"
-        ) ||
-        lower.includes(
-            "package name"
-        ) ||
-        lower.includes(
-            "manufacturer"
-        ) ||
-        lower.includes(
-            "agent name"
-        ) ||
-        lower.includes(
-            "insurance coverage"
-        ) ||
-        lower.includes(
-            "formulary"
-        ) ||
-        lower.includes(
-            "proactive name"
-        ) ||
-        lower.includes(
-            "daman coverage"
-        ) ||
-        lower.includes(
-            "description"
-        ) ||
-        lower.includes(
-            "instruction"
-        ) ||
-        lower.includes(
-            "indication"
-        )
+        lower.includes("item name") ||
+        lower.includes("active ingredient") ||
+        lower.includes("generic name") ||
+        lower.includes("package name") ||
+        lower.includes("manufacturer") ||
+        lower.includes("agent name") ||
+        lower.includes("insurance coverage") ||
+        lower.includes("formulary") ||
+        lower.includes("proactive name") ||
+        lower.includes("daman coverage") ||
+        lower.includes("description") ||
+        lower.includes("instruction") ||
+        lower.includes("indication")
     ){
 
         return 280;
 
     }
 
+
+    /*
+       MEDIUM COLUMNS
+    */
+
     if(
-        lower.includes(
-            "strength"
-        ) ||
-        lower.includes(
-            "dosage form"
-        )
+        lower.includes("strength") ||
+        lower.includes("dosage form")
     ){
 
         return 160;
 
     }
 
+
+    /*
+       PRICE COLUMNS
+    */
+
     if(
-        lower.includes(
-            "price"
-        ) ||
-        lower.includes(
-            "markup"
-        ) ||
-        lower.includes(
-            "reimbursement"
-        ) ||
-        lower.includes(
-            "co-pay"
-        ) ||
-        lower.includes(
-            "copay"
-        )
+        lower.includes("price") ||
+        lower.includes("markup") ||
+        lower.includes("reimbursement") ||
+        lower.includes("co-pay") ||
+        lower.includes("copay")
     ){
 
         return 155;
 
     }
 
+
+    /*
+       DATE COLUMNS
+    */
+
     if(
-        lower.includes(
-            "date"
-        )
+        lower.includes("date")
     ){
 
         return 140;
 
     }
+
+
+    /*
+       THIQA / BASIC
+    */
 
     if(
         lower === "thiqa" ||
@@ -2564,29 +3028,232 @@ function getColumnWidth(
 
     }
 
+
+    /*
+       DEFAULT
+    */
+
     return 150;
 
 }
 
+
 /* =========================================================
-   GRID
+   TEXT IMPORTANCE
+   Used when expanding columns to fill page
+========================================================= */
+
+function getColumnWeight(
+    column
+){
+
+    const lower =
+        column.toLowerCase();
+
+
+    /*
+       Give important text fields
+       more of the available width.
+    */
+
+    if(
+        lower.includes("item name") ||
+        lower.includes("active ingredient") ||
+        lower.includes("generic name") ||
+        lower.includes("package name")
+    ){
+
+        return 2.5;
+
+    }
+
+
+    if(
+        lower.includes("manufacturer") ||
+        lower.includes("description") ||
+        lower.includes("instruction") ||
+        lower.includes("indication") ||
+        lower.includes("formulary") ||
+        lower.includes("proactive name")
+    ){
+
+        return 2;
+
+    }
+
+
+    return 1;
+
+}
+
+
+/* =========================================================
+   GET ACTUAL GRID WIDTHS
+========================================================= */
+
+function getGridColumnWidths(
+    type
+){
+
+    const cols =
+        sheetColumns[type] || [];
+
+
+    if(
+        cols.length === 0
+    ){
+
+        return [];
+
+    }
+
+
+    /*
+       First calculate normal widths.
+    */
+
+    let widths =
+        cols.map(
+            column =>
+                getColumnWidth(
+                    column
+                )
+        );
+
+
+    const baseTotal =
+        widths.reduce(
+            (sum,width) =>
+                sum + width,
+            0
+        );
+
+
+    const area =
+        document.getElementById(
+            "excelArea"
+        );
+
+
+    /*
+       Available visible width.
+
+       A little padding is removed
+       to avoid unnecessary scrollbar
+       caused by rounding.
+    */
+
+    const availableWidth =
+        Math.max(
+            300,
+            area
+                ? area.clientWidth
+                : window.innerWidth
+        );
+
+
+    /*
+       If the natural table is smaller
+       than the page, EXPAND IT.
+    */
+
+    if(
+        baseTotal <
+        availableWidth
+    ){
+
+        const extra =
+            availableWidth -
+            baseTotal;
+
+
+        const weights =
+            cols.map(
+                column =>
+                    getColumnWeight(
+                        column
+                    )
+            );
+
+
+        const totalWeight =
+            weights.reduce(
+                (sum,w) =>
+                    sum + w,
+                0
+            );
+
+
+        widths =
+            widths.map(
+                (width,index) =>
+                    width +
+                    (
+                        extra *
+                        weights[index] /
+                        totalWeight
+                    )
+            );
+
+    }
+
+
+    return widths.map(
+        width =>
+            Math.round(
+                width
+            )
+    );
+
+}
+
+
+/* =========================================================
+   GRID TEMPLATE
 ========================================================= */
 
 function getGridTemplate(
     type
 ){
 
-    return sheetColumns[type]
+    const widths =
+        getGridColumnWidths(
+            type
+        );
+
+
+    return widths
         .map(
-            column =>
-                getColumnWidth(
-                    column
-                ) +
-                "px"
+            width =>
+                width + "px"
         )
         .join(" ");
 
 }
+
+
+/* =========================================================
+   TOTAL GRID WIDTH
+========================================================= */
+
+function getGridTotalWidth(
+    type
+){
+
+    const widths =
+        getGridColumnWidths(
+            type
+        );
+
+
+    return widths.reduce(
+        (sum,width) =>
+            sum + width,
+        0
+    );
+
+}
+
 
 /* =========================================================
    ROW HEIGHT
@@ -2599,36 +3266,69 @@ function calculateRowHeight(
 
     let maxLines = 1;
 
+
     const columns =
         sheetColumns[type] || [];
 
+
+    const widths =
+        getGridColumnWidths(
+            type
+        );
+
+
     columns.forEach(
-        column => {
+        (column,index) => {
 
             const value =
                 String(
                     row[column] ?? ""
                 );
 
+
             const width =
+                widths[index] ||
                 getColumnWidth(
                     column
                 );
 
+
+            /*
+               Estimate how many characters
+               can fit on each line.
+
+               Account for cell padding.
+            */
+
+            const usableWidth =
+                Math.max(
+                    30,
+                    width - 18
+                );
+
+
+            /*
+               Approximate average character
+               width for Arial 13px.
+            */
+
             const charsPerLine =
                 Math.max(
-                    8,
+                    5,
                     Math.floor(
-                        width / 7
+                        usableWidth / 6.8
                     )
                 );
+
 
             const paragraphs =
                 value.split(
                     "\n"
                 );
 
+
             let lines = 0;
+
 
             paragraphs.forEach(
                 paragraph => {
@@ -2655,6 +3355,7 @@ function calculateRowHeight(
                 }
             );
 
+
             maxLines =
                 Math.max(
                     maxLines,
@@ -2664,6 +3365,12 @@ function calculateRowHeight(
         }
     );
 
+
+    /*
+       Give slightly more height
+       to wrapped rows.
+    */
+
     return Math.max(
         MIN_ROW_HEIGHT,
         maxLines *
@@ -2672,6 +3379,7 @@ function calculateRowHeight(
     );
 
 }
+
 
 /* =========================================================
    ROW OFFSETS
@@ -2684,12 +3392,15 @@ function buildRowOffsets(
     const data =
         filteredData[type] || [];
 
+
     const offsets =
         new Array(
             data.length + 1
         );
 
+
     offsets[0] = 0;
+
 
     for(
         let i = 0;
@@ -2699,6 +3410,7 @@ function buildRowOffsets(
 
         offsets[i + 1] =
             offsets[i] +
+
             calculateRowHeight(
                 data[i],
                 type
@@ -2706,8 +3418,10 @@ function buildRowOffsets(
 
     }
 
+
     rowOffsets[type] =
         offsets;
+
 
     totalHeights[type] =
         offsets[
@@ -2715,6 +3429,7 @@ function buildRowOffsets(
         ] || 0;
 
 }
+
 
 /* =========================================================
    FIND ROW
@@ -2730,6 +3445,7 @@ function findRowAtPosition(
     let high =
         offsets.length - 1;
 
+
     while(
         low < high
     ){
@@ -2738,6 +3454,7 @@ function findRowAtPosition(
             Math.floor(
                 (low + high) / 2
             );
+
 
         if(
             offsets[mid] <=
@@ -2757,12 +3474,89 @@ function findRowAtPosition(
 
     }
 
+
     return Math.max(
         0,
         low - 1
     );
 
 }
+
+
+/* =========================================================
+   SET FROZEN POSITION
+========================================================= */
+
+function applyFrozenPosition(
+    cell,
+    type,
+    column,
+    widths,
+    columns
+){
+
+    if(
+        type !== "thiqa"
+    ){
+
+        return;
+
+    }
+
+
+    const lower =
+        column.toLowerCase();
+
+
+    if(
+        lower === "basic"
+    ){
+
+        cell.classList.add(
+            "frozen-basic"
+        );
+
+
+        cell.style.right =
+            "0px";
+
+    }
+
+
+    if(
+        lower === "thiqa"
+    ){
+
+        const basicIndex =
+            columns.findIndex(
+                item =>
+                    item
+                        .toLowerCase() ===
+                    "basic"
+            );
+
+
+        if(
+            basicIndex >= 0
+        ){
+
+            cell.classList.add(
+                "frozen-thiqa"
+            );
+
+
+            cell.style.right =
+                widths[
+                    basicIndex
+                ] +
+                "px";
+
+        }
+
+    }
+
+}
+
 
 /* =========================================================
    RENDER TABLE
@@ -2777,33 +3571,69 @@ function renderVirtualTable(
             "excelHeader"
         );
 
+
     const content =
         document.getElementById(
             "virtualContent"
         );
+
 
     const area =
         document.getElementById(
             "excelArea"
         );
 
+
     const columns =
         sheetColumns[type] || [];
 
-    const template =
-        getGridTemplate(
+
+    const widths =
+        getGridColumnWidths(
             type
         );
+
+
+    const template =
+        widths
+            .map(
+                width =>
+                    width + "px"
+            )
+            .join(" ");
+
+
+    const totalWidth =
+        widths.reduce(
+            (sum,width) =>
+                sum + width,
+            0
+        );
+
+
+    /*
+       Make header and content occupy
+       exactly the calculated width.
+    */
 
     header.style.gridTemplateColumns =
         template;
 
+
+    header.style.width =
+        totalWidth + "px";
+
+
+    content.style.width =
+        totalWidth + "px";
+
+
+    content.style.minWidth =
+        totalWidth + "px";
+
+
     header.innerHTML = "";
 
-    /*
-       If the selected worksheet
-       failed to load.
-    */
 
     if(
         columns.length === 0
@@ -2812,16 +3642,18 @@ function renderVirtualTable(
         content.style.height =
             "100px";
 
+
         content.innerHTML =
             '<div style="padding:25px;font-weight:bold;">No data available for this worksheet.</div>';
+
 
         return;
 
     }
 
+
     /*
-       Build headers from the
-       ACTUAL JSON columns.
+       BUILD HEADER
     */
 
     columns.forEach(
@@ -2832,53 +3664,47 @@ function renderVirtualTable(
                     "div"
                 );
 
-cell.className =
-    "header-cell";
 
-/*
-   Freeze THIQA and BASIC only
-   on the Thiqa & Basic worksheet.
-*/
+            cell.className =
+                "header-cell";
 
-if(
-    type === "thiqa" &&
-    column.toLowerCase() === "basic"
-){
-    cell.classList.add(
-        "frozen-basic"
-    );
-}
 
-if(
-    type === "thiqa" &&
-    column.toLowerCase() === "thiqa"
-){
-    cell.classList.add(
-        "frozen-thiqa"
-    );
-}
+            applyFrozenPosition(
+                cell,
+                type,
+                column,
+                widths,
+                columns
+            );
+
 
             const title =
                 document.createElement(
                     "span"
                 );
 
+
             title.className =
                 "header-title";
 
+
             title.textContent =
                 column;
+
 
             const button =
                 document.createElement(
                     "button"
                 );
 
+
             button.className =
                 "filter-button";
 
+
             button.textContent =
                 "▼";
+
 
             if(
                 columnFilters[type]
@@ -2893,11 +3719,13 @@ if(
 
             }
 
+
             button.addEventListener(
                 "click",
                 function(event){
 
                     event.stopPropagation();
+
 
                     openFilter(
                         column,
@@ -2907,13 +3735,16 @@ if(
                 }
             );
 
+
             cell.appendChild(
                 title
             );
 
+
             cell.appendChild(
                 button
             );
+
 
             header.appendChild(
                 cell
@@ -2922,13 +3753,16 @@ if(
         }
     );
 
+
     content.style.height =
         totalHeights[type] +
         "px";
 
+
     renderVisibleRows(
         type
     );
+
 
     area.onscroll =
         function(){
@@ -2942,6 +3776,7 @@ if(
                 );
 
             }
+
 
             renderTimer =
                 requestAnimationFrame(
@@ -2958,6 +3793,7 @@ if(
 
 }
 
+
 /* =========================================================
    VIRTUAL ROWS
 ========================================================= */
@@ -2971,19 +3807,30 @@ function renderVisibleRows(
             "virtualContent"
         );
 
+
     const area =
         document.getElementById(
             "excelArea"
         );
 
+
     const data =
         filteredData[type] || [];
+
 
     const offsets =
         rowOffsets[type] || [0];
 
+
     const columns =
         sheetColumns[type] || [];
+
+
+    const widths =
+        getGridColumnWidths(
+            type
+        );
+
 
     if(
         !data.length
@@ -2996,17 +3843,21 @@ function renderVisibleRows(
 
     }
 
+
     const scrollTop =
         area.scrollTop;
 
+
     const viewportHeight =
         area.clientHeight;
+
 
     const firstVisible =
         findRowAtPosition(
             offsets,
             scrollTop
         );
+
 
     const lastVisible =
         findRowAtPosition(
@@ -3015,12 +3866,14 @@ function renderVisibleRows(
             viewportHeight
         );
 
+
     const start =
         Math.max(
             0,
             firstVisible -
             BUFFER_ROWS
         );
+
 
     const end =
         Math.min(
@@ -3030,15 +3883,22 @@ function renderVisibleRows(
             1
         );
 
+
     content.innerHTML = "";
+
 
     const fragment =
         document.createDocumentFragment();
 
+
     const template =
-        getGridTemplate(
-            type
-        );
+        widths
+            .map(
+                width =>
+                    width + "px"
+            )
+            .join(" ");
+
 
     for(
         let i = start;
@@ -3051,15 +3911,19 @@ function renderVisibleRows(
                 "div"
             );
 
+
         row.className =
             "data-row";
+
 
         row.style.gridTemplateColumns =
             template;
 
+
         row.style.top =
             offsets[i] +
             "px";
+
 
         row.style.height =
             (
@@ -3068,8 +3932,10 @@ function renderVisibleRows(
             ) +
             "px";
 
+
         const item =
             data[i];
+
 
         columns.forEach(
             column => {
@@ -3079,39 +3945,29 @@ function renderVisibleRows(
                         "div"
                     );
 
-cell.className =
-    "data-cell";
 
-/*
-   Freeze THIQA and BASIC only
-   on data.json.
-*/
+                cell.className =
+                    "data-cell";
 
-if(
-    type === "thiqa" &&
-    column.toLowerCase() === "basic"
-){
-    cell.classList.add(
-        "frozen-basic"
-    );
-}
 
-if(
-    type === "thiqa" &&
-    column.toLowerCase() === "thiqa"
-){
-    cell.classList.add(
-        "frozen-thiqa"
-    );
-}
+                applyFrozenPosition(
+                    cell,
+                    type,
+                    column,
+                    widths,
+                    columns
+                );
+
 
                 const value =
                     String(
                         item[column] ?? ""
                     );
 
+
                 cell.textContent =
                     value;
+
 
                 if(
                     value.length > 40
@@ -3122,14 +3978,17 @@ if(
 
                 }
 
+
                 const lower =
                     column
                         .toLowerCase();
+
 
                 const normalized =
                     value
                         .trim()
                         .toLowerCase();
+
 
                 /*
                    THIQA
@@ -3149,6 +4008,7 @@ if(
 
                     }
 
+
                     if(
                         normalized === "no"
                     ){
@@ -3160,6 +4020,7 @@ if(
                     }
 
                 }
+
 
                 /*
                    BASIC
@@ -3179,6 +4040,7 @@ if(
 
                     }
 
+
                     if(
                         normalized === "no"
                     ){
@@ -3191,6 +4053,7 @@ if(
 
                 }
 
+
                 row.appendChild(
                     cell
                 );
@@ -3198,17 +4061,20 @@ if(
             }
         );
 
+
         fragment.appendChild(
             row
         );
 
     }
 
+
     content.appendChild(
         fragment
     );
 
 }
+
 
 /* =========================================================
    RESIZE
@@ -3221,6 +4087,7 @@ window.addEventListener(
         buildRowOffsets(
             currentSheet
         );
+
 
         renderVirtualTable(
             currentSheet
