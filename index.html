@@ -4289,66 +4289,58 @@ function renderFilterValues(){
 }
 
 
-/* =========================================================
-   APPLY POPUP FILTER
-========================================================= */
-
 function applyPopupFilter(){
 
-    const sheet =
-    filterPopupState.sheet;
+    const type = filterPopupState.sheet;
+    const column = filterPopupState.column;
 
-    const column =
-    filterPopupState.column;
-
-    const selected =
-    filterPopupState.selected;
-
-    const allValues =
-    filterPopupState.allValues;
-
-    if(
-        !sheet ||
-        !column
-    ){
-
+    if(!type || !column){
         return;
-
     }
 
-    /*
-       If everything is selected,
-       remove the filter completely.
-    */
+    const searchText =
+        filterPopupState.search.trim().toLowerCase();
 
-    if(
-        selected.size ===
-        allValues.length
-    ){
+    /* =====================================================
+       IF USER TYPED SEARCH TEXT
+       APPLY TEXT SEARCH DIRECTLY
+    ===================================================== */
 
-        delete columnFilters[
-            sheet
-        ][column];
+    if(searchText){
+
+        columnFilters[type][column] = {
+            text: searchText
+        };
 
     }
     else{
 
-        /*
-           Keep exactly what the user selected.
-        */
+        /* Normal checkbox filtering */
 
-        columnFilters[
-            sheet
-        ][column] =
-        new Set(
-            selected
-        );
+        const allValues =
+            filterPopupState.allValues;
+
+        const selected =
+            filterPopupState.selected;
+
+        if(
+            filterPopupState.selectAll ||
+            selected.size === allValues.length
+        ){
+
+            delete columnFilters[type][column];
+
+        }
+        else{
+
+            columnFilters[type][column] =
+                new Set(selected);
+
+        }
 
     }
 
-    applyFilters(
-        sheet
-    );
+    applyFilters(type);
 
 }
 
