@@ -12,16 +12,11 @@
     box-sizing:border-box;
 }
 
-html,body{
+body{
     margin:0;
-    padding:0;
     font-family:Arial,Helvetica,sans-serif;
     background:#f3f5f7;
     color:#222;
-}
-
-body{
-    overflow-x:hidden;
 }
 
 /* =========================
@@ -49,27 +44,36 @@ h1{
     display:grid;
     grid-template-columns:repeat(8,minmax(0,1fr));
     gap:8px;
+
     width:100%;
     max-width:1600px;
+
     margin:0 auto 15px;
 }
 
 .tab{
     width:100%;
+
     border:1px solid #b8b8b8;
     background:#eee;
+
     padding:10px 7px;
+
     border-radius:6px 6px 0 0;
+
     cursor:pointer;
+
     font-weight:bold;
     font-size:13px;
+
     text-align:center;
+
     white-space:normal;
     line-height:16px;
 }
 
 .tab:hover{
-    background:#e1e5e9;
+    background:#e2e6ea;
 }
 
 .tab.active{
@@ -85,19 +89,24 @@ h1{
 .search-container{
     display:grid;
     grid-template-columns:repeat(4,minmax(0,1fr));
+
     gap:10px;
+
     max-width:1600px;
     margin:0 auto 10px;
 }
 
 .search-container input{
     width:100%;
+
     padding:10px 12px;
+
     border:1px solid #c5cbd1;
     border-radius:5px;
+
     font-size:14px;
+
     outline:none;
-    background:#fff;
 }
 
 .search-container input:focus{
@@ -107,16 +116,22 @@ h1{
 .controls{
     display:flex;
     justify-content:center;
+
     margin-bottom:10px;
 }
 
 .clear-btn{
     border:1px solid #1d3557;
+
     background:#1d3557;
     color:#fff;
+
     padding:9px 18px;
+
     border-radius:5px;
+
     cursor:pointer;
+
     font-weight:bold;
 }
 
@@ -132,18 +147,26 @@ h1{
     text-align:center;
     font-size:13px;
     color:#555;
+
     margin:6px 0 10px;
 }
 
 .error-box{
     display:none;
+
     max-width:1600px;
+
     margin:0 auto 10px;
+
     background:#f8d7da;
     color:#721c24;
+
     border:1px solid #f1b0b7;
+
     padding:10px;
+
     border-radius:5px;
+
     white-space:pre-wrap;
 }
 
@@ -153,33 +176,28 @@ h1{
 
 .excel-area{
     position:relative;
+
     width:100%;
+
     height:calc(100vh - 225px);
+
     min-height:450px;
+
     overflow:auto;
+
     background:#fff;
+
     border-top:1px solid #c8c8c8;
 }
 
-/*
-   Inner scrolling container.
-   The table can become wider than the
-   screen only when necessary.
-*/
-
-.excel-scroll{
-    position:relative;
-    width:100%;
-    min-width:100%;
-}
-
 /* =========================
-   TABLE HEADER
+   HEADER
 ========================= */
 
 .excel-header{
     position:sticky;
     top:0;
+
     z-index:20;
 
     display:grid;
@@ -188,6 +206,7 @@ h1{
     min-width:100%;
 
     background:#e9edf2;
+
     border-bottom:2px solid #9ba6b2;
 }
 
@@ -195,6 +214,7 @@ h1{
     position:relative;
 
     min-width:0;
+
     min-height:54px;
 
     padding:7px 32px 7px 8px;
@@ -215,19 +235,25 @@ h1{
 
 .filter-btn{
     position:absolute;
+
     right:4px;
     top:50%;
+
     transform:translateY(-50%);
 
     width:22px;
     height:22px;
 
     border:1px solid #adb5bd;
+
     background:#fff;
+
     border-radius:4px;
 
     cursor:pointer;
+
     font-size:10px;
+
     padding:0;
 }
 
@@ -241,17 +267,20 @@ h1{
 }
 
 /* =========================
-   VIRTUAL TABLE
+   VIRTUAL CONTENT
 ========================= */
 
 .virtual-content{
     position:relative;
+
     width:100%;
+
     min-width:max-content;
 }
 
 .data-row{
     position:absolute;
+
     left:0;
 
     display:grid;
@@ -273,11 +302,15 @@ h1{
     font-size:13px;
     line-height:17px;
 
+    /*
+       WRAP TEXT
+    */
+
     white-space:normal;
     overflow-wrap:anywhere;
     word-break:break-word;
 
-    overflow:visible;
+    overflow:hidden;
 }
 
 .data-row:nth-child(even) .data-cell{
@@ -291,35 +324,49 @@ h1{
 .thiqa-yes,
 .basic-yes{
     background:#d9ead3 !important;
+
     color:#222 !important;
+
     font-weight:bold !important;
+
     text-align:center;
 }
 
 .thiqa-no,
 .basic-no{
     background:#f4cccc !important;
+
     color:#222 !important;
+
     font-weight:bold !important;
+
     text-align:center;
 }
 
 /* =========================
-   FROZEN COLUMNS
+   FROZEN
 ========================= */
 
 .frozen-basic{
     position:sticky !important;
+
     right:0;
+
     z-index:18 !important;
-    box-shadow:-3px 0 4px rgba(0,0,0,.08);
+
+    box-shadow:
+        -3px 0 4px rgba(0,0,0,.08);
 }
 
 .frozen-thiqa{
     position:sticky !important;
-    right:var(--basic-width,110px);
+
+    right:110px;
+
     z-index:18 !important;
-    box-shadow:-2px 0 3px rgba(0,0,0,.05);
+
+    box-shadow:
+        -2px 0 3px rgba(0,0,0,.05);
 }
 
 .excel-header .frozen-basic,
@@ -335,17 +382,21 @@ h1{
     display:none;
 
     position:fixed;
+
     z-index:1000;
 
     width:280px;
+
     max-height:420px;
 
     background:#fff;
 
     border:1px solid #b9c1c8;
+
     border-radius:6px;
 
-    box-shadow:0 5px 20px rgba(0,0,0,.18);
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.18);
 
     overflow:hidden;
 }
@@ -356,37 +407,51 @@ h1{
 
 .filter-popup-header{
     padding:10px;
+
     border-bottom:1px solid #ddd;
+
     background:#f5f7f9;
+
     font-weight:bold;
+
     font-size:13px;
 }
 
 .filter-search{
     padding:8px;
+
     border-bottom:1px solid #ddd;
 }
 
 .filter-search input{
     width:100%;
+
     padding:7px 8px;
+
     border:1px solid #c7cdd3;
+
     border-radius:4px;
 }
 
 .filter-actions{
     display:flex;
+
     gap:6px;
+
     padding:8px;
+
     border-bottom:1px solid #ddd;
 }
 
 .filter-actions button{
     flex:1;
+
     padding:7px;
 
     border:1px solid #c3cad1;
+
     background:#fff;
+
     border-radius:4px;
 
     cursor:pointer;
@@ -398,13 +463,17 @@ h1{
 
 .filter-values{
     max-height:280px;
+
     overflow-y:auto;
+
     padding:6px 8px;
 }
 
 .filter-value{
     display:flex;
+
     align-items:center;
+
     gap:7px;
 
     padding:5px 2px;
@@ -412,19 +481,14 @@ h1{
     font-size:12px;
 }
 
-.filter-value input{
-    margin:0;
-}
-
 /* =========================
-   PROACTIVE INSTRUCTION
+   PROACTIVE
 ========================= */
 
 .special-content{
     display:none;
 
     width:100%;
-    min-height:calc(100vh - 170px);
 
     background:#fff;
 
@@ -435,27 +499,20 @@ h1{
     display:block;
 
     width:100%;
+
     max-width:1600px;
+
     height:auto;
 
     margin:0 auto 20px;
-
-    object-fit:contain;
 }
 
 .proactive-image:last-child{
     margin-bottom:0;
 }
 
-.proactive-error{
-    text-align:center;
-    color:#a94442;
-    font-weight:bold;
-    padding:20px;
-}
-
 /* =========================
-   RESPONSIVE
+   MOBILE
 ========================= */
 
 @media(max-width:1100px){
@@ -511,92 +568,89 @@ h1{
 
 <div class="top">
 
-    <h1>
-        Insurance Coverage List
-    </h1>
-
-    <!-- =========================
-         TABS
-    ========================== -->
-
-    <div
-        class="tabs"
-        id="tabs"
-    ></div>
+<h1>
+Insurance Coverage List
+</h1>
 
 
-    <!-- =========================
-         SEARCH
-    ========================== -->
+<!-- =========================
+     TABS
+========================= -->
 
-    <div id="searchArea">
-
-        <div class="search-container">
-
-            <input
-                id="brandSearch"
-                type="text"
-                placeholder="Search Brand Name..."
-            >
-
-            <input
-                id="genericSearch"
-                type="text"
-                placeholder="Search Generic Name..."
-            >
-
-            <input
-                id="strengthSearch"
-                type="text"
-                placeholder="Search Strength..."
-            >
-
-            <input
-                id="dosageSearch"
-                type="text"
-                placeholder="Search Dosage Form..."
-            >
-
-        </div>
+<div
+    class="tabs"
+    id="tabs"
+></div>
 
 
-        <div class="controls">
+<!-- =========================
+     SEARCH
+========================= -->
 
-            <button
-                id="clearBtn"
-                class="clear-btn"
-                type="button"
-            >
-                Clear Search & Filters
-            </button>
+<div id="searchArea">
 
-        </div>
+<div class="search-container">
 
-    </div>
+<input
+    id="brandSearch"
+    type="text"
+    placeholder="Search Brand Name..."
+>
+
+<input
+    id="genericSearch"
+    type="text"
+    placeholder="Search Generic Name..."
+>
+
+<input
+    id="strengthSearch"
+    type="text"
+    placeholder="Search Strength..."
+>
+
+<input
+    id="dosageSearch"
+    type="text"
+    placeholder="Search Dosage Form..."
+>
+
+</div>
 
 
-    <!-- =========================
-         STATUS
-    ========================== -->
+<div class="controls">
 
-    <div
-        class="status"
-        id="status"
-    >
-        Loading...
-    </div>
+<button
+    id="clearBtn"
+    class="clear-btn"
+    type="button"
+>
+Clear Search & Filters
+</button>
+
+</div>
+
+</div>
 
 
-    <div
-        class="error-box"
-        id="errorBox"
-    ></div>
+<div
+    class="status"
+    id="status"
+>
+Loading...
+</div>
+
+
+<div
+    class="error-box"
+    id="errorBox"
+></div>
 
 </div>
 
 
 <!-- =========================
-     TABLE AREA
+     TABLE
 ========================= -->
 
 <div
@@ -604,32 +658,26 @@ h1{
     id="excelArea"
 >
 
-    <div
-        class="excel-scroll"
-        id="excelScroll"
-    >
-
-        <div
-            class="excel-header"
-            id="excelHeader"
-        ></div>
-
-        <div
-            class="virtual-content"
-            id="virtualContent"
-        ></div>
-
-    </div>
+<div
+    class="excel-header"
+    id="excelHeader"
+></div>
 
 
-    <!-- =========================
-         PROACTIVE IMAGES
-    ========================== -->
+<div
+    class="virtual-content"
+    id="virtualContent"
+></div>
 
-    <div
-        class="special-content"
-        id="specialContent"
-    ></div>
+
+<!-- =========================
+     PROACTIVE IMAGES
+========================= -->
+
+<div
+    class="special-content"
+    id="specialContent"
+></div>
 
 </div>
 
@@ -643,48 +691,48 @@ h1{
     id="filterPopup"
 >
 
-    <div
-        class="filter-popup-header"
-        id="filterPopupHeader"
-    >
-        Filter
-    </div>
+<div
+    class="filter-popup-header"
+    id="filterPopupHeader"
+>
+Filter
+</div>
 
 
-    <div class="filter-search">
+<div class="filter-search">
 
-        <input
-            id="filterValueSearch"
-            type="text"
-            placeholder="Search values..."
-        >
+<input
+    id="filterValueSearch"
+    type="text"
+    placeholder="Search values..."
+>
 
-    </div>
-
-
-    <div class="filter-actions">
-
-        <button
-            id="selectAllBtn"
-            type="button"
-        >
-            Select All
-        </button>
-
-        <button
-            id="clearFilterBtn"
-            type="button"
-        >
-            Clear
-        </button>
-
-    </div>
+</div>
 
 
-    <div
-        class="filter-values"
-        id="filterValues"
-    ></div>
+<div class="filter-actions">
+
+<button
+    id="selectAllBtn"
+    type="button"
+>
+Select All
+</button>
+
+<button
+    id="clearFilterBtn"
+    type="button"
+>
+Clear
+</button>
+
+</div>
+
+
+<div
+    class="filter-values"
+    id="filterValues"
+></div>
 
 </div>
 
@@ -697,107 +745,107 @@ h1{
 
 const WORKSHEETS = [
 
-    {
-        id:"thiqa",
-        name:"Thiqa & Basic",
-        file:"data.json"
-    },
+{
+    id:"thiqa",
+    name:"Thiqa & Basic",
+    file:"data.json"
+},
 
-    {
-        id:"haad",
-        name:"HAAD",
-        file:"HAAD_LIST.json"
-    },
+{
+    id:"haad",
+    name:"HAAD",
+    file:"HAAD_LIST.json"
+},
 
-    {
-        id:"apg",
-        name:"APG FORMULARY 05-06",
-        file:"APG FORMULARY 05-06.json"
-    },
+{
+    id:"apg",
+    name:"APG FORMULARY 05-06",
+    file:"APG FORMULARY 05-06.json"
+},
 
-    {
-        id:"icd10",
-        name:"ICD10",
-        file:"ICD10.json"
-    },
+{
+    id:"icd10",
+    name:"ICD10",
+    file:"ICD10.json"
+},
 
-    {
-        id:"vitamin",
-        name:"VITAMIN COVERAGE",
-        file:"VITAMIN COVERAGE.json"
-    },
+{
+    id:"vitamin",
+    name:"VITAMIN COVERAGE",
+    file:"VITAMIN COVERAGE.json"
+},
 
-    {
-        id:"ppi",
-        name:"PPI Coverage",
-        file:"PPI Coverage.json"
-    },
+{
+    id:"ppi",
+    name:"PPI Coverage",
+    file:"PPI Coverage.json"
+},
 
-    {
-        id:"proactive",
-        name:"PROACTIVE INSTRUCTION",
-        special:true
-    },
+{
+    id:"proactive",
+    name:"PROACTIVE INSTRUCTION",
+    special:true
+},
 
-    {
-        id:"hcpc",
-        name:"HCPC Cap & Ref Price",
-        file:"HCPC Cap & REf Price.json"
-    },
+{
+    id:"hcpc",
+    name:"HCPC Cap & Ref Price",
+    file:"HCPC Cap & REf Price.json"
+},
 
-    {
-        id:"validity",
-        name:"VALIDITY AFTER OPENNING",
-        file:"VALIDITY AFTER OPENNING.json"
-    },
+{
+    id:"validity",
+    name:"VALIDITY AFTER OPENNING",
+    file:"VALIDITY AFTER OPENNING.json"
+},
 
-    {
-        id:"cda",
-        name:"CDA & CDB MAX DD",
-        file:"CDA &CDB MAX DD.json"
-    },
+{
+    id:"cda",
+    name:"CDA & CDB MAX DD",
+    file:"CDA &CDB MAX DD.json"
+},
 
-    {
-        id:"adnic",
-        name:"ADNIC (KHALIFA F.)",
-        file:"ADNIC ( KHALIFA F. ).json"
-    },
+{
+    id:"adnic",
+    name:"ADNIC (KHALIFA F.)",
+    file:"ADNIC ( KHALIFA F. ).json"
+},
 
-    {
-        id:"nasHaad",
-        name:"Nas TPA Formulary (HAAD)",
-        file:"Nas TPA Formulary (HAAD).json"
-    },
+{
+    id:"nasHaad",
+    name:"Nas TPA Formulary (HAAD)",
+    file:"Nas TPA Formulary (HAAD).json"
+},
 
-    {
-        id:"nasDha",
-        name:"Nas TPA Formulary (DHA)",
-        file:"Nas TPA Formulary (DHA).json"
-    },
+{
+    id:"nasDha",
+    name:"Nas TPA Formulary (DHA)",
+    file:"Nas TPA Formulary (DHA).json"
+},
 
-    {
-        id:"fmc",
-        name:"FMC LIST 01-2026",
-        file:"FMC LIST 01-2026.json"
-    },
+{
+    id:"fmc",
+    name:"FMC LIST 01-2026",
+    file:"FMC LIST 01-2026.json"
+},
 
-    {
-        id:"oman",
-        name:"OMAN FORMULARY 03-2024",
-        file:"OMAN FORMULARY 03-2024.json"
-    },
+{
+    id:"oman",
+    name:"OMAN FORMULARY 03-2024",
+    file:"OMAN FORMULARY 03-2024.json"
+},
 
-    {
-        id:"phone",
-        name:"PHONE CONTACTS",
-        file:"PHONE CONTACTS.json"
-    }
+{
+    id:"phone",
+    name:"PHONE CONTACTS",
+    file:"PHONE CONTACTS.json"
+}
 
 ];
 
 
 /* =========================================================
-   DATA STORAGE
+   STORAGE
 ========================================================= */
 
 const sheetData = {};
@@ -805,18 +853,28 @@ const sheetColumns = {};
 const filteredData = {};
 const columnFilters = {};
 
+let currentSheet = "thiqa";
+
 const rowOffsets = {};
 const totalHeights = {};
 
-let currentSheet = "thiqa";
 
-let renderFrame = null;
+/*
+   FAST FIXED ROW HEIGHT
 
-const MIN_ROW_HEIGHT = 42;
-const LINE_HEIGHT = 17;
-const ROW_VERTICAL_PADDING = 14;
+   This is intentionally fixed.
+   It avoids calculating every row height
+   during loading/searching.
+*/
 
-const BUFFER_ROWS = 25;
+const ROW_HEIGHT = 42;
+
+
+/*
+   Number of rows rendered around viewport.
+*/
+
+const BUFFER_ROWS = 30;
 
 
 /* =========================================================
@@ -841,108 +899,65 @@ let filterPopupState = {
 ========================================================= */
 
 const tabsEl =
-    document.getElementById(
-        "tabs"
-    );
+document.getElementById("tabs");
 
 const statusEl =
-    document.getElementById(
-        "status"
-    );
+document.getElementById("status");
 
 const errorBox =
-    document.getElementById(
-        "errorBox"
-    );
+document.getElementById("errorBox");
 
 const excelArea =
-    document.getElementById(
-        "excelArea"
-    );
-
-const excelScroll =
-    document.getElementById(
-        "excelScroll"
-    );
+document.getElementById("excelArea");
 
 const excelHeader =
-    document.getElementById(
-        "excelHeader"
-    );
+document.getElementById("excelHeader");
 
 const virtualContent =
-    document.getElementById(
-        "virtualContent"
-    );
+document.getElementById("virtualContent");
 
 const specialContent =
-    document.getElementById(
-        "specialContent"
-    );
+document.getElementById("specialContent");
 
 const searchArea =
-    document.getElementById(
-        "searchArea"
-    );
+document.getElementById("searchArea");
 
 const brandSearch =
-    document.getElementById(
-        "brandSearch"
-    );
+document.getElementById("brandSearch");
 
 const genericSearch =
-    document.getElementById(
-        "genericSearch"
-    );
+document.getElementById("genericSearch");
 
 const strengthSearch =
-    document.getElementById(
-        "strengthSearch"
-    );
+document.getElementById("strengthSearch");
 
 const dosageSearch =
-    document.getElementById(
-        "dosageSearch"
-    );
+document.getElementById("dosageSearch");
 
 const clearBtn =
-    document.getElementById(
-        "clearBtn"
-    );
+document.getElementById("clearBtn");
 
 const filterPopup =
-    document.getElementById(
-        "filterPopup"
-    );
+document.getElementById("filterPopup");
 
 const filterPopupHeader =
-    document.getElementById(
-        "filterPopupHeader"
-    );
+document.getElementById("filterPopupHeader");
 
 const filterValueSearch =
-    document.getElementById(
-        "filterValueSearch"
-    );
+document.getElementById("filterValueSearch");
 
 const filterValues =
-    document.getElementById(
-        "filterValues"
-    );
+document.getElementById("filterValues");
 
 const selectAllBtn =
-    document.getElementById(
-        "selectAllBtn"
-    );
+document.getElementById("selectAllBtn");
 
 const clearFilterBtn =
-    document.getElementById(
-        "clearFilterBtn"
-    );
+document.getElementById("clearFilterBtn");
 
 
 /* =========================================================
-   INITIALIZE
+   INITIALIZE STORAGE
 ========================================================= */
 
 function initializeSheetStorage(){
@@ -977,19 +992,23 @@ function createTabs(){
     WORKSHEETS.forEach(sheet => {
 
         const button =
-            document.createElement(
-                "button"
-            );
+        document.createElement("button");
 
-        button.type = "button";
 
-        button.className = "tab";
+        button.type =
+        "button";
+
+
+        button.className =
+        "tab";
+
 
         button.dataset.sheet =
-            sheet.id;
+        sheet.id;
+
 
         button.textContent =
-            sheet.name;
+        sheet.name;
 
 
         if(sheet.id === currentSheet){
@@ -1023,8 +1042,7 @@ function createTabs(){
 
 
 /* =========================================================
-   LOAD ALL JSON FILES
-   FAST PARALLEL LOADING
+   LOAD JSON - PARALLEL
 ========================================================= */
 
 async function loadAllData(){
@@ -1033,105 +1051,103 @@ async function loadAllData(){
         "none";
 
 
+    /*
+       LOAD ALL FILES AT THE SAME TIME
+    */
+
     const results =
-        await Promise.all(
+    await Promise.all(
 
-            WORKSHEETS.map(
-                async sheet => {
+        WORKSHEETS.map(
+            async sheet => {
 
-                    /*
-                       PROACTIVE has no JSON
-                    */
+                if(sheet.special){
 
-                    if(sheet.special){
-
-                        return {
-                            sheet,
-                            rows:[],
-                            error:null
-                        };
-
-                    }
-
-
-                    try{
-
-                        const response =
-                            await fetch(
-                                encodeURI(
-                                    sheet.file
-                                ) +
-                                "?v=" +
-                                Date.now(),
-                                {
-                                    cache:
-                                        "no-store"
-                                }
-                            );
-
-
-                        if(!response.ok){
-
-                            throw new Error(
-                                "HTTP " +
-                                response.status
-                            );
-
-                        }
-
-
-                        const json =
-                            await response.json();
-
-
-                        return {
-
-                            sheet,
-
-                            rows:
-                                normalizeJSON(
-                                    json
-                                ),
-
-                            error:null
-
-                        };
-
-                    }
-                    catch(error){
-
-                        console.error(
-                            sheet.name,
-                            error
-                        );
-
-
-                        return {
-
-                            sheet,
-
-                            rows:[],
-
-                            error
-
-                        };
-
-                    }
+                    return {
+                        sheet,
+                        rows:[],
+                        error:null
+                    };
 
                 }
-            )
 
-        );
+
+                try{
+
+                    const response =
+                    await fetch(
+                        encodeURI(
+                            sheet.file
+                        ) +
+                        "?v=" +
+                        Date.now(),
+                        {
+                            cache:"no-store"
+                        }
+                    );
+
+
+                    if(!response.ok){
+
+                        throw new Error(
+                            "HTTP " +
+                            response.status
+                        );
+
+                    }
+
+
+                    const json =
+                    await response.json();
+
+
+                    return {
+
+                        sheet,
+
+                        rows:
+                        normalizeJSON(
+                            json
+                        ),
+
+                        error:null
+
+                    };
+
+                }
+                catch(error){
+
+                    return {
+
+                        sheet,
+
+                        rows:[],
+
+                        error
+
+                    };
+
+                }
+
+            }
+        )
+
+    );
 
 
     const errors = [];
 
 
+    /*
+       Just store the data.
+       NO row calculations here.
+    */
+
     results.forEach(
         result => {
 
             const sheet =
-                result.sheet;
+            result.sheet;
 
 
             if(sheet.special){
@@ -1140,21 +1156,21 @@ async function loadAllData(){
 
 
             sheetData[sheet.id] =
-                result.rows;
+            result.rows;
 
 
             sheetColumns[sheet.id] =
-                buildColumns(
-                    result.rows
-                );
+            buildColumns(
+                result.rows
+            );
 
 
             filteredData[sheet.id] =
-                result.rows.slice();
+            result.rows.slice();
 
 
             columnFilters[sheet.id] =
-                {};
+            {};
 
 
             if(result.error){
@@ -1172,11 +1188,7 @@ async function loadAllData(){
 
 
     /*
-       Do NOT calculate every row
-       for every worksheet during loading.
-
-       Only the active sheet gets
-       calculated.
+       Display default sheet
     */
 
     switchSheet(
@@ -1187,11 +1199,11 @@ async function loadAllData(){
     if(errors.length){
 
         errorBox.textContent =
-            "Some sheets could not be loaded:\n\n" +
-            errors.join("\n");
+        "Some sheets could not be loaded:\n\n" +
+        errors.join("\n");
 
         errorBox.style.display =
-            "block";
+        "block";
 
     }
 
@@ -1205,7 +1217,9 @@ async function loadAllData(){
 function normalizeJSON(json){
 
     if(Array.isArray(json)){
+
         return json;
+
     }
 
 
@@ -1225,22 +1239,22 @@ function normalizeJSON(json){
     ){
 
         const keys =
-            Object.keys(json);
+        Object.keys(json);
 
 
         for(
-            let i = 0;
-            i < keys.length;
+            let i=0;
+            i<keys.length;
             i++
         ){
 
-            const value =
-                json[keys[i]];
+            if(
+                Array.isArray(
+                    json[keys[i]]
+                )
+            ){
 
-
-            if(Array.isArray(value)){
-
-                return value;
+                return json[keys[i]];
 
             }
 
@@ -1262,15 +1276,19 @@ function buildColumns(rows){
 
     const columns = [];
 
+    /*
+       Stop checking once all row keys
+       are already known in most cases.
+    */
 
     for(
-        let i = 0;
-        i < rows.length;
+        let i=0;
+        i<rows.length;
         i++
     ){
 
         const row =
-            rows[i];
+        rows[i];
 
 
         if(
@@ -1278,26 +1296,28 @@ function buildColumns(rows){
             typeof row !== "object" ||
             Array.isArray(row)
         ){
+
             continue;
+
         }
 
 
         const keys =
-            Object.keys(row);
+        Object.keys(row);
 
 
         for(
-            let j = 0;
-            j < keys.length;
+            let j=0;
+            j<keys.length;
             j++
         ){
 
             const key =
-                keys[j];
+            keys[j];
 
 
             if(
-                !columns.includes(key)
+                columns.indexOf(key) === -1
             ){
 
                 columns.push(key);
@@ -1315,7 +1335,7 @@ function buildColumns(rows){
 
 
 /* =========================================================
-   DISPLAY VALUE
+   VALUE
 ========================================================= */
 
 function displayValue(value){
@@ -1356,9 +1376,7 @@ function displayValue(value){
 
 
 /* =========================================================
-   MULTI TERM SEARCH
-   Example:
-   500%10
+   SEARCH
 ========================================================= */
 
 function matchesMultiSearch(
@@ -1367,11 +1385,11 @@ function matchesMultiSearch(
 ){
 
     const query =
-        String(
-            search || ""
-        )
-        .trim()
-        .toLowerCase();
+    String(
+        search || ""
+    )
+    .trim()
+    .toLowerCase();
 
 
     if(!query){
@@ -1380,25 +1398,31 @@ function matchesMultiSearch(
 
 
     const text =
-        displayValue(
-            value
-        )
-        .toLowerCase();
+    displayValue(value)
+    .toLowerCase();
 
+
+    /*
+       Example:
+       500%10
+
+       Means:
+       contains 500 AND 10
+    */
 
     const terms =
-        query
-            .split("%")
-            .map(
-                term =>
-                    term.trim()
-            )
-            .filter(Boolean);
+    query
+    .split("%")
+    .map(
+        term =>
+        term.trim()
+    )
+    .filter(Boolean);
 
 
     for(
-        let i = 0;
-        i < terms.length;
+        let i=0;
+        i<terms.length;
         i++
     ){
 
@@ -1430,26 +1454,26 @@ function findColumn(
 ){
 
     for(
-        let i = 0;
-        i < patterns.length;
+        let i=0;
+        i<patterns.length;
         i++
     ){
 
         const pattern =
-            patterns[i];
+        patterns[i];
 
 
         for(
-            let j = 0;
-            j < columns.length;
+            let j=0;
+            j<columns.length;
             j++
         ){
 
             if(
                 columns[j]
-                    .toLowerCase()
-                    .trim()
-                    .includes(pattern)
+                .toLowerCase()
+                .trim()
+                .includes(pattern)
             ){
 
                 return columns[j];
@@ -1467,17 +1491,17 @@ function findColumn(
 
 
 /* =========================================================
-   GET FILTERED ROWS
+   FILTER ROWS
 ========================================================= */
 
 function getFilteredRows(type){
 
     const rows =
-        sheetData[type] || [];
+    sheetData[type] || [];
 
 
     const columns =
-        sheetColumns[type] || [];
+    sheetColumns[type] || [];
 
 
     if(!rows.length){
@@ -1486,68 +1510,68 @@ function getFilteredRows(type){
 
 
     const brandColumn =
-        findColumn(
-            columns,
-            [
-                "brand name",
-                "brand",
-                "product name",
-                "item name",
-                "package name"
-            ]
-        );
+    findColumn(
+        columns,
+        [
+            "brand name",
+            "brand",
+            "product name",
+            "item name",
+            "package name"
+        ]
+    );
 
 
     const genericColumn =
-        findColumn(
-            columns,
-            [
-                "generic name",
-                "active ingredient",
-                "active ingredients",
-                "generic",
-                "ingredient"
-            ]
-        );
+    findColumn(
+        columns,
+        [
+            "generic name",
+            "active ingredient",
+            "active ingredients",
+            "generic",
+            "ingredient"
+        ]
+    );
 
 
     const strengthColumn =
-        findColumn(
-            columns,
-            [
-                "strength"
-            ]
-        );
+    findColumn(
+        columns,
+        [
+            "strength"
+        ]
+    );
 
 
     const dosageColumn =
-        findColumn(
-            columns,
-            [
-                "dosage form",
-                "dosage"
-            ]
-        );
+    findColumn(
+        columns,
+        [
+            "dosage form",
+            "dosage"
+        ]
+    );
 
 
     const brandQuery =
-        brandSearch.value;
+    brandSearch.value;
 
 
     const genericQuery =
-        genericSearch.value;
+    genericSearch.value;
 
 
     const strengthQuery =
-        strengthSearch.value;
+    strengthSearch.value;
 
 
     const dosageQuery =
-        dosageSearch.value;
+    dosageSearch.value;
 
 
     const filters =
-        columnFilters[type] || {};
+    columnFilters[type] || {};
 
 
     return rows.filter(
@@ -1576,15 +1600,31 @@ function getFilteredRows(type){
                 }
                 else{
 
-                    const found =
-                        Object.values(row)
-                            .some(
-                                value =>
-                                    matchesMultiSearch(
-                                        value,
-                                        brandQuery
-                                    )
-                            );
+                    let found = false;
+
+                    const values =
+                    Object.values(row);
+
+
+                    for(
+                        let i=0;
+                        i<values.length;
+                        i++
+                    ){
+
+                        if(
+                            matchesMultiSearch(
+                                values[i],
+                                brandQuery
+                            )
+                        ){
+
+                            found = true;
+                            break;
+
+                        }
+
+                    }
 
 
                     if(!found){
@@ -1618,15 +1658,31 @@ function getFilteredRows(type){
                 }
                 else{
 
-                    const found =
-                        Object.values(row)
-                            .some(
-                                value =>
-                                    matchesMultiSearch(
-                                        value,
-                                        genericQuery
-                                    )
-                            );
+                    let found = false;
+
+                    const values =
+                    Object.values(row);
+
+
+                    for(
+                        let i=0;
+                        i<values.length;
+                        i++
+                    ){
+
+                        if(
+                            matchesMultiSearch(
+                                values[i],
+                                genericQuery
+                            )
+                        ){
+
+                            found = true;
+                            break;
+
+                        }
+
+                    }
 
 
                     if(!found){
@@ -1660,15 +1716,31 @@ function getFilteredRows(type){
                 }
                 else{
 
-                    const found =
-                        Object.values(row)
-                            .some(
-                                value =>
-                                    matchesMultiSearch(
-                                        value,
-                                        strengthQuery
-                                    )
-                            );
+                    let found = false;
+
+                    const values =
+                    Object.values(row);
+
+
+                    for(
+                        let i=0;
+                        i<values.length;
+                        i++
+                    ){
+
+                        if(
+                            matchesMultiSearch(
+                                values[i],
+                                strengthQuery
+                            )
+                        ){
+
+                            found = true;
+                            break;
+
+                        }
+
+                    }
 
 
                     if(!found){
@@ -1702,15 +1774,31 @@ function getFilteredRows(type){
                 }
                 else{
 
-                    const found =
-                        Object.values(row)
-                            .some(
-                                value =>
-                                    matchesMultiSearch(
-                                        value,
-                                        dosageQuery
-                                    )
-                            );
+                    let found = false;
+
+                    const values =
+                    Object.values(row);
+
+
+                    for(
+                        let i=0;
+                        i<values.length;
+                        i++
+                    ){
+
+                        if(
+                            matchesMultiSearch(
+                                values[i],
+                                dosageQuery
+                            )
+                        ){
+
+                            found = true;
+                            break;
+
+                        }
+
+                    }
 
 
                     if(!found){
@@ -1727,38 +1815,36 @@ function getFilteredRows(type){
             */
 
             const filterColumns =
-                Object.keys(filters);
+            Object.keys(filters);
 
 
             for(
-                let i = 0;
-                i < filterColumns.length;
+                let i=0;
+                i<filterColumns.length;
                 i++
             ){
 
                 const column =
-                    filterColumns[i];
+                filterColumns[i];
 
 
                 const selected =
-                    filters[column];
+                filters[column];
 
 
                 if(
                     selected &&
-                    selected.size > 0
+                    selected.size
                 ){
 
                     const value =
-                        displayValue(
-                            row[column]
-                        );
+                    displayValue(
+                        row[column]
+                    );
 
 
                     if(
-                        !selected.has(
-                            value
-                        )
+                        !selected.has(value)
                     ){
 
                         return false;
@@ -1779,306 +1865,30 @@ function getFilteredRows(type){
 
 
 /* =========================================================
-   APPLY FILTERS
+   GET COLUMN WIDTH
 ========================================================= */
 
-function applyFilters(type){
-
-    if(type === "proactive"){
-        return;
-    }
-
-
-    filteredData[type] =
-        getFilteredRows(type);
-
-
-    buildRowOffsets(type);
-
-
-    renderVirtualTable(type);
-
-
-    updateStatus(type);
-
-}
-
-
-/* =========================================================
-   UPDATE PLACEHOLDERS
-========================================================= */
-
-function updatePlaceholders(type){
-
-    const columns =
-        sheetColumns[type] || [];
-
-
-    const has =
-        pattern =>
-            columns.some(
-                column =>
-                    column
-                        .toLowerCase()
-                        .includes(pattern)
-            );
-
-
-    brandSearch.placeholder =
-        has("brand") ||
-        has("item name")
-            ? "Search Brand / Item..."
-            : "Search Brand Name...";
-
-
-    genericSearch.placeholder =
-        has("generic") ||
-        has("active ingredient") ||
-        has("ingredient")
-            ? "Search Generic / Active Ingredient..."
-            : "Search Generic Name...";
-
-
-    strengthSearch.placeholder =
-        has("strength")
-            ? "Search Strength..."
-            : "Search Strength / Value...";
-
-
-    dosageSearch.placeholder =
-        has("dosage")
-            ? "Search Dosage Form..."
-            : "Search Dosage / Form...";
-
-}
-
-
-/* =========================================================
-   SWITCH SHEET
-========================================================= */
-
-function switchSheet(type){
-
-    currentSheet = type;
-
-
-    /*
-       Update active tab
-    */
-
-    document
-        .querySelectorAll(".tab")
-        .forEach(tab => {
-
-            tab.classList.toggle(
-                "active",
-                tab.dataset.sheet === type
-            );
-
-        });
-
-
-    /*
-       Clear search when changing
-       worksheet
-    */
-
-    brandSearch.value = "";
-    genericSearch.value = "";
-    strengthSearch.value = "";
-    dosageSearch.value = "";
-
-
-    closeFilterPopup();
-
-
-    /*
-       PROACTIVE
-    */
-
-    if(type === "proactive"){
-
-        searchArea.style.display =
-            "none";
-
-        excelHeader.style.display =
-            "none";
-
-        virtualContent.style.display =
-            "none";
-
-        specialContent.style.display =
-            "block";
-
-
-        renderProactiveImages();
-
-
-        statusEl.textContent =
-            "PROACTIVE INSTRUCTION";
-
-
-        return;
-
-    }
-
-
-    /*
-       NORMAL SHEET
-    */
-
-    searchArea.style.display =
-        "block";
-
-    excelHeader.style.display =
-        "grid";
-
-    virtualContent.style.display =
-        "block";
-
-    specialContent.style.display =
-        "none";
-
-
-    updatePlaceholders(type);
-
-
-    /*
-       Only filter the active sheet
-    */
-
-    filteredData[type] =
-        getFilteredRows(type);
-
-
-    /*
-       Build row offsets once
-    */
-
-    buildRowOffsets(type);
-
-
-    excelScroll.scrollTop = 0;
-    excelScroll.scrollLeft = 0;
-
-
-    renderVirtualTable(type);
-
-
-    updateStatus(type);
-
-}
-
-
-/* =========================================================
-   PROACTIVE IMAGES
-========================================================= */
-
-function renderProactiveImages(){
-
-    specialContent.innerHTML = "";
-
-
-    /*
-       Exact filenames:
-       
-       proactive 1.png
-       proactive 2.png
-    */
-
-    const imageNames = [
-
-        "proactive 1.png",
-
-        "proactive 2.png"
-
-    ];
-
-
-    imageNames.forEach(
-        (fileName,index) => {
-
-            const img =
-                document.createElement(
-                    "img"
-                );
-
-
-            img.className =
-                "proactive-image";
-
-
-            img.alt =
-                "Proactive Instruction " +
-                (index + 1);
-
-
-            img.loading =
-                index === 0
-                    ? "eager"
-                    : "lazy";
-
-
-            img.src =
-                encodeURI(
-                    fileName
-                );
-
-
-            img.onerror =
-                function(){
-
-                    const error =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    error.className =
-                        "proactive-error";
-
-
-                    error.textContent =
-                        "Could not load " +
-                        fileName;
-
-
-                    img.replaceWith(
-                        error
-                    );
-
-                };
-
-
-            specialContent.appendChild(
-                img
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   COLUMN WIDTH
-========================================================= */
-
-function getColumnWidth(column){
+function getColumnWidth(
+    column,
+    type
+){
 
     const c =
-        column
-            .toLowerCase()
-            .trim();
+    column
+    .toLowerCase()
+    .trim();
 
 
     /*
-       Frozen columns
+       Frozen
     */
 
     if(
-        c === "thiqa" ||
-        c === "basic"
+        type === "thiqa" &&
+        (
+            c === "thiqa" ||
+            c === "basic"
+        )
     ){
 
         return 110;
@@ -2087,8 +1897,36 @@ function getColumnWidth(column){
 
 
     /*
-       Vitamin needs larger columns
-       through the expansion algorithm
+       Vitamin
+    */
+
+    if(
+        type === "vitamin"
+    ){
+
+        if(
+            c.includes("item name")
+        ){
+
+            return 330;
+
+        }
+
+
+        if(
+            c.includes("active ingredient") ||
+            c.includes("active ingredients")
+        ){
+
+            return 380;
+
+        }
+
+    }
+
+
+    /*
+       Long text
     */
 
     if(
@@ -2151,13 +1989,13 @@ function getColumnWidth(column){
 
 
 /* =========================================================
-   GET ACTUAL COLUMN WIDTHS
+   FAST COLUMN WIDTH CALCULATION
 ========================================================= */
 
 function getColumnWidths(type){
 
     const columns =
-        sheetColumns[type] || [];
+    sheetColumns[type] || [];
 
 
     if(!columns.length){
@@ -2165,233 +2003,181 @@ function getColumnWidths(type){
     }
 
 
-    const baseWidths =
-        columns.map(
-            column =>
-                getColumnWidth(
-                    column
-                )
-        );
-
-
-    const availableWidth =
-        excelArea.clientWidth ||
-        window.innerWidth;
-
-
-    const baseTotal =
-        baseWidths.reduce(
-            (sum,width) =>
-                sum + width,
-            0
-        );
+    const widths =
+    columns.map(
+        column =>
+        getColumnWidth(
+            column,
+            type
+        )
+    );
 
 
     /*
-       Already wider than screen.
-       Keep natural widths.
+       Available width.
     */
 
-    if(
-        baseTotal >=
-        availableWidth
-    ){
+    const available =
+    excelArea.clientWidth ||
+    window.innerWidth;
 
-        return baseWidths;
+
+    const total =
+    widths.reduce(
+        (a,b) => a+b,
+        0
+    );
+
+
+    /*
+       If already wider than page,
+       don't change anything.
+    */
+
+    if(total >= available){
+
+        return widths;
 
     }
 
 
     const extra =
-        availableWidth -
-        baseTotal;
+    available - total;
 
 
     /*
-       Give extra space according
-       to content type.
+       Extra width weights.
+
+       This makes the table fill the page
+       without making short columns huge.
     */
 
     const weights =
-        columns.map(
-            column => {
+    columns.map(
+        column => {
 
-                const c =
-                    column
-                        .toLowerCase()
-                        .trim();
-
-
-                /*
-                   Vitamin:
-                   Item Name and Active
-                   Ingredients get most
-                   of the additional width.
-                */
-
-                if(
-                    type === "vitamin"
-                ){
-
-                    if(
-                        c.includes(
-                            "item name"
-                        )
-                    ){
-
-                        return 5;
-
-                    }
+            const c =
+            column
+            .toLowerCase()
+            .trim();
 
 
-                    if(
-                        c.includes(
-                            "active ingredient"
-                        ) ||
-                        c.includes(
-                            "active ingredients"
-                        )
-                    ){
-
-                        return 5;
-
-                    }
-
-                }
-
-
-                if(
-                    c.includes("generic") ||
-                    c.includes("active ingredient") ||
+            if(
+                type === "vitamin" &&
+                (
                     c.includes("item name") ||
-                    c.includes("package name") ||
-                    c.includes("product name") ||
-                    c.includes("description") ||
-                    c.includes("instruction") ||
-                    c.includes("indication")
-                ){
+                    c.includes("active ingredient") ||
+                    c.includes("active ingredients")
+                )
+            ){
 
-                    return 3;
-
-                }
-
-
-                return 1;
+                return 5;
 
             }
-        );
+
+
+            if(
+                c.includes("generic") ||
+                c.includes("active ingredient") ||
+                c.includes("item name") ||
+                c.includes("package name") ||
+                c.includes("description") ||
+                c.includes("instruction") ||
+                c.includes("indication")
+            ){
+
+                return 3;
+
+            }
+
+
+            return 1;
+
+        }
+    );
 
 
     /*
-       Thiqa / Basic remain fixed.
+       Frozen columns do NOT receive
+       additional width.
     */
 
-    const frozen =
-        columns.map(
-            column => {
-
-                const c =
-                    column
-                        .toLowerCase()
-                        .trim();
+    let totalWeight = 0;
 
 
-                return (
-                    type === "thiqa" &&
-                    (
-                        c === "thiqa" ||
-                        c === "basic"
-                    )
-                );
+    for(
+        let i=0;
+        i<columns.length;
+        i++
+    ){
 
-            }
+        const c =
+        columns[i]
+        .toLowerCase()
+        .trim();
+
+
+        const frozen =
+        type === "thiqa" &&
+        (
+            c === "thiqa" ||
+            c === "basic"
         );
 
 
-    const totalWeight =
-        weights.reduce(
-            (sum,weight,index) => {
+        if(!frozen){
 
-                if(
-                    frozen[index]
-                ){
+            totalWeight +=
+            weights[i];
 
-                    return sum;
+        }
 
-                }
-
-                return sum + weight;
-
-            },
-            0
-        );
+    }
 
 
     if(totalWeight <= 0){
 
-        return baseWidths;
+        return widths;
 
     }
 
 
     const finalWidths =
-        baseWidths.map(
-            (width,index) => {
+    widths.map(
+        (width,index) => {
 
-                if(
-                    frozen[index]
-                ){
-
-                    return width;
-
-                }
+            const c =
+            columns[index]
+            .toLowerCase()
+            .trim();
 
 
-                return Math.round(
-                    width +
-                    (
-                        extra *
-                        weights[index] /
-                        totalWeight
-                    )
-                );
-
-            }
-        );
-
-
-    /*
-       Frozen Basic width
-    */
-
-    if(type === "thiqa"){
-
-        const basicIndex =
-            columns.findIndex(
-                column =>
-                    column
-                        .toLowerCase()
-                        .trim() ===
-                    "basic"
+            const frozen =
+            type === "thiqa" &&
+            (
+                c === "thiqa" ||
+                c === "basic"
             );
 
 
-        if(
-            basicIndex >= 0
-        ){
+            if(frozen){
 
-            document.documentElement
-                .style
-                .setProperty(
-                    "--basic-width",
-                    finalWidths[
-                        basicIndex
-                    ] + "px"
-                );
+                return width;
+
+            }
+
+
+            return Math.round(
+                width +
+                (
+                    extra *
+                    weights[index] /
+                    totalWeight
+                )
+            );
 
         }
-
-    }
+    );
 
 
     return finalWidths;
@@ -2406,176 +2192,55 @@ function getColumnWidths(type){
 function getGridTemplate(type){
 
     return getColumnWidths(type)
-        .map(
-            width =>
-                width + "px"
-        )
-        .join(" ");
+    .map(
+        width =>
+        width + "px"
+    )
+    .join(" ");
 
 }
 
 
 /* =========================================================
-   ROW HEIGHT
-========================================================= */
-
-function calculateRowHeight(
-    type,
-    row,
-    widths
-){
-
-    const columns =
-        sheetColumns[type] || [];
-
-
-    if(!columns.length){
-
-        return MIN_ROW_HEIGHT;
-
-    }
-
-
-    let maxLines = 1;
-
-
-    for(
-        let i = 0;
-        i < columns.length;
-        i++
-    ){
-
-        const column =
-            columns[i];
-
-
-        const value =
-            displayValue(
-                row[column]
-            );
-
-
-        if(!value){
-            continue;
-        }
-
-
-        const width =
-            widths[i] || 150;
-
-
-        /*
-           Padding is 16px total.
-        */
-
-        const charsPerLine =
-            Math.max(
-                10,
-                Math.floor(
-                    (width - 16) /
-                    7
-                )
-            );
-
-
-        const explicitLines =
-            value.split("\n");
-
-
-        let lineCount = 0;
-
-
-        for(
-            let j = 0;
-            j < explicitLines.length;
-            j++
-        ){
-
-            lineCount +=
-                Math.max(
-                    1,
-                    Math.ceil(
-                        explicitLines[j]
-                            .length /
-                        charsPerLine
-                    )
-                );
-
-        }
-
-
-        if(
-            lineCount >
-            maxLines
-        ){
-
-            maxLines =
-                lineCount;
-
-        }
-
-    }
-
-
-    return Math.max(
-        MIN_ROW_HEIGHT,
-        maxLines *
-        LINE_HEIGHT +
-        ROW_VERTICAL_PADDING
-    );
-
-}
-
-
-/* =========================================================
-   BUILD ROW OFFSETS
+   BUILD SIMPLE OFFSETS
 ========================================================= */
 
 function buildRowOffsets(type){
 
     const rows =
-        filteredData[type] || [];
-
-
-    const widths =
-        getColumnWidths(type);
+    filteredData[type] || [];
 
 
     const offsets =
-        new Array(
-            rows.length
-        );
+    new Array(
+        rows.length
+    );
 
 
-    let currentHeight = 0;
-
+    /*
+       FAST:
+       No per-row calculations.
+    */
 
     for(
-        let i = 0;
-        i < rows.length;
+        let i=0;
+        i<rows.length;
         i++
     ){
 
         offsets[i] =
-            currentHeight;
-
-
-        currentHeight +=
-            calculateRowHeight(
-                type,
-                rows[i],
-                widths
-            );
+        i * ROW_HEIGHT;
 
     }
 
 
     rowOffsets[type] =
-        offsets;
+    offsets;
 
 
     totalHeights[type] =
-        currentHeight;
+    rows.length *
+    ROW_HEIGHT;
 
 
     if(
@@ -2583,7 +2248,8 @@ function buildRowOffsets(type){
     ){
 
         virtualContent.style.height =
-            currentHeight + "px";
+        totalHeights[type] +
+        "px";
 
     }
 
@@ -2591,7 +2257,7 @@ function buildRowOffsets(type){
 
 
 /* =========================================================
-   FIND ROW AT POSITION
+   FIND ROW
 ========================================================= */
 
 function findRowAtPosition(
@@ -2604,52 +2270,25 @@ function findRowAtPosition(
     }
 
 
-    let low = 0;
+    /*
+       Since rows have fixed height,
+       direct calculation is much faster.
+    */
 
-    let high =
-        offsets.length - 1;
-
-
-    while(
-        low <= high
-    ){
-
-        const mid =
-            (low + high) >> 1;
+    const index =
+    Math.floor(
+        position /
+        ROW_HEIGHT
+    );
 
 
-        if(
-            offsets[mid] <=
-            position
-        ){
-
-            if(
-                mid ===
-                offsets.length - 1 ||
-                offsets[mid + 1] >
-                position
-            ){
-
-                return mid;
-
-            }
-
-
-            low =
-                mid + 1;
-
-        }
-        else{
-
-            high =
-                mid - 1;
-
-        }
-
-    }
-
-
-    return 0;
+    return Math.max(
+        0,
+        Math.min(
+            offsets.length - 1,
+            index
+        )
+    );
 
 }
 
@@ -2660,9 +2299,9 @@ function findRowAtPosition(
 
 function renderVirtualTable(type){
 
-    if(type === "proactive"){
-
-        renderProactiveImages();
+    if(
+        type === "proactive"
+    ){
 
         return;
 
@@ -2670,7 +2309,7 @@ function renderVirtualTable(type){
 
 
     const columns =
-        sheetColumns[type] || [];
+    sheetColumns[type] || [];
 
 
     if(!columns.length){
@@ -2680,7 +2319,7 @@ function renderVirtualTable(type){
         virtualContent.innerHTML = "";
 
         virtualContent.style.height =
-            "60px";
+        "60px";
 
         return;
 
@@ -2688,7 +2327,7 @@ function renderVirtualTable(type){
 
 
     const template =
-        getGridTemplate(type);
+    getGridTemplate(type);
 
 
     /*
@@ -2696,53 +2335,54 @@ function renderVirtualTable(type){
     */
 
     excelHeader.style.gridTemplateColumns =
-        template;
+    template;
 
 
-    excelHeader.innerHTML = "";
+    excelHeader.innerHTML =
+    "";
 
 
     for(
-        let i = 0;
-        i < columns.length;
+        let i=0;
+        i<columns.length;
         i++
     ){
 
         const column =
-            columns[i];
+        columns[i];
 
 
-        const headerCell =
-            document.createElement(
-                "div"
-            );
+        const cell =
+        document.createElement(
+            "div"
+        );
 
 
-        headerCell.className =
-            "header-cell";
+        cell.className =
+        "header-cell";
 
 
-        headerCell.textContent =
-            column;
+        cell.textContent =
+        column;
 
 
         /*
-           Frozen header columns
+           Frozen headers
         */
 
         if(type === "thiqa"){
 
             const normalized =
-                column
-                    .toLowerCase()
-                    .trim();
+            column
+            .toLowerCase()
+            .trim();
 
 
             if(
                 normalized === "basic"
             ){
 
-                headerCell.classList.add(
+                cell.classList.add(
                     "frozen-basic"
                 );
 
@@ -2753,7 +2393,7 @@ function renderVirtualTable(type){
                 normalized === "thiqa"
             ){
 
-                headerCell.classList.add(
+                cell.classList.add(
                     "frozen-thiqa"
                 );
 
@@ -2763,30 +2403,26 @@ function renderVirtualTable(type){
 
 
         const filterButton =
-            document.createElement(
-                "button"
-            );
+        document.createElement(
+            "button"
+        );
 
 
         filterButton.type =
-            "button";
+        "button";
 
 
         filterButton.className =
-            "filter-btn";
+        "filter-btn";
 
 
         filterButton.textContent =
-            "▼";
-
-
-        const activeFilter =
-            columnFilters[type][column];
+        "▼";
 
 
         if(
-            activeFilter &&
-            activeFilter.size > 0
+            columnFilters[type][column] &&
+            columnFilters[type][column].size
         ){
 
             filterButton.classList.add(
@@ -2812,52 +2448,50 @@ function renderVirtualTable(type){
         );
 
 
-        headerCell.appendChild(
+        cell.appendChild(
             filterButton
         );
 
 
         excelHeader.appendChild(
-            headerCell
+            cell
         );
 
     }
 
 
     /*
-       VISIBLE ROWS
+       Virtual rows
     */
 
-    renderVisibleRows(type);
+    renderVisibleRows(
+        type
+    );
 
 }
 
 
 /* =========================================================
-   RENDER VISIBLE ROWS
+   VISIBLE ROWS
 ========================================================= */
 
 function renderVisibleRows(type){
 
-    if(type === "proactive"){
-        return;
-    }
-
-
     const rows =
-        filteredData[type] || [];
+    filteredData[type] || [];
 
 
     const columns =
-        sheetColumns[type] || [];
+    sheetColumns[type] || [];
 
 
     if(!rows.length){
 
-        virtualContent.innerHTML = "";
+        virtualContent.innerHTML =
+        "";
 
         virtualContent.style.height =
-            "60px";
+        "60px";
 
         return;
 
@@ -2865,154 +2499,119 @@ function renderVisibleRows(type){
 
 
     const template =
-        getGridTemplate(type);
-
-
-    const widths =
-        getColumnWidths(type);
+    getGridTemplate(type);
 
 
     /*
-       Use the actual scroll position.
+       IMPORTANT:
+       Do NOT calculate each row.
     */
 
     const scrollTop =
-        excelScroll.scrollTop;
+    excelArea.scrollTop;
 
 
     const viewportHeight =
-        excelScroll.clientHeight ||
-        window.innerHeight;
+    excelArea.clientHeight;
 
 
-    const headerHeight =
-        excelHeader.offsetHeight ||
-        54;
+    const start =
+    Math.max(
+        0,
+        Math.floor(
+            scrollTop /
+            ROW_HEIGHT
+        ) -
+        BUFFER_ROWS
+    );
 
 
-    const startPosition =
-        Math.max(
-            0,
-            scrollTop -
-            headerHeight
-        );
+    const end =
+    Math.min(
+        rows.length - 1,
+
+        Math.ceil(
+            (
+                scrollTop +
+                viewportHeight
+            ) /
+            ROW_HEIGHT
+        ) +
+        BUFFER_ROWS
+    );
 
 
-    const endPosition =
-        scrollTop +
-        viewportHeight;
+    virtualContent.innerHTML =
+    "";
 
-
-    let startIndex =
-        findRowAtPosition(
-            rowOffsets[type],
-            startPosition
-        );
-
-
-    let endIndex =
-        findRowAtPosition(
-            rowOffsets[type],
-            endPosition
-        );
-
-
-    startIndex =
-        Math.max(
-            0,
-            startIndex -
-            BUFFER_ROWS
-        );
-
-
-    endIndex =
-        Math.min(
-            rows.length - 1,
-            endIndex +
-            BUFFER_ROWS
-        );
-
-
-    virtualContent.innerHTML = "";
-
-
-    /*
-       Only create visible rows.
-    */
 
     for(
-        let i = startIndex;
-        i <= endIndex;
+        let i=start;
+        i<=end;
         i++
     ){
 
         const row =
-            rows[i];
+        rows[i];
 
 
         const rowElement =
+        document.createElement(
+            "div"
+        );
+
+
+        rowElement.className =
+        "data-row";
+
+
+        rowElement.style.gridTemplateColumns =
+        template;
+
+
+        rowElement.style.height =
+        ROW_HEIGHT + "px";
+
+
+        rowElement.style.top =
+        (
+            i *
+            ROW_HEIGHT
+        ) + "px";
+
+
+        for(
+            let c=0;
+            c<columns.length;
+            c++
+        ){
+
+            const column =
+            columns[c];
+
+
+            const cell =
             document.createElement(
                 "div"
             );
 
 
-        rowElement.className =
-            "data-row";
-
-
-        rowElement.style.gridTemplateColumns =
-            template;
-
-
-        const height =
-            calculateRowHeight(
-                type,
-                row,
-                widths
-            );
-
-
-        rowElement.style.height =
-            height + "px";
-
-
-        rowElement.style.top =
-            rowOffsets[type][i] +
-            "px";
-
-
-        for(
-            let c = 0;
-            c < columns.length;
-            c++
-        ){
-
-            const column =
-                columns[c];
-
-
-            const cell =
-                document.createElement(
-                    "div"
-                );
-
-
             cell.className =
-                "data-cell";
+            "data-cell";
 
 
             const value =
-                displayValue(
-                    row[column]
-                );
+            displayValue(
+                row[column]
+            );
 
 
             cell.textContent =
-                value;
+            value;
 
 
             /*
-               Thiqa / Basic
+               THIQA / BASIC
             */
 
             if(
@@ -3020,15 +2619,15 @@ function renderVisibleRows(type){
             ){
 
                 const normalizedColumn =
-                    column
-                        .toLowerCase()
-                        .trim();
+                column
+                .toLowerCase()
+                .trim();
 
 
                 const normalizedValue =
-                    value
-                        .toLowerCase()
-                        .trim();
+                value
+                .toLowerCase()
+                .trim();
 
 
                 if(
@@ -3118,46 +2717,297 @@ function renderVisibleRows(type){
 
 
 /* =========================================================
-   SCROLL
+   SWITCH SHEET
 ========================================================= */
 
-function handleScroll(){
+function switchSheet(type){
+
+    currentSheet =
+    type;
+
+
+    /*
+       Active tab
+    */
+
+    document
+    .querySelectorAll(".tab")
+    .forEach(
+        tab => {
+
+            tab.classList.toggle(
+                "active",
+                tab.dataset.sheet === type
+            );
+
+        }
+    );
+
+
+    /*
+       Clear search
+    */
+
+    brandSearch.value = "";
+    genericSearch.value = "";
+    strengthSearch.value = "";
+    dosageSearch.value = "";
+
+
+    closeFilterPopup();
+
+
+    /*
+       PROACTIVE
+    */
 
     if(
-        currentSheet ===
-        "proactive"
+        type === "proactive"
     ){
+
+        searchArea.style.display =
+        "none";
+
+
+        excelHeader.style.display =
+        "none";
+
+
+        virtualContent.style.display =
+        "none";
+
+
+        specialContent.style.display =
+        "block";
+
+
+        renderProactiveImages();
+
+
+        statusEl.textContent =
+        "PROACTIVE INSTRUCTION";
+
 
         return;
 
     }
 
 
-    if(renderFrame){
+    /*
+       NORMAL
+    */
 
-        cancelAnimationFrame(
-            renderFrame
-        );
-
-    }
+    searchArea.style.display =
+    "block";
 
 
-    renderFrame =
-        requestAnimationFrame(
-            () => {
+    excelHeader.style.display =
+    "grid";
 
-                renderVisibleRows(
-                    currentSheet
-                );
 
-            }
-        );
+    virtualContent.style.display =
+    "block";
+
+
+    specialContent.style.display =
+    "none";
+
+
+    updatePlaceholders(
+        type
+    );
+
+
+    /*
+       Only filter active sheet
+    */
+
+    filteredData[type] =
+    getFilteredRows(
+        type
+    );
+
+
+    /*
+       Fast fixed offsets
+    */
+
+    buildRowOffsets(
+        type
+    );
+
+
+    excelArea.scrollTop =
+    0;
+
+
+    renderVirtualTable(
+        type
+    );
+
+
+    updateStatus(
+        type
+    );
 
 }
 
 
 /* =========================================================
-   OPEN FILTER
+   PROACTIVE IMAGES
+========================================================= */
+
+function renderProactiveImages(){
+
+    specialContent.innerHTML =
+    "";
+
+
+    const files = [
+
+        "proactive 1.png",
+
+        "proactive 2.png"
+
+    ];
+
+
+    for(
+        let i=0;
+        i<files.length;
+        i++
+    ){
+
+        const img =
+        document.createElement(
+            "img"
+        );
+
+
+        img.className =
+        "proactive-image";
+
+
+        img.src =
+        encodeURI(
+            files[i]
+        );
+
+
+        img.alt =
+        "Proactive Instruction " +
+        (i + 1);
+
+
+        /*
+           First image loads immediately.
+           Second can wait.
+        */
+
+        if(i === 1){
+
+            img.loading =
+            "lazy";
+
+        }
+
+
+        specialContent.appendChild(
+            img
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   PLACEHOLDERS
+========================================================= */
+
+function updatePlaceholders(type){
+
+    const columns =
+    sheetColumns[type] || [];
+
+
+    const has =
+    pattern =>
+    columns.some(
+        column =>
+        column
+        .toLowerCase()
+        .includes(pattern)
+    );
+
+
+    brandSearch.placeholder =
+    has("brand") ||
+    has("item name")
+        ? "Search Brand / Item..."
+        : "Search Brand Name...";
+
+
+    genericSearch.placeholder =
+    has("generic") ||
+    has("active ingredient") ||
+    has("ingredient")
+        ? "Search Generic / Active Ingredient..."
+        : "Search Generic Name...";
+
+
+    strengthSearch.placeholder =
+    "Search Strength...";
+
+
+    dosageSearch.placeholder =
+    "Search Dosage Form...";
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function updateStatus(type){
+
+    if(
+        type === "proactive"
+    ){
+
+        statusEl.textContent =
+        "PROACTIVE INSTRUCTION";
+
+        return;
+
+    }
+
+
+    const total =
+    sheetData[type]
+        ? sheetData[type].length
+        : 0;
+
+
+    const shown =
+    filteredData[type]
+        ? filteredData[type].length
+        : 0;
+
+
+    statusEl.textContent =
+    "Showing " +
+    shown.toLocaleString() +
+    " of " +
+    total.toLocaleString() +
+    " records";
+
+}
+
+
+/* =========================================================
+   FILTER POPUP
 ========================================================= */
 
 function openFilterPopup(
@@ -3166,22 +3016,26 @@ function openFilterPopup(
     button
 ){
 
-    if(type === "proactive"){
+    if(
+        type === "proactive"
+    ){
+
         return;
+
     }
 
 
     const rows =
-        sheetData[type] || [];
+    sheetData[type] || [];
 
 
     const valueSet =
-        new Set();
+    new Set();
 
 
     for(
-        let i = 0;
-        i < rows.length;
+        let i=0;
+        i<rows.length;
         i++
     ){
 
@@ -3195,24 +3049,24 @@ function openFilterPopup(
 
 
     const values =
-        Array.from(
-            valueSet
+    Array.from(
+        valueSet
+    )
+    .sort(
+        (a,b) =>
+        a.localeCompare(
+            b,
+            undefined,
+            {
+                numeric:true,
+                sensitivity:"base"
+            }
         )
-        .sort(
-            (a,b) =>
-                a.localeCompare(
-                    b,
-                    undefined,
-                    {
-                        numeric:true,
-                        sensitivity:"base"
-                    }
-                )
-        );
+    );
 
 
     const existing =
-        columnFilters[type][column];
+    columnFilters[type][column];
 
 
     filterPopupState = {
@@ -3224,35 +3078,35 @@ function openFilterPopup(
         allValues:values,
 
         selected:
-            existing
-                ? new Set(existing)
-                : new Set(values)
+        existing
+            ? new Set(existing)
+            : new Set(values)
 
     };
 
 
     filterPopupHeader.textContent =
-        "Filter: " +
-        column;
+    "Filter: " +
+    column;
 
 
     filterValueSearch.value =
-        "";
+    "";
 
 
     renderFilterValues();
 
 
     const rect =
-        button.getBoundingClientRect();
+    button.getBoundingClientRect();
 
 
     let left =
-        rect.left;
+    rect.left;
 
 
     let top =
-        rect.bottom + 5;
+    rect.bottom + 5;
 
 
     if(
@@ -3261,8 +3115,8 @@ function openFilterPopup(
     ){
 
         left =
-            window.innerWidth -
-            290;
+        window.innerWidth -
+        290;
 
     }
 
@@ -3273,24 +3127,24 @@ function openFilterPopup(
     ){
 
         top =
-            window.innerHeight -
-            430;
+        window.innerHeight -
+        430;
 
     }
 
 
     filterPopup.style.left =
-        Math.max(
-            5,
-            left
-        ) + "px";
+    Math.max(
+        5,
+        left
+    ) + "px";
 
 
     filterPopup.style.top =
-        Math.max(
-            5,
-            top
-        ) + "px";
+    Math.max(
+        5,
+        top
+    ) + "px";
 
 
     filterPopup.classList.add(
@@ -3307,60 +3161,60 @@ function openFilterPopup(
 function renderFilterValues(){
 
     const search =
-        filterValueSearch.value
-            .trim()
-            .toLowerCase();
+    filterValueSearch.value
+    .trim()
+    .toLowerCase();
 
 
     filterValues.innerHTML =
-        "";
+    "";
 
 
     const values =
-        filterPopupState
-            .allValues
-            .filter(
-                value =>
-                    value
-                        .toLowerCase()
-                        .includes(search)
-            );
+    filterPopupState
+    .allValues
+    .filter(
+        value =>
+        value
+        .toLowerCase()
+        .includes(search)
+    );
 
 
     for(
-        let i = 0;
-        i < values.length;
+        let i=0;
+        i<values.length;
         i++
     ){
 
         const value =
-            values[i];
+        values[i];
 
 
         const label =
-            document.createElement(
-                "label"
-            );
+        document.createElement(
+            "label"
+        );
 
 
         label.className =
-            "filter-value";
+        "filter-value";
 
 
         const checkbox =
-            document.createElement(
-                "input"
-            );
+        document.createElement(
+            "input"
+        );
 
 
         checkbox.type =
-            "checkbox";
+        "checkbox";
 
 
         checkbox.checked =
-            filterPopupState
-                .selected
-                .has(value);
+        filterPopupState
+        .selected
+        .has(value);
 
 
         checkbox.addEventListener(
@@ -3372,15 +3226,15 @@ function renderFilterValues(){
                 ){
 
                     filterPopupState
-                        .selected
-                        .add(value);
+                    .selected
+                    .add(value);
 
                 }
                 else{
 
                     filterPopupState
-                        .selected
-                        .delete(value);
+                    .selected
+                    .delete(value);
 
                 }
 
@@ -3392,15 +3246,15 @@ function renderFilterValues(){
 
 
         const text =
-            document.createElement(
-                "span"
-            );
+        document.createElement(
+            "span"
+        );
 
 
         text.textContent =
-            value === ""
-                ? "(Blanks)"
-                : value;
+        value === ""
+            ? "(Blanks)"
+            : value;
 
 
         label.appendChild(
@@ -3429,19 +3283,19 @@ function renderFilterValues(){
 function applyPopupFilter(){
 
     const sheet =
-        filterPopupState.sheet;
+    filterPopupState.sheet;
 
 
     const column =
-        filterPopupState.column;
+    filterPopupState.column;
 
 
     const selected =
-        filterPopupState.selected;
+    filterPopupState.selected;
 
 
     const allValues =
-        filterPopupState.allValues;
+    filterPopupState.allValues;
 
 
     if(
@@ -3459,7 +3313,7 @@ function applyPopupFilter(){
         columnFilters[
             sheet
         ][column] =
-            new Set(selected);
+        new Set(selected);
 
     }
 
@@ -3472,6 +3326,54 @@ function applyPopupFilter(){
 
 
 /* =========================================================
+   APPLY FILTERS
+========================================================= */
+
+function applyFilters(type){
+
+    if(
+        type === "proactive"
+    ){
+
+        return;
+
+    }
+
+
+    filteredData[type] =
+    getFilteredRows(
+        type
+    );
+
+
+    buildRowOffsets(
+        type
+    );
+
+
+    renderVirtualTable(
+        type
+    );
+
+
+    updateStatus(
+        type
+    );
+
+}
+
+
+/* =========================================================
+   FILTER SEARCH
+========================================================= */
+
+filterValueSearch.addEventListener(
+    "input",
+    renderFilterValues
+);
+
+
+/* =========================================================
    SELECT ALL
 ========================================================= */
 
@@ -3480,9 +3382,9 @@ selectAllBtn.addEventListener(
     () => {
 
         filterPopupState.selected =
-            new Set(
-                filterPopupState.allValues
-            );
+        new Set(
+            filterPopupState.allValues
+        );
 
 
         renderFilterValues();
@@ -3503,11 +3405,11 @@ clearFilterBtn.addEventListener(
     () => {
 
         const sheet =
-            filterPopupState.sheet;
+        filterPopupState.sheet;
 
 
         const column =
-            filterPopupState.column;
+        filterPopupState.column;
 
 
         delete columnFilters[
@@ -3516,9 +3418,9 @@ clearFilterBtn.addEventListener(
 
 
         filterPopupState.selected =
-            new Set(
-                filterPopupState.allValues
-            );
+        new Set(
+            filterPopupState.allValues
+        );
 
 
         applyFilters(
@@ -3533,17 +3435,7 @@ clearFilterBtn.addEventListener(
 
 
 /* =========================================================
-   FILTER SEARCH
-========================================================= */
-
-filterValueSearch.addEventListener(
-    "input",
-    renderFilterValues
-);
-
-
-/* =========================================================
-   CLOSE FILTER
+   CLOSE POPUP
 ========================================================= */
 
 function closeFilterPopup(){
@@ -3574,8 +3466,11 @@ document.addEventListener(
 
 
 /* =========================================================
-   SEARCH EVENTS
+   SEARCH
 ========================================================= */
+
+let searchTimer = null;
+
 
 [
     brandSearch,
@@ -3600,28 +3495,22 @@ document.addEventListener(
                 }
 
 
-                /*
-                   Small debounce prevents
-                   repeated rendering while
-                   typing quickly.
-                */
-
                 clearTimeout(
-                    input.searchTimer
+                    searchTimer
                 );
 
 
-                input.searchTimer =
-                    setTimeout(
-                        () => {
+                searchTimer =
+                setTimeout(
+                    () => {
 
-                            applyFilters(
-                                currentSheet
-                            );
+                        applyFilters(
+                            currentSheet
+                        );
 
-                        },
-                        80
-                    );
+                    },
+                    100
+                );
 
             }
         );
@@ -3665,12 +3554,47 @@ clearBtn.addEventListener(
 
 
 /* =========================================================
-   SCROLL EVENT
+   FAST SCROLL
 ========================================================= */
 
-excelScroll.addEventListener(
+let scrollFrame = null;
+
+
+excelArea.addEventListener(
     "scroll",
-    handleScroll,
+    () => {
+
+        if(
+            currentSheet ===
+            "proactive"
+        ){
+
+            return;
+
+        }
+
+
+        if(scrollFrame){
+
+            cancelAnimationFrame(
+                scrollFrame
+            );
+
+        }
+
+
+        scrollFrame =
+        requestAnimationFrame(
+            () => {
+
+                renderVisibleRows(
+                    currentSheet
+                );
+
+            }
+        );
+
+    },
     {
         passive:true
     }
@@ -3694,36 +3618,36 @@ window.addEventListener(
 
 
         resizeTimer =
-            setTimeout(
-                () => {
+        setTimeout(
+            () => {
 
-                    if(
-                        currentSheet ===
-                        "proactive"
-                    ){
+                if(
+                    currentSheet ===
+                    "proactive"
+                ){
 
-                        return;
+                    return;
 
-                    }
-
-
-                    /*
-                       Recalculate only the
-                       active worksheet.
-                    */
-
-                    buildRowOffsets(
-                        currentSheet
-                    );
+                }
 
 
-                    renderVirtualTable(
-                        currentSheet
-                    );
+                /*
+                   Recalculate only active
+                   worksheet.
+                */
 
-                },
-                150
-            );
+                buildRowOffsets(
+                    currentSheet
+                );
+
+
+                renderVirtualTable(
+                    currentSheet
+                );
+
+            },
+            150
+        );
 
     }
 );
