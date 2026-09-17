@@ -736,7 +736,16 @@ Clear
 
 </div>
 
+/* =========================
+   VITAMIN COVERAGE
+   NCI / NOT COVERED
+========================= */
 
+.vitamin-not-covered{
+    background:#f4cccc !important;
+    color:#222 !important;
+    font-weight:bold !important;
+}
 <script>
 
 /* =========================================================
@@ -2701,6 +2710,39 @@ function renderVisibleRows(type){
             cell.textContent =
             value;
 
+            /* VITAMIN NCI / NOT COVERED */
+
+if(type === "vitamin"){
+
+    const normalizedColumn =
+    column
+    .toLowerCase()
+    .trim();
+
+    const normalizedValue =
+    value
+    .toLowerCase()
+    .trim();
+
+    if(
+        (
+            normalizedColumn === "enhanced" ||
+            normalizedColumn === "thiqa"
+        )
+        &&
+        (
+            normalizedValue === "nci" ||
+            normalizedValue === "not covered"
+        )
+    ){
+
+        cell.classList.add(
+            "vitamin-not-covered"
+        );
+
+    }
+
+}
 
             /*
                THIQA / BASIC
