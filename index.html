@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,72 +9,70 @@
 
 <style>
 
+/* =========================================================
+   GENERAL
+========================================================= */
+
 *{
     box-sizing:border-box;
 }
 
+html,
 body{
     margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+}
+
+body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#f3f5f7;
+    background:#f2f3f5;
     color:#222;
 }
 
-/* =========================
-   TOP
-========================= */
+/* =========================================================
+   TOP AREA
+========================================================= */
 
 .top{
     background:#fff;
-    padding:18px 20px 12px;
-    border-bottom:1px solid #d9d9d9;
+    padding:10px 15px 8px;
+    border-bottom:1px solid #d5d8dc;
 }
 
 h1{
-    margin:0 0 15px;
+    margin:0 0 10px;
     text-align:center;
-    font-size:26px;
     color:#1d3557;
+    font-size:24px;
 }
 
-/* =========================
+/* =========================================================
    TABS
-========================= */
+========================================================= */
 
 .tabs{
     display:grid;
-    grid-template-columns:repeat(8,minmax(0,1fr));
-    gap:8px;
-
-    width:100%;
-    max-width:1600px;
-
-    margin:0 auto 15px;
+    grid-template-columns:repeat(8,1fr);
+    gap:5px;
 }
 
 .tab{
-    width:100%;
-
-    border:1px solid #b8b8b8;
-    background:#eee;
-
-    padding:10px 7px;
-
-    border-radius:6px 6px 0 0;
-
+    border:1px solid #bfc5cc;
+    background:#e9edf2;
+    color:#1d3557;
+    padding:8px 5px;
+    border-radius:4px;
     cursor:pointer;
-
+    font-size:12px;
     font-weight:bold;
-    font-size:13px;
-
     text-align:center;
-
-    white-space:normal;
-    line-height:16px;
+    min-width:0;
 }
 
 .tab:hover{
-    background:#e2e6ea;
+    background:#dce6f1;
 }
 
 .tab.active{
@@ -82,918 +81,600 @@ h1{
     border-color:#1d3557;
 }
 
-/* =========================
-   SEARCH
-========================= */
+/* =========================================================
+   SEARCH AREA
+========================================================= */
 
-.search-container{
+.search-area{
+    margin-top:10px;
     display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-
-    gap:10px;
-
-    max-width:1600px;
-    margin:0 auto 10px;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
 }
 
-.search-container input{
+.search-box{
+    position:relative;
+}
+
+.search-box input{
     width:100%;
-
-    padding:10px 12px;
-
-    border:1px solid #c5cbd1;
-    border-radius:5px;
-
-    font-size:14px;
-
+    padding:9px 35px 9px 10px;
+    border:1px solid #bfc5cc;
+    border-radius:4px;
+    font-size:13px;
     outline:none;
 }
 
-.search-container input:focus{
+.search-box input:focus{
     border-color:#1d3557;
 }
 
-.controls{
-    display:flex;
-    justify-content:center;
-
-    margin-bottom:10px;
-}
-
-.clear-btn{
-    border:1px solid #1d3557;
-
-    background:#1d3557;
-    color:#fff;
-
-    padding:9px 18px;
-
-    border-radius:5px;
-
+.clear-search{
+    position:absolute;
+    right:8px;
+    top:50%;
+    transform:translateY(-50%);
     cursor:pointer;
-
+    color:#777;
     font-weight:bold;
+    display:none;
 }
 
-.clear-btn:hover{
-    background:#16304e;
+.clear-search:hover{
+    color:#111;
 }
 
-/* =========================
-   STATUS
-========================= */
+/* =========================================================
+   STATUS / ERROR
+========================================================= */
 
 .status{
-    text-align:center;
-    font-size:13px;
+    margin-top:7px;
+    font-size:12px;
     color:#555;
-
-    margin:6px 0 10px;
 }
 
 .error-box{
     display:none;
-
-    max-width:1600px;
-
-    margin:0 auto 10px;
-
+    margin-top:7px;
+    padding:8px;
     background:#f8d7da;
-    color:#721c24;
-
-    border:1px solid #f1b0b7;
-
-    padding:10px;
-
-    border-radius:5px;
-
-    white-space:pre-wrap;
-}
-
-/* =========================
-   EXCEL AREA
-========================= */
-
-.excel-area{
-    position:relative;
-
-    width:100%;
-
-    height:calc(100vh - 225px);
-
-    min-height:450px;
-
-    overflow:auto;
-
-    background:#fff;
-
-    border-top:1px solid #c8c8c8;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.excel-header{
-    position:sticky;
-    top:0;
-
-    z-index:20;
-
-    display:grid;
-
-    width:max-content;
-    min-width:100%;
-
-    background:#e9edf2;
-
-    border-bottom:2px solid #9ba6b2;
-}
-
-.header-cell{
-    position:relative;
-
-    min-width:0;
-
-    min-height:54px;
-
-    padding:7px 32px 7px 8px;
-
-    border-right:1px solid #c7cbd0;
-
-    display:flex;
-    align-items:center;
-
-    font-weight:bold;
-    font-size:13px;
-    line-height:16px;
-
-    white-space:normal;
-    overflow-wrap:anywhere;
-    word-break:break-word;
-}
-
-.filter-btn{
-    position:absolute;
-
-    right:4px;
-    top:50%;
-
-    transform:translateY(-50%);
-
-    width:22px;
-    height:22px;
-
-    border:1px solid #adb5bd;
-
-    background:#fff;
-
+    border:1px solid #f1aeb5;
+    color:#842029;
     border-radius:4px;
-
-    cursor:pointer;
-
-    font-size:10px;
-
-    padding:0;
-}
-
-.filter-btn:hover{
-    background:#eef2f5;
-}
-
-.filter-btn.filtered{
-    background:#1d3557;
-    color:#fff;
-}
-
-/* =========================
-   VIRTUAL CONTENT
-========================= */
-
-.virtual-content{
-    position:relative;
-
-    width:100%;
-
-    min-width:max-content;
-}
-
-.data-row{
-    position:absolute;
-
-    left:0;
-
-    display:grid;
-
-    width:max-content;
-    min-width:100%;
-
-    background:#fff;
-}
-
-.data-cell{
-    min-width:0;
-
-    padding:7px 8px;
-
-    border-right:1px solid #d5d8dc;
-    border-bottom:1px solid #d5d8dc;
-
-    font-size:13px;
-    line-height:17px;
-
-    white-space:normal;
-    overflow-wrap:anywhere;
-    word-break:break-word;
-
-    overflow:hidden;
-}
-
-.data-row:nth-child(even) .data-cell{
-    background:#fafafa;
-}
-
-/* =========================
-   THIQA / BASIC
-========================= */
-
-.thiqa-yes,
-.basic-yes{
-    background:#d9ead3 !important;
-
-    color:#222 !important;
-
-    font-weight:bold !important;
-
-    text-align:center;
-}
-
-.thiqa-no,
-.basic-no{
-    background:#f4cccc !important;
-
-    color:#222 !important;
-
-    font-weight:bold !important;
-
-    text-align:center;
-}
-
-/* =========================
-   VITAMIN COVERAGE
-   NCI / NOT COVERED
-========================= */
-
-.vitamin-not-covered{
-    background:#f4cccc !important;
-    color:#222 !important;
-    font-weight:bold !important;
-}
-
-/* =========================
-   FROZEN
-========================= */
-
-.frozen-basic{
-    position:sticky !important;
-
-    right:0;
-
-    z-index:18 !important;
-
-    box-shadow:
-        -3px 0 4px rgba(0,0,0,.08);
-}
-
-.frozen-thiqa{
-    position:sticky !important;
-
-    right:110px;
-
-    z-index:18 !important;
-
-    box-shadow:
-        -2px 0 3px rgba(0,0,0,.05);
-}
-
-.excel-header .frozen-basic,
-.excel-header .frozen-thiqa{
-    z-index:25 !important;
-}
-
-/* =========================
-   FILTER POPUP
-========================= */
-
-.filter-popup{
-    display:none;
-
-    position:fixed;
-
-    z-index:1000;
-
-    width:280px;
-
-    max-height:420px;
-
-    background:#fff;
-
-    border:1px solid #b9c1c8;
-
-    border-radius:6px;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.18);
-
-    overflow:hidden;
-}
-
-.filter-popup.show{
-    display:block;
-}
-
-.filter-popup-header{
-    padding:10px;
-
-    border-bottom:1px solid #ddd;
-
-    background:#f5f7f9;
-
-    font-weight:bold;
-
-    font-size:13px;
-}
-
-.filter-search{
-    padding:8px;
-
-    border-bottom:1px solid #ddd;
-}
-
-.filter-search input{
-    width:100%;
-
-    padding:7px 8px;
-
-    border:1px solid #c7cdd3;
-
-    border-radius:4px;
-}
-
-.filter-actions{
-    display:flex;
-
-    gap:6px;
-
-    padding:8px;
-
-    border-bottom:1px solid #ddd;
-}
-
-.filter-actions button{
-    flex:1;
-
-    padding:7px;
-
-    border:1px solid #c3cad1;
-
-    background:#fff;
-
-    border-radius:4px;
-
-    cursor:pointer;
-}
-
-.filter-actions button:hover{
-    background:#eef2f5;
-}
-
-.filter-values{
-    max-height:280px;
-
-    overflow-y:auto;
-
-    padding:6px 8px;
-}
-
-.filter-value{
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    padding:5px 2px;
-
     font-size:12px;
 }
 
-/* =========================
+/* =========================================================
+   EXCEL AREA
+========================================================= */
+
+.excel-area{
+    height:calc(100vh - 225px);
+    min-height:450px;
+    overflow:auto;
+    background:#fff;
+    margin:0;
+    position:relative;
+}
+
+/* =========================================================
+   EXCEL TABLE
+========================================================= */
+
+.excel-table{
+    width:max-content;
+    min-width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    table-layout:fixed;
+}
+
+.excel-table th,
+.excel-table td{
+    border-right:1px solid #d5d8dc;
+    border-bottom:1px solid #d5d8dc;
+    padding:8px 9px;
+    font-size:12px;
+    line-height:16px;
+    height:42px;
+    vertical-align:middle;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+}
+
+.excel-table thead th{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:#1d3557;
+    color:#fff;
+    font-weight:bold;
+    text-align:center;
+}
+
+.excel-table tbody td{
+    background:#fff;
+}
+
+.excel-table tbody tr:nth-child(even) td{
+    background:#fafafa;
+}
+
+/* =========================================================
+   FROZEN THIQA / BASIC COLUMNS
+========================================================= */
+
+.frozen-thiqa{
+    position:sticky !important;
+    right:var(--basic-width,0px);
+    z-index:15 !important;
+    background:#eef5fb !important;
+}
+
+.frozen-basic{
+    position:sticky !important;
+    right:0;
+    z-index:16 !important;
+    background:#eef5fb !important;
+}
+
+thead .frozen-thiqa,
+thead .frozen-basic{
+    z-index:30 !important;
+    background:#1d3557 !important;
+    color:#fff !important;
+}
+
+/* =========================================================
+   VITAMIN COVERAGE SPECIAL CELLS
+========================================================= */
+
+.vitamin-nci,
+.vitamin-not-covered{
+    color:#c00000 !important;
+    font-weight:bold;
+}
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filter-button{
+    margin-left:5px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:16px;
+    height:16px;
+    border:1px solid rgba(255,255,255,.7);
+    border-radius:2px;
+    cursor:pointer;
+    font-size:9px;
+    background:rgba(255,255,255,.12);
+}
+
+.filter-button:hover{
+    background:rgba(255,255,255,.25);
+}
+
+.filter-button.active{
+    background:#fff;
+    color:#1d3557;
+}
+
+/* =========================================================
+   FILTER POPUP
+========================================================= */
+
+.filter-popup{
+    position:fixed;
+    z-index:1000;
+    width:260px;
+    max-height:400px;
+    background:#fff;
+    border:1px solid #aaa;
+    border-radius:5px;
+    box-shadow:0 4px 15px rgba(0,0,0,.2);
+    display:none;
+    overflow:hidden;
+}
+
+.filter-popup-header{
+    padding:8px;
+    background:#1d3557;
+    color:#fff;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.filter-popup-actions{
+    display:flex;
+    gap:5px;
+    padding:7px;
+    border-bottom:1px solid #ddd;
+}
+
+.filter-popup-actions button{
+    flex:1;
+    padding:5px;
+    font-size:11px;
+    cursor:pointer;
+    border:1px solid #bbb;
+    background:#f4f4f4;
+    border-radius:3px;
+}
+
+.filter-popup-actions button:hover{
+    background:#e5e5e5;
+}
+
+.filter-list{
+    max-height:320px;
+    overflow:auto;
+    padding:5px 7px;
+}
+
+.filter-option{
+    display:flex;
+    align-items:flex-start;
+    gap:6px;
+    padding:4px 2px;
+    font-size:11px;
+    cursor:pointer;
+}
+
+.filter-option input{
+    margin-top:2px;
+}
+
+.filter-footer{
+    padding:7px;
+    border-top:1px solid #ddd;
+}
+
+.filter-apply{
+    width:100%;
+    padding:6px;
+    border:0;
+    background:#1d3557;
+    color:#fff;
+    border-radius:3px;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:bold;
+}
+
+/* =========================================================
    SPECIAL CONTENT
-========================= */
+========================================================= */
 
 .special-content{
     display:none;
-
     width:100%;
-
     background:#fff;
-
+    min-height:100%;
     padding:15px;
 }
 
-.proactive-image{
-    display:block;
+/* =========================================================
+   PROACTIVE
+========================================================= */
 
-    width:100%;
+.proactive-container{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    align-items:center;
+}
 
-    max-width:1600px;
-
+.proactive-container img{
+    max-width:100%;
     height:auto;
-
-    margin:0 auto 20px;
+    display:block;
+    border:1px solid #ddd;
 }
 
-.proactive-image:last-child{
-    margin-bottom:0;
-}
-
-/* =========================
+/* =========================================================
    PHONE CONTACTS
-========================= */
+========================================================= */
 
 .phone-layout{
-
     display:grid;
-
-    grid-template-columns:
-        minmax(0,1fr)
-        minmax(0,1fr)
-        minmax(0,1.35fr);
-
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.25fr);
     gap:15px;
-
     width:100%;
-
-    max-width:1600px;
-
-    margin:0 auto;
-
     align-items:stretch;
-
-}
-
-.phone-table-box{
-
-    width:100%;
-
-    background:#fff;
-
-    border:1px solid #bfc5cb;
-
-    border-radius:5px;
-
-    overflow:hidden;
-
 }
 
 .phone-middle{
-
     display:flex;
-
     flex-direction:column;
-
     gap:15px;
-
     min-width:0;
+}
 
+.phone-table-box{
+    background:#fff;
+    border:1px solid #c8c8c8;
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 1px 3px rgba(0,0,0,.06);
+    min-width:0;
 }
 
 .phone-table{
-
     width:100%;
-
     border-collapse:collapse;
-
-    table-layout:auto;
-
+    table-layout:fixed;
 }
+
+/* All cells */
 
 .phone-table th,
 .phone-table td{
-
-    border:1px solid #d5d8dc;
-
-    padding:7px 8px;
-
+    border-right:1px solid #d5d8dc;
+    border-bottom:1px solid #d5d8dc;
+    padding:8px 9px;
     font-size:13px;
-
     line-height:17px;
-
     text-align:left;
-
     vertical-align:middle;
-
     overflow-wrap:anywhere;
-
     word-break:break-word;
-
 }
 
-.phone-table thead th{
+.phone-table th:last-child,
+.phone-table td:last-child{
+    border-right:0;
+}
 
-    background:#e9edf2;
+.phone-table tbody tr:last-child td{
+    border-bottom:0;
+}
 
+/* Section title:
+   APG DEPARTMENTS
+   ZAS BUSINESS UNITS
+*/
+
+.phone-table thead tr.phone-title-row th{
+    background:#1d3557;
+    color:#fff;
+    text-align:center;
+    font-size:14px;
     font-weight:bold;
-
+    padding:10px 8px;
+    border-right:0;
 }
+
+/* Column headings */
+
+.phone-table thead tr.phone-header-row th{
+    background:#dce6f1;
+    color:#222;
+    font-weight:bold;
+    text-align:center;
+    vertical-align:middle;
+    padding:9px 8px;
+}
+
+/* Data rows */
 
 .phone-table tbody tr:nth-child(even) td{
-
     background:#fafafa;
-
 }
 
-/* Merged APG / ZAS title */
+/* =========================================================
+   PHONE TABLE 1
+========================================================= */
 
-.phone-section-title{
-
-    background:#1d3557 !important;
-
-    color:#fff !important;
-
-    text-align:center !important;
-
-    font-weight:bold !important;
-
-    font-size:14px !important;
-
-    padding:9px 8px !important;
-
+.phone-layout > .phone-table-box:first-child
+.phone-table th:first-child,
+.phone-layout > .phone-table-box:first-child
+.phone-table td:first-child{
+    width:42%;
 }
 
-/* Phone table 1 */
-
-.phone-table-contacts th:first-child,
-.phone-table-contacts td:first-child{
-
-    min-width:140px;
-
+.phone-layout > .phone-table-box:first-child
+.phone-table th:nth-child(2),
+.phone-layout > .phone-table-box:first-child
+.phone-table td:nth-child(2),
+.phone-layout > .phone-table-box:first-child
+.phone-table th:nth-child(3),
+.phone-layout > .phone-table-box:first-child
+.phone-table td:nth-child(3){
+    width:29%;
 }
 
-.phone-table-contacts th:nth-child(2),
-.phone-table-contacts td:nth-child(2){
+/* =========================================================
+   PHONE TABLES 2 & 3
+========================================================= */
 
-    min-width:110px;
-
-    white-space:nowrap;
-
+.phone-middle .phone-table th:first-child,
+.phone-middle .phone-table td:first-child{
+    width:68%;
 }
 
-.phone-table-contacts th:nth-child(3),
-.phone-table-contacts td:nth-child(3){
-
-    min-width:120px;
-
-    white-space:nowrap;
-
+.phone-middle .phone-table th:last-child,
+.phone-middle .phone-table td:last-child{
+    width:32%;
 }
 
-/* APG */
+/* =========================================================
+   PHONE TABLE 4
+========================================================= */
 
-.phone-table-apg th:first-child,
-.phone-table-apg td:first-child{
-
-    width:55%;
-
+.phone-layout > .phone-table-box:last-child
+.phone-table th:first-child,
+.phone-layout > .phone-table-box:last-child
+.phone-table td:first-child{
+    width:62%;
 }
 
-.phone-table-apg th:last-child,
-.phone-table-apg td:last-child{
-
-    width:45%;
-
-    white-space:nowrap;
-
+.phone-layout > .phone-table-box:last-child
+.phone-table th:last-child,
+.phone-layout > .phone-table-box:last-child
+.phone-table td:last-child{
+    width:38%;
 }
-
-/* ZAS */
-
-.phone-table-zas th:first-child,
-.phone-table-zas td:first-child{
-
-    width:65%;
-
-}
-
-.phone-table-zas th:last-child,
-.phone-table-zas td:last-child{
-
-    width:35%;
-
-    white-space:nowrap;
-
-}
-
-/* Insurance */
-
-.phone-table-insurance th:first-child,
-.phone-table-insurance td:first-child{
-
-    width:65%;
-
-}
-
-.phone-table-insurance th:last-child,
-.phone-table-insurance td:last-child{
-
-    width:35%;
-
-    white-space:nowrap;
-
-}
-
-/* Phone loading */
 
 .phone-loading{
-
     text-align:center;
-
-    padding:30px;
-
+    padding:40px 15px;
     color:#555;
-
     font-size:14px;
-
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media(max-width:1100px){
 
     .tabs{
-        grid-template-columns:repeat(4,minmax(0,1fr));
+        grid-template-columns:repeat(4,1fr);
     }
 
-    .search-container{
-        grid-template-columns:repeat(2,minmax(0,1fr));
+    .search-area{
+        grid-template-columns:repeat(2,1fr);
     }
 
     .phone-layout{
-
-        grid-template-columns:
-            minmax(0,1fr)
-            minmax(0,1fr);
-
+        grid-template-columns:minmax(0,1fr) minmax(0,1fr);
     }
 
-    .phone-table-box:first-child{
-
+    .phone-layout > .phone-table-box:last-child{
         grid-column:1 / -1;
-
     }
-
-    .phone-middle{
-
-        grid-column:1 / -1;
-
-    }
-
-    .phone-table-box:last-child{
-
-        grid-column:1 / -1;
-
-    }
-
 }
 
 @media(max-width:800px){
 
     h1{
-        font-size:21px;
-    }
-
-    .top{
-        padding:12px 8px 8px;
+        font-size:20px;
     }
 
     .tabs{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:6px;
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .tab{
-        font-size:12px;
-        padding:9px 5px;
-    }
-
-    .search-container{
+    .search-area{
         grid-template-columns:1fr;
     }
 
     .excel-area{
-        height:calc(100vh - 360px);
+        height:calc(100vh - 300px);
+    }
+
+    .phone-layout{
+        grid-template-columns:1fr;
+    }
+
+    .phone-layout > .phone-table-box:last-child{
+        grid-column:auto;
     }
 
     .special-content{
         padding:8px;
     }
-
-    .phone-layout{
-
-        display:flex;
-
-        flex-direction:column;
-
-        gap:12px;
-
-    }
-
-    .phone-middle{
-
-        display:flex;
-
-        flex-direction:column;
-
-        gap:12px;
-
-    }
-
-    .phone-table th,
-    .phone-table td{
-
-        font-size:12px;
-
-        padding:6px;
-
-    }
-
 }
 
 </style>
 </head>
 
+
 <body>
 
 <div class="top">
 
-<h1>
-Insurance Coverage List
-</h1>
+    <h1>Insurance Coverage List</h1>
 
-<!-- =========================
-     TABS
-========================= -->
+    <div class="tabs" id="tabs"></div>
 
-<div
-    class="tabs"
-    id="tabs"
-></div>
+    <div class="search-area" id="searchArea">
 
-<!-- =========================
-     SEARCH
-========================= -->
+        <div class="search-box">
+            <input
+                type="text"
+                id="globalSearch"
+                placeholder="Search all columns..."
+                autocomplete="off">
+            <span class="clear-search" id="clearSearch">×</span>
+        </div>
 
-<div id="searchArea">
+        <div class="search-box">
+            <input
+                type="text"
+                id="strengthSearch"
+                placeholder="Strength / exact terms..."
+                autocomplete="off">
+            <span class="clear-search" id="clearStrengthSearch">×</span>
+        </div>
 
-<div class="search-container">
+    </div>
 
-<input
-    id="brandSearch"
-    type="text"
-    placeholder="Search Brand Name..."
->
+    <div class="status" id="status">
+        Loading...
+    </div>
 
-<input
-    id="genericSearch"
-    type="text"
-    placeholder="Search Generic Name..."
->
-
-<input
-    id="strengthSearch"
-    type="text"
-    placeholder="Search Strength..."
->
-
-<input
-    id="dosageSearch"
-    type="text"
-    placeholder="Search Dosage Form..."
->
+    <div class="error-box" id="errorBox"></div>
 
 </div>
 
-<div class="controls">
 
-<button
-    id="clearBtn"
-    class="clear-btn"
-    type="button"
->
-Clear Search & Filters
-</button>
+<div class="excel-area" id="excelArea">
 
-</div>
+    <div id="excelHeader"></div>
 
-</div>
+    <div id="virtualContent"></div>
 
-<div
-    class="status"
-    id="status"
->
-Loading...
-</div>
-
-<div
-    class="error-box"
-    id="errorBox"
-></div>
+    <div
+        class="special-content"
+        id="specialContent">
+    </div>
 
 </div>
 
-<!-- =========================
-     TABLE
-========================= -->
-
-<div
-    class="excel-area"
-    id="excelArea"
->
-
-<div
-    class="excel-header"
-    id="excelHeader"
-></div>
-
-<div
-    class="virtual-content"
-    id="virtualContent"
-></div>
-
-<!-- =========================
-     SPECIAL CONTENT
-========================= -->
-
-<div
-    class="special-content"
-    id="specialContent"
-></div>
-
-</div>
-
-<!-- =========================
-     FILTER POPUP
-========================= -->
 
 <div
     class="filter-popup"
-    id="filterPopup"
->
+    id="filterPopup">
 
-<div
-    class="filter-popup-header"
-    id="filterPopupHeader"
->
-Filter
-</div>
+    <div
+        class="filter-popup-header"
+        id="filterPopupHeader">
+    </div>
 
-<div class="filter-search">
+    <div class="filter-popup-actions">
 
-<input
-    id="filterValueSearch"
-    type="text"
-    placeholder="Search values..."
->
+        <button id="filterSelectAll">
+            Select All
+        </button>
 
-</div>
+        <button id="filterClearAll">
+            Clear
+        </button>
 
-<div class="filter-actions">
+    </div>
 
-<button
-    id="selectAllBtn"
-    type="button"
->
-Select All
-</button>
+    <div
+        class="filter-list"
+        id="filterList">
+    </div>
 
-<button
-    id="clearFilterBtn"
-    type="button"
->
-Clear
-</button>
+    <div class="filter-footer">
+
+        <button
+            class="filter-apply"
+            id="filterApply">
+            Apply
+        </button>
+
+    </div>
 
 </div>
 
-<div
-    class="filter-values"
-    id="filterValues"
-></div>
-
-</div>
 
 <script>
 
@@ -1003,255 +684,239 @@ Clear
 
 const WORKSHEETS = [
 
-{
-    id:"thiqa",
-    name:"Thiqa & Basic",
-    file:"data.json"
-},
+    {
+        id:"thiqa",
+        name:"Thiqa & Basic",
+        file:"data.json"
+    },
 
-{
-    id:"haad",
-    name:"HAAD",
-    file:"HAAD_LIST.json"
-},
+    {
+        id:"haad",
+        name:"HAAD",
+        file:"HAAD_LIST.json"
+    },
 
-{
-    id:"apg",
-    name:"APG FORMULARY 05-06",
-    file:"APG FORMULARY 05-06.json"
-},
+    {
+        id:"apg",
+        name:"APG FORMULARY 05-06",
+        file:"APG FORMULARY 05-06.json"
+    },
 
-{
-    id:"icd10",
-    name:"ICD10",
-    file:"ICD10.json"
-},
+    {
+        id:"icd10",
+        name:"ICD10",
+        file:"ICD10.json"
+    },
 
-{
-    id:"vitamin",
-    name:"VITAMIN COVERAGE",
-    file:"VITAMIN COVERAGE.json"
-},
+    {
+        id:"vitamin",
+        name:"VITAMIN COVERAGE",
+        file:"VITAMIN COVERAGE.json"
+    },
 
-{
-    id:"ppi",
-    name:"PPI Coverage",
-    file:"PPI Coverage.json"
-},
+    {
+        id:"ppi",
+        name:"PPI Coverage",
+        file:"PPI Coverage.json"
+    },
 
-{
-    id:"proactive",
-    name:"PROACTIVE INSTRUCTION",
-    special:true
-},
+    {
+        id:"proactive",
+        name:"PROACTIVE INSTRUCTION",
+        special:true
+    },
 
-{
-    id:"hcpc",
-    name:"HCPC Cap & Ref Price",
-    file:"HCPC Cap & REf Price.json"
-},
+    {
+        id:"hcpc",
+        name:"HCPC Cap & Ref Price",
+        file:"HCPC Cap & REf Price.json"
+    },
 
-{
-    id:"validity",
-    name:"VALIDITY AFTER OPENNING",
-    file:"VALIDITY AFTER OPENNING.json"
-},
+    {
+        id:"validity",
+        name:"VALIDITY AFTER OPENNING",
+        file:"VALIDITY AFTER OPENNING.json"
+    },
 
-{
-    id:"cda",
-    name:"CDA & CDB MAX DD",
-    file:"CDA &CDB MAX DD.json"
-},
+    {
+        id:"cda",
+        name:"CDA & CDB MAX DD",
+        file:"CDA &CDB MAX DD.json"
+    },
 
-{
-    id:"adnic",
-    name:"ADNIC (KHALIFA F.)",
-    file:"ADNIC ( KHALIFA F. ).json"
-},
+    {
+        id:"adnic",
+        name:"ADNIC (KHALIFA F.)",
+        file:"ADNIC ( KHALIFA F. ).json"
+    },
 
-{
-    id:"nasHaad",
-    name:"Nas TPA Formulary (HAAD)",
-    file:"Nas TPA Formulary (HAAD).json"
-},
+    {
+        id:"nasHaad",
+        name:"Nas TPA Formulary (HAAD)",
+        file:"Nas TPA Formulary (HAAD).json"
+    },
 
-{
-    id:"nasDha",
-    name:"Nas TPA Formulary (DHA)",
-    file:"Nas TPA Formulary (DHA).json"
-},
+    {
+        id:"nasDha",
+        name:"Nas TPA Formulary (DHA)",
+        file:"Nas TPA Formulary (DHA).json"
+    },
 
-{
-    id:"fmc",
-    name:"FMC LIST 01-2026",
-    file:"FMC LIST 01-2026.json"
-},
+    {
+        id:"fmc",
+        name:"FMC LIST 01-2026",
+        file:"FMC LIST 01-2026.json"
+    },
 
-{
-    id:"oman",
-    name:"OMAN FORMULARY 03-2024",
-    file:"OMAN FORMULARY 03-2024.json"
-},
+    {
+        id:"oman",
+        name:"OMAN FORMULARY 03-2024",
+        file:"OMAN FORMULARY 03-2024.json"
+    },
 
-/*
-   PHONE CONTACTS IS SPECIAL.
-   It loads its 4 JSON files only
-   when the tab is opened.
-*/
+    /* =====================================================
+       PHONE CONTACTS
+       4 SEPARATE JSON FILES
+    ===================================================== */
 
-{
-    id:"phone",
-    name:"PHONE CONTACTS",
-    special:"phone",
+    {
+        id:"phone",
+        name:"PHONE CONTACTS",
+        special:"phone",
 
-    phoneFiles:[
-
-        "PHONE CONTACTS 1.json",
-        "PHONE CONTACTS 2.json",
-        "PHONE CONTACTS 3.json",
-        "PHONE CONTACTS 4.json"
-
-    ]
-
-}
+        phoneFiles:[
+            "PHONE CONTACTS 1.json",
+            "PHONE CONTACTS 2.json",
+            "PHONE CONTACTS 3.json",
+            "PHONE CONTACTS 4.json"
+        ]
+    }
 
 ];
 
 
 /* =========================================================
-   STORAGE
+   GLOBAL VARIABLES
 ========================================================= */
-
-const sheetData = {};
-const sheetColumns = {};
-const filteredData = {};
-const columnFilters = {};
 
 let currentSheet = "thiqa";
 
-const rowOffsets = {};
-const totalHeights = {};
+let sheetData = {};
 
-/* Phone data */
+let filteredData = [];
+
+let columns = [];
+
+let filters = {};
+
+let currentFilterColumn = null;
 
 let phoneLoaded = false;
+
 let phoneLoading = false;
 
+const phoneData = {
 
-/*
-   FAST FIXED ROW HEIGHT
-*/
+    contacts:[],
+    apg:[],
+    zas:[],
+    insurance:[]
+
+};
 
 const ROW_HEIGHT = 42;
-
-
-/*
-   Number of rows rendered around viewport.
-*/
 
 const BUFFER_ROWS = 30;
 
 
 /* =========================================================
-   FILTER STATE
-========================================================= */
-
-let filterPopupState = {
-
-    column:null,
-
-    sheet:null,
-
-    allValues:[],
-
-    selected:new Set()
-
-};
-
-
-/* =========================================================
-   DOM
+   ELEMENTS
 ========================================================= */
 
 const tabsEl =
-document.getElementById("tabs");
-
-const statusEl =
-document.getElementById("status");
-
-const errorBox =
-document.getElementById("errorBox");
-
-const excelArea =
-document.getElementById("excelArea");
-
-const excelHeader =
-document.getElementById("excelHeader");
-
-const virtualContent =
-document.getElementById("virtualContent");
-
-const specialContent =
-document.getElementById("specialContent");
+    document.getElementById("tabs");
 
 const searchArea =
-document.getElementById("searchArea");
+    document.getElementById("searchArea");
 
-const brandSearch =
-document.getElementById("brandSearch");
-
-const genericSearch =
-document.getElementById("genericSearch");
+const globalSearch =
+    document.getElementById("globalSearch");
 
 const strengthSearch =
-document.getElementById("strengthSearch");
+    document.getElementById("strengthSearch");
 
-const dosageSearch =
-document.getElementById("dosageSearch");
+const clearSearch =
+    document.getElementById("clearSearch");
 
-const clearBtn =
-document.getElementById("clearBtn");
+const clearStrengthSearch =
+    document.getElementById("clearStrengthSearch");
+
+const statusEl =
+    document.getElementById("status");
+
+const errorBox =
+    document.getElementById("errorBox");
+
+const excelArea =
+    document.getElementById("excelArea");
+
+const excelHeader =
+    document.getElementById("excelHeader");
+
+const virtualContent =
+    document.getElementById("virtualContent");
+
+const specialContent =
+    document.getElementById("specialContent");
 
 const filterPopup =
-document.getElementById("filterPopup");
+    document.getElementById("filterPopup");
 
 const filterPopupHeader =
-document.getElementById("filterPopupHeader");
+    document.getElementById("filterPopupHeader");
 
-const filterValueSearch =
-document.getElementById("filterValueSearch");
+const filterList =
+    document.getElementById("filterList");
 
-const filterValues =
-document.getElementById("filterValues");
+const filterSelectAll =
+    document.getElementById("filterSelectAll");
 
-const selectAllBtn =
-document.getElementById("selectAllBtn");
+const filterClearAll =
+    document.getElementById("filterClearAll");
 
-const clearFilterBtn =
-document.getElementById("clearFilterBtn");
+const filterApply =
+    document.getElementById("filterApply");
 
 
 /* =========================================================
-   INITIALIZE STORAGE
+   NORMALIZE JSON
 ========================================================= */
 
-function initializeSheetStorage(){
+function normalizeJSON(json){
 
-    WORKSHEETS.forEach(sheet => {
+    if(Array.isArray(json)){
+        return json;
+    }
 
-        sheetData[sheet.id] = [];
+    if(json && Array.isArray(json.data)){
+        return json.data;
+    }
 
-        sheetColumns[sheet.id] = [];
+    if(json && typeof json === "object"){
+        return [json];
+    }
 
-        filteredData[sheet.id] = [];
+    return [];
+}
 
-        columnFilters[sheet.id] = {};
 
-        rowOffsets[sheet.id] = [];
+/* =========================================================
+   PHONE JSON NORMALIZER
+========================================================= */
 
-        totalHeights[sheet.id] = 0;
+function normalizePhoneJSON(json){
 
-    });
+    return normalizeJSON(json);
 
 }
 
@@ -1267,42 +932,20 @@ function createTabs(){
     WORKSHEETS.forEach(sheet => {
 
         const button =
-        document.createElement("button");
+            document.createElement("button");
 
-        button.type =
-        "button";
+        button.className = "tab";
 
-        button.className =
-        "tab";
+        button.dataset.id = sheet.id;
 
-        button.dataset.sheet =
-        sheet.id;
-
-        button.textContent =
-        sheet.name;
-
-        if(sheet.id === currentSheet){
-
-            button.classList.add(
-                "active"
-            );
-
-        }
+        button.textContent = sheet.name;
 
         button.addEventListener(
             "click",
-            () => {
-
-                switchSheet(
-                    sheet.id
-                );
-
-            }
+            () => switchSheet(sheet.id)
         );
 
-        tabsEl.appendChild(
-            button
-        );
+        tabsEl.appendChild(button);
 
     });
 
@@ -1310,153 +953,100 @@ function createTabs(){
 
 
 /* =========================================================
-   LOAD NORMAL JSON FILES
+   UPDATE ACTIVE TAB
+========================================================= */
+
+function updateActiveTab(){
+
+    document
+        .querySelectorAll(".tab")
+        .forEach(tab => {
+
+            tab.classList.toggle(
+                "active",
+                tab.dataset.id === currentSheet
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   LOAD ALL NORMAL DATA
 ========================================================= */
 
 async function loadAllData(){
 
-    errorBox.style.display =
-        "none";
+    errorBox.style.display = "none";
 
-    /*
-       PHONE CONTACTS and PROACTIVE
-       are not loaded here.
-    */
+    try{
 
-    const normalSheets =
-    WORKSHEETS.filter(
-        sheet =>
-        !sheet.special
-    );
-
-
-    const results =
-    await Promise.all(
-
-        normalSheets.map(
-            async sheet => {
-
-                try{
-
-                    const response =
-                    await fetch(
-                        encodeURI(
-                            sheet.file
-                        ),
-                        {
-                            cache:"default"
-                        }
-                    );
-
-
-                    if(!response.ok){
-
-                        throw new Error(
-                            "HTTP " +
-                            response.status
-                        );
-
-                    }
-
-
-                    const json =
-                    await response.json();
-
-
-                    return {
-
-                        sheet,
-
-                        rows:
-                        normalizeJSON(
-                            json
-                        ),
-
-                        error:null
-
-                    };
-
-                }
-                catch(error){
-
-                    return {
-
-                        sheet,
-
-                        rows:[],
-
-                        error
-
-                    };
-
-                }
-
-            }
-        )
-
-    );
-
-
-    const errors = [];
-
-
-    results.forEach(
-        result => {
-
-            const sheet =
-            result.sheet;
-
-
-            sheetData[sheet.id] =
-            result.rows;
-
-
-            sheetColumns[sheet.id] =
-            buildColumns(
-                result.rows,
-                sheet.id
+        const normalSheets =
+            WORKSHEETS.filter(
+                sheet => !sheet.special
             );
 
+        const results =
+            await Promise.all(
 
-            filteredData[sheet.id] =
-            result.rows.slice();
+                normalSheets.map(
+                    async sheet => {
 
+                        const response =
+                            await fetch(
+                                encodeURI(
+                                    sheet.file
+                                ) +
+                                "?v=" +
+                                Date.now(),
+                                {
+                                    cache:"no-store"
+                                }
+                            );
 
-            columnFilters[sheet.id] =
-            {};
+                        if(!response.ok){
+                            throw new Error(
+                                "Could not load " +
+                                sheet.file
+                            );
+                        }
 
+                        const json =
+                            await response.json();
 
-            if(result.error){
+                        return {
+                            id:sheet.id,
+                            data:normalizeJSON(json)
+                        };
 
-                errors.push(
-                    sheet.name +
-                    ": " +
-                    result.error.message
-                );
+                    }
+                )
 
-            }
+            );
 
-        }
-    );
+        results.forEach(result => {
 
+            sheetData[result.id] =
+                result.data;
 
-    /*
-       Display default sheet
-    */
+        });
 
-    switchSheet(
-        "thiqa"
-    );
+        switchSheet("thiqa");
 
+    }
+    catch(error){
 
-    if(errors.length){
+        console.error(error);
 
         errorBox.textContent =
-        "Some sheets could not be loaded:\n\n" +
-        errors.join("\n");
+            "Error loading data: " +
+            error.message;
 
-        errorBox.style.display =
-        "block";
+        errorBox.style.display = "block";
+
+        statusEl.textContent =
+            "Loading error";
 
     }
 
@@ -1464,1852 +1054,308 @@ async function loadAllData(){
 
 
 /* =========================================================
-   NORMALIZE JSON
+   GET OBJECT COLUMNS
 ========================================================= */
 
-function normalizeJSON(json){
+function getObjectColumns(
+    rows,
+    fallback=[]
+){
 
-    if(Array.isArray(json)){
+    const result = [];
 
-        return json;
-
-    }
-
-
-    if(
-        json &&
-        Array.isArray(json.data)
-    ){
-
-        return json.data;
-
-    }
-
-
-    if(
-        json &&
-        typeof json === "object"
-    ){
-
-        const keys =
-        Object.keys(json);
-
-
-        for(
-            let i=0;
-            i<keys.length;
-            i++
-        ){
-
-            if(
-                Array.isArray(
-                    json[keys[i]]
-                )
-            ){
-
-                return json[keys[i]];
-
-            }
-
-        }
-
-    }
-
-
-    return [];
-
-}
-
-
-/* =========================================================
-   BUILD COLUMNS
-========================================================= */
-
-function buildColumns(rows, type){
-
-    const columns = [];
-
-
-    for(
-        let i=0;
-        i<rows.length;
-        i++
-    ){
-
-        const row =
-        rows[i];
-
+    rows.forEach(row => {
 
         if(
             !row ||
             typeof row !== "object" ||
             Array.isArray(row)
         ){
-
-            continue;
-
+            return;
         }
 
+        Object.keys(row).forEach(key => {
 
-        const keys =
-        Object.keys(row);
-
-
-        for(
-            let j=0;
-            j<keys.length;
-            j++
-        ){
-
-            const key =
-            keys[j];
-
-
-            if(
-                columns.indexOf(key) === -1
-            ){
-
-                columns.push(key);
-
+            if(!result.includes(key)){
+                result.push(key);
             }
 
-        }
+        });
 
+    });
+
+    if(result.length){
+        return result;
     }
 
-
-    /*
-       SPECIAL COLUMN ORDER
-       ONLY FOR VALIDITY AFTER OPENNING
-    */
-
-    if(type === "validity"){
-
-        const desiredOrder = [
-
-            "HAAD CODE",
-
-            "PROACTIVE NAME",
-
-            "VALIDITY AFTER OPENING:",
-
-            "NOTES",
-
-            "Measurability",
-
-            "Review date"
-
-        ];
-
-
-        const orderedColumns = [];
-
-
-        for(
-            let i=0;
-            i<desiredOrder.length;
-            i++
-        ){
-
-            const desired =
-            desiredOrder[i];
-
-
-            const actual =
-            columns.find(
-                column =>
-                column.toLowerCase().trim() ===
-                desired.toLowerCase().trim()
-            );
-
-
-            if(actual){
-
-                orderedColumns.push(
-                    actual
-                );
-
-            }
-
-        }
-
-
-        for(
-            let i=0;
-            i<columns.length;
-            i++
-        ){
-
-            if(
-                orderedColumns.indexOf(
-                    columns[i]
-                ) === -1
-            ){
-
-                orderedColumns.push(
-                    columns[i]
-                );
-
-            }
-
-        }
-
-
-        return orderedColumns;
-
-    }
-
-
-    return columns;
+    return fallback;
 
 }
 
 
 /* =========================================================
-   VALUE
+   SWITCH SHEET
 ========================================================= */
 
-function displayValue(value){
-
-    if(
-        value === null ||
-        value === undefined
-    ){
-
-        return "";
-
-    }
-
-
-    if(
-        typeof value === "object"
-    ){
-
-        try{
-
-            return JSON.stringify(
-                value
-            );
-
-        }
-        catch{
-
-            return String(value);
-
-        }
-
-    }
-
-
-    return String(value);
-
-}
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-function matchesMultiSearch(
-    value,
-    search
-){
-
-    const query =
-    String(
-        search || ""
-    )
-    .trim()
-    .toLowerCase();
-
-
-    if(!query){
-        return true;
-    }
-
-
-    const text =
-    displayValue(value)
-    .toLowerCase();
-
-
-    /*
-       500%10
-
-       means:
-
-       contains 500
-       AND
-       contains 10
-    */
-
-    const terms =
-    query
-    .split("%")
-    .map(
-        term =>
-        term.trim()
-    )
-    .filter(Boolean);
-
-
-    for(
-        let i=0;
-        i<terms.length;
-        i++
-    ){
-
-        if(
-            !text.includes(
-                terms[i]
-            )
-        ){
-
-            return false;
-
-        }
-
-    }
-
-
-    return true;
-
-}
-
-
-/* =========================================================
-   FIND COLUMN
-========================================================= */
-
-function findColumn(
-    columns,
-    patterns
-){
-
-    for(
-        let i=0;
-        i<patterns.length;
-        i++
-    ){
-
-        const pattern =
-        patterns[i];
-
-
-        for(
-            let j=0;
-            j<columns.length;
-            j++
-        ){
-
-            if(
-                columns[j]
-                .toLowerCase()
-                .trim()
-                .includes(pattern)
-            ){
-
-                return columns[j];
-
-            }
-
-        }
-
-    }
-
-
-    return null;
-
-}
-
-
-/* =========================================================
-   FILTER ROWS
-========================================================= */
-
-function getFilteredRows(type){
-
-    const rows =
-    sheetData[type] || [];
-
-
-    const columns =
-    sheetColumns[type] || [];
-
-
-    if(!rows.length){
-        return [];
-    }
-
-
-    const brandColumn =
-    findColumn(
-        columns,
-        [
-            "brand name",
-            "brand",
-            "product name",
-            "item name",
-            "package name"
-        ]
-    );
-
-
-    const genericColumn =
-    findColumn(
-        columns,
-        [
-            "generic name",
-            "active ingredient",
-            "active ingredients",
-            "generic",
-            "ingredient"
-        ]
-    );
-
-
-    const strengthColumn =
-    findColumn(
-        columns,
-        [
-            "strength"
-        ]
-    );
-
-
-    const dosageColumn =
-    findColumn(
-        columns,
-        [
-            "dosage form",
-            "dosage"
-        ]
-    );
-
-
-    const brandQuery =
-    brandSearch.value;
-
-
-    const genericQuery =
-    genericSearch.value;
-
-
-    const strengthQuery =
-    strengthSearch.value;
-
-
-    const dosageQuery =
-    dosageSearch.value;
-
-
-    const filters =
-    columnFilters[type] || {};
-
-
-    return rows.filter(
-        row => {
-
-            /*
-               BRAND
-            */
-
-            if(brandQuery){
-
-                if(brandColumn){
-
-                    if(
-                        !matchesMultiSearch(
-                            row[brandColumn],
-                            brandQuery
-                        )
-                    ){
-
-                        return false;
-
-                    }
-
-                }
-                else{
-
-                    let found = false;
-
-                    const values =
-                    Object.values(row);
-
-
-                    for(
-                        let i=0;
-                        i<values.length;
-                        i++
-                    ){
-
-                        if(
-                            matchesMultiSearch(
-                                values[i],
-                                brandQuery
-                            )
-                        ){
-
-                            found = true;
-                            break;
-
-                        }
-
-                    }
-
-
-                    if(!found){
-                        return false;
-                    }
-
-                }
-
-            }
-
-
-            /*
-               GENERIC
-            */
-
-            if(genericQuery){
-
-                if(genericColumn){
-
-                    if(
-                        !matchesMultiSearch(
-                            row[genericColumn],
-                            genericQuery
-                        )
-                    ){
-
-                        return false;
-
-                    }
-
-                }
-                else{
-
-                    let found = false;
-
-                    const values =
-                    Object.values(row);
-
-
-                    for(
-                        let i=0;
-                        i<values.length;
-                        i++
-                    ){
-
-                        if(
-                            matchesMultiSearch(
-                                values[i],
-                                genericQuery
-                            )
-                        ){
-
-                            found = true;
-                            break;
-
-                        }
-
-                    }
-
-
-                    if(!found){
-                        return false;
-                    }
-
-                }
-
-            }
-
-
-            /*
-               STRENGTH
-            */
-
-            if(strengthQuery){
-
-                if(strengthColumn){
-
-                    if(
-                        !matchesMultiSearch(
-                            row[strengthColumn],
-                            strengthQuery
-                        )
-                    ){
-
-                        return false;
-
-                    }
-
-                }
-                else{
-
-                    let found = false;
-
-                    const values =
-                    Object.values(row);
-
-
-                    for(
-                        let i=0;
-                        i<values.length;
-                        i++
-                    ){
-
-                        if(
-                            matchesMultiSearch(
-                                values[i],
-                                strengthQuery
-                            )
-                        ){
-
-                            found = true;
-                            break;
-
-                        }
-
-                    }
-
-
-                    if(!found){
-                        return false;
-                    }
-
-                }
-
-            }
-
-
-            /*
-               DOSAGE
-            */
-
-            if(dosageQuery){
-
-                if(dosageColumn){
-
-                    if(
-                        !matchesMultiSearch(
-                            row[dosageColumn],
-                            dosageQuery
-                        )
-                    ){
-
-                        return false;
-
-                    }
-
-                }
-                else{
-
-                    let found = false;
-
-                    const values =
-                    Object.values(row);
-
-
-                    for(
-                        let i=0;
-                        i<values.length;
-                        i++
-                    ){
-
-                        if(
-                            matchesMultiSearch(
-                                values[i],
-                                dosageQuery
-                            )
-                        ){
-
-                            found = true;
-                            break;
-
-                        }
-
-                    }
-
-
-                    if(!found){
-                        return false;
-                    }
-
-                }
-
-            }
-
-
-            /*
-               COLUMN FILTERS
-            */
-
-            const filterColumns =
-            Object.keys(filters);
-
-
-            for(
-                let i=0;
-                i<filterColumns.length;
-                i++
-            ){
-
-                const column =
-                filterColumns[i];
-
-
-                const selected =
-                filters[column];
-
-
-                if(
-                    selected &&
-                    selected.size
-                ){
-
-                    const value =
-                    displayValue(
-                        row[column]
-                    );
-
-
-                    if(
-                        !selected.has(value)
-                    ){
-
-                        return false;
-
-                    }
-
-                }
-
-            }
-
-
-            return true;
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   GET COLUMN WIDTH
-========================================================= */
-
-function getColumnWidth(
-    column,
-    type
-){
-
-    const c =
-    column
-    .toLowerCase()
-    .trim();
-
-
-    /*
-       Frozen
-    */
-
-    if(
-        type === "thiqa" &&
-        (
-            c === "thiqa" ||
-            c === "basic"
-        )
-    ){
-
-        return 110;
-
-    }
-
-
-    /*
-       Vitamin
-    */
-
-    if(
-        type === "vitamin"
-    ){
-
-        if(
-            c.includes("item name")
-        ){
-
-            return 330;
-
-        }
-
-
-        if(
-            c.includes("active ingredient") ||
-            c.includes("active ingredients")
-        ){
-
-            return 380;
-
-        }
-
-    }
-
-
-    /*
-       Long text
-    */
-
-    if(
-        c.includes("generic") ||
-        c.includes("active ingredient") ||
-        c.includes("active ingredients") ||
-        c.includes("package name") ||
-        c.includes("product name") ||
-        c.includes("item name") ||
-        c.includes("description") ||
-        c.includes("instruction") ||
-        c.includes("indication") ||
-        c.includes("manufacturer") ||
-        c.includes("formulary") ||
-        c.includes("agent") ||
-        c.includes("daman")
-    ){
-
-        return 280;
-
-    }
-
-
-    if(
-        c.includes("strength") ||
-        c.includes("dosage form") ||
-        c === "dosage"
-    ){
-
-        return 160;
-
-    }
-
-
-    if(
-        c.includes("price") ||
-        c.includes("markup") ||
-        c.includes("reimbursement") ||
-        c.includes("copay") ||
-        c.includes("cap")
-    ){
-
-        return 155;
-
-    }
-
-
-    if(
-        c.includes("date")
-    ){
-
-        return 140;
-
-    }
-
-
-    return 150;
-
-}
-
-
-/* =========================================================
-   FAST COLUMN WIDTH CALCULATION
-========================================================= */
-
-function getColumnWidths(type){
-
-    const columns =
-    sheetColumns[type] || [];
-
-
-    if(!columns.length){
-        return [];
-    }
-
-
-    const widths =
-    columns.map(
-        column =>
-        getColumnWidth(
-            column,
-            type
-        )
-    );
-
-
-    const available =
-    excelArea.clientWidth ||
-    window.innerWidth;
-
-
-    const total =
-    widths.reduce(
-        (a,b) => a+b,
-        0
-    );
-
-
-    if(total >= available){
-
-        return widths;
-
-    }
-
-
-    const extra =
-    available - total;
-
-
-    const weights =
-    columns.map(
-        column => {
-
-            const c =
-            column
-            .toLowerCase()
-            .trim();
-
-
-            if(
-                type === "vitamin" &&
-                (
-                    c.includes("item name") ||
-                    c.includes("active ingredient") ||
-                    c.includes("active ingredients")
-                )
-            ){
-
-                return 5;
-
-            }
-
-
-            if(
-                c.includes("generic") ||
-                c.includes("active ingredient") ||
-                c.includes("item name") ||
-                c.includes("package name") ||
-                c.includes("description") ||
-                c.includes("instruction") ||
-                c.includes("indication")
-            ){
-
-                return 3;
-
-            }
-
-
-            return 1;
-
-        }
-    );
-
-
-    let totalWeight = 0;
-
-
-    for(
-        let i=0;
-        i<columns.length;
-        i++
-    ){
-
-        const c =
-        columns[i]
-        .toLowerCase()
-        .trim();
-
-
-        const frozen =
-        type === "thiqa" &&
-        (
-            c === "thiqa" ||
-            c === "basic"
+function switchSheet(id){
+
+    const sheet =
+        WORKSHEETS.find(
+            item => item.id === id
         );
 
-
-        if(!frozen){
-
-            totalWeight +=
-            weights[i];
-
-        }
-
-    }
-
-
-    if(totalWeight <= 0){
-
-        return widths;
-
-    }
-
-
-    const finalWidths =
-    widths.map(
-        (width,index) => {
-
-            const c =
-            columns[index]
-            .toLowerCase()
-            .trim();
-
-
-            const frozen =
-            type === "thiqa" &&
-            (
-                c === "thiqa" ||
-                c === "basic"
-            );
-
-
-            if(frozen){
-
-                return width;
-
-            }
-
-
-            return Math.round(
-                width +
-                (
-                    extra *
-                    weights[index] /
-                    totalWeight
-                )
-            );
-
-        }
-    );
-
-
-    return finalWidths;
-
-}
-
-
-/* =========================================================
-   GRID TEMPLATE
-========================================================= */
-
-function getGridTemplate(type){
-
-    return getColumnWidths(type)
-    .map(
-        width =>
-        width + "px"
-    )
-    .join(" ");
-
-}
-
-
-/* =========================================================
-   BUILD SIMPLE OFFSETS
-========================================================= */
-
-function buildRowOffsets(type){
-
-    const rows =
-    filteredData[type] || [];
-
-
-    const offsets =
-    new Array(
-        rows.length
-    );
-
-
-    for(
-        let i=0;
-        i<rows.length;
-        i++
-    ){
-
-        offsets[i] =
-        i * ROW_HEIGHT;
-
-    }
-
-
-    rowOffsets[type] =
-    offsets;
-
-
-    totalHeights[type] =
-    rows.length *
-    ROW_HEIGHT;
-
-
-    if(
-        currentSheet === type
-    ){
-
-        virtualContent.style.height =
-        totalHeights[type] +
-        "px";
-
-    }
-
-}
-
-
-/* =========================================================
-   FIND ROW
-========================================================= */
-
-function findRowAtPosition(
-    offsets,
-    position
-){
-
-    if(!offsets.length){
-        return 0;
-    }
-
-
-    const index =
-    Math.floor(
-        position /
-        ROW_HEIGHT
-    );
-
-
-    return Math.max(
-        0,
-        Math.min(
-            offsets.length - 1,
-            index
-        )
-    );
-
-}
-
-
-/* =========================================================
-   RENDER TABLE
-========================================================= */
-
-function renderVirtualTable(type){
-
-    if(
-        type === "proactive" ||
-        type === "phone"
-    ){
-
+    if(!sheet){
         return;
-
     }
 
+    currentSheet = id;
 
-    const columns =
-    sheetColumns[type] || [];
+    updateActiveTab();
+
+    errorBox.style.display = "none";
+
+    filters = {};
+
+    globalSearch.value = "";
+
+    strengthSearch.value = "";
+
+    clearSearch.style.display = "none";
+
+    clearStrengthSearch.style.display = "none";
+
+    filterPopup.style.display = "none";
 
 
-    if(!columns.length){
+    /* =====================================================
+       PROACTIVE
+    ===================================================== */
+
+    if(sheet.id === "proactive"){
+
+        searchArea.style.display = "none";
 
         excelHeader.innerHTML = "";
 
         virtualContent.innerHTML = "";
 
-        virtualContent.style.height =
-        "60px";
+        virtualContent.style.display = "none";
+
+        specialContent.style.display = "block";
+
+        renderProactive();
+
+        statusEl.textContent =
+            "PROACTIVE INSTRUCTION";
 
         return;
 
     }
 
 
-    const template =
-    getGridTemplate(type);
+    /* =====================================================
+       PHONE CONTACTS
+    ===================================================== */
 
+    if(sheet.id === "phone"){
 
-    /*
-       HEADER
-    */
+        searchArea.style.display = "none";
 
-    excelHeader.style.gridTemplateColumns =
-    template;
+        excelHeader.innerHTML = "";
 
+        virtualContent.innerHTML = "";
 
-    excelHeader.innerHTML =
-    "";
+        virtualContent.style.display = "none";
 
+        specialContent.style.display = "block";
 
-    for(
-        let i=0;
-        i<columns.length;
-        i++
-    ){
+        renderPhoneContacts();
 
-        const column =
-        columns[i];
-
-
-        const cell =
-        document.createElement(
-            "div"
-        );
-
-
-        cell.className =
-        "header-cell";
-
-
-        cell.textContent =
-        column;
-
-
-        /*
-           Frozen headers
-        */
-
-        if(type === "thiqa"){
-
-            const normalized =
-            column
-            .toLowerCase()
-            .trim();
-
-
-            if(
-                normalized === "basic"
-            ){
-
-                cell.classList.add(
-                    "frozen-basic"
-                );
-
-            }
-
-
-            if(
-                normalized === "thiqa"
-            ){
-
-                cell.classList.add(
-                    "frozen-thiqa"
-                );
-
-            }
-
-        }
-
-
-        const filterButton =
-        document.createElement(
-            "button"
-        );
-
-
-        filterButton.type =
-        "button";
-
-
-        filterButton.className =
-        "filter-btn";
-
-
-        filterButton.textContent =
-        "▼";
-
-
-        if(
-            columnFilters[type][column] &&
-            columnFilters[type][column].size
-        ){
-
-            filterButton.classList.add(
-                "filtered"
-            );
-
-        }
-
-
-        filterButton.addEventListener(
-            "click",
-            event => {
-
-                event.stopPropagation();
-
-                openFilterPopup(
-                    type,
-                    column,
-                    filterButton
-                );
-
-            }
-        );
-
-
-        cell.appendChild(
-            filterButton
-        );
-
-
-        excelHeader.appendChild(
-            cell
-        );
-
-    }
-
-
-    /*
-       Virtual rows
-    */
-
-    renderVisibleRows(
-        type
-    );
-
-}
-
-
-/* =========================================================
-   VISIBLE ROWS
-========================================================= */
-
-function renderVisibleRows(type){
-
-    const rows =
-    filteredData[type] || [];
-
-
-    const columns =
-    sheetColumns[type] || [];
-
-
-    if(!rows.length){
-
-        virtualContent.innerHTML =
-        "";
-
-        virtualContent.style.height =
-        "60px";
+        statusEl.textContent =
+            "PHONE CONTACTS";
 
         return;
 
     }
 
 
-    const template =
-    getGridTemplate(type);
+    /* =====================================================
+       NORMAL SHEET
+    ===================================================== */
 
+    searchArea.style.display = "grid";
 
-    const scrollTop =
-    excelArea.scrollTop;
+    specialContent.style.display = "none";
 
+    virtualContent.style.display = "block";
 
-    const viewportHeight =
-    excelArea.clientHeight;
+    const data =
+        sheetData[id] || [];
 
+    columns =
+        getObjectColumns(data);
 
-    const start =
-    Math.max(
-        0,
-        Math.floor(
-            scrollTop /
-            ROW_HEIGHT
-        ) -
-        BUFFER_ROWS
-    );
+    filteredData =
+        [...data];
 
+    updatePlaceholders();
 
-    const end =
-    Math.min(
-        rows.length - 1,
+    buildExcelHeader();
 
-        Math.ceil(
-            (
-                scrollTop +
-                viewportHeight
-            ) /
-            ROW_HEIGHT
-        ) +
-        BUFFER_ROWS
-    );
+    applyFilters();
 
-
-    virtualContent.innerHTML =
-    "";
-
-
-    for(
-        let i=start;
-        i<=end;
-        i++
-    ){
-
-        const row =
-        rows[i];
-
-
-        const rowElement =
-        document.createElement(
-            "div"
-        );
-
-
-        rowElement.className =
-        "data-row";
-
-
-        rowElement.style.gridTemplateColumns =
-        template;
-
-
-        rowElement.style.height =
-        ROW_HEIGHT + "px";
-
-
-        rowElement.style.top =
-        (
-            i *
-            ROW_HEIGHT
-        ) + "px";
-
-
-        for(
-            let c=0;
-            c<columns.length;
-            c++
-        ){
-
-            const column =
-            columns[c];
-
-
-            const cell =
-            document.createElement(
-                "div"
-            );
-
-
-            cell.className =
-            "data-cell";
-
-
-            const value =
-            displayValue(
-                row[column]
-            );
-
-
-            cell.textContent =
-            value;
-
-
-            /* =========================
-               VITAMIN NCI / NOT COVERED
-            ========================= */
-
-            if(type === "vitamin"){
-
-                const normalizedColumn =
-                column
-                .toLowerCase()
-                .trim();
-
-
-                const normalizedValue =
-                value
-                .toLowerCase()
-                .trim();
-
-
-                if(
-                    (
-                        normalizedColumn ===
-                        "enhanced" ||
-
-                        normalizedColumn ===
-                        "thiqa"
-                    )
-                    &&
-                    (
-                        normalizedValue ===
-                        "nci" ||
-
-                        normalizedValue ===
-                        "not covered"
-                    )
-                ){
-
-                    cell.classList.add(
-                        "vitamin-not-covered"
-                    );
-
-                }
-
-            }
-
-
-            /*
-               THIQA / BASIC
-            */
-
-            if(
-                type === "thiqa"
-            ){
-
-                const normalizedColumn =
-                column
-                .toLowerCase()
-                .trim();
-
-
-                const normalizedValue =
-                value
-                .toLowerCase()
-                .trim();
-
-
-                if(
-                    normalizedColumn ===
-                    "basic"
-                ){
-
-                    cell.classList.add(
-                        "frozen-basic"
-                    );
-
-
-                    if(
-                        normalizedValue ===
-                        "yes"
-                    ){
-
-                        cell.classList.add(
-                            "basic-yes"
-                        );
-
-                    }
-                    else if(
-                        normalizedValue ===
-                        "no"
-                    ){
-
-                        cell.classList.add(
-                            "basic-no"
-                        );
-
-                    }
-
-                }
-
-
-                if(
-                    normalizedColumn ===
-                    "thiqa"
-                ){
-
-                    cell.classList.add(
-                        "frozen-thiqa"
-                    );
-
-
-                    if(
-                        normalizedValue ===
-                        "yes"
-                    ){
-
-                        cell.classList.add(
-                            "thiqa-yes"
-                        );
-
-                    }
-                    else if(
-                        normalizedValue ===
-                        "no"
-                    ){
-
-                        cell.classList.add(
-                            "thiqa-no"
-                        );
-
-                    }
-
-                }
-
-            }
-
-
-            rowElement.appendChild(
-                cell
-            );
-
-        }
-
-
-        virtualContent.appendChild(
-            rowElement
-        );
-
-    }
+    statusEl.textContent =
+        sheet.name +
+        " — " +
+        data.length +
+        " records";
 
 }
 
 
 /* =========================================================
-   PHONE CONTACTS
-   LOAD 4 JSON FILES
+   PROACTIVE
 ========================================================= */
 
-async function loadPhoneContacts(){
+function renderProactive(){
+
+    specialContent.innerHTML = `
+
+        <div class="proactive-container">
+
+            <img
+                src="proactive 1.png"
+                alt="Proactive Instruction 1">
+
+            <img
+                src="proactive 2.png"
+                alt="Proactive Instruction 2">
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   PHONE CONTACTS LOADER
+========================================================= */
+
+async function renderPhoneContacts(){
 
     if(phoneLoaded){
 
-        renderPhoneContacts();
+        if(currentSheet === "phone"){
+            buildPhoneContacts();
+        }
 
         return;
 
     }
-
 
     if(phoneLoading){
-
         return;
-
     }
-
 
     phoneLoading = true;
 
+    specialContent.innerHTML = `
 
-    specialContent.innerHTML =
-    '<div class="phone-loading">Loading PHONE CONTACTS...</div>';
+        <div class="phone-loading">
+            Loading phone contacts...
+        </div>
 
-
-    statusEl.textContent =
-    "Loading PHONE CONTACTS...";
-
-
-    const phoneSheet =
-    WORKSHEETS.find(
-        sheet =>
-        sheet.id === "phone"
-    );
-
+    `;
 
     try{
 
-        /*
-           Load all 4 phone files together.
-        */
+        const phoneSheet =
+            WORKSHEETS.find(
+                sheet => sheet.id === "phone"
+            );
 
         const results =
-        await Promise.all(
+            await Promise.all(
 
-            phoneSheet.phoneFiles.map(
-                async file => {
+                phoneSheet.phoneFiles.map(
+                    async file => {
 
-                    const response =
-                    await fetch(
-                        encodeURI(file),
-                        {
-                            cache:"default"
+                        const response =
+                            await fetch(
+                                encodeURI(file),
+                                {
+                                    cache:"no-store"
+                                }
+                            );
+
+                        if(!response.ok){
+
+                            throw new Error(
+                                "Could not load " +
+                                file
+                            );
+
                         }
-                    );
 
+                        const json =
+                            await response.json();
 
-                    if(!response.ok){
-
-                        throw new Error(
-                            file +
-                            " - HTTP " +
-                            response.status
+                        return normalizePhoneJSON(
+                            json
                         );
 
                     }
+                )
+
+            );
 
 
-                    const json =
-                    await response.json();
+        phoneData.contacts =
+            results[0];
 
+        phoneData.apg =
+            results[1];
 
-                    return normalizePhoneRows(
-                        json
-                    );
+        phoneData.zas =
+            results[2];
 
-                }
-            )
-
-        );
-
-
-        sheetData.phone = {
-
-            contacts:
-            results[0],
-
-            apg:
-            results[1],
-
-            zas:
-            results[2],
-
-            insurance:
-            results[3]
-
-        };
-
+        phoneData.insurance =
+            results[3];
 
         phoneLoaded = true;
 
+        phoneLoading = false;
 
-        renderPhoneContacts();
 
+        if(currentSheet !== "phone"){
+            return;
+        }
+
+        buildPhoneContacts();
+
+        statusEl.textContent =
+            "PHONE CONTACTS";
 
     }
     catch(error){
 
-        specialContent.innerHTML = "";
-
-        const message =
-        document.createElement(
-            "div"
-        );
-
-
-        message.className =
-        "error-box";
-
-
-        message.style.display =
-        "block";
-
-
-        message.textContent =
-        "PHONE CONTACTS could not be loaded:\n\n" +
-        error.message;
-
-
-        specialContent.appendChild(
-            message
-        );
-
-
-        statusEl.textContent =
-        "PHONE CONTACTS - Error";
-
-    }
-    finally{
-
         phoneLoading = false;
 
-    }
+        console.error(error);
 
-}
+        specialContent.innerHTML = "";
 
+        errorBox.textContent =
+            "Error loading phone contacts: " +
+            error.message;
 
-/* =========================================================
-   NORMALIZE PHONE JSON
-========================================================= */
+        errorBox.style.display = "block";
 
-function normalizePhoneRows(json){
-
-    if(Array.isArray(json)){
-
-        return json;
+        statusEl.textContent =
+            "PHONE CONTACTS — Loading error";
 
     }
-
-
-    if(
-        json &&
-        Array.isArray(json.data)
-    ){
-
-        return json.data;
-
-    }
-
-
-    if(
-        json &&
-        typeof json === "object"
-    ){
-
-        /*
-           If a single object is supplied,
-           treat it as one row.
-        */
-
-        return [json];
-
-    }
-
-
-    return [];
-
-}
-
-
-/* =========================================================
-   PHONE TABLE HEADERS
-========================================================= */
-
-function getPhoneColumns(rows){
-
-    const columns = [];
-
-
-    for(
-        let i=0;
-        i<rows.length;
-        i++
-    ){
-
-        const row =
-        rows[i];
-
-
-        if(
-            !row ||
-            typeof row !== "object"
-        ){
-
-            continue;
-
-        }
-
-
-        const keys =
-        Object.keys(row);
-
-
-        for(
-            let j=0;
-            j<keys.length;
-            j++
-        ){
-
-            if(
-                columns.indexOf(
-                    keys[j]
-                ) === -1
-            ){
-
-                columns.push(
-                    keys[j]
-                );
-
-            }
-
-        }
-
-    }
-
-
-    return columns;
 
 }
 
@@ -3320,108 +1366,68 @@ function getPhoneColumns(rows){
 
 function createPhoneTable(
     rows,
-    className,
-    title
+    title,
+    headerMap={},
+    fallbackColumns=[]
 ){
 
     const box =
-    document.createElement(
-        "div"
-    );
-
+        document.createElement("div");
 
     box.className =
-    "phone-table-box";
+        "phone-table-box";
 
 
     const table =
-    document.createElement(
-        "table"
-    );
-
+        document.createElement("table");
 
     table.className =
-    "phone-table " +
-    className;
+        "phone-table";
 
 
-    const columns =
-    getPhoneColumns(
-        rows
-    );
+    const actualRows =
+        Array.isArray(rows)
+            ? rows
+            : [];
 
 
-    /*
-       Empty data
-    */
-
-    if(!columns.length){
-
-        const empty =
-        document.createElement(
-            "div"
+    const tableColumns =
+        getObjectColumns(
+            actualRows,
+            fallbackColumns
         );
-
-
-        empty.className =
-        "phone-loading";
-
-
-        empty.textContent =
-        "No data available";
-
-
-        box.appendChild(
-            empty
-        );
-
-
-        return box;
-
-    }
 
 
     const thead =
-    document.createElement(
-        "thead"
-    );
+        document.createElement("thead");
 
 
-    /*
-       Merged title row
-       Only APG and ZAS have title.
-    */
+    /* =====================================================
+       SECTION TITLE ROW
+    ===================================================== */
 
     if(title){
 
         const titleRow =
-        document.createElement(
-            "tr"
-        );
+            document.createElement("tr");
+
+        titleRow.className =
+            "phone-title-row";
 
 
         const titleCell =
-        document.createElement(
-            "th"
-        );
-
+            document.createElement("th");
 
         titleCell.colSpan =
-        columns.length;
-
-
-        titleCell.className =
-        "phone-section-title";
-
+            tableColumns.length;
 
         titleCell.textContent =
-        title;
+            title;
 
 
         titleRow.appendChild(
             titleCell
         );
-
 
         thead.appendChild(
             titleRow
@@ -3430,129 +1436,84 @@ function createPhoneTable(
     }
 
 
-    /*
-       Normal column header row
-    */
+    /* =====================================================
+       COLUMN HEADING ROW
+    ===================================================== */
 
     const headerRow =
-    document.createElement(
-        "tr"
-    );
+        document.createElement("tr");
+
+    headerRow.className =
+        "phone-header-row";
 
 
-    for(
-        let i=0;
-        i<columns.length;
-        i++
-    ){
+    tableColumns.forEach(column => {
 
         const th =
-        document.createElement(
-            "th"
-        );
+            document.createElement("th");
 
+        th.textContent =
+            headerMap[column] ||
+            column;
 
-        /*
-           Table 1:
-           MOBILE becomes MOB
-        */
+        headerRow.appendChild(th);
 
-        if(
-            className ===
-            "phone-table-contacts" &&
-            columns[i]
-            .toLowerCase()
-            .trim() ===
-            "mobile"
-        ){
-
-            th.textContent =
-            "MOB";
-
-        }
-        else{
-
-            th.textContent =
-            columns[i];
-
-        }
-
-
-        headerRow.appendChild(
-            th
-        );
-
-    }
+    });
 
 
     thead.appendChild(
         headerRow
     );
 
-
     table.appendChild(
         thead
     );
 
 
-    /*
-       BODY
-    */
+    /* =====================================================
+       DATA
+    ===================================================== */
 
     const tbody =
-    document.createElement(
-        "tbody"
-    );
+        document.createElement("tbody");
 
 
-    for(
-        let i=0;
-        i<rows.length;
-        i++
-    ){
-
-        const row =
-        rows[i];
-
+    actualRows.forEach(row => {
 
         const tr =
-        document.createElement(
-            "tr"
-        );
+            document.createElement("tr");
 
 
-        for(
-            let c=0;
-            c<columns.length;
-            c++
-        ){
+        tableColumns.forEach(column => {
 
             const td =
-            document.createElement(
-                "td"
-            );
+                document.createElement("td");
+
+
+            let value =
+                row[column];
+
+
+            if(
+                value === undefined ||
+                value === null
+            ){
+                value = "";
+            }
 
 
             td.textContent =
-            displayValue(
-                row[
-                    columns[c]
-                ]
-            );
+                String(value);
 
 
-            tr.appendChild(
-                td
-            );
+            tr.appendChild(td);
 
-        }
+        });
 
 
-        tbody.appendChild(
-            tr
-        );
+        tbody.appendChild(tr);
 
-    }
+    });
 
 
     table.appendChild(
@@ -3571,51 +1532,44 @@ function createPhoneTable(
 
 
 /* =========================================================
-   RENDER PHONE CONTACTS
+   BUILD PHONE CONTACTS
 ========================================================= */
 
-function renderPhoneContacts(){
+function buildPhoneContacts(){
 
-    if(!phoneLoaded){
-
-        loadPhoneContacts();
-
-        return;
-
-    }
-
-
-    specialContent.innerHTML =
-    "";
+    specialContent.innerHTML = "";
 
 
     const layout =
-    document.createElement(
-        "div"
-    );
-
+        document.createElement("div");
 
     layout.className =
-    "phone-layout";
+        "phone-layout";
 
 
-    /*
-       =========================
+    /* =====================================================
        TABLE 1
-       CONTACTS
-       =========================
-    */
+       CONTACTS / LANDLINE / MOB
+    ===================================================== */
 
     const contactsTable =
-    createPhoneTable(
+        createPhoneTable(
 
-        sheetData.phone.contacts,
+            phoneData.contacts,
 
-        "phone-table-contacts",
+            "",
 
-        null
+            {
+                MOBILE:"MOB"
+            },
 
-    );
+            [
+                "CONTACTS",
+                "LANDLINE",
+                "MOBILE"
+            ]
+
+        );
 
 
     layout.appendChild(
@@ -3623,37 +1577,37 @@ function renderPhoneContacts(){
     );
 
 
-    /*
-       =========================
-       MIDDLE
-       APG + ZAS
-       =========================
-    */
+    /* =====================================================
+       MIDDLE COLUMN
+    ===================================================== */
 
     const middle =
-    document.createElement(
-        "div"
-    );
-
+        document.createElement("div");
 
     middle.className =
-    "phone-middle";
+        "phone-middle";
 
 
-    /*
-       APG
-    */
+    /* =====================================================
+       TABLE 2
+       APG DEPARTMENTS
+    ===================================================== */
 
     const apgTable =
-    createPhoneTable(
+        createPhoneTable(
 
-        sheetData.phone.apg,
+            phoneData.apg,
 
-        "phone-table-apg",
+            "APG DEPARTMENTS",
 
-        "APG DEPARTMENTS"
+            {},
 
-    );
+            [
+                "DEPARTMENT",
+                "Contact"
+            ]
+
+        );
 
 
     middle.appendChild(
@@ -3661,20 +1615,26 @@ function renderPhoneContacts(){
     );
 
 
-    /*
-       ZAS
-    */
+    /* =====================================================
+       TABLE 3
+       ZAS BUSINESS UNITS
+    ===================================================== */
 
     const zasTable =
-    createPhoneTable(
+        createPhoneTable(
 
-        sheetData.phone.zas,
+            phoneData.zas,
 
-        "phone-table-zas",
+            "ZAS BUSINESS UNITS",
 
-        "ZAS BUSINESS UNITS"
+            {},
 
-    );
+            [
+                "BUSINESS UNIT",
+                "Contact"
+            ]
+
+        );
 
 
     middle.appendChild(
@@ -3687,23 +1647,26 @@ function renderPhoneContacts(){
     );
 
 
-    /*
-       =========================
+    /* =====================================================
        TABLE 4
-       INSURANCE
-       =========================
-    */
+       INSURANCE COMPANY
+    ===================================================== */
 
     const insuranceTable =
-    createPhoneTable(
+        createPhoneTable(
 
-        sheetData.phone.insurance,
+            phoneData.insurance,
 
-        "phone-table-insurance",
+            "",
 
-        null
+            {},
 
-    );
+            [
+                "INSURANCE COMPANY",
+                "CONTACT NUMBER"
+            ]
+
+        );
 
 
     layout.appendChild(
@@ -3715,259 +1678,6 @@ function renderPhoneContacts(){
         layout
     );
 
-
-    statusEl.textContent =
-    "PHONE CONTACTS - " +
-    (
-        sheetData.phone.contacts.length +
-        sheetData.phone.apg.length +
-        sheetData.phone.zas.length +
-        sheetData.phone.insurance.length
-    ).toLocaleString() +
-    " contacts";
-
-}
-
-
-/* =========================================================
-   SWITCH SHEET
-========================================================= */
-
-async function switchSheet(type){
-
-    currentSheet =
-    type;
-
-
-    /*
-       Active tab
-    */
-
-    document
-    .querySelectorAll(".tab")
-    .forEach(
-        tab => {
-
-            tab.classList.toggle(
-                "active",
-                tab.dataset.sheet === type
-            );
-
-        }
-    );
-
-
-    /*
-       Clear search
-    */
-
-    brandSearch.value = "";
-    genericSearch.value = "";
-    strengthSearch.value = "";
-    dosageSearch.value = "";
-
-
-    closeFilterPopup();
-
-
-    /*
-       =========================
-       PROACTIVE
-       =========================
-    */
-
-    if(
-        type === "proactive"
-    ){
-
-        searchArea.style.display =
-        "none";
-
-
-        excelHeader.style.display =
-        "none";
-
-
-        virtualContent.style.display =
-        "none";
-
-
-        specialContent.style.display =
-        "block";
-
-
-        renderProactiveImages();
-
-
-        statusEl.textContent =
-        "PROACTIVE INSTRUCTION";
-
-
-        return;
-
-    }
-
-
-    /*
-       =========================
-       PHONE CONTACTS
-       =========================
-    */
-
-    if(
-        type === "phone"
-    ){
-
-        searchArea.style.display =
-        "none";
-
-
-        excelHeader.style.display =
-        "none";
-
-
-        virtualContent.style.display =
-        "none";
-
-
-        specialContent.style.display =
-        "block";
-
-
-        excelArea.scrollTop =
-        0;
-
-
-        await loadPhoneContacts();
-
-
-        return;
-
-    }
-
-
-    /*
-       =========================
-       NORMAL
-       =========================
-    */
-
-    searchArea.style.display =
-    "block";
-
-
-    excelHeader.style.display =
-    "grid";
-
-
-    virtualContent.style.display =
-    "block";
-
-
-    specialContent.style.display =
-    "none";
-
-
-    updatePlaceholders(
-        type
-    );
-
-
-    /*
-       Only filter active sheet
-    */
-
-    filteredData[type] =
-    getFilteredRows(
-        type
-    );
-
-
-    /*
-       Fast fixed offsets
-    */
-
-    buildRowOffsets(
-        type
-    );
-
-
-    excelArea.scrollTop =
-    0;
-
-
-    renderVirtualTable(
-        type
-    );
-
-
-    updateStatus(
-        type
-    );
-
-}
-
-
-/* =========================================================
-   PROACTIVE IMAGES
-========================================================= */
-
-function renderProactiveImages(){
-
-    specialContent.innerHTML =
-    "";
-
-
-    const files = [
-
-        "proactive 1.png",
-
-        "proactive 2.png"
-
-    ];
-
-
-    for(
-        let i=0;
-        i<files.length;
-        i++
-    ){
-
-        const img =
-        document.createElement(
-            "img"
-        );
-
-
-        img.className =
-        "proactive-image";
-
-
-        img.src =
-        encodeURI(
-            files[i]
-        );
-
-
-        img.alt =
-        "Proactive Instruction " +
-        (i + 1);
-
-
-        if(i === 1){
-
-            img.loading =
-            "lazy";
-
-        }
-
-
-        specialContent.appendChild(
-            img
-        );
-
-    }
-
 }
 
 
@@ -3975,92 +1685,187 @@ function renderProactiveImages(){
    PLACEHOLDERS
 ========================================================= */
 
-function updatePlaceholders(type){
+function updatePlaceholders(){
 
-    const columns =
-    sheetColumns[type] || [];
+    if(currentSheet === "thiqa"){
 
+        globalSearch.placeholder =
+            "Search Brand / Ingredient / Form / etc...";
 
-    const has =
-    pattern =>
-    columns.some(
-        column =>
-        column
-        .toLowerCase()
-        .includes(pattern)
-    );
+        strengthSearch.placeholder =
+            "Strength search — use % for AND";
 
+    }
+    else{
 
-    brandSearch.placeholder =
-    has("brand") ||
-    has("item name")
-        ? "Search Brand / Item..."
-        : "Search Brand Name...";
+        globalSearch.placeholder =
+            "Search all columns...";
 
+        strengthSearch.placeholder =
+            "Search all cells...";
 
-    genericSearch.placeholder =
-    has("generic") ||
-    has("active ingredient") ||
-    has("ingredient")
-        ? "Search Generic / Active Ingredient..."
-        : "Search Generic Name...";
-
-
-    strengthSearch.placeholder =
-    "Search Strength...";
-
-
-    dosageSearch.placeholder =
-    "Search Dosage Form...";
+    }
 
 }
 
 
 /* =========================================================
-   STATUS
+   BUILD EXCEL HEADER
 ========================================================= */
 
-function updateStatus(type){
+function buildExcelHeader(){
 
-    if(
-        type === "proactive"
-    ){
+    excelHeader.innerHTML = "";
 
-        statusEl.textContent =
-        "PROACTIVE INSTRUCTION";
-
+    if(!columns.length){
         return;
-
     }
 
 
-    if(
-        type === "phone"
-    ){
+    const table =
+        document.createElement("table");
 
+    table.className =
+        "excel-table";
+
+
+    const thead =
+        document.createElement("thead");
+
+    const tr =
+        document.createElement("tr");
+
+
+    columns.forEach(
+        (column,index) => {
+
+            const th =
+                document.createElement("th");
+
+            th.textContent =
+                column;
+
+
+            /* Thiqa / Basic frozen */
+
+            if(
+                currentSheet === "thiqa" &&
+                (
+                    column.toUpperCase() === "THIQA" ||
+                    column.toUpperCase() === "BASIC"
+                )
+            ){
+
+                if(
+                    column.toUpperCase() === "THIQA"
+                ){
+                    th.classList.add(
+                        "frozen-thiqa"
+                    );
+                }
+
+                if(
+                    column.toUpperCase() === "BASIC"
+                ){
+                    th.classList.add(
+                        "frozen-basic"
+                    );
+                }
+
+            }
+
+
+            const filterButton =
+                document.createElement("span");
+
+            filterButton.className =
+                "filter-button";
+
+            filterButton.textContent =
+                "▼";
+
+            filterButton.title =
+                "Filter";
+
+
+            filterButton.addEventListener(
+                "click",
+                event => {
+
+                    event.stopPropagation();
+
+                    openFilterPopup(
+                        column,
+                        filterButton
+                    );
+
+                }
+            );
+
+
+            th.appendChild(
+                filterButton
+            );
+
+
+            tr.appendChild(th);
+
+        }
+    );
+
+
+    thead.appendChild(tr);
+
+    table.appendChild(thead);
+
+    excelHeader.appendChild(table);
+
+
+    updateFrozenWidths();
+
+}
+
+
+/* =========================================================
+   UPDATE FROZEN WIDTHS
+========================================================= */
+
+function updateFrozenWidths(){
+
+    if(currentSheet !== "thiqa"){
         return;
-
     }
 
+    const headers =
+        excelHeader.querySelectorAll(
+            "thead th"
+        );
 
-    const total =
-    sheetData[type]
-        ? sheetData[type].length
-        : 0;
-
-
-    const shown =
-    filteredData[type]
-        ? filteredData[type].length
-        : 0;
+    let basicWidth = 0;
 
 
-    statusEl.textContent =
-    "Showing " +
-    shown.toLocaleString() +
-    " of " +
-    total.toLocaleString() +
-    " records";
+    headers.forEach(th => {
+
+        if(
+            th.classList.contains(
+                "frozen-basic"
+            )
+        ){
+
+            basicWidth =
+                th.getBoundingClientRect()
+                    .width;
+
+        }
+
+    });
+
+
+    document.documentElement.style
+        .setProperty(
+            "--basic-width",
+            basicWidth + "px"
+        );
 
 }
 
@@ -4070,513 +1875,824 @@ function updateStatus(type){
 ========================================================= */
 
 function openFilterPopup(
-    type,
     column,
     button
 ){
 
     if(
-        type === "proactive" ||
-        type === "phone"
+        currentSheet === "proactive" ||
+        currentSheet === "phone"
     ){
-
         return;
-
     }
 
 
-    const rows =
-    sheetData[type] || [];
-
-
-    const valueSet =
-    new Set();
-
-
-    for(
-        let i=0;
-        i<rows.length;
-        i++
-    ){
-
-        valueSet.add(
-            displayValue(
-                rows[i][column]
-            )
-        );
-
-    }
-
-
-    const values =
-    Array.from(
-        valueSet
-    )
-    .sort(
-        (a,b) =>
-        a.localeCompare(
-            b,
-            undefined,
-            {
-                numeric:true,
-                sensitivity:"base"
-            }
-        )
-    );
-
-
-    const existing =
-    columnFilters[type][column];
-
-
-    filterPopupState = {
-
-        column,
-
-        sheet:type,
-
-        allValues:values,
-
-        selected:
-        existing
-            ? new Set(existing)
-            : new Set(values)
-
-    };
+    currentFilterColumn =
+        column;
 
 
     filterPopupHeader.textContent =
-    "Filter: " +
-    column;
+        column;
 
 
-    filterValueSearch.value =
-    "";
+    const data =
+        sheetData[currentSheet] || [];
 
 
-    renderFilterValues();
+    const values = [];
 
 
-    const rect =
-    button.getBoundingClientRect();
+    data.forEach(row => {
+
+        let value =
+            row[column];
+
+        if(
+            value === undefined ||
+            value === null
+        ){
+            value = "";
+        }
+
+        value = String(value);
+
+        if(!values.includes(value)){
+            values.push(value);
+        }
+
+    });
 
 
-    let left =
-    rect.left;
-
-
-    let top =
-    rect.bottom + 5;
-
-
-    if(
-        left + 280 >
-        window.innerWidth
-    ){
-
-        left =
-        window.innerWidth -
-        290;
-
-    }
-
-
-    if(
-        top + 420 >
-        window.innerHeight
-    ){
-
-        top =
-        window.innerHeight -
-        430;
-
-    }
-
-
-    filterPopup.style.left =
-    Math.max(
-        5,
-        left
-    ) + "px";
-
-
-    filterPopup.style.top =
-    Math.max(
-        5,
-        top
-    ) + "px";
-
-
-    filterPopup.classList.add(
-        "show"
-    );
-
-}
-
-
-/* =========================================================
-   FILTER VALUES
-========================================================= */
-
-function renderFilterValues(){
-
-    const search =
-    filterValueSearch.value
-    .trim()
-    .toLowerCase();
-
-
-    filterValues.innerHTML =
-    "";
-
-
-    const values =
-    filterPopupState
-    .allValues
-    .filter(
-        value =>
-        value
-        .toLowerCase()
-        .includes(search)
+    values.sort(
+        (a,b) =>
+            a.localeCompare(
+                b,
+                undefined,
+                {
+                    numeric:true,
+                    sensitivity:"base"
+                }
+            )
     );
 
 
-    for(
-        let i=0;
-        i<values.length;
-        i++
-    ){
+    filterList.innerHTML = "";
 
-        const value =
-        values[i];
 
+    const selected =
+        filters[column]
+            ? filters[column]
+            : new Set(values);
+
+
+    values.forEach(value => {
 
         const label =
-        document.createElement(
-            "label"
-        );
-
+            document.createElement("label");
 
         label.className =
-        "filter-value";
+            "filter-option";
 
 
         const checkbox =
-        document.createElement(
-            "input"
-        );
-
+            document.createElement("input");
 
         checkbox.type =
-        "checkbox";
+            "checkbox";
 
+        checkbox.value =
+            value;
 
         checkbox.checked =
-        filterPopupState
-        .selected
-        .has(value);
+            selected.has(value);
 
 
-        checkbox.addEventListener(
-            "change",
-            () => {
+        const span =
+            document.createElement("span");
 
-                if(
-                    checkbox.checked
-                ){
-
-                    filterPopupState
-                    .selected
-                    .add(value);
-
-                }
-                else{
-
-                    filterPopupState
-                    .selected
-                    .delete(value);
-
-                }
-
-
-                applyPopupFilter();
-
-            }
-        );
-
-
-        const text =
-        document.createElement(
-            "span"
-        );
-
-
-        text.textContent =
-        value === ""
-            ? "(Blanks)"
-            : value;
+        span.textContent =
+            value === ""
+                ? "(Blank)"
+                : value;
 
 
         label.appendChild(
             checkbox
         );
 
-
         label.appendChild(
-            text
+            span
         );
 
 
-        filterValues.appendChild(
+        filterList.appendChild(
             label
         );
 
+    });
+
+
+    const rect =
+        button.getBoundingClientRect();
+
+
+    let left =
+        rect.left;
+
+    let top =
+        rect.bottom + 5;
+
+
+    if(left + 260 > window.innerWidth){
+        left =
+            window.innerWidth - 270;
     }
+
+    if(top + 400 > window.innerHeight){
+        top =
+            Math.max(
+                10,
+                rect.top - 405
+            );
+    }
+
+
+    filterPopup.style.left =
+        left + "px";
+
+    filterPopup.style.top =
+        top + "px";
+
+    filterPopup.style.display =
+        "block";
 
 }
 
 
 /* =========================================================
-   APPLY POPUP FILTER
+   FILTER SELECT ALL
 ========================================================= */
 
-function applyPopupFilter(){
+filterSelectAll.addEventListener(
+    "click",
+    () => {
 
-    const sheet =
-    filterPopupState.sheet;
+        filterList
+            .querySelectorAll(
+                'input[type="checkbox"]'
+            )
+            .forEach(
+                checkbox =>
+                    checkbox.checked = true
+            );
+
+    }
+);
 
 
-    const column =
-    filterPopupState.column;
+/* =========================================================
+   FILTER CLEAR ALL
+========================================================= */
+
+filterClearAll.addEventListener(
+    "click",
+    () => {
+
+        filterList
+            .querySelectorAll(
+                'input[type="checkbox"]'
+            )
+            .forEach(
+                checkbox =>
+                    checkbox.checked = false
+            );
+
+    }
+);
 
 
-    const selected =
-    filterPopupState.selected;
+/* =========================================================
+   APPLY FILTER
+========================================================= */
+
+filterApply.addEventListener(
+    "click",
+    () => {
+
+        if(!currentFilterColumn){
+            return;
+        }
 
 
-    const allValues =
-    filterPopupState.allValues;
+        const selected =
+            new Set();
 
+
+        filterList
+            .querySelectorAll(
+                'input[type="checkbox"]:checked'
+            )
+            .forEach(
+                checkbox =>
+                    selected.add(
+                        checkbox.value
+                    )
+            );
+
+
+        filters[currentFilterColumn] =
+            selected;
+
+
+        filterPopup.style.display =
+            "none";
+
+
+        applyFilters();
+
+    }
+);
+
+
+/* =========================================================
+   APPLY FILTERS + SEARCH
+========================================================= */
+
+function applyFilters(){
 
     if(
-        selected.size ===
-        allValues.length
+        currentSheet === "proactive" ||
+        currentSheet === "phone"
     ){
-
-        delete columnFilters[
-            sheet
-        ][column];
-
-    }
-    else{
-
-        columnFilters[
-            sheet
-        ][column] =
-        new Set(selected);
-
+        return;
     }
 
 
-    applyFilters(
-        sheet
-    );
+    const data =
+        sheetData[currentSheet] || [];
+
+
+    const globalTerm =
+        globalSearch.value
+            .trim()
+            .toLowerCase();
+
+
+    const strengthTerm =
+        strengthSearch.value
+            .trim()
+            .toLowerCase();
+
+
+    filteredData =
+        data.filter(row => {
+
+
+            /* =============================================
+               COLUMN FILTERS
+            ============================================= */
+
+            for(
+                const column in filters
+            ){
+
+                const selected =
+                    filters[column];
+
+
+                let value =
+                    row[column];
+
+
+                if(
+                    value === undefined ||
+                    value === null
+                ){
+                    value = "";
+                }
+
+
+                value =
+                    String(value);
+
+
+                if(
+                    selected.size === 0 ||
+                    !selected.has(value)
+                ){
+                    return false;
+                }
+
+            }
+
+
+            /* =============================================
+               GLOBAL SEARCH
+            ============================================= */
+
+            if(globalTerm){
+
+                const terms =
+                    globalTerm
+                        .split(/\s+/)
+                        .filter(Boolean);
+
+
+                const rowText =
+                    columns
+                        .map(column => {
+
+                            let value =
+                                row[column];
+
+                            if(
+                                value === undefined ||
+                                value === null
+                            ){
+                                value = "";
+                            }
+
+                            return String(value)
+                                .toLowerCase();
+
+                        })
+                        .join(" ");
+
+
+                for(
+                    const term of terms
+                ){
+
+                    if(
+                        !rowText.includes(term)
+                    ){
+                        return false;
+                    }
+
+                }
+
+            }
+
+
+            /* =============================================
+               STRENGTH / % SEARCH
+               Each % term must exist in SAME CELL
+            ============================================= */
+
+            if(strengthTerm){
+
+                const searchParts =
+                    strengthTerm
+                        .split("%")
+                        .map(
+                            part =>
+                                part.trim()
+                                    .toLowerCase()
+                        )
+                        .filter(Boolean);
+
+
+                if(searchParts.length){
+
+                    const found =
+                        columns.some(
+                            column => {
+
+                                let value =
+                                    row[column];
+
+
+                                if(
+                                    value === undefined ||
+                                    value === null
+                                ){
+                                    value = "";
+                                }
+
+
+                                value =
+                                    String(value)
+                                        .toLowerCase();
+
+
+                                return searchParts.every(
+                                    term =>
+                                        value.includes(
+                                            term
+                                        )
+                                );
+
+                            }
+                        );
+
+
+                    if(!found){
+                        return false;
+                    }
+
+                }
+
+            }
+
+
+            return true;
+
+        });
+
+
+    updateFilterButtons();
+
+    renderVirtualTable();
+
+    updateStatus();
 
 }
 
 
 /* =========================================================
-   APPLY FILTERS
+   FILTER BUTTON STATES
 ========================================================= */
 
-function applyFilters(type){
+function updateFilterButtons(){
+
+    document
+        .querySelectorAll(
+            ".filter-button"
+        )
+        .forEach(button => {
+
+            const th =
+                button.parentElement;
+
+            if(!th){
+                return;
+            }
+
+            const column =
+                th.firstChild &&
+                th.firstChild.textContent
+                    ? th.firstChild.textContent
+                    : "";
+
+
+            button.classList.toggle(
+                "active",
+                false
+            );
+
+        });
+
+
+    const headers =
+        excelHeader.querySelectorAll(
+            "thead th"
+        );
+
+
+    headers.forEach(th => {
+
+        const button =
+            th.querySelector(
+                ".filter-button"
+            );
+
+        if(!button){
+            return;
+        }
+
+
+        const column =
+            Array.from(th.childNodes)
+                .filter(
+                    node =>
+                        node.nodeType ===
+                        Node.TEXT_NODE
+                )
+                .map(
+                    node =>
+                        node.textContent
+                )
+                .join("")
+                .trim();
+
+
+        button.classList.toggle(
+            "active",
+            !!filters[column]
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   VIRTUAL TABLE
+========================================================= */
+
+function renderVirtualTable(){
 
     if(
-        type === "proactive" ||
-        type === "phone"
+        currentSheet === "proactive" ||
+        currentSheet === "phone"
     ){
+        return;
+    }
+
+
+    virtualContent.innerHTML = "";
+
+
+    if(!columns.length){
+
+        virtualContent.textContent =
+            "No data";
 
         return;
 
     }
 
 
-    filteredData[type] =
-    getFilteredRows(
-        type
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.style.position =
+        "relative";
+
+    wrapper.style.height =
+        (
+            filteredData.length *
+            ROW_HEIGHT
+        ) + "px";
+
+
+    const table =
+        document.createElement("table");
+
+    table.className =
+        "excel-table";
+
+    table.style.position =
+        "absolute";
+
+    table.style.top =
+        "0";
+
+    table.style.left =
+        "0";
+
+
+    const tbody =
+        document.createElement("tbody");
+
+    table.appendChild(
+        tbody
     );
 
 
-    buildRowOffsets(
-        type
+    wrapper.appendChild(
+        table
+    );
+
+    virtualContent.appendChild(
+        wrapper
     );
 
 
-    renderVirtualTable(
-        type
-    );
+    const scrollTop =
+        excelArea.scrollTop;
 
 
-    updateStatus(
-        type
-    );
-
-}
-
-
-/* =========================================================
-   FILTER SEARCH
-========================================================= */
-
-filterValueSearch.addEventListener(
-    "input",
-    renderFilterValues
-);
-
-
-/* =========================================================
-   SELECT ALL
-========================================================= */
-
-selectAllBtn.addEventListener(
-    "click",
-    () => {
-
-        filterPopupState.selected =
-        new Set(
-            filterPopupState.allValues
+    const start =
+        Math.max(
+            0,
+            Math.floor(
+                scrollTop / ROW_HEIGHT
+            ) - BUFFER_ROWS
         );
 
 
-        renderFilterValues();
+    const visibleCount =
+        Math.ceil(
+            excelArea.clientHeight /
+            ROW_HEIGHT
+        ) +
+        BUFFER_ROWS * 2;
 
 
-        applyPopupFilter();
-
-    }
-);
-
-
-/* =========================================================
-   CLEAR FILTER
-========================================================= */
-
-clearFilterBtn.addEventListener(
-    "click",
-    () => {
-
-        const sheet =
-        filterPopupState.sheet;
-
-
-        const column =
-        filterPopupState.column;
-
-
-        delete columnFilters[
-            sheet
-        ][column];
-
-
-        filterPopupState.selected =
-        new Set(
-            filterPopupState.allValues
+    const end =
+        Math.min(
+            filteredData.length,
+            start + visibleCount
         );
 
 
-        applyFilters(
-            sheet
-        );
+    table.style.top =
+        (
+            start *
+            ROW_HEIGHT
+        ) + "px";
 
 
-        renderFilterValues();
+    for(
+        let i = start;
+        i < end;
+        i++
+    ){
 
-    }
-);
-
-
-/* =========================================================
-   CLOSE POPUP
-========================================================= */
-
-function closeFilterPopup(){
-
-    filterPopup.classList.remove(
-        "show"
-    );
-
-}
+        const row =
+            filteredData[i];
 
 
-document.addEventListener(
-    "click",
-    event => {
+        const tr =
+            document.createElement("tr");
 
-        if(
-            !filterPopup.contains(
-                event.target
-            )
-        ){
-
-            closeFilterPopup();
-
-        }
-
-    }
-);
+        tr.style.height =
+            ROW_HEIGHT + "px";
 
 
-/* =========================================================
-   SEARCH
-========================================================= */
+        columns.forEach(
+            column => {
 
-let searchTimer = null;
+                const td =
+                    document.createElement("td");
 
 
-[
-    brandSearch,
-    genericSearch,
-    strengthSearch,
-    dosageSearch
-]
-.forEach(
-    input => {
+                let value =
+                    row[column];
 
-        input.addEventListener(
-            "input",
-            () => {
 
                 if(
-                    currentSheet ===
-                    "proactive" ||
-                    currentSheet ===
-                    "phone"
+                    value === undefined ||
+                    value === null
+                ){
+                    value = "";
+                }
+
+
+                td.textContent =
+                    String(value);
+
+
+                /* =====================================
+                   VITAMIN SPECIAL
+                ===================================== */
+
+                if(
+                    currentSheet === "vitamin"
                 ){
 
-                    return;
+                    const upper =
+                        String(value)
+                            .toUpperCase()
+                            .trim();
+
+
+                    if(
+                        upper === "NCI" ||
+                        upper === "NOT COVERED"
+                    ){
+
+                        td.classList.add(
+                            "vitamin-nci"
+                        );
+
+                    }
 
                 }
 
 
-                clearTimeout(
-                    searchTimer
-                );
+                /* =====================================
+                   FROZEN THIQA / BASIC
+                ===================================== */
+
+                if(
+                    currentSheet === "thiqa"
+                ){
+
+                    const upperColumn =
+                        column
+                            .toUpperCase()
+                            .trim();
 
 
-                searchTimer =
-                setTimeout(
-                    () => {
+                    if(
+                        upperColumn === "THIQA"
+                    ){
 
-                        applyFilters(
-                            currentSheet
+                        td.classList.add(
+                            "frozen-thiqa"
                         );
 
-                    },
-                    100
-                );
+                    }
+
+
+                    if(
+                        upperColumn === "BASIC"
+                    ){
+
+                        td.classList.add(
+                            "frozen-basic"
+                        );
+
+                    }
+
+                }
+
+
+                tr.appendChild(td);
 
             }
         );
+
+
+        tbody.appendChild(
+            tr
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   UPDATE STATUS
+========================================================= */
+
+function updateStatus(){
+
+    const sheet =
+        WORKSHEETS.find(
+            item =>
+                item.id === currentSheet
+        );
+
+
+    if(!sheet){
+        return;
+    }
+
+
+    statusEl.textContent =
+        sheet.name +
+        " — " +
+        filteredData.length +
+        " / " +
+        (
+            sheetData[currentSheet] || []
+        ).length +
+        " records";
+
+}
+
+
+/* =========================================================
+   SEARCH EVENTS
+========================================================= */
+
+globalSearch.addEventListener(
+    "input",
+    () => {
+
+        if(
+            currentSheet === "proactive" ||
+            currentSheet === "phone"
+        ){
+            return;
+        }
+
+
+        clearSearch.style.display =
+            globalSearch.value
+                ? "block"
+                : "none";
+
+
+        applyFilters();
+
+    }
+);
+
+
+strengthSearch.addEventListener(
+    "input",
+    () => {
+
+        if(
+            currentSheet === "proactive" ||
+            currentSheet === "phone"
+        ){
+            return;
+        }
+
+
+        clearStrengthSearch.style.display =
+            strengthSearch.value
+                ? "block"
+                : "none";
+
+
+        applyFilters();
 
     }
 );
@@ -4586,31 +2702,53 @@ let searchTimer = null;
    CLEAR SEARCH
 ========================================================= */
 
-clearBtn.addEventListener(
+clearSearch.addEventListener(
     "click",
     () => {
 
-        brandSearch.value = "";
-        genericSearch.value = "";
-        strengthSearch.value = "";
-        dosageSearch.value = "";
+        globalSearch.value = "";
 
+        clearSearch.style.display =
+            "none";
+
+        applyFilters();
+
+    }
+);
+
+
+clearStrengthSearch.addEventListener(
+    "click",
+    () => {
+
+        strengthSearch.value = "";
+
+        clearStrengthSearch.style.display =
+            "none";
+
+        applyFilters();
+
+    }
+);
+
+
+/* =========================================================
+   CLOSE FILTER WHEN CLICKING OUTSIDE
+========================================================= */
+
+document.addEventListener(
+    "click",
+    event => {
 
         if(
-            currentSheet !==
-            "proactive" &&
-            currentSheet !==
-            "phone"
+            !filterPopup.contains(event.target) &&
+            !event.target.classList.contains(
+                "filter-button"
+            )
         ){
 
-            columnFilters[
-                currentSheet
-            ] = {};
-
-
-            applyFilters(
-                currentSheet
-            );
+            filterPopup.style.display =
+                "none";
 
         }
 
@@ -4619,51 +2757,22 @@ clearBtn.addEventListener(
 
 
 /* =========================================================
-   FAST SCROLL
+   SCROLL
 ========================================================= */
-
-let scrollFrame = null;
-
 
 excelArea.addEventListener(
     "scroll",
     () => {
 
         if(
-            currentSheet ===
-            "proactive" ||
-            currentSheet ===
-            "phone"
+            currentSheet === "proactive" ||
+            currentSheet === "phone"
         ){
-
             return;
-
         }
 
+        renderVirtualTable();
 
-        if(scrollFrame){
-
-            cancelAnimationFrame(
-                scrollFrame
-            );
-
-        }
-
-
-        scrollFrame =
-        requestAnimationFrame(
-            () => {
-
-                renderVisibleRows(
-                    currentSheet
-                );
-
-            }
-        );
-
-    },
-    {
-        passive:true
     }
 );
 
@@ -4672,53 +2781,27 @@ excelArea.addEventListener(
    RESIZE
 ========================================================= */
 
-let resizeTimer = null;
-
-
 window.addEventListener(
     "resize",
     () => {
 
-        clearTimeout(
-            resizeTimer
-        );
+        if(
+            currentSheet === "proactive" ||
+            currentSheet === "phone"
+        ){
+            return;
+        }
 
+        updateFrozenWidths();
 
-        resizeTimer =
-        setTimeout(
-            () => {
-
-                if(
-                    currentSheet ===
-                    "proactive" ||
-                    currentSheet ===
-                    "phone"
-                ){
-
-                    return;
-
-                }
-
-
-                buildRowOffsets(
-                    currentSheet
-                );
-
-
-                renderVirtualTable(
-                    currentSheet
-                );
-
-            },
-            150
-        );
+        renderVirtualTable();
 
     }
 );
 
 
 /* =========================================================
-   START
+   INITIALIZE
 ========================================================= */
 
 document.addEventListener(
@@ -4726,8 +2809,6 @@ document.addEventListener(
     () => {
 
         createTabs();
-
-        initializeSheetStorage();
 
         loadAllData();
 
