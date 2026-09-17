@@ -1,0 +1,1577 @@
+[
+  {
+    "Item Code": "16-01-00007",
+    "Item Name": "(CDA) BUTRANS 5 MG PATCHES 4 S",
+    "Retail": 143,
+    "Generic Name (HAAD)": "Buprenorphine",
+    "STRENGTH (HAAD)": "5 mg (5mcg/hr)",
+    "MAXIMUM DAILY DOSE": "20 mcg/hr",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00010",
+    "Item Name": "(CDA) CONCERTA 18 MG TAB 30 S",
+    "Retail": 176,
+    "Generic Name (HAAD)": "Methylphenidate Hydrochloride",
+    "STRENGTH (HAAD)": "18 mg",
+    "MAXIMUM DAILY DOSE": "72 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00011",
+    "Item Name": "(CDA) CONCERTA 36 MG TAB 30 S",
+    "Retail": 239.5,
+    "Generic Name (HAAD)": "Methylphenidate Hydrochloride",
+    "STRENGTH (HAAD)": "36 mg",
+    "MAXIMUM DAILY DOSE": "72 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00013",
+    "Item Name": "(CDA) DORMICUM 7.5 MG TAB 10 S",
+    "Retail": 12.5,
+    "Generic Name (HAAD)": "Midazolam",
+    "STRENGTH (HAAD)": "7.5 mg",
+    "MAXIMUM DAILY DOSE": "15 mg",
+    "REMARKS": "The total daily dose should be divided in three single doses, the maximum time interval between doses should not exceed 12 hours."
+  },
+  {
+    "Item Code": "16-01-00097",
+    "Item Name": "(CDA) GABAPENTIN FIDIA 100 MG CAP 50 S",
+    "Retail": 53.5,
+    "Generic Name (HAAD)": "Gabapentin",
+    "STRENGTH (HAAD)": "100 mg",
+    "MAXIMUM DAILY DOSE": "2400-3600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00098",
+    "Item Name": "(CDA) GABAPENTIN FIDIA 300 MG CAP 50 S",
+    "Retail": 86,
+    "Generic Name (HAAD)": "Gabapentin",
+    "STRENGTH (HAAD)": "300 mg",
+    "MAXIMUM DAILY DOSE": "2400-3600 mg",
+    "REMARKS": "Dosage Adjustment in Patients with Renal Impairment"
+  },
+  {
+    "Item Code": "16-01-00099",
+    "Item Name": "(CDA) GABAPENTIN FIDIA 400 MG CAP 30 S",
+    "Retail": 62,
+    "Generic Name (HAAD)": "Gabapentin",
+    "STRENGTH (HAAD)": "400 mg",
+    "MAXIMUM DAILY DOSE": "2400-3600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00015",
+    "Item Name": "(CDA) KEMADRIN 5 MG TAB 100 S",
+    "Retail": 27,
+    "Generic Name (HAAD)": "Procyclidine Hydrochloride",
+    "STRENGTH (HAAD)": "5 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00019",
+    "Item Name": "(CDA) LEXOTANIL 1.5 MG TAB 30 S",
+    "Retail": 12,
+    "Generic Name (HAAD)": "Bromazepam",
+    "STRENGTH (HAAD)": "1.5 mg",
+    "MAXIMUM DAILY DOSE": "60 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00020",
+    "Item Name": "(CDA) LEXOTANIL 3 MG TAB 30 S",
+    "Retail": 17,
+    "Generic Name (HAAD)": "Bromazepam",
+    "STRENGTH (HAAD)": "3 mg",
+    "MAXIMUM DAILY DOSE": "60 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00021",
+    "Item Name": "(CDA) LEXOTANIL 6 MG TAB 30 S",
+    "Retail": 25,
+    "Generic Name (HAAD)": "Bromazepam",
+    "STRENGTH (HAAD)": "6 mg",
+    "MAXIMUM DAILY DOSE": "60 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00112",
+    "Item Name": "(CDA) LYRICA 150 MG CAP 56 S",
+    "Retail": 358,
+    "Generic Name (HAAD)": "Pregabalin",
+    "STRENGTH (HAAD)": "150 mg",
+    "MAXIMUM DAILY DOSE": "600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00113",
+    "Item Name": "(CDA) LYRICA 300 MG CAP 56 S",
+    "Retail": 507,
+    "Generic Name (HAAD)": "Pregabalin",
+    "STRENGTH (HAAD)": "300 mg",
+    "MAXIMUM DAILY DOSE": "600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00114",
+    "Item Name": "(CDA) LYRICA 75 MG CAP 14 S",
+    "Retail": 58.5,
+    "Generic Name (HAAD)": "Pregabalin",
+    "STRENGTH (HAAD)": "75 mg",
+    "MAXIMUM DAILY DOSE": "600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00115",
+    "Item Name": "(CDA) LYRICA 75 MG CAP 56 S",
+    "Retail": 193,
+    "Generic Name (HAAD)": "Pregabalin",
+    "STRENGTH (HAAD)": "75 mg",
+    "MAXIMUM DAILY DOSE": "600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00022",
+    "Item Name": "(CDA) MODIODAL 100 MG TAB 30 S",
+    "Retail": 414,
+    "Generic Name (HAAD)": "Modafinil",
+    "STRENGTH (HAAD)": "100 mg",
+    "MAXIMUM DAILY DOSE": "400 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00122",
+    "Item Name": "(CDA) NERVICA 150 MG CAP 30 S",
+    "Retail": 78.5,
+    "Generic Name (HAAD)": "Pregabalin",
+    "STRENGTH (HAAD)": "150 mg",
+    "MAXIMUM DAILY DOSE": "600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00123",
+    "Item Name": "(CDA) NERVICA 75 MG CAP 30 S",
+    "Retail": 41,
+    "Generic Name (HAAD)": "Pregabalin",
+    "STRENGTH (HAAD)": "75 mg",
+    "MAXIMUM DAILY DOSE": "600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00124",
+    "Item Name": "(CDA) NERVZ 100 MG CAP 48 S",
+    "Retail": 51,
+    "Generic Name (HAAD)": "Gabapentin",
+    "STRENGTH (HAAD)": "100 mg",
+    "MAXIMUM DAILY DOSE": "2400-3600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00125",
+    "Item Name": "(CDA) NERVZ 300 MG CAP 48 S",
+    "Retail": 117,
+    "Generic Name (HAAD)": "Gabapentin",
+    "STRENGTH (HAAD)": "300 mg",
+    "MAXIMUM DAILY DOSE": "2400-3600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00126",
+    "Item Name": "(CDA) NERVZ 400 MG CAP 48 S",
+    "Retail": 140,
+    "Generic Name (HAAD)": "Gabapentin",
+    "STRENGTH (HAAD)": "400 mg",
+    "MAXIMUM DAILY DOSE": "2400-3600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00127",
+    "Item Name": "(CDA) NEURONTIN 300 MG CAP 50 S",
+    "Retail": 156,
+    "Generic Name (HAAD)": "Gabapentin",
+    "STRENGTH (HAAD)": "300 mg",
+    "MAXIMUM DAILY DOSE": "2400-3600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00128",
+    "Item Name": "(CDA) NEURONTIN 400 MG CAP 50 S",
+    "Retail": 183,
+    "Generic Name (HAAD)": "Gabapentin",
+    "STRENGTH (HAAD)": "400 mg",
+    "MAXIMUM DAILY DOSE": "2400-3600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00129",
+    "Item Name": "(CDA) NEUROPLEX 300 MG CAP 50 S",
+    "Retail": 89,
+    "Generic Name (HAAD)": "Gabapentin",
+    "STRENGTH (HAAD)": "300 mg",
+    "MAXIMUM DAILY DOSE": "2400-3600 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00026",
+    "Item Name": "(CDA) REXULTI 1 MG TAB 28 S",
+    "Retail": 466,
+    "Generic Name (HAAD)": "Brexpiprazole",
+    "STRENGTH (HAAD)": "1 mg",
+    "MAXIMUM DAILY DOSE": "4 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00027",
+    "Item Name": "(CDA) REXULTI 2 MG TAB 28 S",
+    "Retail": 501,
+    "Generic Name (HAAD)": "Brexpiprazole",
+    "STRENGTH (HAAD)": "2 mg",
+    "MAXIMUM DAILY DOSE": "4 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00028",
+    "Item Name": "(CDA) RISPERDAL 1 MG / ML SYP 100 ML",
+    "Retail": 273,
+    "Generic Name (HAAD)": "Risperidone",
+    "STRENGTH (HAAD)": "1 mg/ml",
+    "MAXIMUM DAILY DOSE": "6 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-05245",
+    "Item Name": "(CDA) RITALIN 10 MG TAB 30 S",
+    "Retail": 19.5,
+    "Generic Name (HAAD)": "Methylphenidate Hydrochloride",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "72 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00033",
+    "Item Name": "(CDA) RIVOTRIL 0.5 MG TAB 50 S",
+    "Retail": 15.5,
+    "Generic Name (HAAD)": "Clonazepam",
+    "STRENGTH (HAAD)": "0.5 mg",
+    "MAXIMUM DAILY DOSE": "4 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00034",
+    "Item Name": "(CDA) RIVOTRIL 2 MG TAB 30 S",
+    "Retail": 19,
+    "Generic Name (HAAD)": "Clonazepam",
+    "STRENGTH (HAAD)": "2 mg",
+    "MAXIMUM DAILY DOSE": "4 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00035",
+    "Item Name": "(CDA) SEDOXIL 1 MG TAB 30 S",
+    "Retail": 208,
+    "Generic Name (HAAD)": "Mexazolam",
+    "STRENGTH (HAAD)": "1 mg",
+    "MAXIMUM DAILY DOSE": "3 mg",
+    "REMARKS": "Administered three times daily (Couldn't tell if it's 3 mg or 9 mg)"
+  },
+  {
+    "Item Code": "16-01-00043",
+    "Item Name": "(CDA) TAPCLOB 10 MG / 5 ML SUSP 150 ML",
+    "Retail": 550.5,
+    "Generic Name (HAAD)": "Clobazam",
+    "STRENGTH (HAAD)": "2 mg/ml",
+    "MAXIMUM DAILY DOSE": null,
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00044",
+    "Item Name": "(CDA) TRAMAL 100 MG / 2 ML AMP 5 S",
+    "Retail": 32,
+    "Generic Name (HAAD)": "Tramadol Hydrochloride",
+    "STRENGTH (HAAD)": "50 mg/ml",
+    "MAXIMUM DAILY DOSE": "400 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00045",
+    "Item Name": "(CDA) TRAMAL 50 MG CAP 10 S",
+    "Retail": 15.5,
+    "Generic Name (HAAD)": "Tramadol Hydrochloride",
+    "STRENGTH (HAAD)": "50 mg",
+    "MAXIMUM DAILY DOSE": "400 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00046",
+    "Item Name": "(CDA) TRAMAL RETARD 100 MG TAB 10 S",
+    "Retail": 22.5,
+    "Generic Name (HAAD)": "Tramadol Hydrochloride",
+    "STRENGTH (HAAD)": "100 mg",
+    "MAXIMUM DAILY DOSE": "400 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00048",
+    "Item Name": "(CDA) ULTRAM TAB 10 S",
+    "Retail": 11,
+    "Generic Name (HAAD)": "Paracetamol (Acetaminophen),Tramadol Hydrochloride",
+    "STRENGTH (HAAD)": "325 mg,37.5 mg",
+    "MAXIMUM DAILY DOSE": "400 mg",
+    "REMARKS": "For elderly, the maximum daily dose will be reduced to 300 mg"
+  },
+  {
+    "Item Code": "16-01-00049",
+    "Item Name": "(CDA) VALIUM 10 MG TAB 25 S",
+    "Retail": 22,
+    "Generic Name (HAAD)": "Diazepam",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "40 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00050",
+    "Item Name": "(CDA) VALIUM 5 MG TAB 25 S",
+    "Retail": 15,
+    "Generic Name (HAAD)": "Diazepam",
+    "STRENGTH (HAAD)": "5 mg",
+    "MAXIMUM DAILY DOSE": "40 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00051",
+    "Item Name": "(CDA) XANAX 0.25 MG TAB 30 S",
+    "Retail": 9,
+    "Generic Name (HAAD)": "Alprazolam",
+    "STRENGTH (HAAD)": "0.25 mg",
+    "MAXIMUM DAILY DOSE": "4 mg",
+    "REMARKS": "4 mg is the maximum dose in generalized anxiety attacks, however some patients may require doses up to 10 mg depending on the situation."
+  },
+  {
+    "Item Code": "16-01-00052",
+    "Item Name": "(CDA) XANAX 0.5 MG TAB 100 S",
+    "Retail": 50.5,
+    "Generic Name (HAAD)": "Alprazolam",
+    "STRENGTH (HAAD)": "0.5 mg",
+    "MAXIMUM DAILY DOSE": "4 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00053",
+    "Item Name": "(CDA) XANAX 0.5 MG TAB 30 S",
+    "Retail": 15,
+    "Generic Name (HAAD)": "Alprazolam",
+    "STRENGTH (HAAD)": "0.5 mg",
+    "MAXIMUM DAILY DOSE": "4 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00054",
+    "Item Name": "(CDA) XANAX 1 MG TAB 30 S",
+    "Retail": 29.5,
+    "Generic Name (HAAD)": "Alprazolam",
+    "STRENGTH (HAAD)": "1 mg",
+    "MAXIMUM DAILY DOSE": "4 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00055",
+    "Item Name": "(CDA) ZALDIAR TAB 10 S",
+    "Retail": 18.5,
+    "Generic Name (HAAD)": "Paracetamol (Acetaminophen),Tramadol Hydrochloride",
+    "STRENGTH (HAAD)": "325 mg,37.5 mg",
+    "MAXIMUM DAILY DOSE": "400 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00056",
+    "Item Name": "(CDA) ZALDIAR TAB 20 S",
+    "Retail": 32,
+    "Generic Name (HAAD)": "Paracetamol (Acetaminophen),Tramadol Hydrochloride",
+    "STRENGTH (HAAD)": "325 mg,37.5 mg",
+    "MAXIMUM DAILY DOSE": "400 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00170",
+    "Item Name": "(CDA) ZOMAC 1 MG TAB 100 S",
+    "Retail": 990.5,
+    "Generic Name (HAAD)": "Eszopiclone",
+    "STRENGTH (HAAD)": "1 mg",
+    "MAXIMUM DAILY DOSE": "3 mg",
+    "REMARKS": "Renal and hepatic impairment: No dose adjustment required. Only in severe hepatic dysfunction."
+  },
+  {
+    "Item Code": "16-01-00001",
+    "Item Name": "(CDB) ABILIFY 1 MG / ML SYP 150 ML",
+    "Retail": 454,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "1 mg/ml",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00002",
+    "Item Name": "(CDB) ABILIFY 15 MG TAB 30 S",
+    "Retail": 687,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "15 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00003",
+    "Item Name": "(CDB) ABILIFY 400 MG INJ 1 S",
+    "Retail": 2013,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "400 mg/Vial",
+    "MAXIMUM DAILY DOSE": "400 mg (1 vial)",
+    "REMARKS": "After injection, it must be followed by oral Aripiprazole (10-20 mg) for 14 consecutive days."
+  },
+  {
+    "Item Code": "16-01-00063",
+    "Item Name": "(CDB) ANAFRANIL 10 MG TAB 30 S",
+    "Retail": 15,
+    "Generic Name (HAAD)": "Clomipramine Hydrochloride",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "250 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00064",
+    "Item Name": "(CDB) ANAFRANIL 25 MG TAB 30 S",
+    "Retail": 21.5,
+    "Generic Name (HAAD)": "Clomipramine Hydrochloride",
+    "STRENGTH (HAAD)": "25 mg",
+    "MAXIMUM DAILY DOSE": "250 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00065",
+    "Item Name": "(CDB) ANAFRANIL SR 75 MG TAB 20 S",
+    "Retail": 54,
+    "Generic Name (HAAD)": "Clomipramine Hydrochloride",
+    "STRENGTH (HAAD)": "75 mg",
+    "MAXIMUM DAILY DOSE": "250 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00004",
+    "Item Name": "(CDB) APIEXEL 10 MG TAB 28 S",
+    "Retail": 218.5,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00005",
+    "Item Name": "(CDB) APIEXEL 15 MG TAB 28 S",
+    "Retail": 271.5,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "15 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00006",
+    "Item Name": "(CDB) APIEXEL 5 MG TAB 28 S",
+    "Retail": 120.5,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "5 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00066",
+    "Item Name": "(CDB) ASIA BRAX TAB 30 S",
+    "Retail": 10,
+    "Generic Name (HAAD)": "Chlordiazepoxide,Clidinium Bromide",
+    "STRENGTH (HAAD)": "5 mg,2.5 mg",
+    "MAXIMUM DAILY DOSE": null,
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00067",
+    "Item Name": "(CDB) BRINTELLIX 10 MG TAB 28 S",
+    "Retail": 276.5,
+    "Generic Name (HAAD)": "Vortioxetine",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00068",
+    "Item Name": "(CDB) BRINTELLIX 20 MG TAB 28 S",
+    "Retail": 441,
+    "Generic Name (HAAD)": "Vortioxetine",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00069",
+    "Item Name": "(CDB) BRONCHOPHANE EX SYP 125 ML",
+    "Retail": 10.5,
+    "Generic Name (HAAD)": "Dextromethorphan Hydrobromide,Diphenhydramine Hydrochloride,Ephedrine Hydrochloride,Guaifenesin (Guaiphenesin)",
+    "STRENGTH (HAAD)": "4.58 mg/5ml,5 mg/5ml,7.5 mg/5ml,50 mg/5ml",
+    "MAXIMUM DAILY DOSE": "20 mg q4h",
+    "REMARKS": "Do not exceed 6 doses per day!"
+  },
+  {
+    "Item Code": "16-01-00070",
+    "Item Name": "(CDB) CIPRALEX 10 MG TAB 28 S",
+    "Retail": 142,
+    "Generic Name (HAAD)": "Escitalopram Oxalate",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00071",
+    "Item Name": "(CDB) CIPRALEX 20 MG TAB 28 S",
+    "Retail": 233.5,
+    "Generic Name (HAAD)": "Escitalopram Oxalate",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00072",
+    "Item Name": "(CDB) CIPRAM 20 MG TAB 28 S",
+    "Retail": 144,
+    "Generic Name (HAAD)": "Citalopram Hydrobromide",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "40 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00073",
+    "Item Name": "(CDB) CITALO 10 MG TAB 30 S",
+    "Retail": 91.5,
+    "Generic Name (HAAD)": "Escitalopram Oxalate",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00074",
+    "Item Name": "(CDB) CITALO 20 MG TAB 30 S",
+    "Retail": 150,
+    "Generic Name (HAAD)": "Escitalopram Oxalate",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00075",
+    "Item Name": "(CDB) COMPIFY 1 MG / ML ORAL SOLUTION 150 ML",
+    "Retail": 280,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "1 mg/ml",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00008",
+    "Item Name": "(CDB) COMPIFY 10 MG TAB 28 S",
+    "Retail": 218.5,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00009",
+    "Item Name": "(CDB) COMPIFY 15 MG TAB 28 S",
+    "Retail": 271.5,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "15 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00076",
+    "Item Name": "(CDB) CONTRAVE SR 90 / 8 MG TAB 112 S",
+    "Retail": 484.5,
+    "Generic Name (HAAD)": "Bupropion Hydrochloride,Naltrexone",
+    "STRENGTH (HAAD)": "90 mg,8 mg",
+    "MAXIMUM DAILY DOSE": "360/32 mg",
+    "REMARKS": "The maximum recommended daily dose of CONTRAVE is two tablets taken twice daily"
+  },
+  {
+    "Item Code": "16-01-00077",
+    "Item Name": "(CDB) CURACNE 10 MG CAP 30 S",
+    "Retail": 104.5,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "2mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00078",
+    "Item Name": "(CDB) CURACNE 20 MG CAP 30 S",
+    "Retail": 183.5,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "2mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00079",
+    "Item Name": "(CDB) CURACNE 40 MG CAP 30 S",
+    "Retail": 301,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "40 mg",
+    "MAXIMUM DAILY DOSE": "2mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00080",
+    "Item Name": "(CDB) CYMBALTA 30 MG TAB 28 S",
+    "Retail": 122,
+    "Generic Name (HAAD)": "Duloxetine Hydrochloride",
+    "STRENGTH (HAAD)": "30 mg",
+    "MAXIMUM DAILY DOSE": "120 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00081",
+    "Item Name": "(CDB) CYMBALTA 60 MG TAB 28 S",
+    "Retail": 244,
+    "Generic Name (HAAD)": "Duloxetine Hydrochloride",
+    "STRENGTH (HAAD)": "60 mg",
+    "MAXIMUM DAILY DOSE": "120 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-05812",
+    "Item Name": "(CDB) DECA DURABOLIN 50 MG / ML INJ 1 S",
+    "Retail": 36.5,
+    "Generic Name (HAAD)": null,
+    "STRENGTH (HAAD)": null,
+    "MAXIMUM DAILY DOSE": null,
+    "REMARKS": "Couldn’t find it in the system"
+  },
+  {
+    "Item Code": "16-01-00012",
+    "Item Name": "(CDB) DECUTAN 20 MG CAP 50 S",
+    "Retail": 267,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "2mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00082",
+    "Item Name": "(CDB) DERIPEX 10 MG TAB 30 S",
+    "Retail": 351.5,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00083",
+    "Item Name": "(CDB) DERIPEX 15 MG TAB 30 S",
+    "Retail": 424.5,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "15 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00084",
+    "Item Name": "(CDB) DEXTROLAG COUGH SYP 100 ML",
+    "Retail": 9.5,
+    "Generic Name (HAAD)": "Ammonium Chloride,Chlorpheniramine Maleate,Dextromethorphan Hydrobromide,Guaifenesin (Guaiphenesin)",
+    "STRENGTH (HAAD)": "25 mg/5ml,2 mg/5ml,10 mg/5ml,100 mg/5ml",
+    "MAXIMUM DAILY DOSE": "120 mg",
+    "REMARKS": "10 to 30 mg orally every 4 to 8 hours."
+  },
+  {
+    "Item Code": "16-01-00085",
+    "Item Name": "(CDB) DOGMATIL CAP 50 MG 30 S",
+    "Retail": 18,
+    "Generic Name (HAAD)": "Sulpiride",
+    "STRENGTH (HAAD)": "50 mg",
+    "MAXIMUM DAILY DOSE": "2400 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00086",
+    "Item Name": "(CDB) EFEXOR XR 150 MG CAP 14 S",
+    "Retail": 154.5,
+    "Generic Name (HAAD)": "Venlafaxine Hydrochloride",
+    "STRENGTH (HAAD)": "150 mg",
+    "MAXIMUM DAILY DOSE": "225 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00087",
+    "Item Name": "(CDB) EFEXOR XR 75 MG CAP 14 S",
+    "Retail": 92.5,
+    "Generic Name (HAAD)": "Venlafaxine Hydrochloride",
+    "STRENGTH (HAAD)": "75 mg",
+    "MAXIMUM DAILY DOSE": "225 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00088",
+    "Item Name": "(CDB) ENTAPRO 10 MG TAB 30 S",
+    "Retail": 78.5,
+    "Generic Name (HAAD)": "Escitalopram Oxalate",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00089",
+    "Item Name": "(CDB) ENTAPRO 20 MG TAB 30 S",
+    "Retail": 129,
+    "Generic Name (HAAD)": "Escitalopram Oxalate",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00090",
+    "Item Name": "(CDB) ESCITOMAX 10 MG TAB 30 S",
+    "Retail": 61,
+    "Generic Name (HAAD)": "Escitalopram Oxalate",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00091",
+    "Item Name": "(CDB) ESCITOMAX 20 MG TAB 30 S",
+    "Retail": 100.5,
+    "Generic Name (HAAD)": "Escitalopram Oxalate",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00092",
+    "Item Name": "(CDB) ESIL 10 MG TAB 30 S",
+    "Retail": 61,
+    "Generic Name (HAAD)": "Escitalopram Oxalate",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00093",
+    "Item Name": "(CDB) ESIL 20 MG TAB 30 S",
+    "Retail": 100,
+    "Generic Name (HAAD)": "Escitalopram Oxalate",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00094",
+    "Item Name": "(CDB) FAVERIN 100 MG TAB 30 S",
+    "Retail": 91.5,
+    "Generic Name (HAAD)": "Fluvoxamine Maleate",
+    "STRENGTH (HAAD)": "100 mg",
+    "MAXIMUM DAILY DOSE": "300 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00095",
+    "Item Name": "(CDB) FAVERIN 50 MG TAB 60 S",
+    "Retail": 91.5,
+    "Generic Name (HAAD)": "Fluvoxamine Maleate",
+    "STRENGTH (HAAD)": "50 mg",
+    "MAXIMUM DAILY DOSE": "300 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00096",
+    "Item Name": "(CDB) FLUOXONE 20 MG TAB 30 S",
+    "Retail": 136,
+    "Generic Name (HAAD)": "Fluoxetine Hydrochloride",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "80 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00014",
+    "Item Name": "(CDB) GENOTROPIN 5.3 MG INJ 1 S",
+    "Retail": 466.5,
+    "Generic Name (HAAD)": "Somatropin (GENOTROPIN)",
+    "STRENGTH (HAAD)": "5.3 mg(16IU)",
+    "MAXIMUM DAILY DOSE": "0.0125 mg/kg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00100",
+    "Item Name": "(CDB) HALDOL 5 MG TAB 25 S",
+    "Retail": 28,
+    "Generic Name (HAAD)": "Haloperidol",
+    "STRENGTH (HAAD)": "5 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": "It was 100 mg but then got reduced to 30 mg to aviod heart problems."
+  },
+  {
+    "Item Code": "16-01-00101",
+    "Item Name": "(CDB) INVEGA 3 MG TAB 28 S",
+    "Retail": 449.5,
+    "Generic Name (HAAD)": "Paliperidone",
+    "STRENGTH (HAAD)": "3 mg",
+    "MAXIMUM DAILY DOSE": "12 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00102",
+    "Item Name": "(CDB) INVEGA 6 MG TAB 28 S",
+    "Retail": 449.5,
+    "Generic Name (HAAD)": "Paliperidone",
+    "STRENGTH (HAAD)": "6 mg",
+    "MAXIMUM DAILY DOSE": "12 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00103",
+    "Item Name": "(CDB) INVEGA SUSTENNA 100 MG / 1 ML PRE-FILLED SYRINGE 1 S",
+    "Retail": 1777,
+    "Generic Name (HAAD)": "Paliperidone Palmitate",
+    "STRENGTH (HAAD)": "100 mg/ml",
+    "MAXIMUM DAILY DOSE": "12mg/day-234mg/month",
+    "REMARKS": "increases of 3 mg/day recommended at intervals of 4 days"
+  },
+  {
+    "Item Code": "16-01-00104",
+    "Item Name": "(CDB) INVEGA SUSTENNA 150 MG/ 1.5 ML PRE-FILLED SYRINGE 1 S",
+    "Retail": 2067,
+    "Generic Name (HAAD)": "Paliperidone Palmitate",
+    "STRENGTH (HAAD)": "150 mg/1.5ml",
+    "MAXIMUM DAILY DOSE": "12mg/day-234mg/month",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00105",
+    "Item Name": "(CDB) INVEGA SUSTENNA 50 MG / 0.5 ML PRE-FILLED SYRINGE 1 S",
+    "Retail": 1098.5,
+    "Generic Name (HAAD)": "Paliperidone Palmitate",
+    "STRENGTH (HAAD)": "50 mg/0.5ml",
+    "MAXIMUM DAILY DOSE": "12mg/day-234mg/month",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00106",
+    "Item Name": "(CDB) INVEGA SUSTENNA 75 MG / 0.75 ML PRE-FILLED SYRINGE 1 S",
+    "Retail": 1449.5,
+    "Generic Name (HAAD)": "Paliperidone Palmitate",
+    "STRENGTH (HAAD)": "75 mg/0.75ml",
+    "MAXIMUM DAILY DOSE": "12mg/day-234mg/month",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00107",
+    "Item Name": "(CDB) ISOSUPRA 16 MG CAP 30 S",
+    "Retail": 125,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "16 mg",
+    "MAXIMUM DAILY DOSE": "2mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00108",
+    "Item Name": "(CDB) LAGAFLEX TAB 20 S",
+    "Retail": 14,
+    "Generic Name (HAAD)": "Carisoprodol,Paracetamol (Acetaminophen)",
+    "STRENGTH (HAAD)": "300 mg,250 mg",
+    "MAXIMUM DAILY DOSE": "1400 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00016",
+    "Item Name": "(CDB) LATUDA 18.5 MG TAB 28 S",
+    "Retail": 591.5,
+    "Generic Name (HAAD)": "Lurasidone Hydrochloride",
+    "STRENGTH (HAAD)": "18.5 mg",
+    "MAXIMUM DAILY DOSE": "160 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00017",
+    "Item Name": "(CDB) LATUDA 37 MG TAB 28 S",
+    "Retail": 591.5,
+    "Generic Name (HAAD)": "Lurasidone Hydrochloride",
+    "STRENGTH (HAAD)": "37 mg",
+    "MAXIMUM DAILY DOSE": "160 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00018",
+    "Item Name": "(CDB) LATUDA 74 MG TAB 28 S",
+    "Retail": 591.5,
+    "Generic Name (HAAD)": "Lurasidone Hydrochloride",
+    "STRENGTH (HAAD)": "74 mg",
+    "MAXIMUM DAILY DOSE": "160 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00109",
+    "Item Name": "(CDB) LIBRAX TAB 30 S",
+    "Retail": 17,
+    "Generic Name (HAAD)": "Chlordiazepoxide,Clidinium Bromide",
+    "STRENGTH (HAAD)": "5 mg,2.5 mg",
+    "MAXIMUM DAILY DOSE": "40mg,20mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00110",
+    "Item Name": "(CDB) LIBROCOL TAB 30 S",
+    "Retail": 15,
+    "Generic Name (HAAD)": "Chlordiazepoxide,Clidinium Bromide",
+    "STRENGTH (HAAD)": "5 mg,2.5 mg",
+    "MAXIMUM DAILY DOSE": "40mg,20mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00111",
+    "Item Name": "(CDB) LIORESAL 10 MG TAB 50 S",
+    "Retail": 45.5,
+    "Generic Name (HAAD)": "Baclofen",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "80 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-05464",
+    "Item Name": "(CDB) LIORESAL 25 MG TAB 50 S",
+    "Retail": 100,
+    "Generic Name (HAAD)": "Baclofen",
+    "STRENGTH (HAAD)": "25 mg",
+    "MAXIMUM DAILY DOSE": "80 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00116",
+    "Item Name": "(CDB) MENTEX SYP 125 ML",
+    "Retail": 9.5,
+    "Generic Name (HAAD)": "Diphenhydramine& Dextromethorphan& Pseudoephedrine& Ammonium chloride& Sodium Citrate& Menthol",
+    "STRENGTH (HAAD)": "Combination",
+    "MAXIMUM DAILY DOSE": null,
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00117",
+    "Item Name": "(CDB) MUSCADOL TAB 20 S",
+    "Retail": 7.5,
+    "Generic Name (HAAD)": "Orphenadrine citrate,Paracetamol (Acetaminophen)",
+    "STRENGTH (HAAD)": "35 mg,450 mg",
+    "MAXIMUM DAILY DOSE": "4 doses/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00118",
+    "Item Name": "(CDB) MYDRIACYL 0.5 % EYE DROPS 15 ML",
+    "Retail": 25.5,
+    "Generic Name (HAAD)": "Tropicamide",
+    "STRENGTH (HAAD)": "5 mg/ml",
+    "MAXIMUM DAILY DOSE": null,
+    "REMARKS": "Instill 1 or 2 drops of a 1% solution into the eye(s), then repeat in 5 minutes. If the patient has not been seen within 20 to 30 minutes, an additional drop to prolong mydriasis may be used."
+  },
+  {
+    "Item Code": "16-01-00119",
+    "Item Name": "(CDB) MYDRIACYL 1 % EYE DROPS 15 ML",
+    "Retail": 28.5,
+    "Generic Name (HAAD)": "Tropicamide",
+    "STRENGTH (HAAD)": "10 mg/ml",
+    "MAXIMUM DAILY DOSE": null,
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00120",
+    "Item Name": "(CDB) MYOGESIC TAB 20 S",
+    "Retail": 4,
+    "Generic Name (HAAD)": "Orphenadrine citrate,Paracetamol (Acetaminophen)",
+    "STRENGTH (HAAD)": "35 mg,450 mg",
+    "MAXIMUM DAILY DOSE": "4 doses/day",
+    "REMARKS": "up to 4 times daily"
+  },
+  {
+    "Item Code": "16-01-00121",
+    "Item Name": "(CDB) NEBIDO 1000 MG / 4 ML INJ 1 S",
+    "Retail": 375,
+    "Generic Name (HAAD)": "Testosterone undecanoate",
+    "STRENGTH (HAAD)": "250 mg/ml",
+    "MAXIMUM DAILY DOSE": null,
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00023",
+    "Item Name": "(CDB) NEOTIGASON 10 MG TAB 30 S",
+    "Retail": 108,
+    "Generic Name (HAAD)": "Acitretin",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "75 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00130",
+    "Item Name": "(CDB) NOVATRETIN 10 MG CAP 30 S",
+    "Retail": 88.5,
+    "Generic Name (HAAD)": "Acitretin",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "75 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00131",
+    "Item Name": "(CDB) NOVATRETIN 25 MG CAP 30 S",
+    "Retail": 189.5,
+    "Generic Name (HAAD)": "Acitretin",
+    "STRENGTH (HAAD)": "25 mg",
+    "MAXIMUM DAILY DOSE": "75 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00132",
+    "Item Name": "(CDB) ORATANE 10 MG CAP 30 S",
+    "Retail": 95.5,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "2mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00133",
+    "Item Name": "(CDB) ORATANE 10 MG CAP 60 S",
+    "Retail": 191.5,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "2mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-05345",
+    "Item Name": "(CDB) ORATANE 20 MG CAP 30 S",
+    "Retail": 159,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "2mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00134",
+    "Item Name": "(CDB) ORATANE 20 MG CAP 60 S",
+    "Retail": 318,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "20mg",
+    "MAXIMUM DAILY DOSE": "2mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00135",
+    "Item Name": "(CDB) ORATANE 40 MG CAP 30 S",
+    "Retail": 301,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "40 mg",
+    "MAXIMUM DAILY DOSE": "2mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00136",
+    "Item Name": "(CDB) PRISTIQ 50 MG TAB 30 S",
+    "Retail": 168.5,
+    "Generic Name (HAAD)": "desvenlafaxine",
+    "STRENGTH (HAAD)": "50 mg",
+    "MAXIMUM DAILY DOSE": "400 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00137",
+    "Item Name": "(CDB) PROVIRON 25 MG TAB 20 S",
+    "Retail": 20.5,
+    "Generic Name (HAAD)": "Mesterolone",
+    "STRENGTH (HAAD)": "25 mg",
+    "MAXIMUM DAILY DOSE": "300 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00138",
+    "Item Name": "(CDB) PROZAC 20 MG CAP 30 S",
+    "Retail": 168,
+    "Generic Name (HAAD)": " fluoxetine",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "80 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00024",
+    "Item Name": "(CDB) QUETTA XR 200 MG TAB 30 S",
+    "Retail": 122,
+    "Generic Name (HAAD)": "Quetiapine Fumarate",
+    "STRENGTH (HAAD)": "200 mg",
+    "MAXIMUM DAILY DOSE": "800 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00025",
+    "Item Name": "(CDB) QUETTA XR 300 MG TAB 30 S",
+    "Retail": 162,
+    "Generic Name (HAAD)": "Quetiapine Fumarate",
+    "STRENGTH (HAAD)": "300 mg",
+    "MAXIMUM DAILY DOSE": "800 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00139",
+    "Item Name": "(CDB) REMERON 30 MG TAB 30 S",
+    "Retail": 170,
+    "Generic Name (HAAD)": "mirtazapine",
+    "STRENGTH (HAAD)": "30mg",
+    "MAXIMUM DAILY DOSE": "45 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00029",
+    "Item Name": "(CDB) RISPERDAL 1 MG TAB 20 S",
+    "Retail": 80,
+    "Generic Name (HAAD)": "Risperidone",
+    "STRENGTH (HAAD)": "1 mg",
+    "MAXIMUM DAILY DOSE": "6 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00030",
+    "Item Name": "(CDB) RISPERDAL 2 MG TAB 20 S",
+    "Retail": 111.5,
+    "Generic Name (HAAD)": "Risperidone",
+    "STRENGTH (HAAD)": "2 mg",
+    "MAXIMUM DAILY DOSE": "6 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00031",
+    "Item Name": "(CDB) RISPERDAL 3 MG TAB 20 S",
+    "Retail": 143.5,
+    "Generic Name (HAAD)": "Risperidone",
+    "STRENGTH (HAAD)": "3 mg",
+    "MAXIMUM DAILY DOSE": "6 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00032",
+    "Item Name": "(CDB) RISPERDAL CONSTA 25 MG INJ 1 S",
+    "Retail": 595.5,
+    "Generic Name (HAAD)": "Risperidone",
+    "STRENGTH (HAAD)": "25 mg",
+    "MAXIMUM DAILY DOSE": "6 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00140",
+    "Item Name": "(CDB) RISPITAB 1 MG TAB 30 S",
+    "Retail": 91.5,
+    "Generic Name (HAAD)": "Risperidone",
+    "STRENGTH (HAAD)": "1 mg",
+    "MAXIMUM DAILY DOSE": "6 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00141",
+    "Item Name": "(CDB) RISPITAB 2 MG TAB 30 S",
+    "Retail": 100,
+    "Generic Name (HAAD)": "Risperidone",
+    "STRENGTH (HAAD)": "2 mg",
+    "MAXIMUM DAILY DOSE": "6 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00142",
+    "Item Name": "(CDB) ROACCUTAN CAP 10 MG 30 S",
+    "Retail": 100.5,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "2 mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00143",
+    "Item Name": "(CDB) ROACCUTAN CAP 20 MG 30 S",
+    "Retail": 250,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "2 mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-05799",
+    "Item Name": "(CDB) RUATINE 20 MG CAP 30 S",
+    "Retail": 100,
+    "Generic Name (HAAD)": "Isotretinoin",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "2 mg/kg/day",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00144",
+    "Item Name": "(CDB) SAIZEN 1.33 MG (4 IU) INJ 1 S",
+    "Retail": 112,
+    "Generic Name (HAAD)": null,
+    "STRENGTH (HAAD)": null,
+    "MAXIMUM DAILY DOSE": null,
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00145",
+    "Item Name": "(CDB) SERDOLECT 16 MG TAB 28 S",
+    "Retail": 792.5,
+    "Generic Name (HAAD)": "Sertindole",
+    "STRENGTH (HAAD)": "16 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00146",
+    "Item Name": "(CDB) SERDOLECT 4 MG TAB 30 S",
+    "Retail": 275.5,
+    "Generic Name (HAAD)": "Sertindole",
+    "STRENGTH (HAAD)": "4 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00036",
+    "Item Name": "(CDB) SEROQUEL 100 MG TAB 60 S",
+    "Retail": 373.5,
+    "Generic Name (HAAD)": "Quetiapine Fumarate",
+    "STRENGTH (HAAD)": "100 mg",
+    "MAXIMUM DAILY DOSE": "800 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00037",
+    "Item Name": "(CDB) SEROQUEL 200 MG TAB 60 S",
+    "Retail": 612.5,
+    "Generic Name (HAAD)": "Quetiapine Fumarate",
+    "STRENGTH (HAAD)": "200 mg",
+    "MAXIMUM DAILY DOSE": "800 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00038",
+    "Item Name": "(CDB) SEROQUEL 25 MG TAB 60 S",
+    "Retail": 142,
+    "Generic Name (HAAD)": "Quetiapine Fumarate",
+    "STRENGTH (HAAD)": "25 mg",
+    "MAXIMUM DAILY DOSE": "800 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00039",
+    "Item Name": "(CDB) SEROQUEL XR 200 MG TAB 60 S",
+    "Retail": 401.5,
+    "Generic Name (HAAD)": "Quetiapine Fumarate",
+    "STRENGTH (HAAD)": "200 mg",
+    "MAXIMUM DAILY DOSE": "800 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00040",
+    "Item Name": "(CDB) SEROQUEL XR 300 MG TAB 60 S",
+    "Retail": 532,
+    "Generic Name (HAAD)": "Quetiapine Fumarate",
+    "STRENGTH (HAAD)": "300 mg",
+    "MAXIMUM DAILY DOSE": "800 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00041",
+    "Item Name": "(CDB) SEROQUEL XR 50 MG TAB 60 S",
+    "Retail": 104,
+    "Generic Name (HAAD)": "Quetiapine Fumarate",
+    "STRENGTH (HAAD)": "50 mg",
+    "MAXIMUM DAILY DOSE": "800 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00147",
+    "Item Name": "(CDB) SEROXAT 20 MG TAB 30 S",
+    "Retail": 74.5,
+    "Generic Name (HAAD)": "Paroxetine",
+    "STRENGTH (HAAD)": "20 mg",
+    "MAXIMUM DAILY DOSE": "60 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00148",
+    "Item Name": "(CDB) SEROXAT CR 12.5 MG TAB 30 S",
+    "Retail": 88.5,
+    "Generic Name (HAAD)": "Paroxetine",
+    "STRENGTH (HAAD)": "12.5 mg",
+    "MAXIMUM DAILY DOSE": "60 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00149",
+    "Item Name": "(CDB) SEROXAT CR 25 MG TAB 30 S",
+    "Retail": 117.5,
+    "Generic Name (HAAD)": "Paroxetine",
+    "STRENGTH (HAAD)": "25 mg",
+    "MAXIMUM DAILY DOSE": "60 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00150",
+    "Item Name": "(CDB) SIRDALUD 2 MG TAB 30 S",
+    "Retail": 22.5,
+    "Generic Name (HAAD)": "Tizanidine Hydrochloride",
+    "STRENGTH (HAAD)": "2 mg",
+    "MAXIMUM DAILY DOSE": "36 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00151",
+    "Item Name": "(CDB) SIRDALUD 4 MG TAB 30 S",
+    "Retail": 36.5,
+    "Generic Name (HAAD)": "Tizanidine Hydrochloride",
+    "STRENGTH (HAAD)": "4 mg",
+    "MAXIMUM DAILY DOSE": "36 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00042",
+    "Item Name": "(CDB) SOLEIL 100 MG TAB 60 S",
+    "Retail": 390,
+    "Generic Name (HAAD)": "Quetiapine Fumarate",
+    "STRENGTH (HAAD)": "100 mg",
+    "MAXIMUM DAILY DOSE": "800 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00152",
+    "Item Name": "(CDB) STRATTERA 10 MG CAP 28 S",
+    "Retail": 360.5,
+    "Generic Name (HAAD)": "Atomoxetine Hydrochloride",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "100 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00153",
+    "Item Name": "(CDB) STRATTERA 18 MG CAP 28 S",
+    "Retail": 360.5,
+    "Generic Name (HAAD)": "Atomoxetine Hydrochloride",
+    "STRENGTH (HAAD)": "18 mg",
+    "MAXIMUM DAILY DOSE": "100 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00154",
+    "Item Name": "(CDB) STRATTERA 25 MG CAP 28 S",
+    "Retail": 360.5,
+    "Generic Name (HAAD)": "Atomoxetine Hydrochloride",
+    "STRENGTH (HAAD)": "25 mg",
+    "MAXIMUM DAILY DOSE": "100 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00155",
+    "Item Name": "(CDB) STRATTERA 40 MG CAP 28 S",
+    "Retail": 360.5,
+    "Generic Name (HAAD)": "Atomoxetine Hydrochloride",
+    "STRENGTH (HAAD)": "40 mg",
+    "MAXIMUM DAILY DOSE": "100 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00156",
+    "Item Name": "(CDB) STRATTERA 60 MG CAP 28 S",
+    "Retail": 360.5,
+    "Generic Name (HAAD)": "Atomoxetine Hydrochloride",
+    "STRENGTH (HAAD)": "60 mg",
+    "MAXIMUM DAILY DOSE": "100 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00157",
+    "Item Name": "(CDB) SUSTANON 250 MG / 1 ML AMP 1 S",
+    "Retail": 28.5,
+    "Generic Name (HAAD)": null,
+    "STRENGTH (HAAD)": null,
+    "MAXIMUM DAILY DOSE": null,
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00158",
+    "Item Name": "(CDB) SYNTOCINON 5 IU / 2 ML AMP 5 S",
+    "Retail": 15,
+    "Generic Name (HAAD)": null,
+    "STRENGTH (HAAD)": null,
+    "MAXIMUM DAILY DOSE": null,
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00159",
+    "Item Name": "(CDB) TOFRANIL 10 MG TAB 60 S",
+    "Retail": 20,
+    "Generic Name (HAAD)": "imipramine",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "100 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00047",
+    "Item Name": "(CDB) TREVICTA 350 MG / 1.75 ML INJ 1 S",
+    "Retail": 4717,
+    "Generic Name (HAAD)": null,
+    "STRENGTH (HAAD)": null,
+    "MAXIMUM DAILY DOSE": null,
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00160",
+    "Item Name": "(CDB) TRYPTIZOL 25 MG TAB 30 S",
+    "Retail": 9.5,
+    "Generic Name (HAAD)": "amitriptyline",
+    "STRENGTH (HAAD)": "25 mg",
+    "MAXIMUM DAILY DOSE": "200 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00161",
+    "Item Name": "(CDB) VALDOXAN 25 MG TAB 28 S",
+    "Retail": 167.5,
+    "Generic Name (HAAD)": "agomelatine",
+    "STRENGTH (HAAD)": "25 mg",
+    "MAXIMUM DAILY DOSE": "50 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00162",
+    "Item Name": "(CDB) VELEXEL 150 MG TAB 28 S",
+    "Retail": 165,
+    "Generic Name (HAAD)": "Venlafaxine Hydrochloride",
+    "STRENGTH (HAAD)": "150 mg",
+    "MAXIMUM DAILY DOSE": "225 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00163",
+    "Item Name": "(CDB) VELEXEL 75 MG TAB 28 S",
+    "Retail": 100.5,
+    "Generic Name (HAAD)": "Venlafaxine Hydrochloride",
+    "STRENGTH (HAAD)": "75 mg",
+    "MAXIMUM DAILY DOSE": "225 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00164",
+    "Item Name": "(CDB) VENEX XR 150 MG CAP 14 S",
+    "Retail": 76,
+    "Generic Name (HAAD)": "Venlafaxine Hydrochloride",
+    "STRENGTH (HAAD)": "150 mg",
+    "MAXIMUM DAILY DOSE": "225 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00165",
+    "Item Name": "(CDB) VENEX XR 75 MG CAP 14 S",
+    "Retail": 46,
+    "Generic Name (HAAD)": "Venlafaxine Hydrochloride",
+    "STRENGTH (HAAD)": "75 mg",
+    "MAXIMUM DAILY DOSE": "225 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00166",
+    "Item Name": "(CDB) WELLBUTRINE XL TAB 150 MG 30 S",
+    "Retail": 84.5,
+    "Generic Name (HAAD)": "Bupropion Hydrochloride",
+    "STRENGTH (HAAD)": "150 mg",
+    "MAXIMUM DAILY DOSE": "450 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00167",
+    "Item Name": "(CDB) WELLBUTRINE XL TAB 300 MG 30 S",
+    "Retail": 148,
+    "Generic Name (HAAD)": "Bupropion Hydrochloride",
+    "STRENGTH (HAAD)": "300 mg",
+    "MAXIMUM DAILY DOSE": "450 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00057",
+    "Item Name": "(CDB) ZOLINDA 10 MG TAB 30 S",
+    "Retail": 234,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00058",
+    "Item Name": "(CDB) ZOLINDA 15 MG TAB 30 S",
+    "Retail": 291,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "15 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00059",
+    "Item Name": "(CDB) ZOLINDA 5 MG TAB 30 S",
+    "Retail": 138,
+    "Generic Name (HAAD)": "Aripiprazole",
+    "STRENGTH (HAAD)": "5 mg",
+    "MAXIMUM DAILY DOSE": "30 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00168",
+    "Item Name": "(CDB) ZOLOFT 50 MG 15 TAB",
+    "Retail": 65,
+    "Generic Name (HAAD)": "sertraline",
+    "STRENGTH (HAAD)": "50 mg",
+    "MAXIMUM DAILY DOSE": "200 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00169",
+    "Item Name": "(CDB) ZOLOFT 50MG TAB 30S",
+    "Retail": 124,
+    "Generic Name (HAAD)": "sertraline",
+    "STRENGTH (HAAD)": "50 mg",
+    "MAXIMUM DAILY DOSE": "200 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00060",
+    "Item Name": "(CDB) ZOLONIA 10 MG TAB 28 S",
+    "Retail": 35,
+    "Generic Name (HAAD)": " zolpidem",
+    "STRENGTH (HAAD)": "10 mg",
+    "MAXIMUM DAILY DOSE": "10 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00061",
+    "Item Name": "(CDB) ZYPREXA 5 MG VELOTAB 28 S",
+    "Retail": 423.5,
+    "Generic Name (HAAD)": "olanzapine",
+    "STRENGTH (HAAD)": "5 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  },
+  {
+    "Item Code": "16-01-00062",
+    "Item Name": "(CDB) ZYPREXA O. D. 10 MG VELOTAB TAB 28 S",
+    "Retail": 822.5,
+    "Generic Name (HAAD)": "olanzapine",
+    "STRENGTH (HAAD)": "5 mg",
+    "MAXIMUM DAILY DOSE": "20 mg",
+    "REMARKS": null
+  }
+]
