@@ -36,9 +36,12 @@ h1{
     justify-content:center;
     gap:8px;
     margin-bottom:15px;
-    overflow-x:auto;
-    padding-bottom:2px;
+    flex-wrap:wrap;
+    max-width:1500px;
+    margin-left:auto;
+    margin-right:auto;
 }
+
 .tab{
     flex:0 0 auto;
     border:1px solid #b8b8b8;
@@ -50,9 +53,11 @@ h1{
     font-size:14px;
     white-space:nowrap;
 }
+
 .tab:hover{
     background:#e2e2e2;
 }
+
 .tab.active{
     background:#1d3557;
     color:#fff;
@@ -229,6 +234,39 @@ h1{
 }
 
 /* =========================================================
+   FROZEN THIQA / BASIC COLUMNS
+   ONLY USED FOR data.json
+========================================================= */
+
+.frozen-right{
+    position:sticky !important;
+    z-index:15 !important;
+}
+
+/* BASIC = far right */
+.frozen-basic{
+    position:sticky !important;
+    right:0;
+    z-index:18 !important;
+    box-shadow:-3px 0 4px rgba(0,0,0,.08);
+}
+
+/* THIQA = immediately left of BASIC */
+.frozen-thiqa{
+    position:sticky !important;
+    right:110px;
+    z-index:18 !important;
+    box-shadow:-2px 0 3px rgba(0,0,0,.05);
+}
+
+/* Header versions must be above data rows */
+.excel-header .frozen-basic,
+.excel-header .frozen-thiqa{
+    z-index:25 !important;
+    background:#e9edf2;
+}
+    
+/* =========================================================
    THIQA / BASIC
 ========================================================= */
 .thiqa-yes,
@@ -346,20 +384,26 @@ h1{
    MOBILE
 ========================================================= */
 @media(max-width:800px){
+
     h1{
         font-size:21px;
-    }
+    }    
+
     .tabs{
-        overflow-x:auto;
         justify-content:flex-start;
+        flex-wrap:nowrap;
+        overflow-x:auto;
     }
+
     .tab{
         white-space:nowrap;
         padding:10px 16px;
     }
+
     .search-container{
         grid-template-columns:1fr;
     }
+
     .excel-area{
         height:calc(100vh - 360px);
     }
@@ -2789,8 +2833,31 @@ function renderVirtualTable(
                     "div"
                 );
 
-            cell.className =
-                "header-cell";
+cell.className =
+    "header-cell";
+
+/*
+   Freeze THIQA and BASIC only
+   on the Thiqa & Basic worksheet.
+*/
+
+if(
+    type === "thiqa" &&
+    column.toLowerCase() === "basic"
+){
+    cell.classList.add(
+        "frozen-basic"
+    );
+}
+
+if(
+    type === "thiqa" &&
+    column.toLowerCase() === "thiqa"
+){
+    cell.classList.add(
+        "frozen-thiqa"
+    );
+}
 
             const title =
                 document.createElement(
@@ -3013,8 +3080,31 @@ function renderVisibleRows(
                         "div"
                     );
 
-                cell.className =
-                    "data-cell";
+cell.className =
+    "data-cell";
+
+/*
+   Freeze THIQA and BASIC only
+   on data.json.
+*/
+
+if(
+    type === "thiqa" &&
+    column.toLowerCase() === "basic"
+){
+    cell.classList.add(
+        "frozen-basic"
+    );
+}
+
+if(
+    type === "thiqa" &&
+    column.toLowerCase() === "thiqa"
+){
+    cell.classList.add(
+        "frozen-thiqa"
+    );
+}
 
                 const value =
                     String(
