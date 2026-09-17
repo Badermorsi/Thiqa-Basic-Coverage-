@@ -462,6 +462,8 @@ h1{
     border-radius:4px;
 
     cursor:pointer;
+
+    font-weight:bold;
 }
 
 .filter-actions button:hover{
@@ -603,14 +605,6 @@ h1{
 /* =========================
    PHONE COLUMN HEADINGS
 ========================= */
-
-/*
-   Actual column headings:
-   CONTACTS | LANDLINE | MOB
-   DEPARTMENT | Contact
-   BUSINESS UNIT | Contact
-   INSURANCE COMPANY | CONTACT NUMBER
-*/
 
 .phone-table thead tr.phone-column-heading th{
 
@@ -1013,13 +1007,6 @@ Filter
 Select All
 </button>
 
-<button
-    id="clearFilterBtn"
-    type="button"
->
-Clear
-</button>
-
 </div>
 
 <div
@@ -1127,12 +1114,6 @@ const WORKSHEETS = [
     file:"OMAN FORMULARY 03-2024.json"
 },
 
-/*
-   PHONE CONTACTS IS SPECIAL.
-   It loads its 4 JSON files only
-   when the tab is opened.
-*/
-
 {
     id:"phone",
     name:"PHONE CONTACTS",
@@ -1186,7 +1167,11 @@ let filterPopupState = {
 
     allValues:[],
 
-    selected:new Set()
+    selected:new Set(),
+
+    selectAll:true,
+
+    search:""
 
 };
 
@@ -1248,9 +1233,6 @@ document.getElementById("filterValues");
 
 const selectAllBtn =
 document.getElementById("selectAllBtn");
-
-const clearFilterBtn =
-document.getElementById("clearFilterBtn");
 
 
 /* =========================================================
@@ -2096,6 +2078,21 @@ function getFilteredRows(type){
 
                 }
 
+                /*
+                   An empty selected Set means:
+                   nothing is selected.
+                   Therefore no rows should appear.
+                */
+
+                if(
+                    selected &&
+                    selected.size === 0
+                ){
+
+                    return false;
+
+                }
+
             }
 
             return true;
@@ -2562,7 +2559,9 @@ function renderVirtualTable(type){
 
         if(
             columnFilters[type][column] &&
-            columnFilters[type][column].size
+            columnFilters[type][column].size !== undefined &&
+            columnFilters[type][column].size !==
+            sheetData[type].length
         ){
 
             filterButton.classList.add(
@@ -3129,10 +3128,6 @@ function createPhoneTable(
         "thead"
     );
 
-    /*
-       APG / ZAS title row
-    */
-
     if(title){
 
         const titleRow =
@@ -3164,10 +3159,6 @@ function createPhoneTable(
 
     }
 
-    /*
-       ACTUAL COLUMN HEADING ROW
-    */
-
     const headerRow =
     document.createElement(
         "tr"
@@ -3186,11 +3177,6 @@ function createPhoneTable(
         document.createElement(
             "th"
         );
-
-        /*
-           Table 1:
-           MOBILE becomes MOB
-        */
 
         if(
             className ===
@@ -3225,10 +3211,6 @@ function createPhoneTable(
     table.appendChild(
         thead
     );
-
-    /*
-       BODY
-    */
 
     const tbody =
     document.createElement(
@@ -3317,11 +3299,6 @@ function renderPhoneContacts(){
     layout.className =
     "phone-layout";
 
-    /*
-       TABLE 1
-       CONTACTS
-    */
-
     const contactsTable =
     createPhoneTable(
 
@@ -3337,11 +3314,6 @@ function renderPhoneContacts(){
         contactsTable
     );
 
-    /*
-       MIDDLE
-       APG + ZAS
-    */
-
     const middle =
     document.createElement(
         "div"
@@ -3349,10 +3321,6 @@ function renderPhoneContacts(){
 
     middle.className =
     "phone-middle";
-
-    /*
-       APG
-    */
 
     const apgTable =
     createPhoneTable(
@@ -3368,10 +3336,6 @@ function renderPhoneContacts(){
     middle.appendChild(
         apgTable
     );
-
-    /*
-       ZAS
-    */
 
     const zasTable =
     createPhoneTable(
@@ -3391,11 +3355,6 @@ function renderPhoneContacts(){
     layout.appendChild(
         middle
     );
-
-    /*
-       TABLE 4
-       INSURANCE
-    */
 
     const insuranceTable =
     createPhoneTable(
@@ -3458,10 +3417,6 @@ async function switchSheet(type){
 
     closeFilterPopup();
 
-    /*
-       PROACTIVE
-    */
-
     if(
         type === "proactive"
     ){
@@ -3487,10 +3442,6 @@ async function switchSheet(type){
 
     }
 
-    /*
-       PHONE CONTACTS
-    */
-
     if(
         type === "phone"
     ){
@@ -3515,10 +3466,6 @@ async function switchSheet(type){
         return;
 
     }
-
-    /*
-       NORMAL
-    */
 
     searchArea.style.display =
     "block";
@@ -3758,6 +3705,11 @@ function openFilterPopup(
     const existing =
     columnFilters[type][column];
 
+    const selected =
+    existing
+        ? new Set(existing)
+        : new Set(values);
+
     filterPopupState = {
 
         column,
@@ -3766,10 +3718,13 @@ function openFilterPopup(
 
         allValues:values,
 
-        selected:
-        existing
-            ? new Set(existing)
-            : new Set(values)
+        selected,
+
+        selectAll:
+        selected.size ===
+        values.length,
+
+        search:""
 
     };
 
@@ -3779,6 +3734,8 @@ function openFilterPopup(
 
     filterValueSearch.value =
     "";
+
+    updateSelectAllButton();
 
     renderFilterValues();
 
@@ -3808,7 +3765,7 @@ function openFilterPopup(
     ){
 
         top =
-        window.innerHeight - 
+        window.innerHeight -
         430;
 
     }
@@ -3833,6 +3790,20 @@ function openFilterPopup(
 
 
 /* =========================================================
+   UPDATE SELECT ALL BUTTON
+========================================================= */
+
+function updateSelectAllButton(){
+
+    selectAllBtn.textContent =
+    filterPopupState.selectAll
+        ? "Select All"
+        : "Select All";
+
+}
+
+
+/* =========================================================
    FILTER VALUES
 ========================================================= */
 
@@ -3842,6 +3813,9 @@ function renderFilterValues(){
     filterValueSearch.value
     .trim()
     .toLowerCase();
+
+    filterPopupState.search =
+    search;
 
     filterValues.innerHTML =
     "";
@@ -3881,10 +3855,28 @@ function renderFilterValues(){
         checkbox.type =
         "checkbox";
 
-        checkbox.checked =
-        filterPopupState
-        .selected
-        .has(value);
+        /*
+           When Select All is active,
+           every value visible after the
+           search remains checked.
+        */
+
+        if(
+            filterPopupState.selectAll
+        ){
+
+            checkbox.checked =
+            true;
+
+        }
+        else{
+
+            checkbox.checked =
+            filterPopupState
+            .selected
+            .has(value);
+
+        }
 
         checkbox.addEventListener(
             "change",
@@ -3907,7 +3899,22 @@ function renderFilterValues(){
 
                 }
 
+                /*
+                   If every value is selected,
+                   Select All becomes active.
+                */
+
+                filterPopupState.selectAll =
+                filterPopupState
+                .selected
+                .size ===
+                filterPopupState
+                .allValues
+                .length;
+
                 applyPopupFilter();
+
+                renderFilterValues();
 
             }
         );
@@ -3957,9 +3964,65 @@ function applyPopupFilter(){
     const allValues =
     filterPopupState.allValues;
 
+    const search =
+    filterPopupState.search;
+
+    /*
+       SELECT ALL + SEARCH
+       
+       Example:
+       All values = Amoxicillin,
+       Paracetamol, Ibuprofen
+
+       Search = "amox"
+
+       Select All remains checked,
+       but only Amoxicillin is shown.
+    */
+
     if(
-        selected.size ===
-        allValues.length
+        filterPopupState.selectAll &&
+        search
+    ){
+
+        const matchingValues =
+        new Set(
+            allValues.filter(
+                value =>
+                value
+                .toLowerCase()
+                .includes(search)
+            )
+        );
+
+        if(
+            matchingValues.size ===
+            allValues.length
+        ){
+
+            delete columnFilters[
+                sheet
+            ][column];
+
+        }
+        else{
+
+            columnFilters[
+                sheet
+            ][column] =
+            matchingValues;
+
+        }
+
+    }
+
+    /*
+       SELECT ALL with no search
+       means no filter on this column.
+    */
+
+    else if(
+        filterPopupState.selectAll
     ){
 
         delete columnFilters[
@@ -3967,6 +4030,26 @@ function applyPopupFilter(){
         ][column];
 
     }
+
+    /*
+       Nothing selected.
+    */
+
+    else if(
+        selected.size === 0
+    ){
+
+        columnFilters[
+            sheet
+        ][column] =
+        new Set();
+
+    }
+
+    /*
+       Individual selections.
+    */
+
     else{
 
         columnFilters[
@@ -4024,57 +4107,89 @@ function applyFilters(type){
 
 filterValueSearch.addEventListener(
     "input",
-    renderFilterValues
-);
-
-
-/* =========================================================
-   SELECT ALL
-========================================================= */
-
-selectAllBtn.addEventListener(
-    "click",
     () => {
 
-        filterPopupState.selected =
-        new Set(
-            filterPopupState.allValues
-        );
+        const search =
+        filterValueSearch.value
+        .trim()
+        .toLowerCase();
 
-        renderFilterValues();
+        filterPopupState.search =
+        search;
 
-        applyPopupFilter();
+        /*
+           If Select All is checked,
+           search itself becomes the
+           active filter.
+        */
+
+        if(
+            filterPopupState.selectAll
+        ){
+
+            applyPopupFilter();
+
+        }
+        else{
+
+            renderFilterValues();
+
+        }
 
     }
 );
 
 
 /* =========================================================
-   CLEAR FILTER
+   SELECT ALL TOGGLE
 ========================================================= */
 
-clearFilterBtn.addEventListener(
+selectAllBtn.addEventListener(
     "click",
     () => {
 
-        const sheet =
-        filterPopupState.sheet;
+        /*
+           If currently selected,
+           unselect everything.
+        */
 
-        const column =
-        filterPopupState.column;
+        if(
+            filterPopupState.selectAll
+        ){
 
-        delete columnFilters[
-            sheet
-        ][column];
+            filterPopupState.selectAll =
+            false;
 
-        filterPopupState.selected =
-        new Set(
-            filterPopupState.allValues
-        );
+            filterPopupState.selected =
+            new Set();
 
-        applyFilters(
-            sheet
-        );
+        }
+
+        /*
+           If currently unselected,
+           select everything.
+        */
+
+        else{
+
+            filterPopupState.selectAll =
+            true;
+
+            filterPopupState.selected =
+            new Set(
+                filterPopupState.allValues
+            );
+
+        }
+
+        /*
+           Re-apply the current search.
+           If Select All is selected and
+           search contains text, only matching
+           values are shown in the table.
+        */
+
+        applyPopupFilter();
 
         renderFilterValues();
 
