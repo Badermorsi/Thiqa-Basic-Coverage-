@@ -3809,142 +3809,50 @@ function updateSelectAllButton(){
 
 function renderFilterValues(){
 
-    const search =
-    filterValueSearch.value
-    .trim()
-    .toLowerCase();
+    const search = filterValueSearch.value.trim().toLowerCase();
 
-    filterPopupState.search =
-    search;
-
-    filterValues.innerHTML =
-    "";
-
-    const values =
-    filterPopupState
-    .allValues
-    .filter(
-        value =>
-        value
-        .toLowerCase()
-        .includes(search)
+    const values = filterPopupState.allValues.filter(value =>
+        value.toLowerCase().includes(search)
     );
 
-    for(
-        let i=0;
-        i<values.length;
-        i++
-    ){
+    filterValues.innerHTML = "";
 
-        const value =
-        values[i];
+    values.forEach(value => {
 
-        const label =
-        document.createElement(
-            "label"
-        );
+        const label = document.createElement("label");
+        label.className = "filter-value-item";
 
-        label.className =
-        "filter-value";
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
 
-        const checkbox =
-        document.createElement(
-            "input"
-        );
+        checkbox.checked =
+            filterPopupState.selected.has(value);
 
-        checkbox.type =
-        "checkbox";
+        checkbox.addEventListener("change", () => {
 
-        /*
-           When Select All is active,
-           every value visible after the
-           search remains checked.
-        */
-
-        if(
-            filterPopupState.selectAll
-        ){
-
-            checkbox.checked =
-            true;
-
-        }
-        else{
-
-            checkbox.checked =
-            filterPopupState
-            .selected
-            .has(value);
-
-        }
-
-        checkbox.addEventListener(
-            "change",
-            () => {
-
-                if(
-                    checkbox.checked
-                ){
-
-                    filterPopupState
-                    .selected
-                    .add(value);
-
-                }
-                else{
-
-                    filterPopupState
-                    .selected
-                    .delete(value);
-
-                }
-
-                /*
-                   If every value is selected,
-                   Select All becomes active.
-                */
-
-                filterPopupState.selectAll =
-                filterPopupState
-                .selected
-                .size ===
-                filterPopupState
-                .allValues
-                .length;
-
-                applyPopupFilter();
-
-                renderFilterValues();
-
+            if(checkbox.checked){
+                filterPopupState.selected.add(value);
+            }else{
+                filterPopupState.selected.delete(value);
             }
-        );
 
-        const text =
-        document.createElement(
-            "span"
-        );
+            filterPopupState.selectAll =
+                filterPopupState.selected.size ===
+                filterPopupState.allValues.length;
 
-        text.textContent =
-        value === ""
-            ? "(Blanks)"
-            : value;
+            applyPopupFilter();
+            renderFilterValues();
+        });
 
-        label.appendChild(
-            checkbox
-        );
+        const text = document.createElement("span");
+        text.textContent = value;
 
-        label.appendChild(
-            text
-        );
+        label.appendChild(checkbox);
+        label.appendChild(text);
 
-        filterValues.appendChild(
-            label
-        );
-
-    }
-
+        filterValues.appendChild(label);
+    });
 }
-
 
 /* =========================================================
    APPLY POPUP FILTER
