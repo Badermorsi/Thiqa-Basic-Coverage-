@@ -306,7 +306,14 @@ h1{
     overflow-wrap:anywhere;
     word-break:break-word;
 
-    overflow:hidden;
+    /*
+       IMPORTANT:
+       Do not clip long text.
+    */
+    overflow:visible;
+
+    height:auto;
+    min-height:42px;
 }
 
 .data-row:nth-child(even) .data-cell{
@@ -477,7 +484,6 @@ h1{
     padding:6px 8px;
 }
 
-/* FIXED FILTER VALUE */
 .filter-value{
     display:flex !important;
 
@@ -1155,15 +1161,25 @@ const sheetColumns = {};
 const filteredData = {};
 const columnFilters = {};
 
-let currentSheet = "thiqa";
+/*
+   Variable row height storage.
 
+   Each row gets its own height and top offset.
+*/
 const rowOffsets = {};
+const rowHeights = {};
 const totalHeights = {};
+
+let currentSheet = "thiqa";
 
 let phoneLoaded = false;
 let phoneLoading = false;
 
+/*
+   Minimum/default row height.
+*/
 const ROW_HEIGHT = 42;
+
 const BUFFER_ROWS = 30;
 
 
@@ -1264,6 +1280,8 @@ function initializeSheetStorage(){
         columnFilters[sheet.id] = {};
 
         rowOffsets[sheet.id] = [];
+
+        rowHeights[sheet.id] = [];
 
         totalHeights[sheet.id] = 0;
 
@@ -1425,6 +1443,15 @@ async function loadAllData(){
 
             columnFilters[sheet.id] =
             {};
+
+            rowOffsets[sheet.id] =
+            [];
+
+            rowHeights[sheet.id] =
+            [];
+
+            totalHeights[sheet.id] =
+            0;
 
             if(result.error){
 
@@ -2170,6 +2197,20 @@ function getColumnWidth(
 
     }
 
+    /*
+       Proactive name gets extra width.
+       This helps long names wrap naturally
+       instead of creating extremely tall rows.
+    */
+
+    if(
+        c.includes("proactive name")
+    ){
+
+        return 400;
+
+    }
+
     if(
         c.includes("generic") ||
         c.includes("active ingredient") ||
@@ -2297,7 +2338,8 @@ function getColumnWidths(type){
                 c.includes("package name") ||
                 c.includes("description") ||
                 c.includes("instruction") ||
-                c.includes("indication")
+                c.includes("indication") ||
+                c.includes("proactive name")
             ){
 
                 return 3;
@@ -2400,7 +2442,153 @@ function getGridTemplate(type){
 
 
 /* =========================================================
-   BUILD OFFSETS
+   CALCULATE ROW HEIGHT
+========================================================= */
+
+/*
+   This estimates how many lines each cell needs.
+
+   The important difference from the old version is that
+   every row gets its own height.
+
+   Example:
+
+   Normal row = 42px
+
+   Long Cetaphil row = 93px
+
+   Very long row = 127px
+
+   The next row starts AFTER that height.
+*/
+
+function calculateRowHeight(
+    row,
+    type
+){
+
+    const columns =
+    sheetColumns[type] || [];
+
+    const widths =
+    getColumnWidths(type);
+
+    let maxLines = 1;
+
+    for(
+        let i=0;
+        i<columns.length;
+        i++
+    ){
+
+        const column =
+        columns[i];
+
+        const value =
+        displayValue(
+            row[column]
+        );
+
+        if(!value){
+
+            continue;
+
+        }
+
+        const width =
+        widths[i] || 150;
+
+        /*
+           Available text width.
+
+           16px = left + right padding.
+        */
+
+        const availableWidth =
+        Math.max(
+            30,
+            width - 16
+        );
+
+        /*
+           Approximate Arial 13px character
+           width.
+
+           This is deliberately slightly
+           conservative so text does not get
+           clipped.
+        */
+
+        const charsPerLine =
+        Math.max(
+            5,
+            Math.floor(
+                availableWidth / 6.5
+            )
+        );
+
+        const paragraphs =
+        value.split(/\r?\n/);
+
+        let lines = 0;
+
+        paragraphs.forEach(
+            paragraph => {
+
+                if(
+                    paragraph.length === 0
+                ){
+
+                    lines += 1;
+
+                    return;
+
+                }
+
+                /*
+                   Break very long words too.
+                */
+
+                lines += Math.max(
+                    1,
+                    Math.ceil(
+                        paragraph.length /
+                        charsPerLine
+                    )
+                );
+
+            }
+        );
+
+        maxLines =
+        Math.max(
+            maxLines,
+            lines
+        );
+
+    }
+
+    /*
+       17px line height
+       + 14px vertical padding
+       + 4px safety margin.
+    */
+
+    const calculated =
+    (
+        maxLines * 17
+    ) + 18;
+
+    return Math.max(
+        ROW_HEIGHT,
+        calculated
+    );
+
+}
+
+
+/* =========================================================
+   BUILD VARIABLE ROW OFFSETS
 ========================================================= */
 
 function buildRowOffsets(type){
@@ -2413,31 +2601,54 @@ function buildRowOffsets(type){
         rows.length
     );
 
+    const heights =
+    new Array(
+        rows.length
+    );
+
+    let currentTop = 0;
+
     for(
         let i=0;
         i<rows.length;
         i++
     ){
 
+        const height =
+        calculateRowHeight(
+            rows[i],
+            type
+        );
+
         offsets[i] =
-        i * ROW_HEIGHT;
+        currentTop;
+
+        heights[i] =
+        height;
+
+        currentTop +=
+        height;
 
     }
 
     rowOffsets[type] =
     offsets;
 
+    rowHeights[type] =
+    heights;
+
     totalHeights[type] =
-    rows.length *
-    ROW_HEIGHT;
+    currentTop;
 
     if(
         currentSheet === type
     ){
 
         virtualContent.style.height =
-        totalHeights[type] +
-        "px";
+        Math.max(
+            60,
+            currentTop
+        ) + "px";
 
     }
 
@@ -2445,7 +2656,7 @@ function buildRowOffsets(type){
 
 
 /* =========================================================
-   FIND ROW
+   FIND ROW AT POSITION
 ========================================================= */
 
 function findRowAtPosition(
@@ -2459,17 +2670,42 @@ function findRowAtPosition(
 
     }
 
-    const index =
-    Math.floor(
-        position /
-        ROW_HEIGHT
-    );
+    let low = 0;
+
+    let high =
+    offsets.length - 1;
+
+    while(
+        low <= high
+    ){
+
+        const mid =
+        Math.floor(
+            (low + high) / 2
+        );
+
+        if(
+            offsets[mid] <= position
+        ){
+
+            low =
+            mid + 1;
+
+        }
+        else{
+
+            high =
+            mid - 1;
+
+        }
+
+    }
 
     return Math.max(
         0,
         Math.min(
             offsets.length - 1,
-            index
+            high
         )
     );
 
@@ -2579,10 +2815,6 @@ function renderVirtualTable(type){
         filterButton.textContent =
         "▼";
 
-        /*
-           Correct filter active state.
-        */
-
         if(
             Object.prototype.hasOwnProperty.call(
                 columnFilters[type],
@@ -2652,8 +2884,41 @@ function renderVisibleRows(type){
 
     }
 
+    /*
+       Safety check.
+
+       If the offsets don't match the
+       current filtered rows, rebuild them.
+    */
+
+    if(
+        !rowOffsets[type] ||
+        rowOffsets[type].length !== rows.length
+    ){
+
+        buildRowOffsets(
+            type
+        );
+
+    }
+
     const template =
     getGridTemplate(type);
+
+    const offsets =
+    rowOffsets[type];
+
+    const heights =
+    rowHeights[type];
+
+    const totalHeight =
+    totalHeights[type];
+
+    virtualContent.style.height =
+    Math.max(
+        60,
+        totalHeight
+    ) + "px";
 
     const scrollTop =
     excelArea.scrollTop;
@@ -2661,27 +2926,41 @@ function renderVisibleRows(type){
     const viewportHeight =
     excelArea.clientHeight;
 
+    /*
+       Find the actual row at the current
+       scroll position.
+
+       Unlike the old code, this works with
+       different row heights.
+    */
+
+    const firstVisible =
+    findRowAtPosition(
+        offsets,
+        scrollTop
+    );
+
     const start =
     Math.max(
         0,
-        Math.floor(
-            scrollTop /
-            ROW_HEIGHT
-        ) -
+        firstVisible -
         BUFFER_ROWS
+    );
+
+    const bottomPosition =
+    scrollTop +
+    viewportHeight;
+
+    const lastVisible =
+    findRowAtPosition(
+        offsets,
+        bottomPosition
     );
 
     const end =
     Math.min(
         rows.length - 1,
-
-        Math.ceil(
-            (
-                scrollTop +
-                viewportHeight
-            ) /
-            ROW_HEIGHT
-        ) +
+        lastVisible +
         BUFFER_ROWS
     );
 
@@ -2697,6 +2976,13 @@ function renderVisibleRows(type){
         const row =
         rows[i];
 
+        const rowHeight =
+        heights[i] ||
+        ROW_HEIGHT;
+
+        const rowTop =
+        offsets[i];
+
         const rowElement =
         document.createElement(
             "div"
@@ -2709,13 +2995,13 @@ function renderVisibleRows(type){
         template;
 
         rowElement.style.height =
-        ROW_HEIGHT + "px";
+        rowHeight + "px";
+
+        rowElement.style.minHeight =
+        rowHeight + "px";
 
         rowElement.style.top =
-        (
-            i *
-            ROW_HEIGHT
-        ) + "px";
+        rowTop + "px";
 
         for(
             let c=0;
@@ -2741,6 +3027,10 @@ function renderVisibleRows(type){
 
             cell.textContent =
             value;
+
+            /* =========================
+               VITAMIN
+            ========================= */
 
             if(type === "vitamin"){
 
@@ -2779,6 +3069,10 @@ function renderVisibleRows(type){
                 }
 
             }
+
+            /* =========================
+               THIQA / BASIC
+            ========================= */
 
             if(
                 type === "thiqa"
@@ -3513,6 +3807,10 @@ async function switchSheet(type){
         type
     );
 
+    /*
+       Reset and rebuild variable row heights.
+    */
+
     buildRowOffsets(
         type
     );
@@ -3837,19 +4135,6 @@ function renderFilterValues(){
     .trim()
     .toLowerCase();
 
-    /*
-       IMPORTANT:
-       Use matchesMultiSearch()
-       so % means AND.
-
-       Example:
-
-       pan%dol
-
-       means the value must contain
-       BOTH "pan" AND "dol".
-    */
-
     const values =
     filterPopupState.allValues.filter(
         value =>
@@ -3897,19 +4182,6 @@ function renderFilterValues(){
                 "label"
             );
 
-            /*
-               THIS is the important fix.
-
-               Existing CSS uses:
-               .filter-value
-
-               Previously the JS used:
-               .filter-value-item
-
-               which caused the values to appear
-               beside each other.
-            */
-
             label.className =
             "filter-value";
 
@@ -3921,15 +4193,6 @@ function renderFilterValues(){
             checkbox.type =
             "checkbox";
 
-            /*
-               Select All ON:
-               every visible search result
-               is checked.
-
-               Select All OFF:
-               use individual selections.
-            */
-
             checkbox.checked =
             filterPopupState.selectAll
                 ? true
@@ -3940,11 +4203,6 @@ function renderFilterValues(){
             checkbox.addEventListener(
                 "change",
                 () => {
-
-                    /*
-                       Manually changing a checkbox
-                       disables Select All.
-                    */
 
                     filterPopupState.selectAll =
                     false;
@@ -3966,11 +4224,6 @@ function renderFilterValues(){
 
                     }
 
-                    /*
-                       If every value is selected,
-                       restore Select All state.
-                    */
-
                     if(
                         filterPopupState.selected.size ===
                         filterPopupState.allValues.length
@@ -3981,7 +4234,16 @@ function renderFilterValues(){
 
                     }
 
-                    applyPopupFilter();
+                    /*
+                       IMPORTANT:
+                       Do NOT apply the table filter here.
+
+                       The user clicks Apply only in
+                       the Excel-style workflow.
+
+                       Search inside the popup only
+                       changes the dropdown list.
+                    */
 
                     renderFilterValues();
 
@@ -4034,23 +4296,23 @@ function applyPopupFilter(){
     const allValues =
     filterPopupState.allValues;
 
-    const search =
-    filterValueSearch.value
-    .trim()
-    .toLowerCase();
+    if(
+        !sheet ||
+        !column
+    ){
 
+        return;
+
+    }
 
     /*
-       ==============================================
-       SELECT ALL + NO SEARCH
-       ==============================================
-
-       Nothing is filtered.
+       If everything is selected,
+       remove the filter completely.
     */
 
     if(
-        filterPopupState.selectAll &&
-        !search
+        selected.size ===
+        allValues.length
     ){
 
         delete columnFilters[
@@ -4058,57 +4320,11 @@ function applyPopupFilter(){
         ][column];
 
     }
-
-
-    /*
-       ==============================================
-       SELECT ALL + SEARCH
-       ==============================================
-
-       Example:
-
-       pan%dol
-
-       Find values containing BOTH
-       "pan" AND "dol".
-
-       The matching values become
-       the active column filter.
-    */
-
-    else if(
-        filterPopupState.selectAll &&
-        search
-    ){
-
-        const matchingValues =
-        allValues.filter(
-            value =>
-            matchesMultiSearch(
-                value,
-                search
-            )
-        );
-
-        columnFilters[
-            sheet
-        ][column] =
-        new Set(
-            matchingValues
-        );
-
-    }
-
-
-    /*
-       ==============================================
-       SELECT ALL OFF
-       ==============================================
-
-       Use exactly what the user checked.
-    */
-
     else{
+
+        /*
+           Keep exactly what the user selected.
+        */
 
         columnFilters[
             sheet
@@ -4118,7 +4334,6 @@ function applyPopupFilter(){
         );
 
     }
-
 
     applyFilters(
         sheet
@@ -4146,6 +4361,12 @@ function applyFilters(type){
     getFilteredRows(
         type
     );
+
+    /*
+       Recalculate ALL row positions because
+       filtering changes the number of rows and
+       variable heights.
+    */
 
     buildRowOffsets(
         type
@@ -4176,17 +4397,14 @@ filterValueSearch.addEventListener(
         .toLowerCase();
 
         /*
-           First filter the dropdown list.
+           Search ONLY filters the list inside
+           the popup.
+
+           It does NOT change the table until
+           Apply is performed.
         */
 
         renderFilterValues();
-
-        /*
-           Then apply the search to
-           the actual table.
-        */
-
-        applyPopupFilter();
 
         updateSelectAllButton();
 
@@ -4202,43 +4420,77 @@ selectAllBtn.addEventListener(
     "click",
     () => {
 
+        const search =
+        filterValueSearch.value
+        .trim()
+        .toLowerCase();
+
+        const visibleValues =
+        filterPopupState.allValues.filter(
+            value =>
+            matchesMultiSearch(
+                value,
+                search
+            )
+        );
+
         /*
-           ==========================================
-           SELECT ALL -> UNSELECT ALL
-           ==========================================
+           Determine whether every currently
+           visible value is selected.
         */
+
+        const allVisibleSelected =
+        visibleValues.every(
+            value =>
+            filterPopupState.selected.has(
+                value
+            )
+        );
 
         if(
-            filterPopupState.selectAll
+            allVisibleSelected
         ){
 
-            filterPopupState.selectAll =
-            false;
+            /*
+               Deselect ONLY visible values.
 
-            filterPopupState.selected =
-            new Set();
+               Hidden values remain unchanged.
+            */
+
+            visibleValues.forEach(
+                value => {
+
+                    filterPopupState.selected.delete(
+                        value
+                    );
+
+                }
+            );
 
         }
-
-        /*
-           ==========================================
-           UNSELECT ALL -> SELECT ALL
-           ==========================================
-        */
-
         else{
 
-            filterPopupState.selectAll =
-            true;
+            /*
+               Select ONLY visible values.
 
-            filterPopupState.selected =
-            new Set(
-                filterPopupState.allValues
+               Hidden values remain unchanged.
+            */
+
+            visibleValues.forEach(
+                value => {
+
+                    filterPopupState.selected.add(
+                        value
+                    );
+
+                }
             );
 
         }
 
-        applyPopupFilter();
+        filterPopupState.selectAll =
+        filterPopupState.selected.size ===
+        filterPopupState.allValues.length;
 
         renderFilterValues();
 
@@ -4270,6 +4522,12 @@ document.addEventListener(
                 event.target
             )
         ){
+
+            /*
+               Clicking outside closes the popup.
+               Since changes are not applied until
+               Apply, closing does not alter the table.
+            */
 
             closeFilterPopup();
 
@@ -4444,6 +4702,11 @@ window.addEventListener(
                     return;
 
                 }
+
+                /*
+                   Column widths may have changed,
+                   so row heights must be recalculated.
+                */
 
                 buildRowOffsets(
                     currentSheet
