@@ -313,10 +313,18 @@ h1{
 
     height:auto;
     min-height:42px;
+
+    /* ALL DATA CENTERED BY DEFAULT */
+    text-align:center;
+    vertical-align:middle;
 }
 
-.data-row:nth-child(even) .data-cell{
-    background:#fafafa;
+/* =========================
+   LONG TEXT COLUMNS
+========================= */
+
+.data-cell.long-text{
+    text-align:left;
 }
 
 /* =========================
@@ -2144,8 +2152,6 @@ function getFilteredRows(type){
 
                 /* =========================================
                    TEXT FILTER
-                   Excel-style:
-                   Filter search text + Apply
                 ========================================= */
 
                 if(
@@ -2218,7 +2224,7 @@ function getColumnWidth(
     .trim();
 
     /* =========================
-       THIQA + BASIC
+       THIQA + HAAD
        GENERIC CODE WIDTH
     ========================= */
 
@@ -2234,7 +2240,7 @@ function getColumnWidth(
         )
     ){
 
-        return 130;
+        return 150;
 
     }
 
@@ -3048,6 +3054,35 @@ function renderVisibleRows(type){
             cell.className =
             "data-cell";
 
+            /* =========================
+               LONG TEXT ALIGNMENT
+            ========================= */
+
+            const normalizedColumn =
+            column
+            .toLowerCase()
+            .trim();
+
+            if(
+                normalizedColumn ===
+                "brand name" ||
+
+                normalizedColumn ===
+                "active ingredient" ||
+
+                normalizedColumn ===
+                "active ingredients" ||
+
+                normalizedColumn ===
+                "proactive name"
+            ){
+
+                cell.classList.add(
+                    "long-text"
+                );
+
+            }
+
             const value =
             displayValue(
                 row[column]
@@ -3061,11 +3096,6 @@ function renderVisibleRows(type){
             ========================= */
 
             if(type === "vitamin"){
-
-                const normalizedColumn =
-                column
-                .toLowerCase()
-                .trim();
 
                 const normalizedValue =
                 value
@@ -3105,11 +3135,6 @@ function renderVisibleRows(type){
             if(
                 type === "thiqa"
             ){
-
-                const normalizedColumn =
-                column
-                .toLowerCase()
-                .trim();
 
                 const normalizedValue =
                 value
@@ -4058,10 +4083,6 @@ function openFilterPopup(
     let selectAll =
     true;
 
-    /*
-       Restore existing checkbox filter.
-    */
-
     if(
         existing instanceof Set
     ){
@@ -4074,10 +4095,6 @@ function openFilterPopup(
         values.length;
 
     }
-
-    /*
-       Restore existing text filter.
-    */
 
     let existingSearch = "";
 
@@ -4354,29 +4371,6 @@ function applyPopupFilter(){
     .trim()
     .toLowerCase();
 
-    /*
-       =====================================================
-       EXCEL-STYLE TEXT SEARCH
-       =====================================================
-
-       If the user typed something into:
-
-       Search values...
-
-       then that text becomes the actual
-       column filter.
-
-       Example:
-
-       amoxicillin
-
-       or:
-
-       500%10
-
-       means the cell must contain BOTH 500 and 10.
-    */
-
     if(searchText){
 
         columnFilters[type][column] = {
@@ -4386,14 +4380,6 @@ function applyPopupFilter(){
         };
 
     }
-
-    /*
-       =====================================================
-       NO TEXT SEARCH
-       =====================================================
-
-       Use normal checkbox filtering.
-    */
 
     else{
 
@@ -4477,14 +4463,6 @@ filterValueSearch.addEventListener(
         filterValueSearch.value
         .trim()
         .toLowerCase();
-
-        /*
-           This searches ONLY the values
-           displayed inside the popup.
-
-           The actual table changes only
-           after clicking Apply.
-        */
 
         renderFilterValues();
 
@@ -4573,24 +4551,12 @@ applyFilterBtn.addEventListener(
     "click",
     () => {
 
-        /*
-           Save the current text first.
-        */
-
         filterPopupState.search =
         filterValueSearch.value
         .trim()
         .toLowerCase();
 
-        /*
-           Apply the filter.
-        */
-
         applyPopupFilter();
-
-        /*
-           Close popup after Apply.
-        */
 
         closeFilterPopup();
 
