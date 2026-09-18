@@ -44,30 +44,21 @@ h1{
     display:grid;
     grid-template-columns:repeat(8,minmax(0,1fr));
     gap:8px;
-
     width:100%;
     max-width:1600px;
-
     margin:0 auto 15px;
 }
 
 .tab{
     width:100%;
-
     border:1px solid #b8b8b8;
     background:#eee;
-
     padding:10px 7px;
-
     border-radius:6px 6px 0 0;
-
     cursor:pointer;
-
     font-weight:bold;
     font-size:13px;
-
     text-align:center;
-
     white-space:normal;
     line-height:16px;
 }
@@ -89,23 +80,17 @@ h1{
 .search-container{
     display:grid;
     grid-template-columns:repeat(4,minmax(0,1fr));
-
     gap:10px;
-
     max-width:1600px;
     margin:0 auto 10px;
 }
 
 .search-container input{
     width:100%;
-
     padding:10px 12px;
-
     border:1px solid #c5cbd1;
     border-radius:5px;
-
     font-size:14px;
-
     outline:none;
 }
 
@@ -116,22 +101,16 @@ h1{
 .controls{
     display:flex;
     justify-content:center;
-
     margin-bottom:10px;
 }
 
 .clear-btn{
     border:1px solid #1d3557;
-
     background:#1d3557;
     color:#fff;
-
     padding:9px 18px;
-
     border-radius:5px;
-
     cursor:pointer;
-
     font-weight:bold;
 }
 
@@ -147,26 +126,18 @@ h1{
     text-align:center;
     font-size:13px;
     color:#555;
-
     margin:6px 0 10px;
 }
 
 .error-box{
     display:none;
-
     max-width:1600px;
-
     margin:0 auto 10px;
-
     background:#f8d7da;
     color:#721c24;
-
     border:1px solid #f1b0b7;
-
     padding:10px;
-
     border-radius:5px;
-
     white-space:pre-wrap;
 }
 
@@ -176,17 +147,11 @@ h1{
 
 .excel-area{
     position:relative;
-
     width:100%;
-
     height:calc(100vh - 225px);
-
     min-height:450px;
-
     overflow:auto;
-
     background:#fff;
-
     border-top:1px solid #c8c8c8;
 }
 
@@ -197,67 +162,47 @@ h1{
 .excel-header{
     position:sticky;
     top:0;
-
     z-index:20;
-
     display:grid;
-
     width:max-content;
     min-width:100%;
-
     background:#e9edf2;
-
     border-bottom:2px solid #9ba6b2;
 }
 
 .header-cell{
     position:relative;
-
     min-width:0;
-
     min-height:54px;
-
     padding:7px 32px 7px 8px;
-
     border-right:1px solid #c7cbd0;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     font-weight:bold;
     font-size:13px;
     line-height:16px;
-
     text-align:center;
-
     white-space:normal;
     overflow-wrap:anywhere;
     word-break:break-word;
+    overflow:hidden;
 }
 
 .filter-btn{
     position:absolute;
-
     right:4px;
     top:50%;
-
     transform:translateY(-50%);
-
     width:22px;
     height:22px;
-
     border:1px solid #adb5bd;
-
     background:#fff;
-
     border-radius:4px;
-
     cursor:pointer;
-
     font-size:10px;
-
     padding:0;
+    z-index:3;
 }
 
 .filter-btn:hover{
@@ -275,54 +220,35 @@ h1{
 
 .virtual-content{
     position:relative;
-
     width:100%;
-
     min-width:max-content;
 }
 
 .data-row{
     position:absolute;
-
     left:0;
-
     display:grid;
-
     width:max-content;
     min-width:100%;
-
     background:#fff;
 }
 
 .data-cell{
     min-width:0;
-
     padding:7px 8px;
-
     border-right:1px solid #d5d8dc;
     border-bottom:1px solid #d5d8dc;
-
     font-size:13px;
     line-height:17px;
-
     white-space:normal;
     overflow-wrap:anywhere;
     word-break:break-word;
-
     overflow:visible;
-
     height:auto;
     min-height:42px;
-
-    /* ALL DATA CENTERED BY DEFAULT */
     text-align:center;
-
     vertical-align:middle;
 }
-
-/* =========================
-   SPECIFIC LEFT-ALIGNED DATA
-========================= */
 
 .data-cell.left-align{
     text-align:left;
@@ -335,22 +261,16 @@ h1{
 .thiqa-yes,
 .basic-yes{
     background:#d9ead3 !important;
-
     color:#222 !important;
-
     font-weight:bold !important;
-
     text-align:center !important;
 }
 
 .thiqa-no,
 .basic-no{
     background:#f4cccc !important;
-
     color:#222 !important;
-
     font-weight:bold !important;
-
     text-align:center !important;
 }
 
@@ -373,6 +293,7 @@ h1{
     right:110px;
     z-index:7;
     background:#fff;
+    box-shadow:-2px 0 0 rgba(0,0,0,.08);
 }
 
 .frozen-basic{
@@ -380,6 +301,7 @@ h1{
     right:0;
     z-index:8;
     background:#fff;
+    box-shadow:-2px 0 0 rgba(0,0,0,.08);
 }
 
 .excel-header .frozen-thiqa{
@@ -402,24 +324,14 @@ h1{
 
 .filter-popup{
     display:none;
-
     position:fixed;
-
     z-index:1000;
-
     width:280px;
-
     max-height:420px;
-
     background:#fff;
-
     border:1px solid #b9c1c8;
-
     border-radius:6px;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.18);
-
+    box-shadow:0 5px 20px rgba(0,0,0,.18);
     overflow:hidden;
 }
 
@@ -429,55 +341,38 @@ h1{
 
 .filter-popup-header{
     padding:10px;
-
     border-bottom:1px solid #ddd;
-
     background:#f5f7f9;
-
     font-weight:bold;
-
     font-size:13px;
 }
 
 .filter-search{
     padding:8px;
-
     border-bottom:1px solid #ddd;
 }
 
 .filter-search input{
     width:100%;
-
     padding:7px 8px;
-
     border:1px solid #c7cdd3;
-
     border-radius:4px;
 }
 
 .filter-actions{
     display:flex;
-
     gap:6px;
-
     padding:8px;
-
     border-bottom:1px solid #ddd;
 }
 
 .filter-actions button{
     flex:1;
-
     padding:7px;
-
     border:1px solid #c3cad1;
-
     background:#fff;
-
     border-radius:4px;
-
     cursor:pointer;
-
     font-weight:bold;
 }
 
@@ -487,29 +382,19 @@ h1{
 
 .filter-values{
     max-height:280px;
-
     overflow-y:auto;
-
     padding:6px 8px;
 }
 
 .filter-value{
     display:flex !important;
-
     width:100%;
-
     align-items:center;
-
     gap:7px;
-
     padding:5px 2px;
-
     font-size:12px;
-
     line-height:16px;
-
     cursor:pointer;
-
     white-space:normal;
 }
 
@@ -519,21 +404,15 @@ h1{
 
 .filter-value input{
     flex:0 0 auto;
-
     width:auto;
-
     margin:0;
-
     cursor:pointer;
 }
 
 .filter-value span{
     display:block;
-
     min-width:0;
-
     word-break:break-word;
-
     overflow-wrap:anywhere;
 }
 
@@ -543,23 +422,16 @@ h1{
 
 .special-content{
     display:none;
-
     width:100%;
-
     background:#fff;
-
     padding:15px;
 }
 
 .proactive-image{
     display:block;
-
     width:100%;
-
     max-width:1600px;
-
     height:auto;
-
     margin:0 auto 20px;
 }
 
@@ -572,235 +444,127 @@ h1{
 ========================= */
 
 .phone-layout{
-
     display:grid;
-
     grid-template-columns:
         minmax(0,1fr)
         minmax(0,1fr)
         minmax(0,1.35fr);
-
     gap:15px;
-
     width:100%;
-
     max-width:1600px;
-
     margin:0 auto;
-
     align-items:stretch;
-
 }
 
 .phone-table-box{
-
     width:100%;
-
     background:#fff;
-
     border:1px solid #bfc5cb;
-
     border-radius:5px;
-
     overflow:hidden;
-
 }
 
 .phone-middle{
-
     display:flex;
-
     flex-direction:column;
-
     gap:15px;
-
     min-width:0;
-
 }
 
 .phone-table{
-
     width:100%;
-
     border-collapse:collapse;
-
     table-layout:auto;
-
 }
 
 .phone-table th,
 .phone-table td{
-
     border:1px solid #d5d8dc;
-
     padding:7px 8px;
-
     font-size:13px;
-
     line-height:17px;
-
-    /* PHONE DATA CENTERED */
     text-align:center;
-
     vertical-align:middle;
-
     overflow-wrap:anywhere;
-
     word-break:break-word;
-
 }
-
-/* =========================
-   PHONE COLUMN HEADINGS
-========================= */
 
 .phone-table thead tr.phone-column-heading th{
-
     background:#e9edf2 !important;
-
     color:#222 !important;
-
     font-weight:bold !important;
-
     text-align:center !important;
-
     vertical-align:middle;
-
 }
-
-/* =========================
-   PHONE SECTION TITLES
-========================= */
 
 .phone-section-title{
-
     background:#1d3557 !important;
-
     color:#fff !important;
-
     text-align:center !important;
-
     font-weight:bold !important;
-
     font-size:14px !important;
-
     padding:9px 8px !important;
-
 }
-
-/* =========================
-   PHONE BODY
-========================= */
 
 .phone-table tbody tr:nth-child(even) td{
-
     background:#fafafa;
-
 }
-
-/* =========================
-   PHONE TABLE 1
-========================= */
 
 .phone-table-contacts th:first-child,
 .phone-table-contacts td:first-child{
-
     min-width:140px;
-
 }
 
 .phone-table-contacts th:nth-child(2),
 .phone-table-contacts td:nth-child(2){
-
     min-width:110px;
-
     white-space:nowrap;
-
 }
 
 .phone-table-contacts th:nth-child(3),
 .phone-table-contacts td:nth-child(3){
-
     min-width:120px;
-
     white-space:nowrap;
-
 }
-
-/* =========================
-   APG
-========================= */
 
 .phone-table-apg th:first-child,
 .phone-table-apg td:first-child{
-
     width:55%;
-
 }
 
 .phone-table-apg th:last-child,
 .phone-table-apg td:last-child{
-
     width:45%;
-
     white-space:nowrap;
-
 }
-
-/* =========================
-   ZAS
-========================= */
 
 .phone-table-zas th:first-child,
 .phone-table-zas td:first-child{
-
     width:65%;
-
 }
 
 .phone-table-zas th:last-child,
 .phone-table-zas td:last-child{
-
     width:35%;
-
     white-space:nowrap;
-
 }
-
-/* =========================
-   INSURANCE
-========================= */
 
 .phone-table-insurance th:first-child,
 .phone-table-insurance td:first-child{
-
     width:65%;
-
 }
 
 .phone-table-insurance th:last-child,
 .phone-table-insurance td:last-child{
-
     width:35%;
-
     white-space:nowrap;
-
 }
 
-/* =========================
-   PHONE LOADING
-========================= */
-
 .phone-loading{
-
     text-align:center;
-
     padding:30px;
-
     color:#555;
-
     font-size:14px;
-
 }
 
 /* =========================
@@ -818,29 +582,21 @@ h1{
     }
 
     .phone-layout{
-
         grid-template-columns:
             minmax(0,1fr)
             minmax(0,1fr);
-
     }
 
     .phone-table-box:first-child{
-
         grid-column:1 / -1;
-
     }
 
     .phone-middle{
-
         grid-column:1 / -1;
-
     }
 
     .phone-table-box:last-child{
-
         grid-column:1 / -1;
-
     }
 
 }
@@ -878,32 +634,21 @@ h1{
     }
 
     .phone-layout{
-
         display:flex;
-
         flex-direction:column;
-
         gap:12px;
-
     }
 
     .phone-middle{
-
         display:flex;
-
         flex-direction:column;
-
         gap:12px;
-
     }
 
     .phone-table th,
     .phone-table td{
-
         font-size:12px;
-
         padding:6px;
-
     }
 
 }
@@ -1188,7 +933,6 @@ let phoneLoaded = false;
 let phoneLoading = false;
 
 const ROW_HEIGHT = 42;
-
 const BUFFER_ROWS = 30;
 
 
@@ -1199,15 +943,10 @@ const BUFFER_ROWS = 30;
 let filterPopupState = {
 
     column:null,
-
     sheet:null,
-
     allValues:[],
-
     selected:new Set(),
-
     selectAll:true,
-
     search:""
 
 };
@@ -1711,6 +1450,85 @@ function displayValue(value){
 
 
 /* =========================================================
+   NUMERIC SEARCH HELPERS
+========================================================= */
+
+/*
+    Numeric search is token-based.
+
+    Example:
+    Search 5
+
+    Matches:
+    5
+    5 mg
+    5 MG
+    5/5
+
+    Does NOT match:
+    2.5
+    5.8
+    15
+    50
+    0.5
+
+    For decimal searches:
+    Search 2.5
+    Matches 2.5
+    Does NOT match 12.5 or 2.50 when interpreted
+    as a different numeric token.
+*/
+
+function isNumericTerm(term){
+
+    return /^[-+]?(?:\d+(?:\.\d+)?|\.\d+)$/.test(
+        term.trim()
+    );
+
+}
+
+
+function numericTermMatches(
+    text,
+    term
+){
+
+    const cleanTerm =
+    term.trim();
+
+    const escaped =
+    cleanTerm.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        "\\$&"
+    );
+
+    /*
+        A numeric value must not be immediately
+        attached to another digit or decimal point.
+
+        This prevents:
+        5 matching 2.5
+        5 matching 5.8
+        5 matching 15
+        5 matching 50
+    */
+
+    const pattern =
+    new RegExp(
+        "(^|[^0-9.])" +
+        escaped +
+        "(?![0-9.])",
+        "i"
+    );
+
+    return pattern.test(
+        text
+    );
+
+}
+
+
+/* =========================================================
    MULTI SEARCH
    % = AND
 ========================================================= */
@@ -1752,13 +1570,36 @@ function matchesMultiSearch(
         i++
     ){
 
+        const term =
+        terms[i];
+
         if(
-            !text.includes(
-                terms[i]
-            )
+            isNumericTerm(term)
         ){
 
-            return false;
+            if(
+                !numericTermMatches(
+                    text,
+                    term
+                )
+            ){
+
+                return false;
+
+            }
+
+        }
+        else{
+
+            if(
+                !text.includes(
+                    term
+                )
+            ){
+
+                return false;
+
+            }
 
         }
 
@@ -1814,22 +1655,16 @@ function findColumn(
 
 
 /* =========================================================
-   FILTER ROWS
+   CHECK ONE ROW AGAINST SEARCH BOXES
 ========================================================= */
 
-function getFilteredRows(type){
-
-    const rows =
-    sheetData[type] || [];
+function rowMatchesSearches(
+    row,
+    type
+){
 
     const columns =
     sheetColumns[type] || [];
-
-    if(!rows.length){
-
-        return [];
-
-    }
 
     const brandColumn =
     findColumn(
@@ -1884,320 +1719,515 @@ function getFilteredRows(type){
     const dosageQuery =
     dosageSearch.value;
 
+
+    /* =========================
+       BRAND
+    ========================= */
+
+    if(brandQuery){
+
+        if(brandColumn){
+
+            if(
+                !matchesMultiSearch(
+                    row[brandColumn],
+                    brandQuery
+                )
+            ){
+
+                return false;
+
+            }
+
+        }
+        else{
+
+            let found = false;
+
+            const values =
+            Object.values(row);
+
+            for(
+                let i=0;
+                i<values.length;
+                i++
+            ){
+
+                if(
+                    matchesMultiSearch(
+                        values[i],
+                        brandQuery
+                    )
+                ){
+
+                    found = true;
+                    break;
+
+                }
+
+            }
+
+            if(!found){
+
+                return false;
+
+            }
+
+        }
+
+    }
+
+
+    /* =========================
+       GENERIC
+    ========================= */
+
+    if(genericQuery){
+
+        if(genericColumn){
+
+            if(
+                !matchesMultiSearch(
+                    row[genericColumn],
+                    genericQuery
+                )
+            ){
+
+                return false;
+
+            }
+
+        }
+        else{
+
+            let found = false;
+
+            const values =
+            Object.values(row);
+
+            for(
+                let i=0;
+                i<values.length;
+                i++
+            ){
+
+                if(
+                    matchesMultiSearch(
+                        values[i],
+                        genericQuery
+                    )
+                ){
+
+                    found = true;
+                    break;
+
+                }
+
+            }
+
+            if(!found){
+
+                return false;
+
+            }
+
+        }
+
+    }
+
+
+    /* =========================
+       STRENGTH
+    ========================= */
+
+    if(strengthQuery){
+
+        if(strengthColumn){
+
+            if(
+                !matchesMultiSearch(
+                    row[strengthColumn],
+                    strengthQuery
+                )
+            ){
+
+                return false;
+
+            }
+
+        }
+        else{
+
+            let found = false;
+
+            const values =
+            Object.values(row);
+
+            for(
+                let i=0;
+                i<values.length;
+                i++
+            ){
+
+                if(
+                    matchesMultiSearch(
+                        values[i],
+                        strengthQuery
+                    )
+                ){
+
+                    found = true;
+                    break;
+
+                }
+
+            }
+
+            if(!found){
+
+                return false;
+
+            }
+
+        }
+
+    }
+
+
+    /* =========================
+       DOSAGE
+    ========================= */
+
+    if(dosageQuery){
+
+        if(dosageColumn){
+
+            if(
+                !matchesMultiSearch(
+                    row[dosageColumn],
+                    dosageQuery
+                )
+            ){
+
+                return false;
+
+            }
+
+        }
+        else{
+
+            let found = false;
+
+            const values =
+            Object.values(row);
+
+            for(
+                let i=0;
+                i<values.length;
+                i++
+            ){
+
+                if(
+                    matchesMultiSearch(
+                        values[i],
+                        dosageQuery
+                    )
+                ){
+
+                    found = true;
+                    break;
+
+                }
+
+            }
+
+            if(!found){
+
+                return false;
+
+            }
+
+        }
+
+    }
+
+    return true;
+
+}
+
+
+/* =========================================================
+   CHECK ROW AGAINST COLUMN FILTERS
+========================================================= */
+
+function rowMatchesColumnFilters(
+    row,
+    filters,
+    excludeColumn = null
+){
+
+    const filterColumns =
+    Object.keys(filters || {});
+
+    for(
+        let i=0;
+        i<filterColumns.length;
+        i++
+    ){
+
+        const column =
+        filterColumns[i];
+
+        /*
+            IMPORTANT:
+            When building the options for one filter,
+            exclude that filter itself.
+
+            All OTHER active filters remain active.
+
+            This is what makes the dropdown behave
+            like Excel AutoFilter.
+        */
+
+        if(
+            excludeColumn !== null &&
+            column === excludeColumn
+        ){
+
+            continue;
+
+        }
+
+        const selected =
+        filters[column];
+
+        if(!selected){
+
+            continue;
+
+        }
+
+        const value =
+        displayValue(
+            row[column]
+        );
+
+        if(
+            selected &&
+            typeof selected === "object" &&
+            !(selected instanceof Set) &&
+            Object.prototype.hasOwnProperty.call(
+                selected,
+                "text"
+            )
+        ){
+
+            if(
+                !matchesMultiSearch(
+                    value,
+                    selected.text
+                )
+            ){
+
+                return false;
+
+            }
+
+        }
+
+        else if(
+            selected instanceof Set
+        ){
+
+            if(
+                !selected.has(
+                    value
+                )
+            ){
+
+                return false;
+
+            }
+
+        }
+
+    }
+
+    return true;
+
+}
+
+
+/* =========================================================
+   FILTER ROWS
+========================================================= */
+
+function getFilteredRows(type){
+
+    const rows =
+    sheetData[type] || [];
+
     const filters =
     columnFilters[type] || {};
+
+    if(!rows.length){
+
+        return [];
+
+    }
 
     return rows.filter(
         row => {
 
-            /* =========================
-               BRAND
-            ========================= */
-
-            if(brandQuery){
-
-                if(brandColumn){
-
-                    if(
-                        !matchesMultiSearch(
-                            row[brandColumn],
-                            brandQuery
-                        )
-                    ){
-
-                        return false;
-
-                    }
-
-                }
-                else{
-
-                    let found = false;
-
-                    const values =
-                    Object.values(row);
-
-                    for(
-                        let i=0;
-                        i<values.length;
-                        i++
-                    ){
-
-                        if(
-                            matchesMultiSearch(
-                                values[i],
-                                brandQuery
-                            )
-                        ){
-
-                            found = true;
-                            break;
-
-                        }
-
-                    }
-
-                    if(!found){
-
-                        return false;
-
-                    }
-
-                }
-
-            }
-
-
-            /* =========================
-               GENERIC
-            ========================= */
-
-            if(genericQuery){
-
-                if(genericColumn){
-
-                    if(
-                        !matchesMultiSearch(
-                            row[genericColumn],
-                            genericQuery
-                        )
-                    ){
-
-                        return false;
-
-                    }
-
-                }
-                else{
-
-                    let found = false;
-
-                    const values =
-                    Object.values(row);
-
-                    for(
-                        let i=0;
-                        i<values.length;
-                        i++
-                    ){
-
-                        if(
-                            matchesMultiSearch(
-                                values[i],
-                                genericQuery
-                            )
-                        ){
-
-                            found = true;
-                            break;
-
-                        }
-
-                    }
-
-                    if(!found){
-
-                        return false;
-
-                    }
-
-                }
-
-            }
-
-
-            /* =========================
-               STRENGTH
-            ========================= */
-
-            if(strengthQuery){
-
-                if(strengthColumn){
-
-                    if(
-                        !matchesMultiSearch(
-                            row[strengthColumn],
-                            strengthQuery
-                        )
-                    ){
-
-                        return false;
-
-                    }
-
-                }
-                else{
-
-                    let found = false;
-
-                    const values =
-                    Object.values(row);
-
-                    for(
-                        let i=0;
-                        i<values.length;
-                        i++
-                    ){
-
-                        if(
-                            matchesMultiSearch(
-                                values[i],
-                                strengthQuery
-                            )
-                        ){
-
-                            found = true;
-                            break;
-
-                        }
-
-                    }
-
-                    if(!found){
-
-                        return false;
-
-                    }
-
-                }
-
-            }
-
-
-            /* =========================
-               DOSAGE
-            ========================= */
-
-            if(dosageQuery){
-
-                if(dosageColumn){
-
-                    if(
-                        !matchesMultiSearch(
-                            row[dosageColumn],
-                            dosageQuery
-                        )
-                    ){
-
-                        return false;
-
-                    }
-
-                }
-                else{
-
-                    let found = false;
-
-                    const values =
-                    Object.values(row);
-
-                    for(
-                        let i=0;
-                        i<values.length;
-                        i++
-                    ){
-
-                        if(
-                            matchesMultiSearch(
-                                values[i],
-                                dosageQuery
-                            )
-                        ){
-
-                            found = true;
-                            break;
-
-                        }
-
-                    }
-
-                    if(!found){
-
-                        return false;
-
-                    }
-
-                }
-
-            }
-
-
-            /* =================================================
-               COLUMN FILTERS
-            ================================================= */
-
-            const filterColumns =
-            Object.keys(filters);
-
-            for(
-                let i=0;
-                i<filterColumns.length;
-                i++
+            if(
+                !rowMatchesSearches(
+                    row,
+                    type
+                )
             ){
 
-                const column =
-                filterColumns[i];
+                return false;
 
-                const selected =
-                filters[column];
+            }
 
-                if(!selected){
+            if(
+                !rowMatchesColumnFilters(
+                    row,
+                    filters
+                )
+            ){
 
-                    continue;
-
-                }
-
-                const value =
-                displayValue(
-                    row[column]
-                );
-
-                if(
-                    selected &&
-                    typeof selected === "object" &&
-                    !(
-                        selected instanceof Set
-                    ) &&
-                    Object.prototype.hasOwnProperty.call(
-                        selected,
-                        "text"
-                    )
-                ){
-
-                    if(
-                        !matchesMultiSearch(
-                            value,
-                            selected.text
-                        )
-                    ){
-
-                        return false;
-
-                    }
-
-                }
-
-                else if(
-                    selected instanceof Set
-                ){
-
-                    if(
-                        !selected.has(
-                            value
-                        )
-                    ){
-
-                        return false;
-
-                    }
-
-                }
+                return false;
 
             }
 
             return true;
 
         }
+    );
+
+}
+
+
+/* =========================================================
+   GET DEPENDENT FILTER VALUES
+========================================================= */
+
+/*
+    THIS IS THE MAIN EXCEL-LIKE CHANGE.
+
+    If Brand = Panadol is active and we open Strength:
+
+    1. Start with ALL rows.
+    2. Apply search boxes.
+    3. Apply every active column filter EXCEPT Strength.
+    4. Collect Strength values from those rows.
+
+    Therefore the Strength dropdown only contains
+    values belonging to the currently filtered dataset.
+*/
+
+function getDependentFilterValues(
+    type,
+    currentColumn
+){
+
+    const rows =
+    sheetData[type] || [];
+
+    const filters =
+    columnFilters[type] || {};
+
+    const valueSet =
+    new Set();
+
+    for(
+        let i=0;
+        i<rows.length;
+        i++
+    ){
+
+        const row =
+        rows[i];
+
+        /*
+            Search boxes are also part of the current
+            filtered dataset.
+        */
+
+        if(
+            !rowMatchesSearches(
+                row,
+                type
+            )
+        ){
+
+            continue;
+
+        }
+
+        /*
+            Apply all other column filters,
+            but NOT the column whose dropdown
+            we are currently opening.
+        */
+
+        if(
+            !rowMatchesColumnFilters(
+                row,
+                filters,
+                currentColumn
+            )
+        ){
+
+            continue;
+
+        }
+
+        valueSet.add(
+            displayValue(
+                row[currentColumn]
+            )
+        );
+
+    }
+
+    /*
+        If the current filter has selected values which
+        have temporarily disappeared because of another
+        filter, keep those values available internally
+        so the current selection is not unexpectedly lost.
+    */
+
+    const existing =
+    filters[currentColumn];
+
+    if(existing instanceof Set){
+
+        existing.forEach(
+            value => {
+
+                valueSet.add(
+                    value
+                );
+
+            }
+        );
+
+    }
+
+    return Array.from(
+        valueSet
+    ).sort(
+        (a,b) =>
+        a.localeCompare(
+            b,
+            undefined,
+            {
+                numeric:true,
+                sensitivity:"base"
+            }
+        )
     );
 
 }
@@ -2217,11 +2247,6 @@ function getColumnWidth(
     .toLowerCase()
     .trim();
 
-    /* =========================
-       THIQA + HAAD
-       GENERIC CODE WIDTH
-    ========================= */
-
     if(
         (
             type === "thiqa" ||
@@ -2238,11 +2263,6 @@ function getColumnWidth(
 
     }
 
-
-    /* =========================
-       THIQA / BASIC
-    ========================= */
-
     if(
         type === "thiqa" &&
         (
@@ -2254,11 +2274,6 @@ function getColumnWidth(
         return 110;
 
     }
-
-
-    /* =========================
-       VITAMIN COVERAGE
-    ========================= */
 
     if(
         type === "vitamin"
@@ -2283,7 +2298,6 @@ function getColumnWidth(
 
     }
 
-
     if(
         c.includes("proactive name")
     ){
@@ -2291,7 +2305,6 @@ function getColumnWidth(
         return 400;
 
     }
-
 
     if(
         c.includes("generic") ||
@@ -2313,7 +2326,6 @@ function getColumnWidth(
 
     }
 
-
     if(
         c.includes("strength") ||
         c.includes("dosage form") ||
@@ -2323,7 +2335,6 @@ function getColumnWidth(
         return 160;
 
     }
-
 
     if(
         c.includes("price") ||
@@ -2336,7 +2347,6 @@ function getColumnWidth(
         return 155;
 
     }
-
 
     if(
         c.includes("date")
@@ -2714,7 +2724,6 @@ function findRowAtPosition(
     }
 
     let low = 0;
-
     let high =
     offsets.length - 1;
 
@@ -2769,13 +2778,6 @@ function shouldLeftAlign(
     .toLowerCase()
     .trim();
 
-    /* =========================
-       THIQA & BASIC
-       LEFT:
-       Proactive Name
-       Generic Name
-    ========================= */
-
     if(
         type === "thiqa"
     ){
@@ -2786,14 +2788,6 @@ function shouldLeftAlign(
         );
 
     }
-
-
-    /* =========================
-       HAAD LIST
-       LEFT:
-       Package Name
-       Generic Name
-    ========================= */
 
     if(
         type === "haad"
@@ -2806,14 +2800,6 @@ function shouldLeftAlign(
 
     }
 
-
-    /* =========================
-       APG FORMULARY
-       LEFT:
-       Proactive Name
-       Generic Name
-    ========================= */
-
     if(
         type === "apg"
     ){
@@ -2824,14 +2810,6 @@ function shouldLeftAlign(
         );
 
     }
-
-
-    /* =========================
-       VITAMIN COVERAGE
-       LEFT:
-       Item Name
-       Active Ingredients
-    ========================= */
 
     if(
         type === "vitamin"
@@ -2845,13 +2823,6 @@ function shouldLeftAlign(
 
     }
 
-
-    /* =========================
-       HCPC
-       LEFT:
-       Description
-    ========================= */
-
     if(
         type === "hcpc"
     ){
@@ -2861,13 +2832,6 @@ function shouldLeftAlign(
         );
 
     }
-
-
-    /* =========================
-       NAS TPA HAAD
-       LEFT:
-       Name
-    ========================= */
 
     if(
         type === "nasHaad"
@@ -2879,13 +2843,6 @@ function shouldLeftAlign(
 
     }
 
-
-    /* =========================
-       NAS TPA DHA
-       LEFT:
-       Name
-    ========================= */
-
     if(
         type === "nasDha"
     ){
@@ -2895,12 +2852,6 @@ function shouldLeftAlign(
         );
 
     }
-
-
-    /* =========================
-       EVERYTHING ELSE
-       CENTER
-    ========================= */
 
     return false;
 
@@ -3208,10 +3159,6 @@ function renderVisibleRows(type){
             cell.textContent =
             value;
 
-            /* =========================
-               SPECIFIC LEFT ALIGNMENT
-            ========================= */
-
             if(
                 shouldLeftAlign(
                     type,
@@ -3224,10 +3171,6 @@ function renderVisibleRows(type){
                 );
 
             }
-
-            /* =========================
-               VITAMIN
-            ========================= */
 
             if(type === "vitamin"){
 
@@ -3266,10 +3209,6 @@ function renderVisibleRows(type){
                 }
 
             }
-
-            /* =========================
-               THIQA / BASIC
-            ========================= */
 
             if(
                 type === "thiqa"
@@ -3622,7 +3561,7 @@ function createPhoneTable(
 
         const empty =
         document.createElement(
-        "div"
+            "div"
         );
 
         empty.className =
@@ -3632,7 +3571,7 @@ function createPhoneTable(
         "No data available";
 
         box.appendChild(
-        empty
+            empty
         );
 
         return box;
@@ -3666,11 +3605,11 @@ function createPhoneTable(
         title;
 
         titleRow.appendChild(
-        titleCell
+            titleCell
         );
 
         thead.appendChild(
-        titleRow
+            titleRow
         );
 
     }
@@ -3715,17 +3654,17 @@ function createPhoneTable(
         }
 
         headerRow.appendChild(
-        th
+            th
         );
 
     }
 
     thead.appendChild(
-    headerRow
+        headerRow
     );
 
     table.appendChild(
-    thead
+        thead
     );
 
     const tbody =
@@ -3766,23 +3705,23 @@ function createPhoneTable(
             );
 
             tr.appendChild(
-            td
+                td
             );
 
         }
 
         tbody.appendChild(
-        tr
+            tr
         );
 
     }
 
     table.appendChild(
-    tbody
+        tbody
     );
 
     box.appendChild(
-    table
+        table
     );
 
     return box;
@@ -3827,7 +3766,7 @@ function renderPhoneContacts(){
     );
 
     layout.appendChild(
-    contactsTable
+        contactsTable
     );
 
     const middle =
@@ -3850,7 +3789,7 @@ function renderPhoneContacts(){
     );
 
     middle.appendChild(
-    apgTable
+        apgTable
     );
 
     const zasTable =
@@ -3865,11 +3804,11 @@ function renderPhoneContacts(){
     );
 
     middle.appendChild(
-    zasTable
+        zasTable
     );
 
     layout.appendChild(
-    middle
+        middle
     );
 
     const insuranceTable =
@@ -3884,11 +3823,11 @@ function renderPhoneContacts(){
     );
 
     layout.appendChild(
-    insuranceTable
+        insuranceTable
     );
 
     specialContent.appendChild(
-    layout
+        layout
     );
 
     statusEl.textContent =
@@ -4070,7 +4009,7 @@ function renderProactiveImages(){
         }
 
         specialContent.appendChild(
-        img
+            img
         );
 
     }
@@ -4182,40 +4121,16 @@ function openFilterPopup(
 
     }
 
-    const rows =
-    sheetData[type] || [];
-
-    const valueSet =
-    new Set();
-
-    for(
-        let i=0;
-        i<rows.length;
-        i++
-    ){
-
-        valueSet.add(
-            displayValue(
-                rows[i][column]
-            )
-        );
-
-    }
+    /*
+        IMPORTANT:
+        Get values from rows matching every OTHER
+        active filter, not from the entire database.
+    */
 
     const values =
-    Array.from(
-        valueSet
-    )
-    .sort(
-        (a,b) =>
-        a.localeCompare(
-            b,
-            undefined,
-            {
-                numeric:true,
-                sensitivity:"base"
-            }
-        )
+    getDependentFilterValues(
+        type,
+        column
     );
 
     const existing =
@@ -4231,8 +4146,33 @@ function openFilterPopup(
         existing instanceof Set
     ){
 
+        /*
+            Only select values currently available,
+            while preserving the current selection.
+        */
+
         selected =
-        new Set(existing);
+        new Set();
+
+        for(
+            let i=0;
+            i<values.length;
+            i++
+        ){
+
+            if(
+                existing.has(
+                    values[i]
+                )
+            ){
+
+                selected.add(
+                    values[i]
+                );
+
+            }
+
+        }
 
         selectAll =
         selected.size ===
@@ -4389,7 +4329,7 @@ function renderFilterValues(){
         "No matching values";
 
         filterValues.appendChild(
-        empty
+            empty
         );
 
         return;
@@ -4472,15 +4412,15 @@ function renderFilterValues(){
             value || "(Blanks)";
 
             label.appendChild(
-            checkbox
+                checkbox
             );
 
             label.appendChild(
-            text
+                text
             );
 
             filterValues.appendChild(
-            label
+                label
             );
 
         }
@@ -4639,8 +4579,10 @@ selectAllBtn.addEventListener(
         );
 
         const allVisibleSelected =
+        visibleValues.length > 0 &&
         visibleValues.every(
             value =>
+            filterPopupState.selectAll ||
             filterPopupState.selected.has(
                 value
             )
@@ -4649,6 +4591,9 @@ selectAllBtn.addEventListener(
         if(
             allVisibleSelected
         ){
+
+            filterPopupState.selectAll =
+            false;
 
             visibleValues.forEach(
                 value => {
@@ -4663,6 +4608,9 @@ selectAllBtn.addEventListener(
         }
         else{
 
+            filterPopupState.selectAll =
+            false;
+
             visibleValues.forEach(
                 value => {
 
@@ -4675,9 +4623,15 @@ selectAllBtn.addEventListener(
 
         }
 
-        filterPopupState.selectAll =
-        filterPopupState.selected.size ===
-        filterPopupState.allValues.length;
+        if(
+            filterPopupState.selected.size ===
+            filterPopupState.allValues.length
+        ){
+
+            filterPopupState.selectAll =
+            true;
+
+        }
 
         renderFilterValues();
 
