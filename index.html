@@ -2214,6 +2214,32 @@ function getColumnWidth(
     .toLowerCase()
     .trim();
 
+    /* =========================
+       THIQA + BASIC
+       REDUCE GENERIC CODE WIDTH
+    ========================= */
+
+    if(
+        (
+            type === "thiqa" ||
+            type === "haad"
+        )
+        &&
+        (
+            c.includes("generic code") ||
+            c === "generic code"
+        )
+    ){
+
+        return 110;
+
+    }
+
+
+    /* =========================
+       THIQA / BASIC
+    ========================= */
+
     if(
         type === "thiqa" &&
         (
@@ -2225,6 +2251,11 @@ function getColumnWidth(
         return 110;
 
     }
+
+
+    /* =========================
+       VITAMIN COVERAGE
+    ========================= */
 
     if(
         type === "vitamin"
@@ -2249,6 +2280,7 @@ function getColumnWidth(
 
     }
 
+
     if(
         c.includes("proactive name")
     ){
@@ -2256,6 +2288,7 @@ function getColumnWidth(
         return 400;
 
     }
+
 
     if(
         c.includes("generic") ||
@@ -2277,6 +2310,7 @@ function getColumnWidth(
 
     }
 
+
     if(
         c.includes("strength") ||
         c.includes("dosage form") ||
@@ -2286,6 +2320,7 @@ function getColumnWidth(
         return 160;
 
     }
+
 
     if(
         c.includes("price") ||
@@ -2298,6 +2333,7 @@ function getColumnWidth(
         return 155;
 
     }
+
 
     if(
         c.includes("date")
