@@ -314,31 +314,18 @@ h1{
     height:auto;
     min-height:42px;
 
-    /* DEFAULT:
-       ALL DATA CENTERED
-    */
+    /* ALL DATA CENTERED BY DEFAULT */
     text-align:center;
 
     vertical-align:middle;
 }
 
 /* =========================
-   LONG TEXT
-   Automatically left-align
-   text likely to occupy
-   2 or more lines
+   SPECIFIC LEFT-ALIGNED DATA
 ========================= */
 
-.data-cell.long-text{
+.data-cell.left-align{
     text-align:left;
-}
-
-/* =========================
-   EVEN ROWS
-========================= */
-
-.data-row:nth-child(even) .data-cell{
-    background:#fafafa;
 }
 
 /* =========================
@@ -652,6 +639,7 @@ h1{
 
     line-height:17px;
 
+    /* PHONE DATA CENTERED */
     text-align:center;
 
     vertical-align:middle;
@@ -2539,71 +2527,6 @@ function getGridTemplate(type){
 
 
 /* =========================================================
-   DETECT LONG TEXT
-========================================================= */
-
-function isLongText(
-    value,
-    width
-){
-
-    const text =
-    String(value || "").trim();
-
-    if(!text){
-
-        return false;
-
-    }
-
-    /*
-       Explicit line breaks automatically
-       count as long text.
-    */
-
-    if(
-        text.includes("\n") ||
-        text.includes("\r")
-    ){
-
-        return true;
-
-    }
-
-    /*
-       Estimate whether the text will occupy
-       approximately 2 or more lines.
-
-       This uses the same approximate character
-       width used by the row-height calculation.
-    */
-
-    const availableWidth =
-    Math.max(
-        30,
-        width - 16
-    );
-
-    const charsPerLine =
-    Math.max(
-        5,
-        Math.floor(
-            availableWidth / 6.5
-        )
-    );
-
-    /*
-       Only left-align if it is long enough
-       to reasonably wrap onto 2+ lines.
-    */
-
-    return text.length >
-        charsPerLine;
-
-}
-
-
-/* =========================================================
    CALCULATE ROW HEIGHT
 ========================================================= */
 
@@ -2828,6 +2751,158 @@ function findRowAtPosition(
             high
         )
     );
+
+}
+
+
+/* =========================================================
+   CHECK LEFT-ALIGNED COLUMN
+========================================================= */
+
+function shouldLeftAlign(
+    type,
+    column
+){
+
+    const c =
+    column
+    .toLowerCase()
+    .trim();
+
+    /* =========================
+       THIQA & BASIC
+       LEFT:
+       Proactive Name
+       Generic Name
+    ========================= */
+
+    if(
+        type === "thiqa"
+    ){
+
+        return (
+            c === "proactive name" ||
+            c === "generic name"
+        );
+
+    }
+
+
+    /* =========================
+       HAAD LIST
+       LEFT:
+       Package Name
+       Generic Name
+    ========================= */
+
+    if(
+        type === "haad"
+    ){
+
+        return (
+            c === "package name" ||
+            c === "generic name"
+        );
+
+    }
+
+
+    /* =========================
+       APG FORMULARY
+       LEFT:
+       Proactive Name
+       Generic Name
+    ========================= */
+
+    if(
+        type === "apg"
+    ){
+
+        return (
+            c === "proactive name" ||
+            c === "generic name"
+        );
+
+    }
+
+
+    /* =========================
+       VITAMIN COVERAGE
+       LEFT:
+       Item Name
+       Active Ingredients
+    ========================= */
+
+    if(
+        type === "vitamin"
+    ){
+
+        return (
+            c === "item name" ||
+            c === "active ingredients" ||
+            c === "active ingredient"
+        );
+
+    }
+
+
+    /* =========================
+       HCPC
+       LEFT:
+       Description
+    ========================= */
+
+    if(
+        type === "hcpc"
+    ){
+
+        return (
+            c === "description"
+        );
+
+    }
+
+
+    /* =========================
+       NAS TPA HAAD
+       LEFT:
+       Name
+    ========================= */
+
+    if(
+        type === "nasHaad"
+    ){
+
+        return (
+            c === "name"
+        );
+
+    }
+
+
+    /* =========================
+       NAS TPA DHA
+       LEFT:
+       Name
+    ========================= */
+
+    if(
+        type === "nasDha"
+    ){
+
+        return (
+            c === "name"
+        );
+
+    }
+
+
+    /* =========================
+       EVERYTHING ELSE
+       CENTER
+    ========================= */
+
+    return false;
 
 }
 
@@ -3072,9 +3147,6 @@ function renderVisibleRows(type){
     virtualContent.innerHTML =
     "";
 
-    const widths =
-    getColumnWidths(type);
-
     for(
         let i=start;
         i<=end;
@@ -3136,26 +3208,19 @@ function renderVisibleRows(type){
             cell.textContent =
             value;
 
-            /*
-               ==========================================
-               LONG TEXT ALIGNMENT
-
-               Short values stay CENTERED.
-
-               Text that is likely to occupy
-               2 or more lines becomes LEFT aligned.
-               ==========================================
-            */
+            /* =========================
+               SPECIFIC LEFT ALIGNMENT
+            ========================= */
 
             if(
-                isLongText(
-                    value,
-                    widths[c] || 150
+                shouldLeftAlign(
+                    type,
+                    column
                 )
             ){
 
                 cell.classList.add(
-                    "long-text"
+                    "left-align"
                 );
 
             }
