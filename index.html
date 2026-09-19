@@ -5043,46 +5043,47 @@ function applyPopupFilter(){
 
     }
 
-    const searchText =
-    filterValueSearch.value
-    .trim()
-    .toLowerCase();
+    const allValues =
+    filterPopupState.allValues;
 
-    if(searchText){
+    const selected =
+    filterPopupState.selected;
 
-        columnFilters[type][column] = {
+    /*
+     * IMPORTANT:
+     * The text typed into "Search values..."
+     * is ONLY used to find options in the popup.
+     *
+     * It must NOT become a text filter for the table.
+     */
 
-            text:searchText
+    if(
+        filterPopupState.selectAll ||
+        selected.size === allValues.length
+    ){
 
-        };
+        delete columnFilters[type][column];
 
     }
-
     else{
 
-        const allValues =
-        filterPopupState.allValues;
+        /*
+         * FILTER BY EXACT SELECTED VALUE
+         *
+         * Example:
+         * selected = {"Combination"}
+         *
+         * This will show:
+         * Combination
+         *
+         * It will NOT show:
+         * 7 Combination
+         * Combination + ...
+         * Combination something
+         */
 
-        const selected =
-        filterPopupState.selected;
-
-        if(
-            filterPopupState.selectAll ||
-            selected.size ===
-            allValues.length
-        ){
-
-            delete columnFilters[type][column];
-
-        }
-        else{
-
-            columnFilters[type][column] =
-            new Set(
-                selected
-            );
-
-        }
+        columnFilters[type][column] =
+        new Set(selected);
 
     }
 
