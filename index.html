@@ -4948,8 +4948,12 @@ function renderFilterValues(){
             checkbox.type =
             "checkbox";
 
+            /*
+             * If everything was selected before,
+             * the checkbox is checked.
+             */
             checkbox.checked =
-            filterPopupState.selectAll
+                filterPopupState.selectAll
                 ? true
                 : filterPopupState.selected.has(
                     value
@@ -4959,8 +4963,29 @@ function renderFilterValues(){
                 "change",
                 () => {
 
-                    filterPopupState.selectAll =
-                    false;
+                    /*
+                     * IMPORTANT:
+                     *
+                     * If Select All was active,
+                     * create a real Set containing
+                     * ALL values first.
+                     *
+                     * This prevents hidden values
+                     * from being accidentally lost.
+                     */
+                    if(
+                        filterPopupState.selectAll
+                    ){
+
+                        filterPopupState.selected =
+                        new Set(
+                            filterPopupState.allValues
+                        );
+
+                        filterPopupState.selectAll =
+                        false;
+
+                    }
 
                     if(
                         checkbox.checked
@@ -4979,6 +5004,10 @@ function renderFilterValues(){
 
                     }
 
+                    /*
+                     * If every value is selected,
+                     * return to Select All state.
+                     */
                     if(
                         filterPopupState.selected.size ===
                         filterPopupState.allValues.length
@@ -5170,74 +5199,38 @@ selectAllBtn.addEventListener(
     "click",
     () => {
 
+        /*
+         * PHONE FILTER
+         */
         if(
             currentSheet === "phone" &&
             phoneFilterState.table
         ){
 
-            const search =
-            filterValueSearch.value
-            .trim()
-            .toLowerCase();
-
-            const visibleValues =
-            phoneFilterState.values.filter(
-                value =>
-                matchesMultiSearch(
-                    value,
-                    search
-                )
-            );
-
-            const allVisibleSelected =
-            visibleValues.length > 0 &&
-            visibleValues.every(
-                value =>
-                phoneFilterState.selectAll ||
-                phoneFilterState.selected.has(
-                    value
-                )
-            );
-
+            /*
+             * Select All works on ALL values,
+             * not only the values currently
+             * visible after searching.
+             */
             if(
-                allVisibleSelected
+                phoneFilterState.selectAll ||
+                phoneFilterState.selected.size ===
+                phoneFilterState.values.length
             ){
+
+                phoneFilterState.selected =
+                new Set();
 
                 phoneFilterState.selectAll =
                 false;
-
-                visibleValues.forEach(
-                    value => {
-
-                        phoneFilterState.selected.delete(
-                            value
-                        );
-
-                    }
-                );
 
             }
             else{
 
-                phoneFilterState.selectAll =
-                false;
-
-                visibleValues.forEach(
-                    value => {
-
-                        phoneFilterState.selected.add(
-                            value
-                        );
-
-                    }
+                phoneFilterState.selected =
+                new Set(
+                    phoneFilterState.values
                 );
-
-            }
-
-            if(
-                phoneFilterState.selected.size ===
-                phoneFilterState.values.length
-            ){
 
                 phoneFilterState.selectAll =
                 true;
@@ -5252,69 +5245,36 @@ selectAllBtn.addEventListener(
 
         }
 
-        const search =
-        filterValueSearch.value
-        .trim()
-        .toLowerCase();
 
-        const visibleValues =
-        filterPopupState.allValues.filter(
-            value =>
-            matchesMultiSearch(
-                value,
-                search
-            )
-        );
-
-        const allVisibleSelected =
-        visibleValues.length > 0 &&
-        visibleValues.every(
-            value =>
-            filterPopupState.selectAll ||
-            filterPopupState.selected.has(
-                value
-            )
-        );
+        /*
+         * NORMAL TABLE FILTER
+         */
 
         if(
-            allVisibleSelected
+            filterPopupState.selectAll ||
+            filterPopupState.selected.size ===
+            filterPopupState.allValues.length
         ){
+
+            /*
+             * UNSELECT EVERYTHING
+             */
+            filterPopupState.selected =
+            new Set();
 
             filterPopupState.selectAll =
             false;
-
-            visibleValues.forEach(
-                value => {
-
-                    filterPopupState.selected.delete(
-                        value
-                    );
-
-                }
-            );
 
         }
         else{
 
-            filterPopupState.selectAll =
-            false;
-
-            visibleValues.forEach(
-                value => {
-
-                    filterPopupState.selected.add(
-                        value
-                    );
-
-                }
+            /*
+             * SELECT EVERYTHING
+             */
+            filterPopupState.selected =
+            new Set(
+                filterPopupState.allValues
             );
-
-        }
-
-        if(
-            filterPopupState.selected.size ===
-            filterPopupState.allValues.length
-        ){
 
             filterPopupState.selectAll =
             true;
