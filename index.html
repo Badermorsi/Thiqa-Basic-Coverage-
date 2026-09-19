@@ -1015,6 +1015,27 @@ document.getElementById("applyFilterBtn");
 
 
 /* =========================================================
+   SEARCH VISIBILITY
+   ONLY:
+   - Thiqa & Basic
+   - HAAD List
+   - Vitamin Coverage
+========================================================= */
+
+function updateSearchVisibility(type){
+
+    const showSearch =
+        type === "thiqa" ||
+        type === "haad" ||
+        type === "vitamin";
+
+    searchArea.style.display =
+        showSearch ? "block" : "none";
+
+}
+
+
+/* =========================================================
    INITIALIZE STORAGE
 ========================================================= */
 
@@ -1453,32 +1474,6 @@ function displayValue(value){
    NUMERIC SEARCH HELPERS
 ========================================================= */
 
-/*
-    Numeric search is token-based.
-
-    Example:
-    Search 5
-
-    Matches:
-    5
-    5 mg
-    5 MG
-    5/5
-
-    Does NOT match:
-    2.5
-    5.8
-    15
-    50
-    0.5
-
-    For decimal searches:
-    Search 2.5
-    Matches 2.5
-    Does NOT match 12.5 or 2.50 when interpreted
-    as a different numeric token.
-*/
-
 function isNumericTerm(term){
 
     return /^[-+]?(?:\d+(?:\.\d+)?|\.\d+)$/.test(
@@ -1501,17 +1496,6 @@ function numericTermMatches(
         /[.*+?^${}()|[\]\\]/g,
         "\\$&"
     );
-
-    /*
-        A numeric value must not be immediately
-        attached to another digit or decimal point.
-
-        This prevents:
-        5 matching 2.5
-        5 matching 5.8
-        5 matching 15
-        5 matching 50
-    */
 
     const pattern =
     new RegExp(
@@ -1720,10 +1704,6 @@ function rowMatchesSearches(
     dosageSearch.value;
 
 
-    /* =========================
-       BRAND
-    ========================= */
-
     if(brandQuery){
 
         if(brandColumn){
@@ -1777,10 +1757,6 @@ function rowMatchesSearches(
 
     }
 
-
-    /* =========================
-       GENERIC
-    ========================= */
 
     if(genericQuery){
 
@@ -1836,10 +1812,6 @@ function rowMatchesSearches(
     }
 
 
-    /* =========================
-       STRENGTH
-    ========================= */
-
     if(strengthQuery){
 
         if(strengthColumn){
@@ -1893,10 +1865,6 @@ function rowMatchesSearches(
 
     }
 
-
-    /* =========================
-       DOSAGE
-    ========================= */
 
     if(dosageQuery){
 
@@ -1977,17 +1945,6 @@ function rowMatchesColumnFilters(
 
         const column =
         filterColumns[i];
-
-        /*
-            IMPORTANT:
-            When building the options for one filter,
-            exclude that filter itself.
-
-            All OTHER active filters remain active.
-
-            This is what makes the dropdown behave
-            like Excel AutoFilter.
-        */
 
         if(
             excludeColumn !== null &&
@@ -2113,20 +2070,6 @@ function getFilteredRows(type){
    GET DEPENDENT FILTER VALUES
 ========================================================= */
 
-/*
-    THIS IS THE MAIN EXCEL-LIKE CHANGE.
-
-    If Brand = Panadol is active and we open Strength:
-
-    1. Start with ALL rows.
-    2. Apply search boxes.
-    3. Apply every active column filter EXCEPT Strength.
-    4. Collect Strength values from those rows.
-
-    Therefore the Strength dropdown only contains
-    values belonging to the currently filtered dataset.
-*/
-
 function getDependentFilterValues(
     type,
     currentColumn
@@ -2150,11 +2093,6 @@ function getDependentFilterValues(
         const row =
         rows[i];
 
-        /*
-            Search boxes are also part of the current
-            filtered dataset.
-        */
-
         if(
             !rowMatchesSearches(
                 row,
@@ -2165,12 +2103,6 @@ function getDependentFilterValues(
             continue;
 
         }
-
-        /*
-            Apply all other column filters,
-            but NOT the column whose dropdown
-            we are currently opening.
-        */
 
         if(
             !rowMatchesColumnFilters(
@@ -2191,13 +2123,6 @@ function getDependentFilterValues(
         );
 
     }
-
-    /*
-        If the current filter has selected values which
-        have temporarily disappeared because of another
-        filter, keep those values available internally
-        so the current selection is not unexpectedly lost.
-    */
 
     const existing =
     filters[currentColumn];
@@ -3872,12 +3797,18 @@ async function switchSheet(type){
 
     closeFilterPopup();
 
+    /* =========================================
+       SEARCH BAR VISIBILITY
+       ONLY THIQA / HAAD / VITAMIN
+    ========================================= */
+
+    updateSearchVisibility(
+        type
+    );
+
     if(
         type === "proactive"
     ){
-
-        searchArea.style.display =
-        "none";
 
         excelHeader.style.display =
         "none";
@@ -3901,9 +3832,6 @@ async function switchSheet(type){
         type === "phone"
     ){
 
-        searchArea.style.display =
-        "none";
-
         excelHeader.style.display =
         "none";
 
@@ -3921,9 +3849,6 @@ async function switchSheet(type){
         return;
 
     }
-
-    searchArea.style.display =
-    "block";
 
     excelHeader.style.display =
     "grid";
@@ -4121,12 +4046,6 @@ function openFilterPopup(
 
     }
 
-    /*
-        IMPORTANT:
-        Get values from rows matching every OTHER
-        active filter, not from the entire database.
-    */
-
     const values =
     getDependentFilterValues(
         type,
@@ -4145,11 +4064,6 @@ function openFilterPopup(
     if(
         existing instanceof Set
     ){
-
-        /*
-            Only select values currently available,
-            while preserving the current selection.
-        */
 
         selected =
         new Set();
@@ -4713,10 +4627,9 @@ let searchTimer = null;
             () => {
 
                 if(
-                    currentSheet ===
-                    "proactive" ||
-                    currentSheet ===
-                    "phone"
+                    currentSheet !== "thiqa" &&
+                    currentSheet !== "haad" &&
+                    currentSheet !== "vitamin"
                 ){
 
                     return;
@@ -4763,21 +4676,22 @@ clearBtn.addEventListener(
         dosageSearch.value = "";
 
         if(
-            currentSheet !==
-            "proactive" &&
-            currentSheet !==
-            "phone"
+            currentSheet !== "thiqa" &&
+            currentSheet !== "haad" &&
+            currentSheet !== "vitamin"
         ){
 
-            columnFilters[
-                currentSheet
-            ] = {};
-
-            applyFilters(
-                currentSheet
-            );
+            return;
 
         }
+
+        columnFilters[
+            currentSheet
+        ] = {};
+
+        applyFilters(
+            currentSheet
+        );
 
     }
 );
