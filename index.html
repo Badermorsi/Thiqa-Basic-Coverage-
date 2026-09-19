@@ -560,6 +560,39 @@ h1{
     white-space:nowrap;
 }
 
+/* PHONE FIRST-COLUMN FILTER */
+
+.phone-filter-header{
+    position:relative;
+    padding-right:30px !important;
+}
+
+.phone-filter-btn{
+    position:absolute;
+    right:5px;
+    top:50%;
+    transform:translateY(-50%);
+    width:21px;
+    height:21px;
+    border:1px solid #adb5bd;
+    background:#fff;
+    border-radius:4px;
+    cursor:pointer;
+    font-size:10px;
+    line-height:19px;
+    padding:0;
+    z-index:5;
+}
+
+.phone-filter-btn:hover{
+    background:#eef2f5;
+}
+
+.phone-filter-btn.filtered{
+    background:#1d3557;
+    color:#fff;
+}
+
 .phone-loading{
     text-align:center;
     padding:30px;
@@ -937,6 +970,49 @@ const BUFFER_ROWS = 30;
 
 
 /* =========================================================
+   PHONE FILTER STORAGE
+========================================================= */
+
+const phoneFilters = {
+
+    contacts:new Set(),
+
+    apg:new Set(),
+
+    zas:new Set(),
+
+    insurance:new Set()
+
+};
+
+const phoneFilterActive = {
+
+    contacts:false,
+
+    apg:false,
+
+    zas:false,
+
+    insurance:false
+
+};
+
+let phoneFilterState = {
+
+    table:null,
+
+    values:[],
+
+    selected:new Set(),
+
+    selectAll:true,
+
+    search:""
+
+};
+
+
+/* =========================================================
    FILTER STATE
 ========================================================= */
 
@@ -1016,10 +1092,6 @@ document.getElementById("applyFilterBtn");
 
 /* =========================================================
    SEARCH VISIBILITY
-   ONLY:
-   - Thiqa & Basic
-   - HAAD List
-   - Vitamin Coverage
 ========================================================= */
 
 function updateSearchVisibility(type){
@@ -1514,7 +1586,6 @@ function numericTermMatches(
 
 /* =========================================================
    MULTI SEARCH
-   % = AND
 ========================================================= */
 
 function matchesMultiSearch(
@@ -3451,13 +3522,494 @@ function getPhoneColumns(rows){
 
 
 /* =========================================================
+   PHONE FILTER COLUMN
+========================================================= */
+
+function getPhoneFilterColumn(
+    rows,
+    tableType
+){
+
+    const columns =
+    getPhoneColumns(rows);
+
+    if(!columns.length){
+
+        return null;
+
+    }
+
+    const patterns = {
+
+        contacts:[
+            "contacts",
+            "contact"
+        ],
+
+        apg:[
+            "department"
+        ],
+
+        zas:[
+            "business unit",
+            "businessunit",
+            "business"
+        ],
+
+        insurance:[
+            "insurance company",
+            "insurance",
+            "company"
+        ]
+
+    };
+
+    const wanted =
+    patterns[tableType] || [];
+
+    for(
+        let i=0;
+        i<wanted.length;
+        i++
+    ){
+
+        const pattern =
+        wanted[i];
+
+        const found =
+        columns.find(
+            column =>
+            column
+            .toLowerCase()
+            .trim()
+            .includes(pattern)
+        );
+
+        if(found){
+
+            return found;
+
+        }
+
+    }
+
+    /* Requested filters are always the
+       first column if the JSON name differs. */
+
+    return columns[0];
+
+}
+
+
+/* =========================================================
+   GET PHONE FILTER VALUES
+========================================================= */
+
+function getPhoneFilterValues(
+    rows,
+    tableType
+){
+
+    const column =
+    getPhoneFilterColumn(
+        rows,
+        tableType
+    );
+
+    if(!column){
+
+        return [];
+
+    }
+
+    const values =
+    new Set();
+
+    rows.forEach(
+        row => {
+
+            values.add(
+                displayValue(
+                    row[column]
+                )
+            );
+
+        }
+    );
+
+    return Array.from(
+        values
+    ).sort(
+        (a,b) =>
+        a.localeCompare(
+            b,
+            undefined,
+            {
+                numeric:true,
+                sensitivity:"base"
+            }
+        )
+    );
+
+}
+
+
+/* =========================================================
+   GET FILTERED PHONE ROWS
+========================================================= */
+
+function getFilteredPhoneRows(
+    rows,
+    tableType
+){
+
+    if(
+        !phoneFilterActive[tableType]
+    ){
+
+        return rows;
+
+    }
+
+    const selected =
+    phoneFilters[tableType];
+
+    const column =
+    getPhoneFilterColumn(
+        rows,
+        tableType
+    );
+
+    if(!column){
+
+        return rows;
+
+    }
+
+    return rows.filter(
+        row =>
+        selected.has(
+            displayValue(
+                row[column]
+            )
+        )
+    );
+
+}
+
+
+/* =========================================================
+   OPEN PHONE FILTER
+========================================================= */
+
+function openPhoneFilter(
+    tableType,
+    button
+){
+
+    const rows =
+    sheetData.phone[tableType] || [];
+
+    const values =
+    getPhoneFilterValues(
+        rows,
+        tableType
+    );
+
+    const selected =
+    phoneFilterActive[tableType]
+        ? new Set(
+            phoneFilters[tableType]
+        )
+        : new Set(values);
+
+    phoneFilterState = {
+
+        table:tableType,
+
+        values,
+
+        selected,
+
+        selectAll:
+            !phoneFilterActive[tableType] ||
+            selected.size === values.length,
+
+        search:""
+
+    };
+
+    const column =
+    getPhoneFilterColumn(
+        rows,
+        tableType
+    );
+
+    filterPopupHeader.textContent =
+    "Filter: " +
+    (
+        column || tableType
+    );
+
+    filterValueSearch.value =
+    "";
+
+    renderPhoneFilterValues();
+
+    updateSelectAllButton();
+
+    const rect =
+    button.getBoundingClientRect();
+
+    let left =
+    rect.left;
+
+    let top =
+    rect.bottom + 5;
+
+    if(
+        left + 280 >
+        window.innerWidth
+    ){
+
+        left =
+        window.innerWidth -
+        290;
+
+    }
+
+    if(
+        top + 420 >
+        window.innerHeight
+    ){
+
+        top =
+        window.innerHeight -
+        430;
+
+    }
+
+    filterPopup.style.left =
+    Math.max(
+        5,
+        left
+    ) + "px";
+
+    filterPopup.style.top =
+    Math.max(
+        5,
+        top
+    ) + "px";
+
+    filterPopup.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   RENDER PHONE FILTER VALUES
+========================================================= */
+
+function renderPhoneFilterValues(){
+
+    const search =
+    filterValueSearch.value
+    .trim()
+    .toLowerCase();
+
+    const values =
+    phoneFilterState.values.filter(
+        value =>
+        matchesMultiSearch(
+            value,
+            search
+        )
+    );
+
+    filterValues.innerHTML =
+    "";
+
+    if(!values.length){
+
+        const empty =
+        document.createElement(
+            "div"
+        );
+
+        empty.style.padding =
+        "10px 4px";
+
+        empty.style.fontSize =
+        "12px";
+
+        empty.style.color =
+        "#666";
+
+        empty.textContent =
+        "No matching values";
+
+        filterValues.appendChild(
+            empty
+        );
+
+        return;
+
+    }
+
+    values.forEach(
+        value => {
+
+            const label =
+            document.createElement(
+                "label"
+            );
+
+            label.className =
+            "filter-value";
+
+            const checkbox =
+            document.createElement(
+                "input"
+            );
+
+            checkbox.type =
+            "checkbox";
+
+            checkbox.checked =
+            phoneFilterState.selectAll
+                ? true
+                : phoneFilterState.selected.has(
+                    value
+                );
+
+            checkbox.addEventListener(
+                "change",
+                () => {
+
+                    phoneFilterState.selectAll =
+                    false;
+
+                    if(
+                        checkbox.checked
+                    ){
+
+                        phoneFilterState.selected.add(
+                            value
+                        );
+
+                    }
+                    else{
+
+                        phoneFilterState.selected.delete(
+                            value
+                        );
+
+                    }
+
+                    if(
+                        phoneFilterState.selected.size ===
+                        phoneFilterState.values.length
+                    ){
+
+                        phoneFilterState.selectAll =
+                        true;
+
+                    }
+
+                    renderPhoneFilterValues();
+
+                    updateSelectAllButton();
+
+                }
+            );
+
+            const text =
+            document.createElement(
+                "span"
+            );
+
+            text.textContent =
+            value || "(Blanks)";
+
+            label.appendChild(
+                checkbox
+            );
+
+            label.appendChild(
+                text
+            );
+
+            filterValues.appendChild(
+                label
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   APPLY PHONE FILTER
+========================================================= */
+
+function applyPhoneFilter(){
+
+    const tableType =
+    phoneFilterState.table;
+
+    if(!tableType){
+
+        return;
+
+    }
+
+    const allValues =
+    phoneFilterState.values;
+
+    const selected =
+    phoneFilterState.selected;
+
+    if(
+        phoneFilterState.selectAll ||
+        selected.size === allValues.length
+    ){
+
+        phoneFilters[tableType] =
+        new Set();
+
+        phoneFilterActive[tableType] =
+        false;
+
+    }
+    else{
+
+        phoneFilters[tableType] =
+        new Set(
+            selected
+        );
+
+        phoneFilterActive[tableType] =
+        true;
+
+    }
+
+    renderPhoneContacts();
+
+}
+
+
+/* =========================================================
    CREATE PHONE TABLE
 ========================================================= */
 
 function createPhoneTable(
     rows,
     className,
-    title
+    title,
+    tableType
 ){
 
     const box =
@@ -3559,6 +4111,17 @@ function createPhoneTable(
         );
 
         if(
+            i === 0 &&
+            tableType
+        ){
+
+            th.classList.add(
+                "phone-filter-header"
+            );
+
+        }
+
+        if(
             className ===
             "phone-table-contacts" &&
             columns[i]
@@ -3575,6 +4138,61 @@ function createPhoneTable(
 
             th.textContent =
             columns[i];
+
+        }
+
+        /*
+         * FILTER ONLY FIRST COLUMN
+         */
+
+        if(
+            i === 0 &&
+            tableType
+        ){
+
+            const filterButton =
+            document.createElement(
+                "button"
+            );
+
+            filterButton.type =
+            "button";
+
+            filterButton.className =
+            "phone-filter-btn";
+
+            filterButton.textContent =
+            "▼";
+
+            if(
+                phoneFilterActive[
+                    tableType
+                ]
+            ){
+
+                filterButton.classList.add(
+                    "filtered"
+                );
+
+            }
+
+            filterButton.addEventListener(
+                "click",
+                event => {
+
+                    event.stopPropagation();
+
+                    openPhoneFilter(
+                        tableType,
+                        filterButton
+                    );
+
+                }
+            );
+
+            th.appendChild(
+                filterButton
+            );
 
         }
 
@@ -3597,14 +4215,20 @@ function createPhoneTable(
         "tbody"
     );
 
+    const displayRows =
+    getFilteredPhoneRows(
+        rows,
+        tableType
+    );
+
     for(
         let i=0;
-        i<rows.length;
+        i<displayRows.length;
         i++
     ){
 
         const row =
-        rows[i];
+        displayRows[i];
 
         const tr =
         document.createElement(
@@ -3679,6 +4303,11 @@ function renderPhoneContacts(){
     layout.className =
     "phone-layout";
 
+    /*
+     * 1ST TABLE
+     * CONTACTS FILTER
+     */
+
     const contactsTable =
     createPhoneTable(
 
@@ -3686,13 +4315,20 @@ function renderPhoneContacts(){
 
         "phone-table-contacts",
 
-        null
+        null,
+
+        "contacts"
 
     );
 
     layout.appendChild(
         contactsTable
     );
+
+
+    /*
+     * MIDDLE TABLES
+     */
 
     const middle =
     document.createElement(
@@ -3702,6 +4338,12 @@ function renderPhoneContacts(){
     middle.className =
     "phone-middle";
 
+
+    /*
+     * 2ND TABLE
+     * DEPARTMENT FILTER
+     */
+
     const apgTable =
     createPhoneTable(
 
@@ -3709,13 +4351,21 @@ function renderPhoneContacts(){
 
         "phone-table-apg",
 
-        "APG DEPARTMENTS"
+        "APG DEPARTMENTS",
+
+        "apg"
 
     );
 
     middle.appendChild(
         apgTable
     );
+
+
+    /*
+     * 3RD TABLE
+     * BUSINESS UNIT FILTER
+     */
 
     const zasTable =
     createPhoneTable(
@@ -3724,7 +4374,9 @@ function renderPhoneContacts(){
 
         "phone-table-zas",
 
-        "ZAS BUSINESS UNITS"
+        "ZAS BUSINESS UNITS",
+
+        "zas"
 
     );
 
@@ -3736,6 +4388,12 @@ function renderPhoneContacts(){
         middle
     );
 
+
+    /*
+     * 4TH TABLE
+     * INSURANCE COMPANY FILTER
+     */
+
     const insuranceTable =
     createPhoneTable(
 
@@ -3743,7 +4401,9 @@ function renderPhoneContacts(){
 
         "phone-table-insurance",
 
-        null
+        null,
+
+        "insurance"
 
     );
 
@@ -3755,15 +4415,39 @@ function renderPhoneContacts(){
         layout
     );
 
+    const visibleContacts =
+    getFilteredPhoneRows(
+        sheetData.phone.contacts,
+        "contacts"
+    ).length;
+
+    const visibleApg =
+    getFilteredPhoneRows(
+        sheetData.phone.apg,
+        "apg"
+    ).length;
+
+    const visibleZas =
+    getFilteredPhoneRows(
+        sheetData.phone.zas,
+        "zas"
+    ).length;
+
+    const visibleInsurance =
+    getFilteredPhoneRows(
+        sheetData.phone.insurance,
+        "insurance"
+    ).length;
+
     statusEl.textContent =
     "PHONE CONTACTS - " +
     (
-        sheetData.phone.contacts.length +
-        sheetData.phone.apg.length +
-        sheetData.phone.zas.length +
-        sheetData.phone.insurance.length
+        visibleContacts +
+        visibleApg +
+        visibleZas +
+        visibleInsurance
     ).toLocaleString() +
-    " contacts";
+    " records";
 
 }
 
@@ -3796,11 +4480,6 @@ async function switchSheet(type){
     dosageSearch.value = "";
 
     closeFilterPopup();
-
-    /* =========================================
-       SEARCH BAR VISIBILITY
-       ONLY THIQA / HAAD / VITAMIN
-    ========================================= */
 
     updateSearchVisibility(
         type
@@ -4462,7 +5141,19 @@ filterValueSearch.addEventListener(
         .trim()
         .toLowerCase();
 
-        renderFilterValues();
+        if(
+            phoneFilterState.table &&
+            currentSheet === "phone"
+        ){
+
+            renderPhoneFilterValues();
+
+        }
+        else{
+
+            renderFilterValues();
+
+        }
 
         updateSelectAllButton();
 
@@ -4477,6 +5168,88 @@ filterValueSearch.addEventListener(
 selectAllBtn.addEventListener(
     "click",
     () => {
+
+        if(
+            currentSheet === "phone" &&
+            phoneFilterState.table
+        ){
+
+            const search =
+            filterValueSearch.value
+            .trim()
+            .toLowerCase();
+
+            const visibleValues =
+            phoneFilterState.values.filter(
+                value =>
+                matchesMultiSearch(
+                    value,
+                    search
+                )
+            );
+
+            const allVisibleSelected =
+            visibleValues.length > 0 &&
+            visibleValues.every(
+                value =>
+                phoneFilterState.selectAll ||
+                phoneFilterState.selected.has(
+                    value
+                )
+            );
+
+            if(
+                allVisibleSelected
+            ){
+
+                phoneFilterState.selectAll =
+                false;
+
+                visibleValues.forEach(
+                    value => {
+
+                        phoneFilterState.selected.delete(
+                            value
+                        );
+
+                    }
+                );
+
+            }
+            else{
+
+                phoneFilterState.selectAll =
+                false;
+
+                visibleValues.forEach(
+                    value => {
+
+                        phoneFilterState.selected.add(
+                            value
+                        );
+
+                    }
+                );
+
+            }
+
+            if(
+                phoneFilterState.selected.size ===
+                phoneFilterState.values.length
+            ){
+
+                phoneFilterState.selectAll =
+                true;
+
+            }
+
+            renderPhoneFilterValues();
+
+            updateSelectAllButton();
+
+            return;
+
+        }
 
         const search =
         filterValueSearch.value
@@ -4563,6 +5336,22 @@ applyFilterBtn.addEventListener(
     "click",
     () => {
 
+        if(
+            currentSheet === "phone" &&
+            phoneFilterState.table
+        ){
+
+            applyPhoneFilter();
+
+            phoneFilterState.table =
+            null;
+
+            closeFilterPopup();
+
+            return;
+
+        }
+
         filterPopupState.search =
         filterValueSearch.value
         .trim()
@@ -4585,6 +5374,9 @@ function closeFilterPopup(){
     filterPopup.classList.remove(
         "show"
     );
+
+    phoneFilterState.table =
+    null;
 
 }
 
