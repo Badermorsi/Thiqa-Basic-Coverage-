@@ -5171,6 +5171,61 @@ filterValueSearch.addEventListener(
         .trim()
         .toLowerCase();
 
+        /*
+         * When text is entered into the filter search box,
+         * automatically select ONLY the values matching
+         * that text.
+         *
+         * This makes the filter behave like Excel:
+         *
+         * Type "Combination"
+         * → only matching values remain selected
+         *
+         * IMPORTANT:
+         * This affects ONLY the filter popup.
+         * The main table search remains unchanged.
+         */
+
+        if(
+            filterPopupState.search
+        ){
+
+            const matchingValues =
+            filterPopupState.allValues.filter(
+                value =>
+                matchesMultiSearch(
+                    value,
+                    filterPopupState.search
+                )
+            );
+
+            filterPopupState.selected =
+            new Set(
+                matchingValues
+            );
+
+            filterPopupState.selectAll =
+            matchingValues.length ===
+            filterPopupState.allValues.length;
+
+        }
+        else{
+
+            /*
+             * Search box cleared:
+             * restore Select All state.
+             */
+
+            filterPopupState.selected =
+            new Set(
+                filterPopupState.allValues
+            );
+
+            filterPopupState.selectAll =
+            true;
+
+        }
+
         if(
             phoneFilterState.table &&
             currentSheet === "phone"
