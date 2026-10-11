@@ -1194,141 +1194,114 @@ function createTabs(){
    LOAD NORMAL JSON FILES
 ========================================================= */
 
-async function loadAllData(){
 
-    errorBox.style.display =
-        "none";
+async function loadAllData() {
+    errorBox.style.display = "none";
 
-    const normalSheets =
-    WORKSHEETS.filter(
-        sheet =>
-        !sheet.special
+    const normalSheets = WORKSHEETS.filter(
+        sheet => !sheet.special
     );
 
-    const results =
-    await Promise.all(
+    const results = await Promise.all(
+        normalSheets.map(async sheet => {
+            // Support either one file or multiple files
+            const filenames = Array.isArray(sheet.files) && sheet.files.length
+                ? sheet.files
+                : sheet.file
+                    ? [sheet.file]
+                    : [];
 
-        normalSheets.map(
-            async sheet => {
+            if (!filenames.length) {
+                return {
+                    sheet,
+                    rows: [],
+                    error: "No JSON files configured"
+                };
+            }
 
-                try{
-
-                    const response =
-                    await fetch(
-                        encodeURI(
-                            sheet.file
-                        ),
-                        {
-                            cache:"default"
-                        }
-                    );
-
-                    if(!response.ok){
-
-                        throw new Error(
-                            "HTTP " +
-                            response.status
+            // Load all JSON files belonging to this worksheet
+            const fileResults = await Promise.all(
+                filenames.map(async filename => {
+                    try {
+                        const response = await fetch(
+                            encodeURI(filename),
+                            { cache: "default" }
                         );
 
+                        if (!response.ok) {
+                            throw new Error(
+                                "HTTP " + response.status
+                            );
+                        }
+
+                        const json = await response.json();
+
+                        return {
+                            rows: normalizeJSON(json),
+                            error: null
+                        };
+                    } catch (error) {
+                        return {
+                            rows: [],
+                            error: filename + ": " + error.message
+                        };
                     }
+                })
+            );
 
-                    const json =
-                    await response.json();
+            // Combine rows from every successfully loaded file
+            const rows = fileResults.flatMap(
+                result => result.rows
+            );
 
-                    return {
+            const errors = fileResults
+                .filter(result => result.error)
+                .map(result => result.error);
 
-                        sheet,
-
-                        rows:
-                        normalizeJSON(
-                            json
-                        ),
-
-                        error:null
-
-                    };
-
-                }
-                catch(error){
-
-                    return {
-
-                        sheet,
-
-                        rows:[],
-
-                        error
-
-                    };
-
-                }
-
-            }
-        )
-
+            return {
+                sheet,
+                rows,
+                error: errors.length ? errors.join("\n") : null
+            };
+        })
     );
 
     const errors = [];
 
-    results.forEach(
-        result => {
+    results.forEach(result => {
+        const sheet = result.sheet;
 
-            const sheet =
-            result.sheet;
+        sheetData[sheet.id] = result.rows;
 
-            sheetData[sheet.id] =
-            result.rows;
+        sheetColumns[sheet.id] = buildColumns(
+            result.rows,
+            sheet.id
+        );
 
-            sheetColumns[sheet.id] =
-            buildColumns(
-                result.rows,
-                sheet.id
+        filteredData[sheet.id] = result.rows.slice();
+        columnFilters[sheet.id] = {};
+        rowOffsets[sheet.id] = [];
+        rowHeights[sheet.id] = [];
+        totalHeights[sheet.id] = 0;
+
+        if (result.error) {
+            errors.push(
+                sheet.name + ":\n" + result.error
             );
-
-            filteredData[sheet.id] =
-            result.rows.slice();
-
-            columnFilters[sheet.id] =
-            {};
-
-            rowOffsets[sheet.id] =
-            [];
-
-            rowHeights[sheet.id] =
-            [];
-
-            totalHeights[sheet.id] =
-            0;
-
-            if(result.error){
-
-                errors.push(
-                    sheet.name +
-                    ": " +
-                    result.error.message
-                );
-
-            }
-
         }
-    );
+    });
 
-    switchSheet(
-        "thiqa"
-    );
+    switchSheet("thiqa");
 
-    if(errors.length){
-
+    if (errors.length) {
         errorBox.textContent =
-        "Some sheets could not be loaded:\n\n" +
-        errors.join("\n");
+            "Some sheets could not be loaded:\n\n" +
+            errors.join("\n\n");
 
-        errorBox.style.display =
-        "block";
-
+        errorBox.style.display = "block";
     }
-
 }
+
 
 
 /* =========================================================
